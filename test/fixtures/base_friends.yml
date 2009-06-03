@@ -1,0 +1,74 @@
+# == Schema Information
+#
+# Table name: base_friends
+#
+#  id           :integer(4)      not null, primary key
+#  base_user_id :integer(4)      not null
+#  friend_id    :integer(4)      not null
+#  status       :integer(4)
+#  created_at   :datetime
+#  updated_at   :datetime
+#  deleted_at   :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  base_user_id: 1
+  friend_id: 2
+  status: 1
+two:
+  id: 2
+  base_user_id: 2
+  friend_id: 1
+  status: 1
+three:
+  id: 3
+  base_user_id: 1
+  friend_id: 3
+  status: 2
+four:
+  id: 4
+  base_user_id: 3
+  friend_id: 2
+  status: 2
+friend2-4:
+  id: 5
+  base_user_id: 2
+  friend_id: 4
+  status: 1
+frined4-2:
+  id: 6
+  base_user_id: 4
+  friend_id: 2
+  status: 1
+friend4-5:
+  id: 7
+  base_user_id: 4
+  friend_id: 5
+  status: 1
+frined5-4:
+  id: 8
+  base_user_id: 5
+  friend_id: 4
+  status: 1
+friend3-4:
+  id: 9
+  base_user_id: 3
+  friend_id: 4
+  status: 1
+friend4-4:
+  id: 10
+  base_user_id: 4
+  friend_id: 3
+  status: 1
+friend6-1:
+  id: 11
+  base_user_id: 6
+  friend_id: 2
+  status: 2
+friend6-2:
+  id: 12
+  base_user_id: 6
+  friend_id: 3
+  status: 2

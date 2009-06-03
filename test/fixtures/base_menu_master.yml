@@ -1,0 +1,46 @@
+a:
+  id: 1
+  name: 更新情報
+  icon: updatehistory
+  url: /base/portal
+  num: 2
+  default_show: true
+b:
+  id: 2
+  name: プロフィール
+  icon: profile
+  url: /base_profile/
+  num: 1
+  default_show: true
+c:
+  id: 3
+  name: 日記
+  icon: diary
+  url: /base_profile/
+  num: 2
+  default_show: false
+d:
+  id: 4
+  name: hoge
+  icon: hoge
+  url: /base_profile/
+  num: 3
+  default_show: true
+e:
+  id: 5
+  name: hoge2
+  icon: hoge2
+  url: /base_profile/
+  num: 1
+  default_show: false
+f:
+  id: 6
+  name: hoge3
+  icon: hoge3
+  url: /base_profile/
+  num: 4
+  default_show: true
+  
+  
+  
+  

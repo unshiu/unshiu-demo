@@ -1,0 +1,95 @@
+--- 
+ja-JP: 
+  activerecord: 
+    models: 
+      prf image: "マイプロフ画像"
+      prf question: "項目" 
+      prf profile: "マイプロフ"
+      prf answer: "項目回答"
+      prf question set: "項目セット"
+      prf question set partial: "項目セット順番" 
+      prf choice: "選択肢"
+    attributes: 
+      prf_image: 
+        created_at: "作成日"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        prf_profile: "プロフィール"
+        image: "画像"
+      prf_question: 
+        question_type: "項目の回答方法"
+        created_at: "作成日"
+        body: "項目"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        prf_profile: "プロフィール"
+        active_flag: "有効フラグ"
+      prf_profile: 
+        created_at: "作成日"
+        prf_image: "画像"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        public_level: "公開レベル"
+        base_user: "ユーザ"
+      prf_answer: 
+        created_at: "作成日"
+        body: "本文"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        prf_question: "質問"
+        prf_profile: "プロフィール"
+        prf_choice: "選択肢"
+      prf_question_set: 
+        name: "名前"
+        created_at: "作成日"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+      prf_question_set_partial: 
+        order_num: "順番"
+        created_at: "作成日"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        required_flag: "必須フラグ"
+        prf_question: "項目"
+        prf_question_set: "項目セット"
+      prf_choice: 
+        created_at: "更新日"
+        body: "選択肢"
+        updated_at: "更新日"
+        free_area_type: "回答タイプ"
+        deleted_at: "削除日"
+        prf_question: "項目"
+        prf_profile: "プロフィール"
+    constant: 
+      type: 
+        none: "非設定"
+        text: "自由入力(1行)"
+        radio: "単数選択(ラジオボタン)"
+        checkbox: "複数選択"
+        textarea: "自由入力(複数行)"
+        select: "単数選択(プルダウン)"
+  view: 
+    noun: 
+      prf_image: "プロフィール画像"
+      prf_question: "項目"
+      prf_profile: "マイプロフ"
+      base_user: "ユーザ"
+      dia_entry: "日記"
+      prf_answer: "回答"
+      prf_question_set_partial: "プロフィールセット"
+      prf_question_set: "項目セット"
+      prf_choice: "選択肢"
+    flash:
+      notice:
+        prf_update: "マイプロフ情報を更新しました。"
+        prf_profile_image_update: "マイプロフ画像を更新しました。"
+        prf_create: "マイプロフ項目を作成しました。"
+        prf_create_with_choice: "マイプロフ項目を作成しました。引き続き、項目の選択肢を作成してください。"
+        prf_question_update: "マイプロフ項目を更新しました。"
+        prf_question_delete: "マイプロフ項目を削除しました。"
+        prf_choice_create: "選択肢を追加しました。"
+        prf_choice_update: "選択肢を編集しました。"
+        prf_choice_delete: "選択肢を削除しました。"
+      error:
+        prf_profile_image_update: "マイプロフ画像の更新に問題がありました。"
+        prf_choice_create: "選択肢を入力してください。"

@@ -1,0 +1,150 @@
+# == Schema Information
+#
+# Table name: prf_choices
+#
+#  id              :integer(4)      not null, primary key
+#  prf_question_id :integer(4)      not null
+#  prf_profile_id  :integer(4)      not null
+#  body            :text
+#  free_area_type  :integer(4)
+#  created_at      :datetime
+#  updated_at      :datetime
+#  deleted_at      :datetime
+#
+
+a:
+  id: 1
+  prf_question_id: 1
+  prf_profile_id: 0
+  body: "男性"
+  free_area_type: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+b:
+  id: 2
+  prf_question_id: 1
+  prf_profile_id: 0
+  body: "女性"
+  free_area_type: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+c:
+  id: 3
+  prf_question_id: 2
+  prf_profile_id: 0
+  body: "10代"
+  free_area_type: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>  
+d:
+  id: 4
+  prf_question_id: 2
+  prf_profile_id: 0
+  body: "20代"
+  free_area_type: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>  
+e:
+  id: 5
+  prf_question_id: 2
+  prf_profile_id: 0
+  body: "30代"
+  free_area_type: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>  
+f:
+  id: 6
+  prf_question_id: 3
+  prf_profile_id: 0
+  body: "未婚"
+  free_area_type: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+g:
+  id: 7
+  prf_question_id: 3
+  prf_profile_id: 0
+  body: "既婚"
+  free_area_type: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+h:
+  id: 8
+  prf_question_id: 4
+  prf_profile_id: 0
+  body: "北海道"
+  free_area_type: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+i:
+  id: 9
+  prf_question_id: 4
+  prf_profile_id: 0
+  body: "東北"
+  free_area_type: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+j:
+  id: 10
+  prf_question_id: 4
+  prf_profile_id: 0
+  body: "関東"
+  free_area_type: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+k:
+  id: 11
+  prf_question_id: 4
+  prf_profile_id: 0
+  body: "関西"
+  free_area_type: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+l:
+  id: 12
+  prf_question_id: 6
+  prf_profile_id: 0
+  body: "選択肢1"
+  free_area_type: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+m:
+  id: 13
+  prf_question_id: 6
+  prf_profile_id: 0
+  body: "選択肢2"
+  free_area_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+n:
+  id: 14
+  prf_question_id: 6
+  prf_profile_id: 0
+  body: "選択肢3"
+  free_area_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+o:
+  id: 15
+  prf_question_id: 9
+  prf_profile_id: 0
+  body: "選択肢"
+  free_area_type: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+p:
+  id: 16
+  prf_question_id: 5
+  prf_profile_id: 0
+  body: "nick"
+  free_area_type: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+q:
+  id: 17
+  prf_question_id: 12
+  prf_profile_id: 0
+  body: ""
+  free_area_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>

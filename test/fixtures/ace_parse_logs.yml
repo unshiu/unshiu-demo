@@ -1,0 +1,42 @@
+# == Schema Information
+#
+# Table name: ace_parse_logs
+#
+#  id             :integer(4)      not null, primary key
+#  client_id      :integer(4)      not null
+#  filename       :string(128)     not null
+#  complate_point :integer(4)
+#  deleted_at     :datetime
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# one:
+#   column: value
+#
+# two:
+#   column: value
+target:
+  id: 1
+  client_id: 1
+  filename: unshiu_imp.log.1111target
+  complate_point: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+finished:
+  id: 2
+  client_id: 1
+  filename: unshiu_imp.log.1111finished
+  complate_point: 10000
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+delete:
+  id: 3
+  client_id: 1
+  filename: unshiu_imp.log.1111delete
+  complate_point: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  deleted_at: <%= Time.now.to_s :db %>

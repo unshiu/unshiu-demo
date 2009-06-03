@@ -1,0 +1,31 @@
+# == Schema Information
+#
+# Table name: base_notices
+#
+#  id             :integer(4)      not null, primary key
+#  title          :string(255)
+#  body           :text
+#  start_datetime :datetime
+#  end_datetime   :datetime
+#  created_at     :datetime
+#  updated_at     :datetime
+#  deleted_at     :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  title: test
+  body: test
+  start_datetime: <%= Time.now.to_s :db %>
+  end_datetime: <%= (Time.now + 1.day).to_s :db %>
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+two:
+  id: 2
+  title: test
+  body: test
+  start_datetime: <%= Time.now.to_s :db %>
+  end_datetime: <%= (Time.now + 1.day).to_s :db %>
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>

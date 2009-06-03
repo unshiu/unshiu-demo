@@ -1,0 +1,29 @@
+# == Schema Information
+# Schema version: 110
+#
+# Table name: pnt_filter_masters
+#
+#  id              :integer(11)   not null, primary key
+#  title           :string(500)   default(""), not null
+#  controller_name :string(256)   default(""), not null
+#  action_name     :string(256)   default(""), not null
+#  created_at      :datetime      not null
+#  updated_at      :datetime      not null
+#  deleted_at      :datetime      
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+a:
+  id: 1
+  title: 'ポータルを表示する'
+  controller_name: 'base'
+  action_name: 'index'
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+b:
+  id: 2
+  title: 'マイポータルを表示する'
+  controller_name: 'base'
+  action_name: 'portal'
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>

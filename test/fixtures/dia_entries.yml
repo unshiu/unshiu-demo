@@ -1,0 +1,91 @@
+# == Schema Information
+#
+# Table name: dia_entries
+#
+#  id                :integer(4)      not null, primary key
+#  dia_diary_id      :integer(4)      not null
+#  title             :string(255)     default(""), not null
+#  body              :text
+#  public_level      :integer(4)
+#  draft_flag        :boolean(1)      not null
+#  created_at        :datetime
+#  updated_at        :datetime
+#  deleted_at        :datetime
+#  last_commented_at :datetime
+#  contributed_at    :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  dia_diary_id: 1
+  public_level: 1
+  title: 'テストタイトルA'
+  body: 'テスト本文A'
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  contributed_at: <%= Time.now.to_s :db %>
+two:
+  id: 2
+  dia_diary_id: 2
+  public_level: 2
+  title: 'テストタイトルB'
+  body: 'テスト本文B'
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  contributed_at: <%= Time.now.to_s :db %>
+three:
+  id: 3
+  dia_diary_id: 3
+  public_level: 1
+  title: 'テストタイトルC'
+  body: 'テスト本文C'
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  contributed_at: <%= Time.now.to_s :db %>
+four:
+  id: 4
+  dia_diary_id: 1
+  public_level: 1
+  title: 'テストタイトルD'
+  body: 'テスト本文D'
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  contributed_at: <%= Time.now.to_s :db %>
+five:
+  id: 5
+  dia_diary_id: 1
+  public_level: 1
+  title: 'テストタイトルE'
+  body: 'テスト本文E'
+  draft_flag: true
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  contributed_at: <%= Time.now.to_s :db %>
+six:
+  id: 6
+  dia_diary_id: 1
+  public_level: 2
+  title: 'テストタイトルF'
+  body: 'テスト本文F'
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  contributed_at: <%= Time.now.to_s :db %>
+seven:
+  id: 7
+  dia_diary_id: 1
+  public_level: 3
+  title: 'テストタイトルG'
+  body: 'テスト本文G'
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  contributed_at: <%= Time.now.to_s :db %>
+eight:
+  id: 8
+  dia_diary_id: 1
+  public_level: 4
+  title: 'テストタイトルH'
+  body: 'テスト本文H'
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  contributed_at: <%= Time.now.to_s :db %>

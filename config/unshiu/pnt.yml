@@ -1,0 +1,16 @@
+common: &common
+  history_list_size: 10
+  history_list_size_mobile: 5
+  history_file_path: public/system/files/pnt
+  
+development:
+  upload_file_dir: public/system/files/pnt_import/
+  <<: *common
+
+test:
+  upload_file_dir: test/file/
+  <<: *common
+
+production:
+  upload_file_dir: public/system/files/pnt_import/
+  <<: *common

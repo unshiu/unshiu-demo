@@ -1,0 +1,122 @@
+# == Schema Information
+#
+# Table name: prf_questions
+#
+#  id               :integer(4)      not null, primary key
+#  prf_profile_id   :integer(4)      not null
+#  question_type    :integer(4)
+#  body             :text
+#  active_flag      :boolean(1)
+#  created_at       :datetime
+#  updated_at       :datetime
+#  deleted_at       :datetime
+#  open_accept_type :integer(4)
+#
+
+a:
+  id: 1
+  prf_profile_id: 1
+  question_type: 2
+  body: "性別は？"
+  active_flag: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  open_accept_type: 0
+b:
+  id: 2
+  prf_profile_id: 1
+  question_type: 2
+  body: "年齢は?"
+  active_flag: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  open_accept_type: 0  
+c:
+  id: 3
+  prf_profile_id: 1
+  question_type: 2
+  body: "配偶者は?"
+  active_flag: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  open_accept_type: 0
+d:
+  id: 4
+  prf_profile_id: 1
+  question_type: 4
+  body: "所在地は?"
+  active_flag: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  open_accept_type: 0
+e:
+  id: 5
+  prf_profile_id: 1
+  question_type: 4
+  body: "ニックネームは？"
+  active_flag: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  open_accept_type: 0
+f:
+  id: 6
+  prf_profile_id: 1
+  question_type: 3
+  body: "複数回答（チェックボックス）"
+  active_flag: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  open_accept_type: 0
+g:
+  id: 7
+  prf_profile_id: 1
+  question_type: 1
+  body: "ラジオ"
+  active_flag: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  open_accept_type: 0
+h:
+  id: 8
+  prf_profile_id: 1
+  question_type: 2
+  body: "セレクト"
+  active_flag: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  open_accept_type: 0
+i:
+  id: 9
+  prf_profile_id: 1
+  question_type: 3
+  body: "チェックボックス"
+  active_flag: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  open_accept_type: 0
+j:
+  id: 10
+  prf_profile_id: 1
+  question_type: 4
+  body: "テキスト"
+  active_flag: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  open_accept_type: 0
+k:
+  id: 11
+  prf_profile_id: 1
+  question_type: 5
+  body: "テキストエリア"
+  active_flag: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  open_accept_type: 0
+l:
+  id: 12
+  prf_profile_id: 1
+  question_type: 2
+  body: "趣味は？（自由回答）"
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  open_accept_type: 0

@@ -1,0 +1,114 @@
+# == Schema Information
+#
+# Table name: pnt_filters
+#
+#  id                   :integer(4)      not null, primary key
+#  pnt_master_id        :integer(4)      not null
+#  point                :integer(4)      not null
+#  created_at           :datetime        not null
+#  updated_at           :datetime        not null
+#  deleted_at           :datetime
+#  summary              :string(200)
+#  pnt_filter_master_id :integer(4)      not null
+#  start_at             :datetime
+#  end_at               :datetime
+#  rule_day             :integer(4)
+#  rule_count           :integer(4)
+#  stock                :integer(4)
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+a:
+  id: 1
+  pnt_filter_master_id: 1
+  pnt_master_id: 1
+  point: 10
+  stock: -1
+  summary: "test追加"
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+b:
+  id: 2
+  pnt_filter_master_id: 2
+  pnt_master_id: 1
+  stock: 1000
+  point: 20
+  summary: "test追加"
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+c:
+  id: 3
+  pnt_filter_master_id: 3
+  pnt_master_id: 2
+  point: 100
+  start_at: <%= 1.days.ago.to_s :db %>
+  end_at: <%= (Time.now + 10.days).to_s :db %>
+  stock: 1000
+  summary: "test追加"
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+d:
+  id: 4
+  pnt_filter_master_id: 4
+  pnt_master_id: 2
+  point: 30
+  start_at: <%= 1.years.ago.to_s :db %>
+  end_at: <%= 10.days.ago.to_s :db %>
+  stock: 1000
+  summary: "test追加"
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+e:
+  id: 5
+  pnt_filter_master_id: 5
+  pnt_master_id: 1
+  point: 50
+  stock: -1
+  rule_count: 3
+  rule_day: null
+  summary: "test追加"
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+f:
+  id: 6
+  pnt_filter_master_id: 6
+  pnt_master_id: 1
+  point: 60
+  stock: -1
+  rule_count: 3
+  rule_day: 2
+  summary: "test追加"
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+g:
+  id: 7
+  pnt_filter_master_id: 7
+  pnt_master_id: 1
+  point: 70
+  stock: 70
+  summary: "test追加"
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+h:
+  id: 8
+  pnt_filter_master_id: 8
+  pnt_master_id: 1
+  point: 80
+  stock: -1
+  start_at: <%= 1.days.ago.to_s :db %> # 期間内
+  end_at: <%= (Time.now + 10.days).to_s :db %>
+  summary: "test追加"
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+i:
+  id: 9
+  pnt_filter_master_id: 8
+  pnt_master_id: 1
+  point: 90
+  stock: -1
+  start_at: <%= 1.years.ago.to_s :db %> # 期間外
+  end_at: <%= 10.days.ago.to_s :db %>
+  summary: "test追加"
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  

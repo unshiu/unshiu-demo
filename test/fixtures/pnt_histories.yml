@@ -1,0 +1,84 @@
+# == Schema Information
+#
+# Table name: pnt_histories
+#
+#  id            :integer(4)      not null, primary key
+#  pnt_point_id  :integer(4)      not null
+#  difference    :integer(4)      default(0), not null
+#  created_at    :datetime
+#  updated_at    :datetime
+#  deleted_at    :datetime
+#  message       :string(2000)    default(""), not null
+#  pnt_filter_id :integer(4)
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+a:
+  id: 1
+  pnt_point_id: 3
+  difference: 20
+  message: 'test record'
+  created_at: <%= 1.month.ago.to_s :db %>
+  updated_at: <%= 1.month.ago.to_s :db %>
+b:
+  id: 2
+  pnt_point_id: 3
+  difference: 100
+  message: 'test record'
+  created_at: <%= 1.month.ago.to_s :db %>
+  updated_at: <%= 1.month.ago.to_s :db %>
+c:
+  id: 3
+  pnt_point_id: 1
+  difference: -20
+  message: 'test record'
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+g:
+  id: 4
+  pnt_point_id: 5
+  pnt_filter_id: 5
+  difference: 50
+  message: 'test record'
+  created_at: <%= 1.days.ago.to_s :db %>
+  updated_at: <%= 1.days.ago.to_s :db %>
+h:
+  id: 5
+  pnt_point_id: 5
+  pnt_filter_id: 5
+  difference: 50
+  message: 'test record'
+  created_at: <%= 1.days.ago.to_s :db %>
+  updated_at: <%= 1.days.ago.to_s :db %>
+i:
+  id: 6
+  pnt_point_id: 5
+  pnt_filter_id: 6
+  difference: 60
+  message: 'test record'
+  created_at: <%= 3.days.ago.to_s :db %>
+  updated_at: <%= 3.days.ago.to_s :db %>
+j:
+  id: 7
+  pnt_point_id: 5
+  pnt_filter_id: 6
+  difference: 60
+  message: 'test record'
+  created_at: <%= 1.days.ago.to_s :db %>
+  updated_at: <%= 1.days.ago.to_s :db %>
+k:
+  id: 8
+  pnt_point_id: 5
+  pnt_filter_id: 6
+  difference: 60
+  message: 'test record'
+  created_at: <%= 1.days.ago.to_s :db %>
+  updated_at: <%= 1.days.ago.to_s :db %>
+l:
+  id: 9
+  pnt_point_id: 1
+  difference: 90
+  message: 'test record'
+  created_at: <%= 1.month.ago.to_s :db %>
+  updated_at: <%= 1.month.ago.to_s :db %>
+

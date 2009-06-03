@@ -1,0 +1,22 @@
+# == Schema Information
+#
+# Table name: msg_notifies
+#
+#  id             :integer(4)      not null, primary key
+#  msg_message_id :integer(4)
+#  comment        :text
+#  created_at     :datetime
+#  updated_at     :datetime
+#  deleted_at     :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  msg_message_id: 5
+two:
+  id: 2
+  msg_message_id: 6
+three:
+  id: 3
+  msg_message_id: 6

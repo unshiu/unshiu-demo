@@ -1,0 +1,49 @@
+# == Schema Information
+#
+# Table name: pnt_points
+#
+#  id            :integer(4)      not null, primary key
+#  base_user_id  :integer(4)      not null
+#  point         :integer(4)      default(0), not null
+#  created_at    :datetime
+#  updated_at    :datetime
+#  deleted_at    :datetime
+#  pnt_master_id :integer(4)      not null
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+a:
+  id: 1
+  base_user_id: 1
+  pnt_master_id: 1
+  point: 100
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+b:
+  id: 2
+  base_user_id: 2
+  pnt_master_id: 1
+  point: 200
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+c:
+  id: 3
+  base_user_id: 3
+  pnt_master_id: 1
+  point: 2000
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+d:
+  id: 4
+  base_user_id: 1
+  pnt_master_id: 2
+  point: 300
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+e:
+  id: 5
+  base_user_id: 4
+  pnt_master_id: 1
+  point: 100
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>

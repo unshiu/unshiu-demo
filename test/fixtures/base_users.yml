@@ -1,0 +1,238 @@
+# == Schema Information
+#
+# Table name: base_users
+#
+#  id                         :integer(4)      not null, primary key
+#  login                      :string(255)
+#  email                      :string(255)
+#  crypted_password           :string(40)
+#  salt                       :string(40)
+#  created_at                 :datetime
+#  updated_at                 :datetime
+#  remember_token             :string(255)
+#  remember_token_expires_at  :datetime
+#  deleted_at                 :datetime
+#  status                     :integer(4)
+#  activation_code            :string(255)
+#  crypted_uid                :string(255)
+#  joined_at                  :datetime
+#  quitted_at                 :datetime
+#  new_email                  :string(255)
+#  receive_system_mail_flag   :boolean(1)
+#  receive_mail_magazine_flag :boolean(1)
+#  message_accept_level       :integer(4)      default(2), not null
+#  footmark_flag              :boolean(1)      default(TRUE), not null
+#  base_carrier_id            :integer(4)
+#  device_name                :string(255)
+#  name                       :string(255)
+#
+
+quentin:
+  id: 1
+  login: quentin
+  email: mobilesns-dev@devml.drecom.co.jp
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  #crypted_password: "ce2/iFrNtQ8=\n" # quentin, use only if you're using 2-way encryption
+  created_at: <%= 5.days.ago.to_s :db %>
+  # activated_at: <%= 5.days.ago.to_s :db %> # only if you're activating new signups
+  status: 2
+  message_accept_level: 2
+  footmark_flag: true
+  base_carrier_id: 1
+  receive_system_mail_flag: true
+  receive_mail_magazine_flag: true
+  joined_at: <%= 5.days.ago.to_s :db %>
+  crypted_uid: <%= BaseUser.encrypt_uid('012345678912345') %>
+  name: quentin
+
+aaron:
+  id: 2
+  login: aaron
+  email: test1@test.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  # activation_code: aaronscode # only if you're activating new signups
+  created_at: <%= 1.days.ago.to_s :db %>
+  status: 2
+  message_accept_level: 3
+  footmark_flag: false
+  base_carrier_id: 1
+  receive_system_mail_flag: false
+  receive_mail_magazine_flag: false
+  joined_at: <%= 1.days.ago.to_s :db %>
+three:
+  id: 3
+  login: three
+  email: test2@test.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  # activation_code: aaronscode # only if you're activating new signups
+  created_at: <%= 1.days.ago.to_s :db %>
+  status: 2
+  message_accept_level: 3
+  base_carrier_id: 2
+  receive_mail_magazine_flag: true
+  joined_at: <%= 1.days.ago.to_s :db %>
+four:
+  id: 4
+  login: four
+  email: test3@test.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  # activation_code: aaronscode # only if you're activating new signups
+  created_at: <%= 1.days.ago.to_s :db %>
+  status: 2
+  message_accept_level: 4
+  base_carrier_id: 2
+  receive_mail_magazine_flag: true
+  joined_at: <%= 1.days.ago.to_s :db %>
+five:
+  id: 5
+  login: five
+  email: kaku@drecom.co.jp
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  # activation_code: aaronscode # only if you're activating new signups
+  created_at: <%= 1.days.ago.to_s :db %>
+  status: 2
+  base_carrier_id: 3
+  receive_mail_magazine_flag: true
+  joined_at: <%= 1.days.ago.to_s :db %>
+forbidden:
+  id: 6
+  login: forbidden
+  email: test4@test.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  # activation_code: aaronscode # only if you're activating new signups
+  created_at: <%= 1.days.ago.to_s :db %>
+  status: 3
+  base_carrier_id: 1
+  receive_mail_magazine_flag: false
+  joined_at: <%= 1.days.ago.to_s :db %>
+seven:
+  id: 7
+  login: seven
+  email: test5@test.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  # activation_code: aaronscode # only if you're activating new signups
+  created_at: <%= 1.days.ago.to_s :db %>
+  status: 1
+  base_carrier_id: 1
+  receive_mail_magazine_flag: false
+  joined_at: null
+eight:
+  id: 8
+  login: eight
+  email: test6@test.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  # activation_code: aaronscode # only if you're activating new signups
+  created_at: <%= 1.days.ago.to_s :db %>
+  status: 4
+  deleted_at: <%= 1.days.ago.to_s :db %>
+  base_carrier_id: 1
+  receive_mail_magazine_flag: true
+  joined_at: <%= 1.days.ago.to_s :db %>
+nine:
+  id: 9
+  login: nine
+  email: test7@test.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  # activation_code: aaronscode # only if you're activating new signups
+  created_at: <%= 1.days.ago.to_s :db %>
+  status: 5
+  deleted_at: <%= 1.days.ago.to_s :db %>
+  base_carrier_id: 1
+  receive_mail_magazine_flag: true
+  joined_at: <%= 1.days.ago.to_s :db %>
+ten:
+  id: 10
+  login: ten
+  email: test8@devml.drecom.co.jp
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  #crypted_password: "ce2/iFrNtQ8=\n" # quentin, use only if you're using 2-way encryption
+  created_at: <%= 5.days.ago.to_s :db %>
+  # activated_at: <%= 5.days.ago.to_s :db %> # only if you're activating new signups
+  status: 2
+  message_accept_level: 4
+  footmark_flag: true
+  base_carrier_id: 1
+  receive_system_mail_flag: true
+  receive_mail_magazine_flag: true
+  joined_at: <%= 5.days.ago.to_s :db %>
+  crypted_uid: uid_for_test
+eleven:
+  id: 11
+  login: eleven
+  email: test9@devml.drecom.co.jp
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  activation_code: activation
+  #crypted_password: "ce2/iFrNtQ8=\n" # quentin, use only if you're using 2-way encryption
+  created_at: <%= 5.days.ago.to_s :db %>
+  # activated_at: <%= 5.days.ago.to_s :db %> # only if you're activating new signups
+  status: 1
+  message_accept_level: 4
+  footmark_flag: true
+  base_carrier_id: 1
+  receive_system_mail_flag: false
+  receive_mail_magazine_flag: false
+  joined_at: <%= 5.days.ago.to_s :db %>
+  crypted_uid: uid_for_test
+twelve:
+  id: 12
+  login: twelve
+  email: test10@devml.drecom.co.jp
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  activation_code: activation-twelve
+  new_email: mail_reset@drecom.co.jp
+  created_at: <%= 5.days.ago.to_s :db %>
+  # activated_at: <%= 5.days.ago.to_s :db %> # only if you're activating new signups
+  status: 1
+  message_accept_level: 4
+  footmark_flag: true
+  base_carrier_id: 1
+  receive_system_mail_flag: false
+  receive_mail_magazine_flag: false
+  crypted_uid: uid_for_test
+thirteen:
+  id: 13
+  login: thirteen
+  email: test11@devml.drecom.co.jp
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  activation_code: activation-thirteen
+  new_email: mobilesns-dev@devml.drecom.co.jp
+  created_at: <%= 5.days.ago.to_s :db %>
+  # activated_at: <%= 5.days.ago.to_s :db %> # only if you're activating new signups
+  status: 1
+  message_accept_level: 4
+  footmark_flag: true
+  base_carrier_id: 1
+  receive_system_mail_flag: false
+  receive_mail_magazine_flag: false
+  crypted_uid: uid_for_test
+fourteen:
+  id: 14
+  login: fourteen
+  email: test14@devml.drecom.co.jp
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  activation_code: activation-fourteen
+  created_at: <%= 5.days.ago.to_s :db %>
+  updated_at: <%= 5.days.ago.to_s :db %>
+  deleted_at: <%= 3.days.ago.to_s :db %>
+  # activated_at: <%= 5.days.ago.to_s :db %> # only if you're activating new signups
+  status: 4 # 退会
+  message_accept_level: 4
+  footmark_flag: true
+  base_carrier_id: 1
+  receive_system_mail_flag: false
+  receive_mail_magazine_flag: false
+  crypted_uid: uid_for_test14

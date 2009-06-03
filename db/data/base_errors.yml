@@ -1,0 +1,398 @@
+# == Schema Information
+#
+# Table name: base_errors
+#
+#  id         :integer(4)      not null, primary key
+#  error_code :string(255)     not null
+#  message    :text            default(""), not null
+#  coping     :text            default(""), not null
+#  created_at :datetime
+#  updated_at :datetime
+#  deleted_at :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+a:
+  id: 1
+  error_code: U-00001
+  message:    申し訳ございません。ページが見つかりませんでした。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+b:
+  id: 2
+  error_code: U-00002
+  message:    申し訳ございません。エラーが発生しました。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-01003:
+  id: 3
+  error_code: U-01003
+  message:    お気に入りユーザではないので削除できません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-01004:
+  id: 4
+  error_code: U-01004
+  message: すでにお気に入りです。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-01005:
+  id: 5
+  error_code: U-01005
+  message: 自分自身をお気に入りにすることはできません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-01006:
+  id: 6
+  error_code: U-01006
+  message: 自分自身は友達に追加できません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-01007:
+  id: 7
+  error_code: U-01007
+  message: アクセス権限がありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-01008:
+  id: 8
+  error_code: U-01008
+  message: 申請中でないユーザーを拒否することはできません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-01009:
+  id: 9
+  error_code: U-01009
+  message: 申請中でないユーザーを承認することはできません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-01010:
+  id: 10
+  error_code: U-01010
+  message: すでに友達であるか、友達申請中です。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-01011:
+  id: 11
+  error_code: U-01011
+  message: ユーザーが見つかりません。 
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-01012:
+  id: 12
+  error_code: U-01012
+  message: 自分自身は追加できません。 
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-01013:
+  id: 13
+  error_code: U-01013
+  message: 友達ではないため削除できません 
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-01014:
+  id: 14
+  error_code: U-01014
+  message: 友達ではないため削除できません 
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-01015:
+  id: 15
+  error_code: U-01015
+  message: 入力されたメールアドレスはすでにこのサービスで使われています。 
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-01018:
+  id: 18
+  error_code: U-01018
+  message: プロフィール更新に失敗しました。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-01019:
+  id: 19
+  error_code: U-01019
+  message: メールアドレス変更処理に失敗しました。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-01020:
+  id: 20
+  error_code: U-01020
+  message: アクティベーションコードが無効です。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-01021:
+  id: 21
+  error_code: U-01021
+  message: 申し訳ございません。ページが見つかりませんでした。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-01022:
+  id: 22
+  error_code: U-01022
+  message: 管理者は退会することはきません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-02001:
+  id: 2001
+  error_code: U-02001
+  message: このフォトアルバムへのアクセス権限がありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-02002:
+  id: 2002
+  error_code: U-02002
+  message: アクセス権限がありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-02003:
+  id: 2003
+  error_code: U-02003
+  message: このフォトアルバム画像コメントへのアクセス権限がありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-02004:
+  id: 2004
+  error_code: U-02004
+  message: 権限がありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-02005:
+  id: 2005
+  error_code: U-02005
+  message: このフォトアルバム画像へのアクセス権限がありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-02006:
+  id: 2006
+  error_code: U-02006
+  message: このフォトアルバム画像へのアクセス権限がありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-03001:
+  id: 3001
+  error_code: U-03001
+  message: この参加承認を実行するアクセス権限がありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-03002:
+  id: 3002
+  error_code: U-03002
+  message: この参加承認を実行するアクセス権限がありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-03003:
+  id: 3003
+  error_code: U-03003
+  message: ユーザ権限変更を行うアクセス権限がありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-03004:
+  id: 3004
+  error_code: U-03004
+  message: 自分の権限の変更はできません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-03005:
+  id: 3005
+  error_code: U-03005
+  message: 自分の権限の変更はできません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-03006:
+  id: 3006
+  error_code: U-03006
+  message: コミュニティ管理者のみ閲覧可能です。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-03007:
+  id: 3007
+  error_code: U-03007
+  message: コミュニティ管理者のみ閲覧可能です。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-03008:
+  id: 3008
+  error_code: U-03008
+  message: コミュニティ管理者かサブ管理者のみ閲覧可能です。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-03009:
+  id: 3009
+  error_code: U-03009
+  message: コミュニティ参加処理に失敗しました。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-03010:
+  id: 3010
+  error_code: U-03010
+  message: コミュニティ管理者は脱退できません。管理者権限を譲ってから脱退してください。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-03011:
+  id: 3011
+  error_code: U-03011
+  message: コミュニティ管理者は脱退できません。管理者権限を譲ってから脱退してください。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-03012:
+  id: 3012
+  error_code: U-03012
+  message: コミュニティ脱退処理に失敗しました。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-03013:
+  id: 3013
+  error_code: U-03013
+  message: 存在しないコミュニティです。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-04001:
+  id: 4001
+  error_code: U-04001
+  message: この日記に対するアクセス権限がありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-04002:
+  id: 4002
+  error_code: U-04002
+  message: この日記を削除する権限はありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-04003:
+  id: 4003
+  error_code: U-04003
+  message: この日記の下書き一覧へのアクセス権限はありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-04004:
+  id: 4004
+  error_code: U-04004
+  message: この日記の処理権限は作成者のみです。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-04005:
+  id: 4005
+  error_code: U-04005
+  message: 該当する日記はありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-04006:
+  id: 4006
+  error_code: U-04006
+  message: この日記に指定された画像は存在しません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-04007:
+  id: 4007
+  error_code: U-04007
+  message: 不適切な画像が選択されています。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-04008:
+  id: 4008
+  error_code: U-04008
+  message: このアルバムへのアクセス権限がありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+M-05001:
+  id: 15001
+  error_code: M-05001
+  message: 既に配信処理済みのメールマガジンであるため削除できません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-06001:
+  id: 6001
+  error_code: U-06001
+  message: このユーザーにメッセージを送ることはできません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-06002:
+  id: 6002
+  error_code: U-06002
+  message: このメッセージへのアクセス権限がありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-06003:
+  id: 6003
+  error_code: U-06003
+  message: このメッセージへのアクセス権限がありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-06004:
+  id: 6004
+  error_code: U-06004
+  message: 該当するメッセージが見つかりません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-06005:
+  id: 6005
+  error_code: U-06005
+  message: このメッセージへのアクセス権限がありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-06006:
+  id: 6006
+  error_code: U-06006
+  message: このメッセージへのアクセス権限がありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-06007:
+  id: 6007
+  error_code: U-06007
+  message: このメッセージへのアクセス権限がありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-06008:
+  id: 6008
+  error_code: U-06008
+  message: ご指定のメッセージをゴミ箱から削除することはできません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>  
+U-07001:
+  id: 7001
+  error_code: U-07001
+  message: 自分のポイント履歴閲覧のみ可能です。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>  
+M-07001:
+  id: 17001
+  error_code: M-07001
+  message: ポイント処理履歴があるため削除することはできません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+M-08001:
+  id: 18001
+  error_code: M-08001
+  message: 指定された質問の移動処理はできません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-09001:
+  id: 09001
+  error_code: U-09001
+  message: このトピックの閲覧権限はありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-09002:
+  id: 09002
+  error_code: U-09002
+  message: このトピックにコメントすることはできません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-09003:
+  id: 09003
+  error_code: U-09003
+  message: この処理はトピック管理のみ可能です。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-09004:
+  id: 09004
+  error_code: U-09004
+  message: コメントを削除する権限がありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+U-09005:
+  id: 09005
+  error_code: U-09005
+  message: このコミュニティにトピックの作成権限はありません。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>

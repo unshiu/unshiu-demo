@@ -1,0 +1,115 @@
+# == Schema Information
+#
+# Table name: prf_answers
+#
+#  id              :integer(4)      not null, primary key
+#  prf_question_id :integer(4)      not null
+#  prf_choice_id   :integer(4)      not null
+#  prf_profile_id  :integer(4)      not null
+#  body            :text
+#  created_at      :datetime
+#  updated_at      :datetime
+#  deleted_at      :datetime
+#
+
+a:
+  id: 1
+  prf_question_id: 1
+  prf_choice_id: 2
+  prf_profile_id: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+b:
+  id: 2
+  prf_question_id: 2
+  prf_choice_id: 1
+  prf_profile_id: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+c:
+  id: 3
+  prf_question_id: 2
+  prf_choice_id: 6
+  prf_profile_id: 3
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+d:
+  id: 4
+  prf_question_id: 4
+  prf_choice_id: 9
+  body: 福島
+  prf_profile_id: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+e:
+  id: 5
+  prf_question_id: 1
+  prf_choice_id: 1
+  prf_profile_id: 4
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>      
+f:
+  id: 6
+  prf_question_id: 6
+  prf_choice_id: 12
+  prf_profile_id: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>      
+g:
+  id: 7
+  prf_question_id: 6
+  prf_choice_id: 14
+  prf_profile_id: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+h:
+  id: 8
+  prf_question_id: 1
+  prf_choice_id: 2
+  prf_profile_id: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+i:
+  id: 9
+  prf_question_id: 9
+  prf_choice_id: 15
+  prf_profile_id: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+j:
+  id: 10
+  prf_question_id: 9
+  prf_choice_id: 15
+  prf_profile_id: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+k:
+  id: 11
+  prf_question_id: 9
+  prf_choice_id: 15
+  prf_profile_id: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+l:
+  id: 12
+  prf_question_id: 9
+  prf_choice_id: 15
+  prf_profile_id: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+m:
+  id: 13
+  prf_question_id: 3
+  prf_choice_id: 6
+  prf_profile_id: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+n:
+  id: 14
+  prf_question_id: 5
+  prf_choice_id: 16
+  prf_profile_id: 1
+  body: unshiu
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+    

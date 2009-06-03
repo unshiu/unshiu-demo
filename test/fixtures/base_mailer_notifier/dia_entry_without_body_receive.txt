@@ -1,0 +1,6 @@
+From: mobilesns-dev@devml.drecom.co.jp
+To: test1@test
+Subject: =?iso-2022-jp?B?GyRCJEYkOSRIGyhC?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset="iso-2022-jp"
+Content-Transfer-Encoding: 7bit

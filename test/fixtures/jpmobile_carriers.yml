@@ -1,0 +1,19 @@
+a:
+  id: 1
+  name: docomo
+  available_flag: true
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+b:
+  id: 2
+  name: ac
+  available_flag: true
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+c:
+  id: 3
+  name: softbank
+  available_flag: true
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  

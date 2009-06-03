@@ -1,0 +1,109 @@
+--- 
+ja-JP: 
+  activerecord: 
+    models: 
+      pnt point: "ポイント" 
+      pnt　history: "ポイント配布履歴"
+      pnt　update　error　record: "エラーレコード"
+      pnt filter: "ポイントフィルタ" 
+      pnt　master: "ポイントマスタ"
+      pnt　filter　master: "ポイントフィルタマスタ" 
+      pnt　file　update　history: "ポイントファイル一括更新履歴" 
+      pnt　history　summary: "ポイント配布履歴"
+      pnt import form: "ポイント一括登録"
+    attributes: 
+      pnt_point: 
+        created_at: "作成日"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        pnt_master: "ポイントマスタ"
+        point: "ポイント"
+        base_user: "ユーザ"
+      pnt_history: 
+        pnt_point: "ポイント"
+        pnt_filter: "ポイントフィルタ"
+        created_at: "作成日"
+        updated_at: "発生日"
+        deleted_at: "削除日"
+        message: "名目"
+        difference: "増減値"
+      pnt_update_error_record: 
+        created_at: "作成日"
+        pnt_file_update_hisotry: "ファイル更新履歴"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        reason: "理由"
+        line_number: "行番号"
+        record: "レコード"
+      pnt_filter: 
+        created_at: "作成日"
+        updated_at: "更新日"
+        rule_day: "配布日ルール"
+        rule_count: "配布数ルール"
+        end_at: "配布終了日"
+        deleted_at: "削除日"
+        stock: "配布上限"
+        pnt_master: "ポイントマスタ"
+        pnt_filter_master: "ポイントフィルタマスタ"
+        start_at: "配布開始日"
+        point: "増減"
+        summary: "名目"
+      pnt_master: 
+        created_at: "作成日"
+        title: "タイトル"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+      pnt_filter_master: 
+        created_at: "作成日"
+        title: "ポイント増減箇所"
+        action_name: "アクション名"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        controller_name: "コントーラ名"
+      base_user: 
+        login: "ログインID"
+      pnt_file_update_history: 
+        success_count: "成功数"
+        created_at: "作成日"
+        updated_at: "更新日"
+        record_count: "レコード数"
+        deleted_at: "削除日"
+        file_name: "ファイル名"
+        complated_at: "完了日"
+        fail_count: "失敗数"
+      pnt_history_summary: 
+        created_at: "作成日"
+        updated_at: "更新日"
+        record_count: "トランザクション数"
+        end_at: "集計終了日"
+        deleted_at: "削除日"
+        start_at: "集計開始日"
+        file_name: "ファイル名"
+        kind_type: "種別"
+        sum_use_point: "利用ポイント"
+        sum_issue_point: "発行ポイント"
+      forms/pnt_import_form: 
+        import_file: "ファイル"  
+    constant: {}
+    
+    errors:
+      messages:
+        file_record_invalid_format: "アップロードされたファイルの{{count}}行目のフォーマットに問題があります。"
+        
+  view: 
+    noun: 
+      pnt_point: "ポイント"
+      pnt_history: "ポイント履歴"
+      pnt_update_error_record: "ポイント更新処理エラーレコード"
+      pnt_filter: "ポイントフィルタ"
+      pnt_master: "ポイントマスタ"
+      pnt_filter_master: "ポイントフィルタマスタ"
+      pnt_import: "ポイント一括登録"
+      pnt_file_update_history: "ファイル一括登録履歴"
+      pnt_history_summary: "ポイント集計履歴"
+      pnt_import_upload: "正常にアップロードされました"
+    flash:
+      notice:
+        manage_pnt_create: "ユーザのポイント増減処理を行いました。"
+      error:
+        manage_pnt_create: "ユーザのポイント増減処理に問題が発生しました。"

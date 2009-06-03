@@ -1,0 +1,96 @@
+# == Schema Information
+#
+# Table name: abm_images
+#
+#  id                :integer(4)      not null, primary key
+#  abm_album_id      :integer(4)      not null
+#  title             :string(255)
+#  body              :string(255)
+#  created_at        :datetime
+#  updated_at        :datetime
+#  deleted_at        :datetime
+#  image             :string(255)
+#  image_size        :integer(4)      not null
+#  original_filename :string(255)     not null
+#  content_type      :string(255)     not null
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  abm_album_id: 1
+  title: '花の写真'
+  body: '家の近くで撮った写真だよ。'
+  image: 345009210_1f826cd5a1_m.jpg
+  image_size: 100
+  original_filename: original.jpg
+  content_type: image/jpg
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  
+two:
+  id: 2
+  abm_album_id: 1
+  title: なんか撮ってみた
+  image: 345009210_1f826cd5a1_m.jpg
+  image_size: 200
+  original_filename: origina2.jpg
+  content_type: image/jpg
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  
+no_related_album:
+  id: 3
+  abm_album_id: 555
+  title: 写真だぞ
+  image: 345009210_1f826cd5a1_m.jpg
+  image_size: 230
+  original_filename: origina3.jpg
+  content_type: image/jpg
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  
+four:
+  id: 4
+  abm_album_id: 2
+  title: 写真だよ
+  image: 345009210_1f826cd5a1_m.jpg
+  image_size: 30
+  original_filename: origina4.jpg
+  content_type: image/jpg
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  
+  
+five:
+  id: 5
+  abm_album_id: 1
+  title: 写真だよ
+  image: 345009210_1f826cd5a1_m.jpg
+  image_size: 10
+  original_filename: origina5.jpg
+  content_type: image/jpg
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+
+six:
+  id: 6
+  abm_album_id: 5
+  title: abm_album 5, public_level 3
+  image: 345009210_1f826cd5a1_m.jpg
+  image_size: 120
+  original_filename: origina6.jpg
+  content_type: image/jpg
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+g:
+  id: 7
+  abm_album_id: 1
+  title: logo
+  image: logo.gif
+  image_size: 10
+  original_filename: logo.gif
+  content_type: image/gif
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  

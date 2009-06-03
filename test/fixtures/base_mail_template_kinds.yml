@@ -1,0 +1,161 @@
+# == Schema Information
+#
+# Table name: base_mail_template_kinds
+#
+#  id          :integer(4)      not null, primary key
+#  action      :string(255)     not null
+#  name        :string(255)     not null
+#  description :string(255)     not null
+#  deleted_at  :datetime
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
+a:
+  id: 1
+  action: footer
+  name: フッター
+  description: 共通のフッターです。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+b:
+  id: 2
+  action: send_registration_url
+  name: 仮登録受付メール
+  description: 仮登録を受け付けた際に送信されます。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+c:
+  id: 3
+  action: already_registed
+  name: 登録済みお知らせメール
+  description: 既に登録されているメールアドレスだった場合に送信されます。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+e:
+  id: 4
+  action: send_complete_registration
+  name: 登録完了メール
+  description: ユーザの登録が完了した際に送信されます。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+f:
+  id: 5
+  action: mail_reset
+  name: メールアドレス変更
+  description: メールアドレス変更の際に送信されます。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+g:
+  id: 6
+  action: friend_apply_message
+  name: 友達申請
+  description: 友達を申請した際に送信されます。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+h:
+  id: 7
+  action: invite_to_service
+  name: ユーザ招待
+  description: ユーザを招待した際に送信されます。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+i:
+  id: 8
+  action: password_remind
+  name: パスワード再設定
+  description: パスワードを再設定した際に送信されます。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+j:
+  id: 9
+  action: success_saving_dia_entry
+  name: 日記投稿成功通知
+  description: 日記の投稿が成功した際に送信されます。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+k:
+  id: 10
+  action: failure_receiving_mail
+  name: 投稿失敗通知
+  description: ユーザがメール投稿に失敗した場合全般に送信されます。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+l:
+  id: 11
+  action: failure_saving_dia_entry
+  name: 日記投稿失敗通知
+  description: 日記の投稿が失敗した際に送信されます。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+m:
+  id: 12
+  action: notify_dia_entry_commented
+  name: 日記コメント通知
+  description: 日記にコメントがついたことを日記投稿者に通知。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+n:
+  id: 13
+  action: success_saving_abm_images
+  name: 写真投稿成功通知
+  description: 写真の投稿が成功した際に送信されます。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+o:
+  id: 14
+  action: failure_saving_abm_images
+  name: 写真投稿失敗通知
+  description: 写真の投稿が失敗した際に送信されます。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+p:
+  id: 15
+  action: success_saving_base_profile_images
+  name: プロフィール画像保存完了通知
+  description: プロフィール投稿が成功した際に送信されます。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+q:
+  id: 16
+  action: failure_saving_base_profile_images
+  name: プロフィール画像保存失敗通知
+  description: プロフィール投稿が失敗した際に送信されます。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+r:
+  id: 17
+  action: success_saving_prf_images
+  name: プロフ画像保存保存完了通知
+  description: プロフ投稿が成功した際に送信されます。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+s:  
+  id: 18
+  action: failure_saving_prf_images
+  name: プロフ画像保存失敗通知
+  description: プロフ投稿が失敗した際に送信されます。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+t:
+  id: 19
+  action: success_saving_cmm_images
+  name: コミュニティ画像保存完了通知
+  description: コミュニティ画像投稿が成功した際に送信されます。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+u:
+  id: 20
+  action: failure_saving_cmm_images
+  name: コミュニティ画像保存失敗通知
+  description: コミュニティ投稿が失敗した際に送信されます。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+v:  
+  id: 21
+  action: notify_receiving_message
+  name: メッセージのお知らせ
+  description: メッセージが送られた際に送信されます。
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  

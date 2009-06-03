@@ -1,0 +1,57 @@
+# == Schema Information
+#
+# Table name: pnt_filter_masters
+#
+#  id              :integer(4)      not null, primary key
+#  title           :string(500)     default(""), not null
+#  controller_name :string(256)     default(""), not null
+#  action_name     :string(256)     default(""), not null
+#  created_at      :datetime        not null
+#  updated_at      :datetime        not null
+#  deleted_at      :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+a:
+  id: 1
+  title: '通常テスト'
+  controller_name: 'point_system_test'
+  action_name: 'target'
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+b:
+  id: 2
+  title: 'エラー処理テスト'
+  controller_name: 'point_system_test'
+  action_name: 'exception_target'
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+e:
+  id: 5
+  title: '回数制限有りテスト'
+  controller_name: 'point_system_test'
+  action_name: 'rule_count_target'
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+f:
+  id: 6
+  title: '日数回数制限有りテスト'
+  controller_name: 'point_system_test'
+  action_name: 'rule_day_target'
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+g:
+  id: 7
+  title: '配布制限テスト'
+  controller_name: 'point_system_test'
+  action_name: 'stock_target'
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+h:
+  id: 8
+  title: '配布期間テスト'
+  controller_name: 'point_system_test'
+  action_name: 'term_target'
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  

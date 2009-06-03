@@ -1,0 +1,33 @@
+# == Schema Information
+#
+# Table name: base_carriers
+#
+#  id         :integer(4)      not null, primary key
+#  name       :string(256)     default(""), not null
+#  created_at :datetime
+#  updated_at :datetime
+#  deleted_at :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+a:
+  id: 1
+  name: docomo
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+b:
+  id: 2
+  name: au
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+c:
+  id: 3
+  name: softbank
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+d:
+  id: 4
+  name: other
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+

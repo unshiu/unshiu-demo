@@ -1,0 +1,43 @@
+--- 
+ja-JP: 
+  activerecord: 
+    models: 
+      mng_user_action_history_archive: 
+      base_user: 
+      mng_user_action_history: 
+    attributes: 
+      mng_user_action_history_archive: 
+        created_at: "作成日"
+        end_datetime: "終了日"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        start_datetime: "開始日"
+        filesize: "ファイルサイズ"
+        filename: "ファイル名"
+      base_user: 
+        name: "名前"
+        receive_system_mail_flag: "システムメール受信設定"
+        receive_mail_magazine_flag: "メールマガジン受信設定"
+        footmark_flag: "足跡設定"
+        password: "パスワード"
+        login: "ログインID"
+        email: "メールアドレス"
+      mng_user_action_history: 
+        created_at: "作成日"
+        user_action: "処理"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        base_user: "ユーザ"
+    constant: {}
+
+  view: 
+    noun: 
+      pnt_point: "ポイント"
+      mng_user_action_history_archive: "管理画面ログアーカイブ"
+      base_footmark: "足跡"
+      mng_user: "管理者"
+      base_user: "ユーザ"
+      mng_user_action_history: "管理画面ログ"
+    flash:
+      error:
+        mange_application_manager_login_required: "指定のページは管理者権限のあるユーザーでのみ閲覧できます"
