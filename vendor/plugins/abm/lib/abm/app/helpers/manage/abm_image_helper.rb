@@ -1,0 +1,2 @@
+module ManageAbmImageHelperModule
+end

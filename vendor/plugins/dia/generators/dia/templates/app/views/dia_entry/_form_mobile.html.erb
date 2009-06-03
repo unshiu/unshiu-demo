@@ -1,0 +1,34 @@
+<div style="<%= style_value('form_style') %>">
+
+<hr style="<%= style_value('hr1') %>" />
+
+<%= error_messages_for 'dia_entry' %>
+
+<%= image_tag_for_default 'Spec_02.gif' %><br />
+<span style="color:#f75009;"></span><%= t('activerecord.attributes.dia_entry.title') %><br />
+<%= text_field 'dia_entry', 'title', :size => 50 %><br />
+<span style="color:#f75009;"></span><%= t('activerecord.attributes.dia_entry.body') %><br />
+<%= text_area 'dia_entry', 'body', :size => "50x3" %><br />
+<span style="color:#f75009;"></span><%= t('activerecord.attributes.dia_entry.public_level') %><br />
+<%= select 'dia_entry', 'public_level', select_type(DiaEntry::PUBLIC_LEVELS) %><br />
+
+  <% unless @images.empty? %>
+	<hr style="<%= style_value('hr1') %>" />
+	
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+	
+	<% action = (@dia_entry.new_record?)? :new : :edit %>
+    <% for image in @images %>
+	  <%= image_tag(url_for_image_column(image, :image, :thumb), :style => 'margin:0 5px;width:64px;float:left;', :width => '64px') %>
+      <%= link_to_list_cell "[#{t('view.noun.abm_image')}を#{t('view.noun.dia_diary')}から削除]", :action => action, :id => params[:id], :images => removed_array(@images, image) %>
+	  <div style="clear:both;"></div>
+      <%= hidden_field_tag "images[#{image.id}]" %>
+	  <%= image_tag_for_default 'Spec_02.gif' %><br />
+    <% end %>
+  <% end %>
+
+<%= image_tag_for_default 'Spec_02.gif' %><br />
+
+</div>
+
+<%= image_tag_for_default 'Spec_02.gif' %><br />

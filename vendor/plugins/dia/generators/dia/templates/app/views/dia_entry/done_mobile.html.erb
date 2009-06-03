@@ -1,0 +1,6 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.dia_diary') %>投稿
+<% end %>
+
+<%= link_basic_to "投稿した#{t('view.noun.dia_diary')}を表示する", :action => 'show', :id => params[:id] %><br />
+<span style="color:#f75100;"></span><%= link_basic_to "#{t('view.noun.dia_diary')}一覧を見る", {:controller => 'dia_entry', :action => 'list'}, {:accesskey => '5'} %><br />

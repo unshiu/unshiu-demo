@@ -1,0 +1,42 @@
+<% content_for(:header_title) do %>
+	<%= h @community.name %>
+	<% if @state == CmmCommunitiesBaseUser::STATUS_REJECTED %>
+		<%= t('activerecord.constant.status.status_rejected') %>
+	<% elsif @state == CmmCommunitiesBaseUser::STATUS_APPLYING %>
+		<%= t('activerecord.constant.status.status_applying') %>
+	<% else %>
+		<%= t('activerecord.constant.status.status_member') %>
+	<% end %>
+	一覧
+<% end %>
+
+<% if @members.size.zero? %>
+	該当する<%= t('view.noun.base_user') %>はいません。
+
+<% else %>
+
+	<%= paginate_header @members %>
+
+	<% @members.each do |member| %>
+		<% list_cell_for do %>
+			<%= link_to_user_without_emoticon member.base_user %>
+			<%= post(member) %>
+		
+			<% if member.rejected? %>
+				<%= link_basic_to "#{t('view.noun.cmm_community_rejected')}解除", :action => 'member_status_confirm', :id => member.id, :state => CmmCommunitiesBaseUser::STATUS_MEMBER %>
+			<% elsif member.applying? %>
+				<%= link_basic_to '承認する', :action => 'approve_confirm', :id => member.id, :state => CmmCommunitiesBaseUser::STATUS_MEMBER %>
+				<%= link_basic_to '拒否する', :action => 'approve_confirm', :id => member.id, :state => CmmCommunitiesBaseUser::STATUS_NONE %>
+				<%= link_basic_to '追放する', :action => 'approve_confirm', :id => member.id, :state => CmmCommunitiesBaseUser::STATUS_REJECTED %>
+			<% elsif member.admin? %>
+		
+			<% else %>
+				<%= link_basic_to '脱退させる', :action => 'member_status_confirm', :id => member.id, :state => CmmCommunitiesBaseUser::STATUS_NONE %>
+				<%= link_basic_to t('view.noun.cmm_community_rejected'), :action => 'member_status_confirm', :id => member.id, :state => CmmCommunitiesBaseUser::STATUS_REJECTED %>
+			<% end %>
+		<% end %>
+	<% end %>
+
+	<%= paginate_links @members %>
+
+<% end %>

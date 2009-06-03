@@ -1,0 +1,9 @@
+  :base_active_history_create_worker: 
+    :update_last_3days_active_count:
+      :trigger_args: 0 0 3 * * * *
+    :update_last_week_active_count:
+      :trigger_args: 0 0 3 * * * *
+    :update_last_14days_active_count:
+      :trigger_args: 0 0 3 * * * *
+    :update_last_30days_active_count:
+      :trigger_args: 0 0 3 * * * *

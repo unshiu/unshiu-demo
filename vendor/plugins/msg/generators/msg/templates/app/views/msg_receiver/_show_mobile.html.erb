@@ -1,0 +1,5 @@
+<%= t('activerecord.attributes.msg_receiver.base_user') %><br />
+<%= link_to_user(@message.msg_sender.base_user) %><br />
+<br />
+<%= t('activerecord.attributes.msg_message.body') %><br />
+<%= hbr @message.body %>

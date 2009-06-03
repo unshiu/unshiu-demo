@@ -1,0 +1,31 @@
+<%- @pan1="SNS設定" -%><%- @pan2="#{t('view.noun.msg_message')}" -%><%- @pan3="#{t('view.noun.mng_user')}送信#{t('view.noun.msg_message')}一覧" -%>
+<% content_for(:header_title) do %>
+	<%= t('view.noun.mng_user') %>送信<%= t('view.noun.msg_message') %>一覧
+<% end %>
+
+<h3>管理者送信<%= t('view.noun.msg_message') %>一覧</h3>
+
+<% if @messages.size.zero? %>
+	<%= t('view.noun.msg_message') %>がありません。
+<% else %>
+	<%= paginate_header(@messages) %>
+	<table class="lineColorT" style="width:609px;">
+	<tr>
+		<th style="width:150px;"><%= t('activerecord.attributes.msg_message.updated_at') %></th>
+		<th style="width:200px;"><%= t('view.noun.msg_sender') %></th>
+		<th style="width:200px;"><%= t('activerecord.attributes.msg_message.title') %></th>
+		<th style="width:60px;"></th>
+	</tr>
+	<% for message in @messages %>
+	<tr>
+		<td><%= datetime_to_s(message.updated_at) %></td>
+		<td><%= sender_name(message) %></td>
+		<td><%= message.title %></td>
+		<td>
+			<%= link_to "詳細", :action => 'show', :id => message.id %>
+		</td>
+	</tr>
+	<% end %>
+	</table>
+	<%= paginate_links(@messages) %>
+<% end %>

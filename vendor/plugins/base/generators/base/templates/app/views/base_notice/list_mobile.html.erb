@@ -1,0 +1,22 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_notice') %>一覧
+<% end %>
+
+<% if @notices.size.zero? %>
+	<%= t('view.noun.base_notice') %>がありません。
+
+<% else %>
+
+	<%= paginate_header(@notices) %>
+
+	<% @notices.each do |notice| %>
+		<% list_cell_for do %>
+      		<%= link_to_list_cell notice.title, :controller => 'base_notice', :action => 'show', :id => notice.id %>
+	  		<%= notice_new_if_new(notice.start_datetime) %><br />
+      		<%= date_to_s(notice.start_datetime) %>
+      	<% end %>
+	<% end %>
+	
+	<%= paginate_links(@notices) %>
+
+<% end %>

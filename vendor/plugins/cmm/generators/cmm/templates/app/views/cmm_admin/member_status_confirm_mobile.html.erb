@@ -1,0 +1,18 @@
+<% content_for(:header_title) do %>
+	<%= t('activerecord.attributes.cmm_communities_base_user.status')%>変更
+<% end %>
+
+<%= @ccbu.base_user.show_name %>
+<%- if @state == CmmCommunitiesBaseUser::STATUS_MEMBER %>の<%= t('view.noun.cmm_community_rejected') %>を解除します
+<%- elsif @state == CmmCommunitiesBaseUser::STATUS_NONE %>を脱退させます
+<%- elsif @state == CmmCommunitiesBaseUser::STATUS_REJECTED %>を<%= t('view.noun.cmm_community_rejected') %>にします
+<%- end %>。<br/>
+よろしいですか？<br/>
+
+<%= image_tag_for_default 'Spec_04.gif' %><br />
+<% form_tag :action=> 'member_status_complete', :id => @ccbu.id, :state => @state do %>
+	<div style="text-align:center">
+		<%= submit_tag '決定' %>
+		<%= cancel_tag %>
+	</div>
+<% end %>

@@ -1,0 +1,48 @@
+<%- @pan1="メール" -%><%- @pan2="#{t('view.noun.mlg_magazine')}配信履歴" -%><%- @pan2="#{t('view.noun.mlg_magazine')}詳細表示" -%>
+
+<% content_for(:header_title) do %>
+  <%= t('view.noun.mlg_magazine') %>詳細表示
+<% end %>
+
+<h3><%= t('view.noun.mlg_magazine') %>詳細表示</h3>
+
+<% if @mlg_magazine.deletable? %>
+	<ul class="list">
+		<li><%= link_to '削除する', :action => :delete_confirm, :id => @mlg_magazine.id %></li>
+		<li><%= link_to '配信設定をする', :controller => :mlg_delivery, :action => :setup, :id => @mlg_magazine.id %></li>
+	</ul>
+<% else %>
+	<p class="dialog">配信設定済みの<%= t('view.noun.mlg_magazine') %>は削除できません。</p>
+<% end %>
+
+
+<table class="lineColorL" style="width:609px;">
+<tbody>
+  <tr>
+    <th style="width:140px;"><%= t('activerecord.attributes.mlg_magazine.title') %></th>
+    <td><%= @mlg_magazine.title %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;"><%= t('activerecord.attributes.mlg_magazine.body') %></th>
+    <td><%= @mlg_magazine.body %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;"><%= t('activerecord.attributes.mlg_magazine.send_at') %></th>
+    <td><%= datetime_to_s(@mlg_magazine.send_at) %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;"><%= t('activerecord.attributes.mlg_magazine.sended_at') %></th>
+    <td><%= datetime_to_s(@mlg_magazine.sended_at) %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;">送信予定数</th>
+    <td>
+		<% if @mlg_magazine.send_setup? %>
+			<%= @send_count %>
+		<% else %>
+			-
+		<% end %>
+	</td>
+  </tr>
+</tbody>
+</table>

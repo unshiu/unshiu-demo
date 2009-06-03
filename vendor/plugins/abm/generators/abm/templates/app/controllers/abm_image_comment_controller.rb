@@ -1,0 +1,3 @@
+class AbmImageCommentController < ApplicationController
+  include AbmImageCommentControllerModule
+end

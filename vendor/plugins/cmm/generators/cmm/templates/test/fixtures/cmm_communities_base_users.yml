@@ -1,0 +1,70 @@
+# == Schema Information
+#
+# Table name: cmm_communities_base_users
+#
+#  id               :integer(4)      not null, primary key
+#  cmm_community_id :integer(4)      not null
+#  base_user_id     :integer(4)      not null
+#  created_at       :datetime
+#  updated_at       :datetime
+#  deleted_at       :datetime
+#  status           :integer(4)
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one_ADMIN:
+  id: 1
+  cmm_community_id: 1
+  base_user_id: 2
+  status: <%= CmmCommunitiesBaseUser::STATUS_ADMIN %>
+two:
+  id: 2
+  cmm_community_id: 2
+  base_user_id: 1
+  status: <%= CmmCommunitiesBaseUser::STATUS_SUBADMIN %>
+three_SUBADMIN:
+  id: 3
+  cmm_community_id: 1
+  base_user_id: 1
+  status: <%= CmmCommunitiesBaseUser::STATUS_SUBADMIN %>
+four_GUEST:
+  id: 4
+  cmm_community_id: 1
+  base_user_id: 3
+  status: <%= CmmCommunitiesBaseUser::STATUS_GUEST %>
+five_APPLYING:
+  id: 5
+  cmm_community_id: 1
+  base_user_id: 5
+  status: <%= CmmCommunitiesBaseUser::STATUS_APPLYING %>
+#ログイン拒否されているユーザ
+six_REJECTED:
+  id: 6
+  cmm_community_id: 1
+  base_user_id: 6
+  status: <%= CmmCommunitiesBaseUser::STATUS_REJECTED %>
+seven:
+  id: 7
+  cmm_community_id: 3
+  base_user_id: 2
+  status: <%= CmmCommunitiesBaseUser::STATUS_MEMBER %>
+eight_NO_STATUS:
+  id: 8
+  cmm_community_id: 3
+  base_user_id: 3
+nine:
+  id: 9
+  cmm_community_id: 2
+  base_user_id: 6
+  status: <%= CmmCommunitiesBaseUser::STATUS_MEMBER %>
+ten:
+  id: 10
+  cmm_community_id: 1
+  base_user_id: 10
+  status: <%= CmmCommunitiesBaseUser::STATUS_REJECTED %>
+eleven:
+  id: 11
+  cmm_community_id: 1
+  base_user_id: 10
+  status: <%= CmmCommunitiesBaseUser::STATUS_MEMBER %>
+  

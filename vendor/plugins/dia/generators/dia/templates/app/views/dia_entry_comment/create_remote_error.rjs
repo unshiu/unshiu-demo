@@ -1,0 +1,2 @@
+page.replace_html 'dia_entry_comment_message', error_message_on_with_label(@comment, :body)
+page.visual_effect :highlight, "dia_entry_comment_message"

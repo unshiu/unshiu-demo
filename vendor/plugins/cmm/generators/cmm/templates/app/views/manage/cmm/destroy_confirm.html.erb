@@ -1,0 +1,17 @@
+<%- @pan1="SNS設定" -%><%- @pan2="#{t('view.noun.cmm_community')}" -%><%- @pan3="#{t('view.noun.cmm_community')}削除確認" -%>
+<% content_for(:header_title) do %>
+<%= t('view.noun.cmm_community') %>削除確認
+<% end %>
+
+<h3><%= t('view.noun.cmm_community') %>削除確認</h3>
+
+以下の<%= t('view.noun.cmm_community') %>を削除します。よろしいですか？
+
+<% form_tag :action => 'destroy_complete', :id => @community.id do %>
+  <div class="bot_btn">
+    <%= mng_submit_tag '削除する' %>
+    <%= mng_cancel_tag %>
+  </div>
+<% end %>
+
+<%= render :partial => 'show' %>

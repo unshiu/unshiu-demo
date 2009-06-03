@@ -1,0 +1,18 @@
+1.0.3: 2009/01/15 <asami@drecom.co.jp>
+
+* #310 アップロード画像部分をリファクタリング
+
+1.0.2: 2008/12/15 <asami@drecom.co.jp>
+
+* #149 ユーザ権限処理を　user_relation_system.rb で一元化されたものを利用するように
+* list_cell_for に対応
+* #152 管理画面のリストサイズはmngで設定するように
+
+1.0.1: 2008/11/07 <asami@drecom.co.jp>
+
+* テスターによる全体テストを実施し1.0.0のbug fix
+* テンプレートの拡張子を.rhtmlから.html.erbへ
+
+1.0.0: 2008/07  <asami@drecom.co.jp>
+
+* unshiu本体から切り離し Dia pluginとして確立

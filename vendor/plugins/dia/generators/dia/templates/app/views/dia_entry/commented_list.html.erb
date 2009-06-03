@@ -1,0 +1,55 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.dia_entry') %>
+<% end %>
+<% content_for(:sub_title) do %>
+	<%= t('view.noun.dia_entry_comment') %>した<%= t('view.noun.dia_diary') %>一覧
+<% end %>
+
+<div class="clearfix">
+	<div id="contents_title" class="span-12">
+		<h2><span><%= t('view.noun.dia_entry_comment') %>した<%= t('view.noun.dia_diary') %>一覧</span>
+	</h2></div>
+</div>
+
+<% if @entries.size.zero? %>
+	<%= t('view.noun.dia_entry_comment') %>した<%= t('view.noun.dia_diary') %>がありません。
+
+<% else %>
+
+	<div class="pager_box pager_box_top append-bottom clearfix">
+		<%= paginate(@entries) %>
+	</div><!--pager_col-->
+	
+	<div class="diary_storys_box box_outer">
+		<% @entries.each do |entry| %>
+			<div class="diary_story_box box_outer clearfix">
+				<p>
+				<% link_to :controller => 'base_profile', :action => 'show', :id => entry.dia_diary.base_user.id do %>
+					<%= safe_profile_view(entry.dia_diary.base_user.base_profile, :thumb, { :size => "120x120", :class => "left"}) %>
+				<% end %>
+				
+				<h5><span><%= link_to body_summary(entry.title, :length => 100), :action => :show, :id => entry.id %></span></h5>
+				<div class="diary_text box_outer small">
+					<p>
+					<%= body_summary(entry.body, :length => 120) %>
+					</p>
+				</div>
+				<div class="span-10 small">
+					<span class="permanent_link"><%= link_to_user entry.dia_diary.base_user %>｜</span>
+					<span class="permanent_link">
+						<%= link_to "続きを読む", :action => :show, :id => entry.id %>｜
+					</span>
+					<span class="comment_link"><%=h "コメント#{entry.dia_entry_comments.count}" %>｜</span><!--/comment_link-->
+					<span class="contents_date"><%= l(entry.contributed_at) %></span><!--/contents_date-->
+				</div>
+				</p>
+			</div>
+		<% end %>
+	</div><!--/diary_storys_box-->
+
+	<div class="pager_box pager_box_top append-bottom clearfix">
+		<%= paginate(@entries) %>
+	</div><!--pager_col-->
+	
+<% end %>
+

@@ -1,0 +1,2 @@
+module ManageBaseNgWordHelperModule
+end

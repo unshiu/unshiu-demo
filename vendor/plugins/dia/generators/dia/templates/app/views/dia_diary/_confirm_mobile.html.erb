@@ -1,0 +1,3 @@
+<%= t('activerecord.attributes.dia_diary.default_public_level') %><br />
+<%= DiaEntry.public_level_name(@diary.default_public_level) %>
+<%= hidden_field 'diary', 'default_public_level' %><br />

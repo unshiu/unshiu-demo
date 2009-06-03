@@ -1,0 +1,22 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_invite') %>
+<% end %>
+招待したい人の<%= t('activerecord.attributes.base_invite_form.mail_address') %>と<%= t('activerecord.attributes.base_invite_form.invite_message') %>を入力してください。
+<% form_tag :action => 'confirm' do %>
+
+<div style="<%= style_value('form_style') %>">
+	<%= error_messages_for 'maf', :object_name => 'mail_address_form' %>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_invite_form.mail_address') %><br />
+	<%= text_field_tag 'mail_address', @mail_address %><br />
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_invite_form.invite_message') %><br />
+	<%= text_area_tag 'invite_message', @invite_message, {:size=> '50x3'} %><br />
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+</div>
+
+<%= image_tag_for_default 'Spec_02.gif' %><br />
+
+<div style="text-align:center">
+	<%= submit_tag '確認' %>
+</div>
+
+<% end %>

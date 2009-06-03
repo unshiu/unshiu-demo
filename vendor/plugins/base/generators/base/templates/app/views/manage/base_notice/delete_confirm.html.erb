@@ -1,0 +1,19 @@
+<%- @pan1="SNS設定" -%><%- @pan2="#{t('view.noun.base_notice')}" -%><%- @pan3="#{t('view.noun.base_notice')}削除確認" -%>
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_notice') %>削除確認
+<% end %>
+<h3><%= t('view.noun.base_notice') %>削除確認</h3>
+
+<p class="dialog">
+	以下の<%= t('view.noun.base_notice') %>を削除します。よろしいですか？<br />
+	もし<%= t('view.noun.my_portal') %>での表示を止めたいだけの場合は削除せずに、<%= t('activerecord.attributes.base_notice.end_datetime') %>を過去の日付に変更してください。
+</p>
+
+<% form_tag :action => 'delete', :id => @base_notice.id do %>
+  <div class="bot_btn">
+    <%= mng_submit_tag '削除' %>
+    <%= mng_cancel_tag %>
+  </div>
+<% end %>
+<br />
+<%= render :partial => 'show' %>

@@ -1,0 +1,15 @@
+<div id="left02">
+  <div class="sideWrap">
+    <h4><p><%= @pan1 -%></p></h4>
+    <div class="sideMenu">
+      <ul>
+        <li><%= link_to "#{t('view.noun.base_user')}レポート", :controller => 'manage/base_user', :action => 'info' %></li>
+		<li><%= link_to "#{t('view.noun.base_user')}数遷移", :controller => 'manage/base_transit', :action => 'index' %></li>
+		<li><%= link_to "#{t('view.noun.base_user')}検索", :controller => 'manage/base_user', :action => 'search' %></li>
+		<li><%= link_to "アクティブ率", manage_base_active_histories_path %></li>
+		<li><%= link_to t('view.noun.base_user_file_history'), :controller => 'manage/base_user_file_history', :action => 'list' %></li>
+      </ul>
+    </div>
+  </div>
+</div><!-- /left02 -->
+

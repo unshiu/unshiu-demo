@@ -1,0 +1,20 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.base_user') -%><%- @pan3="#{t('view.noun.base_user')}編集確認" -%>
+
+<% content_for(:header_title) do %>
+<%= @pan3 %>
+<% end %>
+
+<h3><%= @pan3 %></h3>
+
+<% form_tag :action => 'update', :id => params[:id] do %>
+
+<%= render :partial => 'show'%>
+
+<%= hidden_field 'base_user', 'email' %>
+
+<div class="bot_btn">
+	<%= mng_submit_tag '編集' %>
+	<%= mng_cancel_tag %>
+</div>
+
+<% end %>

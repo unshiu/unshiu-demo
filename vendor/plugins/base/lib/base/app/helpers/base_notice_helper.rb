@@ -1,0 +1,2 @@
+module BaseNoticeHelperModule
+end

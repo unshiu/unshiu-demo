@@ -1,0 +1,24 @@
+<%- @pan1="SNS設定" -%><%- @pan2="#{t('view.noun.msg_message')}" -%><%- @pan3="#{t('view.noun.msg_message')}詳細" -%>
+<% content_for(:header_title) do %>
+<%= t('view.noun.msg_message') %>詳細
+<% end %>
+<h3><%= t('view.noun.msg_message') %>詳細</h3>
+
+<ul class="list">
+	<li><%= link_to 'メッセージの削除', :action => 'delete_confirm', :id => @message.id %></li>
+</ul>
+
+<%= render :partial => 'show' %>
+<br />
+
+<h3><%= t('view.noun.msg_notify') %>詳細</h3>
+<% for notify in @message.msg_notifies %>
+<table class="lineColorL" style="width:609px;">
+  <tr>
+  	<th width="20%"><%= t('activerecord.attributes.msg_notify.comment') %></th>
+	<td><%= hbr notify.comment %><td>
+  <tr>
+</table>
+<% end %>
+
+

@@ -1,0 +1,11 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.cmm_community') %>編集
+<% end %>
+
+<% form_tag :action => "edit_confirm", :id => @community.id do %>
+	<%= render :partial => 'cmm/form' %>
+	<%= hidden_field 'community', 'id' %>
+	<div style="text-align:center">
+		<%= submit_tag '確認' %>
+	</div>
+<% end %>

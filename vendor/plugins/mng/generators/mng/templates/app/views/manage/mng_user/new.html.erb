@@ -1,0 +1,49 @@
+<%- @pan1="#{t('view.noun.mng_user')}設定" -%><%- @pan2="#{t('view.noun.mng_user')}設定" -%><%- @pan3="新規#{t('view.noun.mng_user')}" -%>
+
+<% content_for(:header_title) do %>
+	新規<%= t('view.noun.mng_user') %>
+<% end %>
+
+<h3>新規<%= t('view.noun.mng_user') %></h3>
+
+<% form_tag :action => 'confirm' do %>
+
+<%= error_messages_for 'base_user' %>
+
+<table class="lineColorL" style="width:609px;">
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_user.login') %></th>
+		<td><%= text_field 'base_user', 'login' %></td>
+	</tr>
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_user.password') %></th>
+		<td><%= password_field 'base_user', 'password' %></td>
+	</tr>
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_user.name') %></th>
+		<td><%= text_field 'base_user', 'name' %></td>
+	</tr>
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_user.email') %></th>
+		<td><%= text_field 'base_user', 'email' %></td>
+	</tr>
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_user.footmark_flag') %></th>
+		<td><%= check_box 'base_user', 'footmark_flag' %></td>
+	</tr>
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_user.receive_mail_magazine_flag') %></th>
+		<td><%= check_box 'base_user', 'receive_mail_magazine_flag' %></td>
+	</tr>
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_user.receive_system_mail_flag') %></th>
+		<td><%= check_box 'base_user', 'receive_system_mail_flag' %></td>
+	</tr>
+	
+</table>
+
+<div class="bot_btn">
+	<%= submit_tag "確認", :class => 'button' %>
+</div>
+
+<% end %>

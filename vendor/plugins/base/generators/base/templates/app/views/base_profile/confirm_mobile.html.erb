@@ -1,0 +1,14 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_profile') %>設定
+<% end %>
+<% form_tag :action => 'create' do %>
+	<div style="<%= style_value('form_style') %>">
+		<%= render :partial => 'confirm' %>
+		<%= image_tag_for_default 'Spec_02.gif' %><br />
+	</div>
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+	<div style="text-align:center">
+		<%= submit_tag '設定' %>
+		<%= cancel_tag %>
+	</div>
+<% end %>

@@ -1,0 +1,27 @@
+<%- @pan1="システム設定" -%><%- @pan2="設定情報" -%><%- @pan3="キャッシュ設定" -%>
+
+<% content_for(:header_title) do %>
+	キャッシュ設定
+<% end %>
+
+<h3>キャッシュ設定</h3>
+
+<table class="lineColorL" style="width:609px;">
+	<tr>
+		<th width="30%">アルバム情報キャッシュ</th>
+		<td><%= sec_format(@system.album_portal_cache_time) %></td>
+	</tr>
+	<tr>
+		<th width="30%">コミュニティ情報キャッシュ</th>
+		<td><%= sec_format(@system.community_portal_cache_time) %></td>
+	</tr>
+	<tr>
+		<th width="30%">日記情報キャッシュ</th>
+		<td><%= sec_format(@system.diary_portal_cache_time) %></td>
+	</tr>
+	<tr>
+		<th width="30%">トピックキャッシュ</th>
+		<td><%= sec_format(@system.topic_portal_cache_time) %></td>
+	</tr>
+</table>
+

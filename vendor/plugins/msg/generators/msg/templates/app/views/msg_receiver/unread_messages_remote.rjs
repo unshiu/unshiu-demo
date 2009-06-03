@@ -1,0 +1,3 @@
+page.replace_html 'message_list', render(:partial => "message", :collection => @messages, :locals => { :msg_controller => 'msg_receiver', :msg_action => 'show' })
+page.replace_html 'callback_function_message', "指定されたメッセージを未読にしました。"
+page.visual_effect :highlight, "callback_function_message"

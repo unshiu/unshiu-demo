@@ -1,0 +1,39 @@
+--- 
+ja-JP: 
+  activerecord: 
+    models: 
+      mlg_magazine: 
+      mlg_delivery: 
+      base_user: 
+      base_profile: 
+    attributes: 
+      mlg_magazine: 
+        sended_at: "送信完了日"
+        created_at: "作成日"
+        title: "タイトル"
+        body: "本文"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        send_at: "送信日"
+      mlg_delivery: 
+        sended_at: "送信日"
+        mlg_magazine: "メールマガジン"
+        created_at: "作成日"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        base_user: "ユーザ"
+      base_user: 
+        joined_at: "入会日"
+        base_carrier: "携帯キャリア"
+      base_profile: 
+        sex: "性別"
+        area: "地域"
+        age: "年齢"
+        civil_status: "未婚•既婚"
+    constant: {}
+
+  view: 
+    noun: 
+      pnt_point: "ポイント"
+      mlg_magazine: "メールマガジン"
+      mlg_delivery: "配送"

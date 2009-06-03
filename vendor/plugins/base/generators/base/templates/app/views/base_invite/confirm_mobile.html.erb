@@ -1,0 +1,22 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_invite') %>
+<% end %>
+<% form_tag :action => 'create' do %>
+
+<div style="<%= style_value('form_style') %>">
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_invite_form.mail_address') %><br />
+	<%= @mail_address %><br />
+	<%= hidden_field_tag 'mail_address', @mail_address %>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_invite_form.invite_message') %><br />
+	<%= hbr @invite_message %><br />
+	<%= hidden_field_tag 'invite_message', @invite_message %>
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+</div>
+
+<%= image_tag_for_default 'Spec_02.gif' %><br />
+
+<div style="text-align:center">
+	<%= submit_tag '招待' %>
+	<%= cancel_tag %>
+</div>
+<% end %>

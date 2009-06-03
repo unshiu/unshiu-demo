@@ -1,0 +1,126 @@
+<h3><%= t('view.noun.mlg_magazine') %>配信確認</h3>
+
+<% form_tag :action => 'update' do %>
+  <%= hidden_field 'mlg_magazine', 'id' %>
+  <%= hidden_field_tag 'mlg_magazine[send_at]', datetime_for_hidden(@mlg_magazine.send_at) %>
+
+<table class="lineColorL" style="width:609px;">
+<tbody>
+  <tr>
+  	<th style="width:140px;"><label name="mlg_magazine_title"><%= t('activerecord.attributes.mlg_magazine.title') %></label></th>
+	<td><%= @mlg_magazine.title %></td>
+  </tr>
+  <tr>
+  	<th style="width:140px;"><label name="mlg_magazine_send_at"><%= t('activerecord.attributes.mlg_magazine.send_at') %></label></th>
+	<td><%= datetime_to_s(@mlg_magazine.send_at) %></td>
+  </tr>
+</tbody>
+</table>
+
+<h4>配信条件</h4>
+
+<table class="lineColorL" style="width:609px;">
+<tbody>
+
+	<% if !@user_info[:joined_at_start].nil? || !@user_info[:joined_at_end].nil? %>
+	<tr>
+		<th style="width:140px;"><label name="joined_at"><%= t('activerecord.attributes.base_user.joined_at') %></label></th>
+		<td>
+		<%= @user_info[:joined_at_start] %>〜<%= @user_info[:joined_at_end] %>
+		<%= hidden_field 'joined_at', 'start', :value => @user_info[:joined_at_start] %>
+		<%= hidden_field 'joined_at', 'end', :value => @user_info[:joined_at_end] %>
+		</td>
+	</tr>
+	<% end %>
+
+	<% if !@profile_info[:age_start].nil? || !@profile_info[:age_end].nil? %>
+	<tr>
+		<th style="width:140px;"><label name="profile_sex"><%= t('activerecord.attributes.base_profile.age') %></label></th>
+		<td>
+		<%= @profile_info[:age_start] %>〜<%= @profile_info[:age_end] %>
+		<%= hidden_field 'age', 'start', :value => @profile_info[:age_start] %>
+		<%= hidden_field 'age', 'end', :value => @profile_info[:age_end] %>
+		</td>
+	</tr>
+	<% end %>
+
+	<% unless @profile_info[:sex].nil? %>
+	<tr>
+		<th style="width:140px;"><label name="profile_sex"><%= t('activerecord.attributes.base_profile.sex') %></label></th>
+		<td>
+		<% @profile_info[:sex].each do | value | %>
+		<%= BaseProfile.sex_kind_name(value) %>&nbsp;&nbsp;
+		<%= hidden_field 'sex', '', :value => value %>
+		<% end %>
+		</td>
+	</tr>
+	<% end %>
+
+	<% unless @profile_info[:area].nil? %>
+	<tr>
+		<th style="width:140px;"><label name="profile_civil_status"><%= t('activerecord.attributes.base_profile.area') %></label></th>
+		<td>
+		<% @profile_info[:area].each do | value | %>
+		<%= BaseProfile.area_kind_name(value) %>&nbsp;&nbsp;
+		<%= hidden_field 'area', '', :value => value %>
+		<% end %>
+		</td>
+	</tr>
+	<% end %>
+
+	<% unless @profile_info[:civil_status].nil? %>
+	<tr>
+		<th style="width:140px;"><label name="profile_civil_status"><%= t('activerecord.attributes.base_profile.civil_status') %></label></th>
+		<td>
+		<% @profile_info[:civil_status].each do | value | %>
+		<%= BaseProfile.civil_status_kind_name(value) %>&nbsp;&nbsp;
+		<%= hidden_field 'civil_status', '', :value => value %>
+		<% end %>
+		</td>
+	</tr>
+	<% end %>
+
+	<% unless @point_info.blank? %>
+	<tr>
+		<th style="width:140px;"><label name="point"><%= t('view.noun.pnt_point') %></label></th>
+		<td>
+		<%= @pnt_master.title %>: <%= @point_info[:start_point] %>〜<%= @point_info[:end_point] %>
+		<%= hidden_field 'point', 'pnt_master_id', :value => @point_info[:pnt_master_id] %>
+		<%= hidden_field 'point', 'start_point', :value => @point_info[:start_point] %>
+		<%= hidden_field 'point', 'end_point', :value => @point_info[:end_point] %>
+		</td>
+	</tr>
+	<% end %>
+
+	<% unless @user_info[:base_carrier_id].nil? %>
+	<tr>
+		<th style="width:140px;"><label name="carrier"><%= t('activerecord.attributes.base_user.base_carrier') %></label></th>
+		<td>
+		<% @carriers.each do | carrier | %>
+		<%= carrier.name %>&nbsp;&nbsp;
+		<%= hidden_field 'base_carrier_id', '', :value => carrier.id %>
+		<% end %>
+		</td>
+	</tr>
+	<% end %>
+
+	<% unless @user_info[:receive_mail_magazine_flag].nil? %>
+	<tr>
+		<th><label name="receive_mail_magazine_flag"><%= t('view.noun.mlg_magazine') %>許可</label></th>
+		<td><%= hidden_field_tag "receive_mail_magazine_flag", '1' %><%= t('view.noun.mlg_magazine') %>許可のユーザのみ</td>
+	</tr>
+	<% end %>
+	
+</tbody>
+</table>
+
+<h4>配信数</h4>
+  <p><%= @user_count %></p>
+
+  <%# TODO 一覧をみせてajaxでページめくり　要望があったら%>
+
+<div class="bot_btn">
+  <%= mng_submit_tag "送信設定" %>
+</div>
+
+<% end %>

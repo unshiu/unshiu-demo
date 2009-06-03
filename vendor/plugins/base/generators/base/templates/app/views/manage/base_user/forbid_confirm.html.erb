@@ -1,0 +1,15 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.base_user') -%><%- @pan3="#{t('view.noun.base_user')}ログイン停止" -%>
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_user') %>ログイン停止確認
+<% end %>
+<h3><%= t('view.noun.base_user') %>ログイン停止確認</h3>
+
+<p class="dialog">次の<%= t('view.noun.base_user') %>をログイン停止にします。よろしいですか？</p>
+
+<% form_tag :action => 'forbid', :id => @base_user.id do %>
+  <div class="bot_btn">
+    <%= mng_submit_tag 'ログイン停止' %>
+    <%= mng_cancel_tag %>
+  </div>
+<% end %>
+<%= render :partial => 'show' %>

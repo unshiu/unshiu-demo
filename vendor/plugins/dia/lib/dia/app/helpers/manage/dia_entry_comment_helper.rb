@@ -1,0 +1,2 @@
+module ManageDiaEntryCommentHelperModule
+end

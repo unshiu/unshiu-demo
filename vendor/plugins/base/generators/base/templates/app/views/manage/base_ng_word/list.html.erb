@@ -1,0 +1,35 @@
+<%- @pan1="管理者設定" -%><%- @pan2="#{t('view.noun.base_ng_word')}" -%><%- @pan3="NGワード一覧" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_ng_word') %>一覧
+<% end %>
+
+<h3><%= t('view.noun.base_ng_word') %>一覧</h3>
+
+<% if @ng_words.size.zero? %>
+	<%= t('view.noun.base_ng_word') %>がありません。
+	
+<% else %>
+	<%= paginate_header(@ng_words) %>
+	<table class="lineColorT" style="width:609px;">
+	<tr>
+		<th width="500px">
+			<%= t('activerecord.attributes.base_ng_word.word') %>
+		</th>
+		<th width="109px">
+			<%= t('activerecord.attributes.base_ng_word.active_flag') %>
+		</th>
+	</tr>
+	<% for ng_word in @ng_words %>
+	<tr>
+		<td>
+			<%= link_to ng_word.word, :action => 'show', :id => ng_word.id %>
+		</td>
+		<td class="textalignC">
+			<%=h ng_word.active_str %>
+		</td>
+	</tr>
+	<% end %>
+	</table>
+	<%= paginate_links(@ng_words) %>
+<% end %>

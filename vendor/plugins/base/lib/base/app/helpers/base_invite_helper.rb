@@ -1,0 +1,2 @@
+module BaseInviteHelperModule
+end

@@ -1,0 +1,9 @@
+<% content_for(:header_title) do %>
+初めての方へ
+<% end %>
+
+<%= yield %>
+
+<%= image_tag_for_default 'Spec_08.gif' %><br />
+<%= link_basic_to "初めての方へトップへ戻る", :controller=>:base_guides, :action=>:index %>
+<%= image_tag_for_default 'Spec_08.gif' %><br />

@@ -1,0 +1,25 @@
+<%- @pan1="管理者設定" -%><%- @pan2=t('view.noun.base_mail_template') -%><%- @pan3="更新" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_mail_template') %>更新
+<% end %>
+
+<h3><%= t('view.noun.base_mail_template') %>更新</h3>
+
+<% form_for @base_mail_template, :url => manage_base_mail_template_path do |f| %>
+	<%= f.hidden_field 'id' %>
+	<%= f.hidden_field 'active_flag' %>
+	<%= f.hidden_field 'base_mail_template_kind_id', { :value => @base_mail_template.base_mail_template_kind_id  } %>
+	<%= f.hidden_field 'content_type' %>
+	<%= f.hidden_field 'device_type' %>
+	<%= f.hidden_field 'subject' %>
+	<%= f.hidden_field 'body'  %>
+	<%= f.hidden_field 'footer_flag' %>
+	
+	<%= render :partial => 'confirm' %>
+	
+	<div class="bot_btn">
+		<%= mng_submit_tag "作成" %>
+		<%= mng_cancel_tag %>
+	</div>
+<% end %>

@@ -1,0 +1,36 @@
+<div style="<%= style_value('form_style') %>">
+
+<div>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.cmm_community.name') %>
+	<div>
+		<%= h @community.name %>
+	</div>
+</div>
+<div>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.cmm_community.profile') %>
+	<div>
+		<%= hbr @community.profile %>
+	</div>
+</div>
+<div>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.cmm_community.join_type') %>
+	<% if @community.join_type_free? %>
+		<div>自由参加</div>
+		<% unless @community.new_record? %>
+		<div>※ 管理者の承認が必要から自由参加に変更した場合、申請中の人はみんな参加状態になります。</div>
+		<% end %>
+	<% elsif @community.join_type_need_approval? %>
+		<div>管理者の承認が必要</div>
+	<% end %>
+</div>
+<div>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.cmm_community.topic_create_level') %>
+	<% if @community.topic_create_level_member? %>
+		<div><%= t('view.noun.cmm_community') %>参加者なら誰でも</div>
+	<% elsif @community.topic_create_level_admin? %>
+		<div>管理者のみ</div>
+	<% end %>
+</div>
+<%= image_tag_for_default 'Spec_02.gif' %><br />
+</div>
+<%= image_tag_for_default 'Spec_02.gif' %><br />

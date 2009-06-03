@@ -1,0 +1,29 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.dia_diary') %>編集
+<% end %>
+
+<% form_tag :action => 'update', :id => params[:id] do %>
+	<%= render :partial => 'form' %>
+   
+  	<a id="diary_preview" class="button"><span><img src="" alt="">プレビュー</span></a>
+	<a id="diary_edit" class="button" style="display:none"><span><img src="" alt="">編集に戻る</span></a>
+	
+	<%= submit_button_tag("公開") %>
+	<%= button_tag("draft", "下書き保存", "tick") %>
+	
+<% end %>
+
+<% content_for(:sidemenu) do %>
+	<div  class="W5R4B9df box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+			<div class="box_inner clearfix">
+			<h6><span>オプション</span></h6>
+			<ul><span id="abm_album_dialog"><%= "#{t('view.noun.abm_image')}を追加する" %></span></ul>
+			</div><!--/box_inner-->
+		</div><!--/wrap3 -->
+		</div><!--/wrap2 -->
+		</div><!--/wrap1 -->
+	</div><!--/friend_box-->
+<% end %>

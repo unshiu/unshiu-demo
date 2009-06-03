@@ -1,0 +1,10 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_notice') %>
+<% end %>
+<% content_for(:sub_title) do %>
+<%= @notice.title %>
+<% end %>
+<div style="<%= style_value('small_info_right') %>">
+<%= l(@notice.start_datetime.to_date) %>
+</div>
+<%= br @notice.body %>

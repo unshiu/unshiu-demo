@@ -1,0 +1,10 @@
+<div><%= @area_graph %></div>
+<table class="lineColorL" style="width:609px;padding-left:10px">
+	<% hash2sorted_array(BaseProfile::PREFECTURES).each_with_index do | area, index | %>
+	<%= "<tr>" if index % 2 == 0 %>
+		<th><%= area[1] %></th>
+		<td><%= @count_area[index] %></td>
+	<%= "</tr>" if index % 2 == 1 %>
+	<% end %>
+</table>
+<div class="clear"></div>

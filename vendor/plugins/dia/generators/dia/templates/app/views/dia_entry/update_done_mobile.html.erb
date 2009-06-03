@@ -1,0 +1,6 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.dia_diary') %>編集
+<% end %>
+
+<%= link_basic_to "編集した#{t('view.noun.dia_diary')}を表示する", :action => 'show', :id => params[:id] %><br />
+<%= link_basic_to "[5]#{t('view.noun.dia_diary')}一覧を見る", {:controller => 'dia_entry', :action => 'list'}, {:accesskey => '5'} %><br />

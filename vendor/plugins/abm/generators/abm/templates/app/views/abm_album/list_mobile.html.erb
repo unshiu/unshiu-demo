@@ -1,0 +1,9 @@
+<% content_for(:header_title) do %>
+<%= @user.show_name + "の" + t('view.noun.abm_album') %>一覧
+<% end %>
+<hr>
+<%= render :partial => 'list' %>
+
+<%= image_tag_for_default 'Spec_08.gif' %><br />
+
+

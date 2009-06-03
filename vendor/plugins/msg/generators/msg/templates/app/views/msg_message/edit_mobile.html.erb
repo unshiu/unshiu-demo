@@ -1,0 +1,16 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.msg_message') %>送信
+<% end %>
+<% content_for(:sub_title) do %>
+<%= t('view.noun.msg_message') %>を書く
+<% end %>
+<% form_tag :action => 'update_confirm', :id => params[:id] do %>
+  <%= render :partial => 'form' %>
+  <div style="text-align:center">
+    <%= submit_tag "確認", :name => 'confirm' %>
+    <%= submit_tag "下書き保存", :name => 'draft' %>
+  </div>
+<% end %>
+<hr style="<%= style_value('hr1') %>">
+<%= link_to '下書き一覧に戻る', :action => 'draft_list' %><br />
+<%= link_to '削除する', :action => 'delete_draft_messages_confirm', :del => { @message.id => true} %><br />

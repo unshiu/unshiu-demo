@@ -1,0 +1,49 @@
+<% content_for(:header_title) do %>
+登録<%= t('activerecord.attributes.base_user.email') %>：変更
+<% end %>
+
+<div class="presignup">
+	<div id="presignup_mailaddress_box" class="W5R4B9df box_outer clearfix">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="box_inner clearfix">
+			<h6 class="W5R4B9df caps">
+				<span>登録<%= t('activerecord.attributes.base_user.email') %>：変更</span>
+			</h6>
+			<div class="notice prepend-top">
+				入力された<%= t('activerecord.attributes.base_user.email') %>に変更手続き用のメールが送信されますので、そのメールに記載されたURLにアクセスし、変更を完了させてください。
+			</div>
+		
+			<% form_tag :action => 'mail_reset_send' do %>
+				
+				<label for="new_mail_address" accesskey="n"><%= t('activerecord.attributes.base_user.email') %>：</label>
+				<%= text_field_tag 'new_mail_address', @new_mail_address, {:class => "span-16"} %>
+				<%= error_message_on_with_label @maf, 'mail_address' %>
+				
+				<%= submit_button_tag '送信' %>
+			<% end %>
+		</div>
+		</div><!--/wrap3-->
+		</div><!--/wrap2-->
+		</div><!--/wrap1-->
+	</div>
+</div>
+
+<% content_for(:sidemenu) do %>
+	<div  class="W5R4B9df box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+			<div class="box_inner clearfix">
+			<h6><span>menu</span></h6>
+			<%= link_to '設定変更', :action => 'index' %><br/>
+			<%= link_to "#{t('view.noun.base_profile')}変更", :controller => 'base_profile', :action => 'edit' %><br/>
+			<%= link_to 'パスワード変更', :controller => 'base_signup', :action => 'password_set_ask' %><br/>
+
+			</div><!--/box_inner-->
+		</div><!--/wrap3 -->
+		</div><!--/wrap2 -->
+		</div><!--/wrap1 -->
+	</div><!--/friend_box-->
+<% end %>

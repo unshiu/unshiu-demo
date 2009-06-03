@@ -1,0 +1,2 @@
+module DiaEntryCommentHelperModule
+end

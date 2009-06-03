@@ -1,0 +1,18 @@
+<%= error_messages_for 'base_error', :object_name => 'base_error' %>
+
+<table class="lineColorL" style="width:609px;">
+<tbody>
+  <tr>
+    <th style="width:100px;"><%= t('activerecord.attributes.base_error.error_code') %></th>
+    <td><%= @base_error.error_code %><%= hidden_field 'base_error', 'error_code' %></td>
+  </tr>
+  <tr>
+    <th style="width:100px;"><%= t('activerecord.attributes.base_error.message') %></th>
+    <td><%= @base_error.message %><%= hidden_field 'base_error', 'message' %></td>
+  </tr>
+  <tr>
+    <th style="width:100px;"><%= t('activerecord.attributes.base_error.coping') %></th>
+    <td><%= text_area 'base_error', 'coping', :rows=>8 , :cols=>45 %></td>
+  </tr>
+</tbody>
+</table>

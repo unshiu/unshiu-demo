@@ -1,0 +1,31 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_user') %>登録
+<% end %>
+
+<% form_tag :action => 'signup', :id => params[:id], :invite => params[:invite] do %>
+
+	<div style="<%= style_value('form_style') %>">
+	
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_user.email') %><br />
+	<%= @user.email %><%= hidden_field 'user', 'email' %><br/>
+		
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_user.login') %><br />
+	<%= @user.login %><%= hidden_field 'user', 'login' %><br/>
+		
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_user.password') %><br />
+	安全のため表示しません<%= hidden_field 'user', 'password' %><br/>
+
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_user.receive_mail_magazine_flag') %><br />
+	<%= mail_receive_setting_message(@user.receive_mail_magazine?) %>
+
+	<%= hidden_field 'user', 'receive_mail_magazine_flag' %>
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+	</div>
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+
+	<div style="text-align:center">
+	<%= submit_tag '登録' %>
+	<%= cancel_tag %>
+	</div>
+
+<% end %>

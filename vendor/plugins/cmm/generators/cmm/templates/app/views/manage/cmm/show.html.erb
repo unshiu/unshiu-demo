@@ -1,0 +1,13 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.cmm_community') -%><%- @pan3="#{t('view.noun.cmm_community')}詳細" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.cmm_community') %>詳細
+<% end %>
+
+<h3><%= t('view.noun.cmm_community') %>詳細</h3>
+
+<ul class="list">
+	<li><%= link_to "この#{t('view.noun.cmm_community')}を削除する", :controller => 'cmm', :action => 'destroy_confirm', :id => @community.id %></li>
+</ul>
+
+<%= render :partial => 'show' %>

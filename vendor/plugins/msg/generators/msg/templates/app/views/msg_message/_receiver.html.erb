@@ -1,0 +1,12 @@
+<li class="small">
+	<%= link_to (image_tag receiver[:image], {"width" => 40, "height" => 40}), :controller => 'base_profile', :action => 'show', :id => receiver.id %>
+	<div class="receiver_data">
+		<div class="receiver_name clearfix"><%= receiver[:text] %></div>
+		<span class="ui-icon ui-icon-close"></span>
+		<div class="delete clearfix ">
+			<%= link_to_function "<span class='receiver_delete'>削除</span>", "$(this).parent().parent().parent().remove()" %>
+			<span class="ui-icon ui-icon-trash" alt="" src=""/></span>
+		</div>
+	</div>
+	<%= hidden_field_tag "receivers", receiver[:id] %>
+</li>

@@ -1,0 +1,3 @@
+class BaseUserConfigController < ApplicationController
+  include BaseUserConfigControllerModule
+end

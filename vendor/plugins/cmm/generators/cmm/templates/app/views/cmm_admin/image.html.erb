@@ -1,0 +1,19 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.cmm_community') %>
+<% end %>
+<% content_for(:sub_title) do %>
+	<%= t('view.noun.cmm_image') %>アップロード
+<% end %>
+
+
+<% form_for :upload_file, :url => {:action => :image_upload }, :method => :post, :html => { :multipart => true } do |f| %>
+	<%= hidden_field_tag 'id', @community.id %>
+	<fieldset>
+		<label for="photo_file"><%= t('view.noun.cmm_image') %></label>
+		<%= f.file_field :image %>
+		<%= error_message_on_with_label @cmm_image, 'image' %>
+	</fieldset>
+	<div class="buttons">
+		<%= f.submit 'アップロード', :class => 'button upload' %>
+	</div>
+<% end %>

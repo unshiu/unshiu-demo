@@ -1,0 +1,45 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_notice') %>一覧
+<% end %>
+
+<div class="clearfix">
+	<div id="contents_title" class="span-12">
+		<h2><span><%= t('view.noun.base_notice') %>一覧</span></h2>
+	</div>
+</div>
+
+<div class="top_topic_box box_outer">
+<div class="wrap1">
+<div class="wrap2">
+<div class="wrap3">
+<div class="box_inner">
+	
+	<% if @notices.size.zero? %>
+		<%= t('view.noun.base_notice') %>はありません。
+	<% else %>
+	
+		<% @notices.each do |notice| %>
+			<div class="diary_story_box box_outer clearfix community_topic_list">
+				<div class="community_topic_text">
+					<h6><span><%= link_to notice.title, :action => 'show', :id => notice.id %></span></h6>
+					<div class="diary_text box_outer small">
+						<p>
+						<%= truncate(notice.body, :length => 120) %>
+						</p>
+					</div>
+					<div class="span-10 small">
+						<span class="permanent_link"><%= link_to "続きを読む", :action => 'show', :id => notice.id %>｜</span>
+						<span class="contents_date"><%= l(notice.start_datetime.to_date) %></span>
+						<span class="contents_time"></span>
+					</div>
+				</div>
+			<!--/contents_time-->
+			</div>
+		<% end %>
+	<% end %>
+	</div>
+
+</div>
+</div><!--/wrap3-->
+</div><!--/wrap2-->
+</div><!--/wrap1-->

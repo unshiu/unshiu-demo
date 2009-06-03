@@ -1,0 +1,14 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.cmm_community') %>削除
+<% end %>
+
+<%= t('view.noun.cmm_community') %>「<%= h @community.name %>」を削除します。<br/>
+よろしいですか？<br/>
+<br/>
+<%= image_tag_for_default 'Spec_04.gif' %><br />
+<% form_tag :action => 'destroy_complete', :id => @community.id do %>
+	<div style="text-align:center">
+		<%= submit_tag '削除' %>
+		<%= cancel_tag %>
+	</div>
+<% end %>

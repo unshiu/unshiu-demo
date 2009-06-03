@@ -1,0 +1,118 @@
+<% content_for(:header_title) do %>
+	<%= @album.base_user.show_name %>の<%= t('view.noun.abm_album') %>
+<% end %>
+<% content_for(:sub_title) do %>
+	<%=h @album.title %>
+<% end %>
+
+<% content_for(:header_profile) do %>
+	<%= render :partial => "common/header_profile", :locals => {:base_user => @album.base_user} %>
+<% end %>
+
+<% content_for(:js) do %>
+	<%= javascript_include_tag 'swfupload' %>
+	<%= javascript_include_tag 'upload' %>
+	<script type="text/javascript">
+		var swfu;
+		
+		// Dom Ready
+		$(document).ready(function() {
+			// Setup SWFU object
+			var settings = {
+				upload_url: "/abm_image/upload_remote?abm_album_id=<%= @album.id %>",
+				flash_url: "/swfupload.swf",
+
+				file_size_limit: "<%= AppResources[:abm][:file_size_max_image_size].to_byte_i %>",
+				file_types: "<%= AppResources[:abm][:swf_image_allow_format] %>",
+				
+				file_dialog_complete_handler: Upload.file_dialog_complete,
+				upload_start_handler : Upload.upload_start,
+				upload_progress_handler: Upload.upload_progress,
+				upload_error_handler: Upload.upload_error,
+				upload_success_handler: Upload.upload_success,
+				upload_complete_handler: Upload.upload_complete,
+
+				custom_settings : { 
+			        upload_target : 'divFileProgressContainer'
+			    },
+				// Button Settings
+				button_image_url : "/images/spyglass.png",
+				button_placeholder_id : "spanButtonPlaceholder",
+				button_width: 180,
+				button_height: 18,
+				button_text : "<span class='button'>画像を選択(1ファイル最大<%= AppResources[:abm][:file_size_max_image_size] %>)</span>",
+				button_text_style : '.button { font-family: Helvetica, Arial, sans-serif; font-size: 12pt; }',
+				button_text_top_padding: 0,
+				button_text_left_padding: 10,
+				button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+				button_cursor: SWFUpload.CURSOR.HAND,
+				
+				debug: false // Set to true to find out why things aren't working
+			};
+			
+			swfu = new SWFUpload(settings);
+		});
+	</script>
+<% end %>
+
+<div class="main_content_data_title">
+	<h2><%=h @album.title %></h2>
+</div><!--/content_title-->
+
+<%= hbr(@album.body) %>
+
+<br class="clearer" />
+
+<% if logged_in? && @album.is_mine?(current_base_user.id)%>
+	<div class="notice">
+		ファイルの複数同時選択が可能なアップロード機能です。<br/>
+		（「画像を選択」ボタンを押し、ファイルの参照時にドラッグしてください。）<br/>
+		うまくいかない場合は<%= link_to 'こちら', :controller => :abm_image, :action => :new, :abm_album_id => @album.id %>からアップロードしてください。
+	</div>
+
+	<div style="margin: 0px 10px;">
+		<div>
+			<form>
+	  		<div style="display: inline; background-color: #C5D9FF; padding: 4px;">
+	  			<span id="spanButtonPlaceholder"></span>
+	  		</div>
+			</form>
+		</div>
+		<div id="SWFUpload_0_0" class="progressWrapper">
+			<div class="status"></div>
+		</div>
+	</div>
+	
+<% end %>
+
+<%= paginate(@images) %>
+
+<% if @images.size.zero? %>
+	<p><%= t('view.noun.abm_album') %>に<%= t('view.noun.abm_image') %>は登録されていません。</p>
+<% end %>
+
+<table>
+	<tbody>
+	<tr id="images"></tr>
+	<%= render :partial => 'abm_image/image', :collection => @images %>
+	</tbody>
+</table>
+						
+<% content_for(:sidemenu) do %>
+	<% if logged_in? && @album.is_mine?(current_base_user.id)%>
+		<div  class="W5R4B9df box_outer">
+			<div class="wrap1">
+			<div class="wrap2">
+			<div class="wrap3">
+				<div class="box_inner clearfix">
+				<h6><span>menu</span></h6>
+					<%= link_to "#{t('view.noun.abm_album')}一覧", :action => :index %><br/>
+					<%= link_to "#{t('view.noun.abm_album')}を作成する", :action => :new %>
+			
+				</div><!--/box_inner-->
+			</div><!--/wrap3 -->
+			</div><!--/wrap2 -->
+			</div><!--/wrap1 -->
+		</div><!--/friend_box-->
+	<% end %>
+<% end %>

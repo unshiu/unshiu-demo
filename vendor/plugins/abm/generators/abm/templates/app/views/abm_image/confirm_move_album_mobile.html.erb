@@ -1,0 +1,18 @@
+<%content_for(:header_title) do %>
+<%= t('view.noun.abm_album') %><%= t('view.noun.abm_image') %>移動
+<%end %>
+<%content_for(:sub_title) do %>
+<%= h @image.title %>
+<%end %>
+<div>
+    <%= h @album.title %>に移動してよろしいですか？<br/>
+    <%= render :partial => 'show_image' %>
+    
+    <% form_tag :action => :move_album, :id => @image.id do %>
+        <%= hidden_field_tag "abm_album_id", @album.id  %>
+		<div style="text-align:center">
+        	<%= submit_tag "移動" %>
+		</div>
+    <% end %>
+</div>
+<%= image_tag_for_default 'Spec_08.gif' %><br />

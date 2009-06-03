@@ -1,0 +1,28 @@
+<%- @pan1="メール" -%><%- @pan2="#{t('view.noun.mlg_magazine')}の確認" -%>
+<% content_for(:header_title) do %>
+  <%= t('view.noun.mlg_magazine') %>の確認
+<% end %>
+
+<h3><%= t('view.noun.mlg_magazine') %>の確認</h3>
+
+<% form_tag :action => 'create' do %>
+	<table class="lineColorL" style="width:609px;">
+	<tbody>
+	  <tr>
+	    <th style="width:140px;"><%= t('activerecord.attributes.mlg_magazine.title') %></th>
+	    <td><%= @mlg_magazine.title %>
+			<%= hidden_field 'mlg_magazine', 'title' %></td>
+	  </tr>
+	  <tr>
+	    <th style="width:140px;"><%= t('activerecord.attributes.mlg_magazine.body') %></th>
+	    <td><%= @mlg_magazine.body %>
+			<%= hidden_field 'mlg_magazine', 'body' %></td>
+	  </tr>
+	</tbody>
+	</table>
+
+	<div class="bot_btn">
+	 	<%= mng_submit_tag "保存" %>
+	  	<%= mng_cancel_tag %>
+	</div>
+<% end %>

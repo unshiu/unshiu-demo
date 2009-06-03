@@ -1,0 +1,14 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_user') %>登録
+<% end %>
+
+<%= error_messages_for :base_user %>
+
+利用規約<br />
+<br />
+<% form_tag :action => 'ask_names', :id => params[:id], :invite => params[:invite] do %>
+	
+	<%= submit_tag '同意する' %>
+	<%= cancel_tag '同意しない' %>
+	
+<% end %>

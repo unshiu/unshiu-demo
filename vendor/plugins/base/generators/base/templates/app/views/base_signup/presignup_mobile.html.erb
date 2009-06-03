@@ -1,0 +1,21 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_user') %>登録
+<% end %>
+
+<%= error_messages_for :base_user %>
+
+以下のリンクよりメール送信画面を開いて指定のアドレスに空メールを送信してください。
+システムから自動的に返信メールが送られますので、記載のURLにアクセスし登録手続きを行ってください。<br />
+<div style="text-align:center">
+	<%= mail_to @resistration_mail_address, "メール登録" %>
+</div>
+<br/>
+■メール受信設定をしている方へ<br/>
+弊社からのメールを受け取れるように設定してください。<br />
+ドメイン指定受信されている方は「<%= AppResources[:init][:action_mailer_setting_domain]%>」、
+メールアドレス指定受信をされている方は「<%= AppResources[:base][:registration_mail_address]%>」を追加してください。
+<br />
+ドメイン/メールアドレスは以下からコピーしてください。
+<input type="text" value="<%= AppResources[:init][:action_mailer_setting_domain] %>"/><br/>
+<input type="text" value="<%= AppResources[:base][:registration_mail_address] %>"/><br/>
+

@@ -1,0 +1,33 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_user') %>登録
+<% end %>
+
+<div class="presignup">
+	<div id="presignup_mailaddress_box" class="W5R4B9df box_outer clearfix">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="box_inner clearfix">
+			<h6 class="W5R4B9df caps"><span>仮登録メールアドレス入力</span></h6>
+			<div class="notice prepend-top">メールアドレスを入力してください。システムから自動的にメールが送られますので、記載のURLにアクセスし登録手続きを行ってください。</div>
+		
+			<% form_tag :action => 'mail_regist' do %>
+			
+				<label for="base_mail_address_form_mail_address" accesskey="n">
+				<%= t('activerecord.attributes.base_user.email') %>：</label>
+			
+				<%= text_field 'base_mail_address_form', 'mail_address', {:class => "span-16"} %>
+				<%= error_message_on_with_label @base_mail_address_form, 'mail_address' %>
+				<br>
+				<div class="clearfix prepend-0">
+				
+					<%= submit_button_tag '仮登録' %>
+					
+				</div>
+			<% end %>
+		</div>
+		</div><!--/wrap3-->
+		</div><!--/wrap2-->
+		</div><!--/wrap1-->
+	</div>
+</div>

@@ -1,0 +1,16 @@
+<% content_for(:header_title) do %>
+受信<%= t('view.noun.msg_message') %>
+<% end %>
+<% content_for(:sub_title) do %>
+<%= @message.title %>
+<% end %>
+この受信<%= t('view.noun.msg_message') %>をゴミ箱に入れます。よろしいですか？
+
+<% form_tag :action => 'delete', :id => @message.id do %>
+  <div style="text-align:center">
+    <%= submit_tag 'ゴミ箱に入れる' %>
+    <%= cancel_tag %>
+  </div>
+<% end %>
+<%= image_tag_for_default 'Spec_08.gif' %><br />
+<%= render :partial => 'show' %>

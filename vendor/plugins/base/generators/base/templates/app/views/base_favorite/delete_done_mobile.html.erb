@@ -1,0 +1,6 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_favorite') %>削除
+<% end %>
+<%= @user.show_name %>を<%= t('view.noun.base_favorite') %>から削除しました。<br />
+<br />
+<span style="color:#f75100;"></span><%= link_basic_to "#{t('view.noun.base_favorite')}一覧へ戻る", {:action => 'list'}, {:accesskey => '5'} %>

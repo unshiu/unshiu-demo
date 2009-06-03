@@ -1,0 +1,12 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_friend') %>申請拒否
+<% end %>
+<%= link_to_user_without_emoticon(@apply.base_user) %>の<%= t('view.noun.base_friend') %>申請を拒否しますか？<br />
+申請を拒否した場合、再度申請されない限り再度承認することはできません。<br />
+<br />
+<div style="text-align:center">
+	<% form_tag :action => 'deny', :id => @apply.id do %>
+		<%= submit_tag '拒否' %>
+		<%= cancel_tag %>
+	<% end %>
+</div>

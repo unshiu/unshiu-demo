@@ -1,0 +1,20 @@
+<% content_for(:header_title) do %>
+	<%= h @community.name %><%= t('view.noun.cmm_communities_base_user') %>一覧
+<% end %>
+
+<% if @members.size.zero? %>
+	<%= t('view.noun.cmm_communities_base_user') %>がいません。
+
+<% else %>
+	<%= paginate_header @members %>
+
+	<% @members.each do |member| %>
+		<% list_cell_for do %>
+			<%= link_to_user_without_emoticon member.base_user %>
+			<%= post(member) %>
+		<% end %>
+	<% end %>
+
+	<%= paginate_links @members %>
+	
+<% end %>

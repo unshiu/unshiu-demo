@@ -1,0 +1,18 @@
+<%- @pan1="システム設定" -%><%- @pan2='携帯機種管理' -%><%- @pan3="対応機種設定" -%>
+
+<% content_for(:header_title) do %>
+	「<%= @jpmobile_device.device %>」閲覧拒否確認
+<% end %>
+
+<h3>「<%= @jpmobile_device.device %>」閲覧拒否確認</h3>
+
+<p class="dialog">
+	「<%= @jpmobile_device.device %>」での閲覧を拒否します。よろしいですか？
+</p>
+	
+<% form_for @jpmobile_device, :url => unavailable_manage_base_device_path do %>
+  <div class="bot_btn">
+    <%= mng_submit_tag '閲覧を拒否する' %>
+    <%= mng_cancel_tag %>
+  </div>
+<% end %>

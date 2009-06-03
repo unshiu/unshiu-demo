@@ -1,0 +1,35 @@
+<%- @pan1="#{t('view.noun.base_user')}" -%><%- @pan2="#{t('view.noun.base_user')}数遷移" -%>
+
+<h3><%= t('view.noun.base_user') %>総数推移</h3>
+
+<% form_tag :controller => :base_transit, :action => :user do %>
+	<%= error_messages_for 'base_transit_form' %>
+
+	<table class="lineColorL" style="width:609px;">
+		<tr>
+			<th>開始日</th>
+			<td>
+				<%= date_select 'date', 'start', :use_month_numbers => true, :default => Date.today - 7.days %>
+				<%= adjusted_datetime 'date', 'start' %>
+			</td>
+		</tr>
+		<tr>
+			<th>終了日</th>
+			<td>
+				<%= date_select 'date', 'end', :use_month_numbers => true, :default => Time.now %>
+				<%= adjusted_datetime 'date', 'end' %>
+			</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td>
+				<%= radio_button_tag "type", "day", true %>日別
+				<%= radio_button_tag "type", "month" %>月別
+			</td>
+		</tr>
+	</table>
+	<center>
+	<%= submit_tag '検索', :name => 'search' %>
+	<%= submit_tag 'CSV書き出し', :name => 'csv' %>
+	</center>
+<% end %>

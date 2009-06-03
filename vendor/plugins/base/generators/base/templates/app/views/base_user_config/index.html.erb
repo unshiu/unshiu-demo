@@ -1,0 +1,72 @@
+<% content_for(:header_title) do %>
+設定変更
+<% end %>
+
+<div id="" class="prepend-top append-bottom">
+<div class="wrap1">
+<div class="wrap2">
+<div class="wrap3">
+<div class="box_inner clearfix">
+
+<% form_tag :action => 'update', "class" => "prepend-0" do %>
+	<table id="config_table" class="config clear  span-16" >
+			<col class="label">
+			<col class="data">
+	<thead></thead>
+	<tbody class="first_child">
+		<tr class="small">
+			<th><span>メール：</span></dt>
+			<td>
+				<%= check_box 'base_user', 'receive_system_mail_flag' %>
+				<span class="name">サービスからの通知メールを受け取る</span><br>
+				<%= check_box 'base_user', 'receive_mail_magazine_flag' %>
+				<span class="name">メールマガジンを受け取る</span>
+			</td>
+		</tr>
+		<tr class="small">
+			<th><span>メッセージを誰から受け取る？：</span></dt>
+			<td>
+				<%= select 'base_user', 'message_accept_level', hash2sorted_array(MsgMessage::MESSAGE_ACCEPT_LEVELS) %>
+			</td>
+		</tr>
+		<tr class="small">
+			<th><span>日記公開レベル初期値：</span></dt>
+			<td>
+				<%= select 'dia_diary', 'default_public_level', select_type(DiaEntry::PUBLIC_LEVELS) %>
+			</td>
+		</tr>
+		<tr >
+			<th><span></span></dt>
+			<td>
+				<%= submit_button_tag '更新' %>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<% end %>
+
+</div><!--/box_inner-->
+</div><!--wrap3-->
+</div><!--wrap2-->
+</div><!--wrap1-->
+</div><!--box_outer-->
+
+<% content_for(:sidemenu) do %>
+	<div  class="W5R4B9df box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+			<div class="box_inner clearfix">
+			<h6><span>menu</span></h6>
+			<%= link_to "#{t('view.noun.base_profile')}変更", :controller => 'base_profile', :action => 'edit' %><br/>
+			<%= link_to '登録メールアドレス変更', :action => 'mail_reset_input' %><br/>
+			<%= link_to 'パスワード変更', :controller => 'base_signup', :action => 'password_set_ask' %><br/>
+			<% unless current_base_user_manage? %>
+				<%= link_to '退会', :controller => 'base_signup', :action => 'quit_confirm' %><br/>
+			<% end %>
+			</div><!--/box_inner-->
+		</div><!--/wrap3 -->
+		</div><!--/wrap2 -->
+		</div><!--/wrap1 -->
+	</div><!--/friend_box-->
+<% end %>

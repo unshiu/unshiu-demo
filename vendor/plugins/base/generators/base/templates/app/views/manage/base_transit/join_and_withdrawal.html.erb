@@ -1,0 +1,25 @@
+<%- @pan1="#{t('view.noun.base_user')}" -%><%- @pan2="#{t('view.noun.base_user')}数遷移" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_user') %>数遷移
+<% end %>
+
+
+<h3><%= t('view.noun.base_user') %>数推移</h3>
+
+<table class="lineColorT" style="width:609px;">
+	<tr>
+		<th>日付</th>
+		<th>総<%= t('view.noun.base_user') %>数</th>
+		<th>総入会者数</th>
+		<th>総退会者数</th>
+	</tr>
+  <% @infos.each do |info| %>
+	<tr>
+		<td><%= info[:date] %></td>
+		<td><%= info[:all] %></td>
+		<td><%= info[:join] %></td>
+		<td><%= info[:quit] %></td>
+	</tr>
+  <% end %>
+</table>

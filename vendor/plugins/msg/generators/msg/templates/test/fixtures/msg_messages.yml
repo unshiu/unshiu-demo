@@ -1,0 +1,61 @@
+# == Schema Information
+#
+# Table name: msg_messages
+#
+#  id                :integer(4)      not null, primary key
+#  title             :string(255)     default(""), not null
+#  body              :text
+#  created_at        :datetime
+#  updated_at        :datetime
+#  deleted_at        :datetime
+#  parent_message_id :integer(4)
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  title: aaa1
+  body: body1
+  parent_message_id: 2
+two:
+  id: 2
+  title: aaa2
+  body: body2
+three:
+  id: 3
+  title: aaa3
+  parent_message_id: 1
+four:
+  id: 4
+  title: aaa4
+  parent_message_id: 1
+five:
+  id: 5
+  title: aaa5
+  body: body5
+six:
+  id: 6
+  title: aaa6
+seven:
+  id: 7
+  title: aaa7
+eight:
+  id: 8
+  title: aaa8
+nine:
+  id: 9
+  title: aaa9
+ten:
+  id: 10
+  title: aaa10
+eleven:
+  id: 11
+  title: aaa11
+twelve:
+  id: 12
+  title: aaa12
+thirteen:
+  id: 13
+  title: from delete user
+  body: message
+  parent_message_id: 1

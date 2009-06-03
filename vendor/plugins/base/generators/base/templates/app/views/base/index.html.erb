@@ -1,0 +1,193 @@
+<div class="top_topic_box box_outer">
+	<div class="wrap1">
+	<div class="wrap2">
+	<div class="wrap3">
+	<div class="box_inner">
+		<div class="title"><h2><span><img src="/images/default/title/title-1icon.jpg" alt="" >公開日記</span></h2></div>
+		<div class="topic_body">
+			<div class="topic_body_inner clearfix">
+				<% @entries.each do |entry| %>
+					<div class="newsitem clearfix">
+						<p>
+						<%= link_to safe_profile_view(entry.dia_diary.base_user.base_profile, :thumb, {"width" => 120, "height" => 120, :class => "left"}), :controller => 'base_profile', :action => 'show', :id => entry.dia_diary.base_user.id %>
+						<h6>
+							<span><%= link_to body_summary(entry.title, :length => 25), :controller => 'dia_entry', :action => 'show', :id => entry.id %></span>
+						</h6>
+						<div class="date"><%= datetime_to_date(entry.contributed_at)%></div>
+							<%= body_summary(entry.body, :length => 100) %>
+							
+						<div class="more">
+							<%= link_to "もっと読む", :controller => :dia_entry, :action => :show, :id => entry.id %>
+						</div>
+					</div>
+					<hr/>
+				<% end %>
+
+				<div class="more">
+					<%= link_to "すべて表示", :controller => :base, :action => 'search', :base_search => {:scope => 'dia' } %>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div><!--/wrap3-->
+	</div><!--/wrap2-->
+	</div><!--/wrap1-->
+</div>
+
+<div class="top_topic_box box_outer">
+	<div class="wrap1">
+	<div class="wrap2">
+	<div class="wrap3">
+	<div class="box_inner">
+		<div class="title"><h2><span><img src="/images/default/title/title-1icon.jpg" alt="" >公開アルバム</span></h2></div>
+		<div class="topic_body">
+			<div class="topic_body_inner clearfix">
+				<% @albums.each do |album| %>
+					<div class="newsitem clearfix">
+						<p>
+						<h6><span>
+							<%= link_to body_summary(album.title, :length => 30), :controller => 'abm_album', :action => 'show', :id => album.id %></span></h6>
+						<div class="date"><%= l(album.updated_at, :format => :short)%></div>
+						<div>
+							<%= body_summary(album.body, :length => 65) %>
+						</div>
+						<div class="more">
+							<%= link_to "画像を見る", :controller => :abm_album, :action => :show, :id => album.id %>
+						</div>
+						<p>
+					</div><!--/newsitem-->
+					<hr/>
+				<% end %>
+				
+				<div class="more">
+					<%= link_to "すべて表示", :controller => :base, :action => 'search', :base_search => {:scope => 'abm' } %>
+				</div>
+			</div><!--/topic_body_inner-->
+		</div><!--/topic_body-->
+	</div><!--/box_inner-->
+	</div><!--/wrap3-->
+	</div><!--/wrap2-->
+	</div><!--/wrap1-->
+</div><!--/top_topic-->
+
+<div class="top_topic_box box_outer">
+	<div class="wrap1">
+	<div class="wrap2">
+	<div class="wrap3">
+	<div class="box_inner">
+		<div class="title"><h2><span><img src="/images/default/title/title-1icon.jpg" alt="">新着コミュニティ</span></h2></div>
+		<div class="topic_body">
+			<div class="topic_body_inner clearfix">
+				<% @communities.each do |community| %>
+					<div class="newsitem clearfix">
+						<p>
+						<%= safe_community_image_view(community.cmm_image, :thumb, {"width" => 120, "height" => 120, :class => "left"}) %>
+						<h6><span><%= link_to body_summary(community.name, :length => 25), :controller => 'cmm', :action => 'show', :id => community.id %></span></h6>
+						<div class="date"><%= l(community.updated_at, :format => :short)%></div>
+						<div>
+							<%= body_summary(community.profile, :length => 100) %>
+						</div>
+						<div class="more">
+							<%= link_to "もっと読む", :controller => :cmm, :action => :show, :id => community.id %>
+						</div>
+						<p>
+					</div><!--/newsitem-->
+					<hr/>
+				<% end %>
+				
+				<div class="more">
+					<%= link_to "すべて表示", :controller => :base, :action => 'search', :base_search => {:scope => 'cmm' } %>
+				</div>
+			</div><!--/topic_body_inner-->
+		</div><!--/topic_body-->
+	</div><!--/box_inner-->
+	</div><!--/wrap3-->
+	</div><!--/wrap2-->
+	</div><!--/wrap1-->
+</div><!--/top_topic-->
+
+<% content_for(:sidemenu) do %>
+
+<% unless logged_in? %>
+	
+	<div id="login_box" class="W5R4B9df box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="box_inner clearfix">
+		<% form_tag({ :controller => 'base_user', :action => 'login' }, :class => 'clearfix') do -%>
+		<fieldset>
+		<legend>ログイン</legend>
+				<label for="login" accesskey="n" class="column span-3">
+					<%= t('activerecord.attributes.base_user.login') %>：
+				</label>
+				<%= text_field_tag 'login' %>
+				<br>
+				<label for="password" accesskey="n" class="column span-3">
+					<%= t('activerecord.attributes.base_user.password') %>：
+				</label>
+				<%= password_field_tag 'password', nil, numeric_text_field_options %>
+				<br>
+				<%= check_box_tag 'remember_me' %><label class="small">次回から入力を省略</label>
+				<br>
+				<div class="clearfix">
+					<%= submit_button_tag("ログイン") %>
+				</div>
+				<%= link_to "ユーザーID・パスワードを忘れた方はこちら", :controller => 'base_signup', :action => 'password_remind_ask' %>
+		</fieldset>
+		<% end -%>
+		</div><!--/box_inner-->
+		</div><!--/wrap3-->
+		</div><!--/wrap2-->
+		</div><!--/wrap1-->
+	</div><!--/login_box-->
+	
+	
+	<div id="registration_box" class="W5R4B9df box_outer clearfix">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="box_inner clearfix">
+			<div class="tilte"><h6 class="caps"><span>ユーザー登録（無料）</span></h6></div>
+			<%= link_to "<span><img src='stylesheets/blueprint/plugins/buttons/icons/key.png' alt=''/>ユーザー登録</span>", { :controller => :base_signup, :action => 'presignup' }, :class => "button"%>
+		</div><!--/registration_inner-->
+		</div><!--/wrap3-->
+		</div><!--/wrap2-->
+		</div><!--/wrap1-->
+	</div><!--/registration_box-->
+	
+<% end %>
+
+<div class="W5R4B9df side_topic_box box_outer">
+	<div class="wrap1">
+	<div class="wrap2">
+	<div class="wrap3">
+	<div class="box_inner clearfix">
+		<h6 class="W5R4B9df caps"><span>お知らせ</span></h6>
+		<div class="side_topic_body">
+			<% if @notices.size.zero? %>
+				<p><%= t('view.noun.base_notice') %>はありません。</p>
+
+			<% else %>
+				
+				<% @notices.each do |notice| %>
+			      	<h6><span><%= link_to truncate(h(notice.title), :length => 20), :controller => 'base_notice', :action => 'show', :id => notice.id %></span></h6>
+					<div class="date"><%= l(notice.start_datetime.to_date, :format => :short) %></div>
+					<div>
+						<%= truncate(h(notice.body), :length => 20)%>
+					</div>
+				<% end %>
+				
+				<div class="more clearfix">
+					<%= link_to "お知らせ一覧へ", :controller => :base_notice, :action => :list %>
+				</div>
+				
+			<% end %>
+		</div><!--/side_topic_body-->
+	</div><!--/side_col_inner-->
+	</div><!--/wrap3-->
+	</div><!--/wrap2-->
+	</div><!--/wrap1-->
+</div><!--/side_topic_box-->
+
+<% end %>

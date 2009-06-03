@@ -1,0 +1,45 @@
+common: &common
+  # 日記（DiaDiary）を作ったときのデフォルト公開レベルの初期値
+  default_default_public_level: 1
+  
+  # 最新の記事一覧サイズ
+  recent_entry_list_size: 5
+  recent_comment_list_size: 5
+  
+  # 日記記事リストの1ページに表示する数
+  entry_list_size: 10
+  entry_list_size_mobile: 5
+  
+  # 画像を追加する際のアルバム表示数
+  entry_album_list_size: 8 
+  
+  # プロフィール画面で表示する日記記事の最大数
+  profile_entry_list_size: 3
+  
+  # 日記記事とともに表示するコメントの最大数
+  entry_comment_list_size_with_comment: 3
+
+  # 日記記事コメントリストの1ページに表示する数
+  entry_comment_list_size: 10
+  entry_comment_list_size_mobile: 5
+
+  # マイポータルに表示する友だち日記記事リストの最大数
+  portal_frined_entry_list_size: 3
+
+  # マイポータルに表示するコメントした日記記事リストの最大数
+  portal_commented_entry_list_size: 3
+
+  # 共通ポータルに表示する新着日記記事リストの最大数
+  portal_public_entry_list_size: 3
+
+  # ポータルに表示する場合などの記事のキャッシュ時間(sec)
+  dia_diary_cache_time: 600
+  
+development:
+  <<: *common
+
+test:
+  <<: *common
+
+production:
+  <<: *common

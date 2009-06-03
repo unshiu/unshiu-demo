@@ -1,0 +1,99 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.base_user') -%><%- @pan3="#{t('view.noun.base_user')}編集" -%>
+
+<% content_for(:header_title) do %>
+<%= @pan3 %>
+<% end %>
+
+<h3><%= @pan3 %></h3>
+
+<% form_tag :action => 'update_confirm', :id => @base_user.id do %>
+
+<%= error_messages_for 'base_user' %>
+
+<table class="lineColorL" style="width:609px;">
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_profile.name') %></th>
+		<td><%= @base_user.show_name %></td>
+	</tr>
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_user.email') %></th>
+		<td><%= text_field 'base_user', 'email' %></td>
+	</tr>
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_latest_login.latest_login') %></th>
+		<td><%= l(Time.at(@base_user.latest_login)) %></td>
+	</tr>
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_user.device_name') %></th>
+		<td><%= device(@base_user) %></td>
+	</tr>
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_user.base_carrier') %></th>
+		<td><%= carrier(@base_user) %></td>
+	</tr>
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_user.status') %></th>
+		<td><%= BaseUser.status_name(@base_user.status) %></td>
+	</tr>
+	<tr>
+		<th width="20%"><%= t('view.noun.pnt_point') %></th>
+		<td><%= PntPoint.base_user_all_point(@base_user.id) %></td>
+	</tr>
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_user.joined_at') %></th>
+		<td><%= datetime_to_s(@base_user.joined_at) %></td>
+	</tr>
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_user.quitted_at') %></th>
+		<td><%= datetime_to_s(@base_user.quitted_at) %></td>
+	</tr>
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_user.receive_mail_magazine_flag') %></th>
+		<td><%= mail_receive_setting_message(@base_user.receive_mail_magazine?) %></td>
+	</tr>
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_user.receive_system_mail_flag') %></th>
+		<td><%= mail_receive_setting_message(@base_user.receive_system_mail?) %></td>
+	</tr>
+	<% if @profile %>
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_profile.image') %></th>
+		<td>
+			<% unless @profile.image.blank? %>
+				<%= image_tag url_for_image_column(@profile, :image, :thumb) %>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.base_profile.sex') %></th>
+		<td><%= BaseProfile.sex_kind_name(@profile.sex) %></td>
+		<td><%= BaseProfile.public_level_name(@profile.sex_public_level) %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.base_profile.area') %></th>
+		<td><%= BaseProfile.area_kind_name(@profile.area) %></td>
+		<td><%= BaseProfile.public_level_name(@profile.area_public_level) %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.base_profile.civil_status') %></th>
+		<td><%= BaseProfile.civil_status_kind_name(@profile.civil_status) %></td>
+		<td><%= BaseProfile.public_level_name(@profile.civil_status_public_level) %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.base_profile.birthday') %></th>
+		<td><%= date_to_s(@profile.birthday) %></td>
+		<td><%= BaseProfile.public_level_name(@profile.birthday_public_level) %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.base_profile.introduction') %></th>
+		<td><%= @profile.introduction %></td>
+		<td><%= BaseProfile.public_level_name(@profile.introduction_public_level) %></td>
+	</tr>
+	<% end %>
+</table>
+
+<div class="bot_btn">
+	<%= mng_submit_tag '確認' %>
+</div>
+
+<% end %>

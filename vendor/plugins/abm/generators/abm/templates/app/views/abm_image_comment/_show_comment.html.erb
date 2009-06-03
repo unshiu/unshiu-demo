@@ -1,0 +1,19 @@
+<% if @comment.not_invisibled_by_anyone? %>
+	<%= link_to_user_without_emoticon @comment.base_user, '#F75200' %>
+	
+	<% if logged_in? && @comment.deletable?(current_base_user) %>
+		<%= link_to_list_cell '[削除]', :action => 'confirm_delete_comment', :id => @comment.id, :cancel_to => "/abm_image_comment/comments/#{@comment.abm_image_id}" %>
+	<% end %><br />
+
+	<%= hbr @comment.body %><br />
+	<div style="text-align:right;"><%= date_or_time(@comment.created_at) %></div>
+
+<% else %>
+	<% if @comment.invisibled_by_writer? %>
+		<%= t('view.noun.abm_image_comment') %>投稿者によって削除されました。<br/>
+	<% elsif @comment.invisibled_by_owner? %>
+		<%= t('view.noun.abm_image') %>投稿者によって削除されました。<br/>
+	<% elsif @comment.invisibled_by_manager? %>
+		システム管理者によって削除されました。<br/>
+	<% end %>
+<% end %>

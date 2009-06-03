@@ -1,0 +1,88 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.msg_message') %>
+<% end %>
+<% content_for(:sub_title) do %>
+	下書き削除確認
+<% end %>
+
+<% content_for(:sidemenu) do %>
+
+<h2><span>下書き削除確認</span></h2>
+
+<div id="side_contents_col" class="span-4">
+<div id="side_contents_box">
+	<div id="write_message_box" class="box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="clearfix">
+			<h6 class="caps"></h6>
+			<div class="">
+			<ul class="sidemenu">
+				<li><%= link_to '<span class="small">メッセージを書く</span>', { :controller => :msg_message, :action => :new } , {:class => "button"}%></li>
+			</ul>
+
+			</div>
+		</div><!--/box_inner-->
+		</div><!--wrap3-->
+		</div><!--wrap2-->
+		</div><!--wrap1-->
+	</div>
+
+	<div id="" class="W5R4B9df sidemenu_tray  append-bottom">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="box_inner clearfix">
+			<h6 class="caps"></h6>
+			<div class="">
+				<ul class="sidemenu">
+					<%= render :partial => 'msg/message_sidemenu' , :locals => {:current_menu => 'draft'}%>
+				</ul>
+
+			</div>
+		</div><!--/box_inner-->
+		</div><!--wrap3-->
+		</div><!--wrap2-->
+		</div><!--wrap1-->
+	</div>
+</div>
+</div>
+<% end %>
+
+<div id="warning">
+	この下書き<%= t('view.noun.msg_message') %>を削除します。よろしいですか？
+</div>
+
+<% form_tag :action => 'delete_draft_messages' do %>
+	<% @messages.each do |message| %>
+		<%= hidden_field_tag "del[#{message.id}]" %>
+	<% end %>
+    <%= submit_button_tag '削除' %>
+    <%= cancel_button_tag %>
+<% end %>
+
+<div id="" class="W5R4B9df  append-bottom">
+	<div class="wrap1">
+	<div class="wrap2">
+	<div class="wrap3">
+	<div class="box_inner clearfix">
+
+	<div id="message_rows_header" class="clearfix">
+	</div><!--/message_rows_header-->
+
+	<div class="box_inner message_view">
+		<% @messages.each do |@message| %>
+			<%= render :partial => 'msg_sender/sender_message' %>
+		<% end %>
+	</div><!--/box_inner-->
+
+	<div id="message_rows_footer">
+	</div><!--/message_rows_footer-->
+
+	</div><!--/box_inner-->
+	</div><!--wrap3-->
+	</div><!--wrap2-->
+	</div><!--wrap1-->
+</div><!--box_outer-->
+

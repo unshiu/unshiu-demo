@@ -1,0 +1,35 @@
+<div style="<%= style_value('form_style') %>">
+
+<hr style="<%= style_value('hr1') %>" />
+
+<span style="color:#f75009;"></span><%= t('activerecord.attributes.dia_entry.title') %><br />
+<%= @dia_entry.title %>
+<%= hidden_field 'dia_entry', 'title' %><br />
+<%= image_tag_for_default 'Spec_02.gif' %><br />
+
+<span style="color:#f75009;"></span><%= t('activerecord.attributes.dia_entry.body') %><br />
+<%= hbr @dia_entry.body %>
+<%= hidden_field 'dia_entry', 'body' %><br />
+<%= image_tag_for_default 'Spec_02.gif' %><br />
+
+<span style="color:#f75009;"></span><%= t('activerecord.attributes.dia_entry.public_level') %><br />
+<%= DiaEntry.public_level_name(@dia_entry.public_level) %>
+<%= hidden_field 'dia_entry', 'public_level' %>
+
+<% unless @images.empty? %>
+  <%= image_tag_for_default 'Spec_04.gif' %><br />
+  <div style="background-color:#FFF7E7;">
+  	<%= image_tag_for_default 'Spec_02.gif' %><br />
+  	<% for image in @images %>
+    	<%= image_tag(url_for_image_column(image, :image, :thumb), :style => 'margin:0 5px;width:64px', :width => '64px') %>
+		<%= hidden_field_tag "images[#{image.id}]" %>
+  	<% end %>
+  	<%= image_tag_for_default 'Spec_02.gif' %><br />
+  </div>
+<% end %>
+
+<%= image_tag_for_default 'Spec_02.gif' %><br />
+
+</div>
+
+<%= image_tag_for_default 'Spec_02.gif' %><br />

@@ -1,0 +1,64 @@
+--- 
+ja-JP: 
+  activerecord: 
+    models: 
+      dia_entries_abm_image: 
+      dia_diary: 
+      dia entry: "日記作成"
+      dia　entry　comment: "日記コメント作成"
+    attributes: 
+      dia_entries_abm_image: 
+        created_at: "作成日"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        dia_entry: "日記"
+        abm_image: "写真"
+      dia_diary: 
+        created_at: "作成日"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        default_public_level: "公開レベル"
+        base_user: "ユーザ"
+      dia_entry: 
+        draft_flag: "下書きフラグ"
+        created_at: "作成日"
+        title: "タイトル"
+        dia_diary: "日記"
+        body: "日記"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        public_level: "公開レベル"
+        contributed_at: "投稿日"
+        last_commented_at: "最終コメント日時"
+      dia_entry_comment: 
+        deleter_writer: "コメント投稿者"
+        created_at: "作成日"
+        body: "コメント本文"
+        updated_at: "更新日"
+        deleter_manager: "システム管理者"
+        deleter_owner: "日記所有者"
+        base_user: "ユーザ"
+        dia_entry: "日記"
+        read_flag: "既読フラグ"
+    constant: {}
+
+  view: 
+    noun: 
+      user_album_title: "日記のメール投稿時にシステムより自動的に作成されました。"
+      dia_entries_abm_image: "日記画像"
+      dia_diary: "日記"
+      base_friend: "友達"
+      user_album_body: "自分専用アルバム"
+      dia_entry_comment: "コメント"
+      dia_entry: "日記"
+      abm_album: "アルバム"
+      abm_image: "写真"
+    flash:
+      notice:
+        dia_entry_update: "日記を更新しました。"
+        dia_entry_create: "日記を作成しました。"
+        dia_entry_delete: "日記を削除しました。"
+        dia_entry_comment_create: "コメントを追加しました。"
+        dia_entry_comment_delete: "コメントを削除しました。"
+      error:
+        dia_entry_comment_create: "コメントを追加に問題がありました。"

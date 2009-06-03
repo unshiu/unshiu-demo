@@ -1,0 +1,62 @@
+# == Schema Information
+#
+# Table name: mlg_magazines
+#
+#  id         :integer(4)      not null, primary key
+#  title      :string(500)     default(""), not null
+#  body       :string(2000)    default(""), not null
+#  send_at    :datetime
+#  sended_at  :datetime
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
+#  deleted_at :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# 送信日が昨日のメールマガジン。まだ配達されてない
+a:
+  id: 1
+  title: 'メールマガジン1号'
+  body: '内容内容内容'
+  send_at: <%= Time.now.yesterday.to_s :db %>
+  sended_at: NULL
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+# いまさっき送信をしたメールマガジン
+b:
+  id: 2
+  title: 'メールマガジン0号'
+  body: 'ないようないようないよう'
+  send_at: <%= Time.now.to_s :db %>
+  sended_at: <%= Time.now.to_s :db %>
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+# いまさっき送信をしたメールマガジン
+c:
+  id: 3
+  title: 'メールマガジン2号'
+  body: 'ないようないようないよう-----'
+  send_at: <%= Time.now.to_s :db %>
+  sended_at: <%= Time.now.to_s :db %>
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+# 送信日が明日のメールマガジン。まだ配達されてない
+d:
+  id: 4
+  title: 'メールマガジン2号'
+  body: 'ないようないようないよう-----'
+  send_at: <%= Time.now.tomorrow.to_s :db %>
+  sended_at: NULL
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+# 送信設定がされていないメールマガジン
+e:
+  id: 5
+  title: 'メールマガジンx号'
+  body: 'ないようないようないよう-----'
+  send_at: NULL
+  sended_at: NULL
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  

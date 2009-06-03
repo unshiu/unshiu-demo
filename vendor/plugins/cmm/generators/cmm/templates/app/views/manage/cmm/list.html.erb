@@ -1,0 +1,40 @@
+<%- @pan1="SNS設定" -%><%- @pan2="#{t('view.noun.cmm_community')}" -%><%- @pan3="#{t('view.noun.cmm_community')}一覧" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.cmm_community') %>一覧
+<% end %>
+
+<h3>
+	<% if @keyword %>
+		<%= @keyword %>の検索結果
+	<% else %>
+		<%= t('view.noun.cmm_community') %>一覧
+	<% end %>
+</h3>
+
+<% if @communities.size > 0 %>
+	<%= paginate_header @communities %>
+	<table class="lineColorT" style="width:609px;">
+		<tr>
+			<th><%= t('activerecord.attributes.cmm_community.created_at') %></th>
+			<th><%= t('activerecord.attributes.cmm_community.name') %></th>
+			<th>参加者</th>
+		</tr>
+		<% @communities.each do |community| %>
+			<tr>
+				<td>
+					<%= datetime_to_s(community.created_at) %>
+				</td>
+				<td>
+					<%= link_to community.name, :action => 'show', :id => community.id %>
+				</td>
+				<td class="textalignC">
+					<%= community.joined_users.size %>人
+				</td>
+			</tr>
+		<% end %>
+	</table>
+	<%= paginate_links @communities %>
+<% else %>
+	該当する<%= t('view.noun.cmm_community') %>がありません。
+<% end %>

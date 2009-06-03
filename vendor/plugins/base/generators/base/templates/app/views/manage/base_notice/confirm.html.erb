@@ -1,0 +1,16 @@
+<%- @pan1="SNS設定" -%><%- @pan2="#{t('view.noun.base_notice')}" -%><%- @pan3="#{t('view.noun.base_notice')}作成確認" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_notice') %>作成確認
+<% end %>
+
+<h3><%= t('view.noun.base_notice') %>作成確認</h3>
+
+<% form_tag :action => 'create' do %>
+  <%= render :partial => 'confirm' %>
+
+　　<div class="bot_btn">
+    <%= mng_submit_tag '作成' %>
+    <%= mng_cancel_tag %>
+  </div>
+<% end %>

@@ -1,0 +1,18 @@
+<%- @pan1="SNS設定" -%><%- @pan2="#{t('view.noun.base_notice')}" -%><%- @pan3="#{t('view.noun.base_notice')}詳細" -%>
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_notice') %>詳細
+<% end %>
+
+<h3><%= t('view.noun.base_notice') %>詳細</h3>
+
+<ul class="list">
+	<li><%= link_to '編集する', :action => 'edit', :id => @base_notice.id %></li>
+	<li><%= link_to '削除する', :action => 'delete_confirm', :id => @base_notice.id %></li>
+	<li><%= link_to '一覧へ戻る', :action => 'list' %></li>
+</ul>
+
+<%= render :partial => 'show' %>
+
+
+
+

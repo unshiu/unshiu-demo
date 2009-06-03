@@ -1,0 +1,71 @@
+--- 
+ja-JP: 
+  activerecord: 
+    models: 
+      msg message: メッセージ作成
+      msg receiver: 受信メッセージ
+      msg notify: 通報メッセージ
+      msg sender: 送信メッセージ
+    attributes: 
+      msg_message: 
+        parent_message: "親メッセージ"
+        created_at: "作成日"
+        title: "タイトル"
+        body: "本文"
+        updated_at: "送信日時"
+        deleted_at: "削除日"
+        receiver: "宛先"
+      msg_receiver: 
+        replied_flag: "返信フラグ"
+        msg_message: "メッセージ"
+        draft_flag: "下書きフラグ"
+        created_at: "作成日"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        base_user: "送信者"
+        trash_status: "ゴミ箱状態"
+        read_flag: "既読フラグ"
+      msg_notify: 
+        msg_message: "メッセージ"
+        comment: "通報理由"
+        created_at: "作成日"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+      msg_sender: 
+        msg_message: "メッセージ"
+        draft_flag: "下書きフラグ"
+        created_at: "作成日"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        base_user: "送信者"
+        trash_status: "ゴミ箱状態"
+    constant: {}
+
+  view: 
+    noun: 
+      msg_message: "メッセージ"
+      msg_receiver: "受信者"
+      mng_user: "管理者"
+      base_user: "ユーザ"
+      msg_notify: "通報"
+      msg_sender: "送信者"
+    flash:
+      notice:
+        msg_message_create: "メッセージを送信しました。"
+        msg_message_draft_create: "メッセージを下書きとして保存しました。"
+        msg_message_update: "メッセージを送信しました。"
+        msg_message_draft_update: "下書きメッセージを保存しました。"
+        into_trash_msg_message: "メッセージをゴミ箱へ移動しました。"
+        notify_msg_message: "メッセージを運営者へ通報しました。"
+        delete_msg_message: "メッセージを削除しました。"
+        msg_receiver_restore: "メッセージを元に戻しました。"
+        msg_sender_restore: "メッセージを元に戻しました。"
+        msg_message_delete_from_trash_box: "指定されたメッセージをゴミ箱から削除しました。"
+        msg_message_delete_draft_messages: "指定された下書きメッセージを削除しました。"
+      error:
+        delete_messages_remote_no_check: "送信箱から削除したいメッセージを選択してください"
+        delete_messages_remote_no_sender: "指定されたメッセージは削除できません。"
+        msg_message_create: "メッセージを送信できませんでした。"
+        msg_message_draft_create: "メッセージを下書きとして保存できませんでした。"
+        msg_message_delete_from_trash_box_confirm: "ゴミ箱から削除したいメッセージを選択してください。"
+        msg_message_delete_draft_messages_confirm: "下書きメッセージから削除したいメッセージを選択してください。"

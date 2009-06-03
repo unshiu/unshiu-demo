@@ -1,0 +1,14 @@
+<%= error_messages_for 'ng_word', :object_name => 'base_ng_word' %>
+
+<table class="lineColorL" style="width:609px;">
+<tbody>
+  <tr>
+    <th style="width:140px;"><%= t('activerecord.attributes.base_ng_word.word') %></th>
+    <td><%= text_field 'ng_word', 'word' %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;"><%= t('activerecord.attributes.base_ng_word.active_flag') %></th>
+    <td><%= check_box 'ng_word', 'active_flag' %></td>
+  </tr>
+</tbody>
+</table>

@@ -1,0 +1,13 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.cmm_community') %>脱退
+<% end %>
+
+<%= h @community.name %>から本当に脱退しますか？
+
+<%= image_tag_for_default 'Spec_04.gif' %><br />
+<% form_tag :action => 'resign_complete', :id => @community.id do %>
+	<div style="text-align:center">
+		<%= submit_tag '脱退' %>
+		<%= cancel_tag %>
+	</div>
+<% end %>

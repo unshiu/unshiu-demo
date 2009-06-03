@@ -1,0 +1,21 @@
+<% content_for(:header_title) do %>
+	<%= @user.show_name %>の<%= t('view.noun.base_friend') %>一覧
+<% end %>
+
+<% if @friends.size.zero? %>
+	<%= t('view.noun.base_friend') %>がいません。
+
+<% else %>
+	<%= paginate_header(@friends) %>
+
+	<% @friends.each do |friend| %>
+		<% list_cell_for do %>
+			<%= link_to_user_without_emoticon friend %>
+			<% if @user.me?(current_base_user.id) %>
+				<%= link_basic_to '[外す]', :action => 'delete_confirm', :id => friend.id %>
+			<% end %>
+		<% end %>
+	<% end %>
+
+	<%= paginate_links(@friends) %>
+<% end %>

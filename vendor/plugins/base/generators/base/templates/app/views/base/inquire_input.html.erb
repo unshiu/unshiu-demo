@@ -1,0 +1,38 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_inquire') %>
+<% end %>
+
+<div class="presignup">
+	<div id="presignup_mailaddress_box" class="W5R4B9df box_outer clearfix">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="box_inner clearfix">
+			<h6 class="W5R4B9df caps"><span><%= t('view.noun.base_inquire') %></span></h6>
+			<div class="notice prepend-top">
+				サービス運営者へ問い合わせをします。問い合わせ内容の返答などはサービスポリシーに沿って行います。
+			</div>
+		
+			<% form_tag :action => 'inquire' do %>
+			  <%= error_messages_for 'inquire', :object_name => 'base_inquire' %>
+
+			  <% unless logged_in? %>
+			  	<label for="inquire_mail_address"><%= t('activerecord.attributes.base_inquire.mail_address') %>：</label>
+				<%= text_field 'inquire', 'mail_address', :class => "span-16"%><br />
+			  <% end %>
+			  	<label for="inquire_body"><%= t('activerecord.attributes.base_inquire.body') %>
+				<%= text_area 'inquire','body', :size => '50x3', :class => "span-16" %><br />
+			
+				<%= hidden_field 'inquire', 'referer' %>
+				
+				<div class="clearfix prepend-0">
+					<%= submit_button_tag '送信' %>
+				</div>
+			<% end %>
+			
+		</div>
+		</div><!--/wrap3-->
+		</div><!--/wrap2-->
+		</div><!--/wrap1-->
+	</div>
+</div>

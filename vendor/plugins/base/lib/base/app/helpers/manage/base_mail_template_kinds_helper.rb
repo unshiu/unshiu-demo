@@ -1,0 +1,2 @@
+module ManageBaseMailTemplateKindsHelperModule
+end

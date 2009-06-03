@@ -1,0 +1,45 @@
+<%- @pan1="#{t('view.noun.base_user')}" -%><%- @pan2="#{t('view.noun.base_user')}レポート" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_user') %>レポート
+<% end %>
+
+<h3><%= t('view.noun.base_user') %>レポート</h3>
+
+<table class="lineColorL" style="width:609px;">
+	<tr>
+		<th width="30%">現在の総<%= t('view.noun.base_user') %>数</th>
+		<td><%= @all_user_count %></td>
+	</tr>
+	<tr>
+		<th><%= t('view.noun.base_user') %>数</th>
+		<td><%= @all_user_count - @withdrawal_user_count %></td>
+	</tr>
+	<tr>
+		<th>退会者数</th>
+		<td><%= @withdrawal_user_count %></td>
+	</tr>
+	<tr>
+		<th><%= t('view.noun.mail_magazine') %>許可数</th>
+		<td><%= @receive_mail_magazine_user_count %></td>
+	</tr>
+</table>
+<br />
+<script type="text/javascript">
+<!--
+	$(document).ready(function(){
+		$('#graphtabs').tabs({ fx: { opacity: 'toggle' } }).tabs();
+	});
+// -->
+</script>
+
+<div id="graphtabs">
+	<ul>
+		<li><%= link_to "#{t('activerecord.attributes.base_profile.sex')}比", :action => 'sex_graph_tab' %></li>
+		<li><%= link_to "#{t('activerecord.attributes.base_profile.area')}比", :action => 'area_graph_tab' %></li>
+		<li><%= link_to "#{t('activerecord.attributes.base_profile.civil_status')}比", :action => 'civil_graph_tab' %></li>
+		<li><%= link_to "#{t('activerecord.attributes.base_user.base_carrier')}比", :action => 'carrier_graph_tab' %></li>
+		<li><%= link_to "#{t('view.noun.mail_magazine')}許可比", :action => 'mail_magazine_graph_tab' %></li>
+	</ul>
+</div>
+<br/>

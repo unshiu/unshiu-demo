@@ -1,0 +1,19 @@
+<%- @pan1="管理者設定" -%><%- @pan2="#{t('view.noun.base_ng_word')}" -%><%- @pan3="削除" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_ng_word') %>削除
+<% end %>
+
+<h3><%= t('view.noun.base_ng_word') %>削除</h3>
+
+<p class="dialog">
+	以下の<%= t('view.noun.base_ng_word') %>を削除します。よろしいですか？
+</p>
+
+<% form_tag :action => 'delete', :id => params[:id] do %>
+	<%= render :partial => 'confirm' %>
+	<div class="bot_btn">
+		<%= mng_submit_tag '削除' %>
+		<%= mng_cancel_tag %>
+	</div>
+<% end %>

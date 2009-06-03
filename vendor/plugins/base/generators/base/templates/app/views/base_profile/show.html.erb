@@ -1,0 +1,146 @@
+<% content_for(:header_title) do %>
+	<%= @user.show_name %>の<%= t('view.noun.base_profile') %>
+<% end %>
+
+<% content_for(:header_profile) do %>
+	<%= render :partial => "common/header_profile", :locals => {:base_user => @user} %>
+<% end %>
+
+<dl>
+	<dt class="span-3">名前</dt>
+	<dd>
+		<%= @user.show_name %>
+	</dd>
+	<dt class="span-3"><%= t('activerecord.attributes.base_profile.birthday') %></dt>
+	<dd>
+		<% if @profile && @profile.birthday && UserRelationSystem.accessible?(current_base_user, params[:id], @profile.birthday_public_level) %>
+			<%= @profile.birthday.strftime('%Y/%m/%d') %><br />
+		<% else %>
+			非公開
+		<% end %>
+	</dd>
+	<dt class="span-3"><%= t('activerecord.attributes.base_profile.sex') %></dt>
+	<dd>
+		<% if @profile && @profile.sex && UserRelationSystem.accessible?(current_base_user, params[:id], @profile.sex_public_level) %>
+			<%= BaseProfile.sex_kind_name(@profile.sex) %><br />
+		<% else %>
+			非公開
+		<% end %>
+	</dd>
+	<dt class="span-3"><%= t('activerecord.attributes.base_profile.area') %></dt>
+	<dd>
+		<% if @profile && @profile.civil_status && UserRelationSystem.accessible?(current_base_user, params[:id], @profile.area_public_level) %>
+			<%= BaseProfile.area_kind_name(@profile.area) %><br />
+		<% else %>
+			非公開
+		<% end %>
+	</dd>
+	<dt class="span-3"><%= t('activerecord.attributes.base_profile.civil_status') %></dt>
+	<dd>
+		<% if @profile && @profile.civil_status && UserRelationSystem.accessible?(current_base_user, params[:id], @profile.civil_status_public_level) %>
+			<%= BaseProfile.civil_status_kind_name(@profile.civil_status) %><br />
+		<% else %>
+			非公開
+		<% end %>
+	</dd>
+	<dt class="span-3">紹介文</dt>
+	<dd>
+		<% if @profile && !@profile.introduction.blank? && UserRelationSystem.accessible?(current_base_user, params[:id], @profile.introduction_public_level) %>
+			<%= hbr @profile.introduction %><br />
+		<% else %>
+			非公開
+		<% end %>
+	</dd>
+</dl>
+
+<% if logged_in? && Unshiu::Plugins.active_ace? %>
+	<%= footmark(@footmark.uuid) %>
+<% end %>
+
+<% content_for(:sidemenu) do %>
+	<div id="friend_box" class="box_outer clearfix">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="box_inner">
+			<div class="title">
+				<h6><%= t('view.noun.base_friend') %></h6>
+			</div>
+			<div class="profile_img_panel">
+				<% @user.friends.each do | friend | %>
+					<%= link_to safe_profile_view(friend.base_profile, :thumb, {"width" => 40, "height" => 40}), :controller => 'base_profile', :action => 'show', :id => friend.id %>
+				<% end %>
+			</div><!--/profile_img_panel-->
+			<div class="more ">
+				<%= link_to "すべて表示", :controller => :base_friend, :action => :list, :id => @user.id %>
+			</div>
+		</div><!--/box_inner-->
+		</div><!-- /wrap3 -->
+		</div><!-- /wrap2 -->
+		</div><!-- /wrap1 -->
+	</div><!--/friend_box-->
+	
+	<div id="friend_box" class="box_outer clearfix">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="box_inner">
+			<div class="title">
+				<h6><%= t('view.noun.cmm_community') %></h6>
+			</div>
+			<div class="profile_img_panel">
+				<% @user.cmm_communities.each do | community | %>
+					<% link_to :controller => :cmm, :action => :show, :id => community.id do %>
+						<%= safe_community_image_view(community.cmm_image, :thumb, {"width" => 40, "height" => 40}) %>
+					<% end %>
+				<% end %>
+			</div><!--/profile_img_panel-->
+			<div class="more ">
+				<%= link_to "すべて表示", :controller => :cmm_user, :action => :list, :id => @user.id %>
+			</div>
+		</div><!--/box_inner-->
+		</div><!-- /wrap3 -->
+		</div><!-- /wrap2 -->
+		</div><!-- /wrap1 -->
+	</div><!--/friend_box-->
+	
+	<div  class="W5R4B9df box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+			<div class="box_inner clearfix">
+			<h6><span>menu</span></h6>
+			
+			<%= link_to "#{t('view.noun.dia_entry')}一覧(#{@entries.size})", :controller => 'dia_entry', :action => 'list', :id => @user.id %><br/>
+			<%= link_to "#{t('view.noun.abm_album')}一覧(#{@albums.size})", :controller => 'abm_album', :action => 'list', :id => @user.id %><br/>
+			
+			<% if logged_in? %>
+				<% if @user.me?(current_base_user.id) %>
+					<% if @profile %>
+						<%= link_to "#{t('view.noun.base_profile')}を編集する", :action => 'edit' %><br/>
+					<% else %>
+						<%= link_to "#{t('view.noun.base_profile')}を設定する", :action => 'new' %><br/>
+					<% end %>
+					<%= link_to "#{t('view.noun.base_profile')}画像を設定する", :action => 'image' %><br/>
+					
+				<% else %>
+					<% if MsgMessage.acceptable?(current_base_user, @user.id) %>
+						<%= link_to "#{t('view.noun.msg_message')}を送る", :controller => 'msg_message', :action => 'new', :id => @user.id, :receivers => [@user.id] %><br />
+					<% end %>
+					<% unless BaseFriend.friend?(current_base_user.id, @user.id) %>
+						<%= link_to "#{t('view.noun.base_friend')}申請をする", :controller => 'base_friend_apply', :action => 'new', :id => @user.id %><br />
+					<% end %>
+					<% unless BaseFavorite.favorite?(current_base_user.id, @user.id) %>
+						<%= link_to "#{t('view.noun.base_favorite')}に追加する", :controller => 'base_favorite', :action => 'add', :id => @user.id %><br/>
+					<% end %>
+					
+				<% end %>
+			<% end %>
+			
+			</div><!--/box_inner-->
+		</div><!--/wrap3 -->
+		</div><!--/wrap2 -->
+		</div><!--/wrap1 -->
+	</div><!--/friend_box-->
+	
+<% end %>

@@ -1,0 +1,16 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.msg_message') %>復元
+<% end %>
+<% content_for(:sub_title) do %>
+<%= @message.title %>
+<% end %>
+この送信<%= t('view.noun.msg_message') %>をゴミ箱から送信箱へ復元します。よろしいですか？
+
+<% form_tag :action => 'restore', :id => @message.id do %>
+  <div style="text-align:center">
+    <%= submit_tag '復元' %>
+    <%= cancel_tag %>
+  </div>
+<% end %>
+<%= image_tag_for_default 'Spec_08.gif' %><br />
+<%= render :partial => 'show' %>

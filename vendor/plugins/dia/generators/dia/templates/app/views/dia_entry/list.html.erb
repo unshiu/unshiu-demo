@@ -1,0 +1,112 @@
+<% content_for(:header_title) do %>
+	<%= @diary.base_user.show_name %>の<%= t('view.noun.dia_entry') %>一覧
+<% end %>
+
+<div class="clearfix">
+	<div id="contents_title" class="span-12"><h2><span><%= t('view.noun.dia_entry') %>一覧</span></h2></div>
+	<% if logged_in? && @diary.mine?(current_base_user) %>
+	<ul class="menu_list">
+		<li><%= link_add_menu_to "日記を書く", :action => :new %></li>
+	</ul>
+	<% end %>
+</div>
+
+<div class="pager_box pager_box_top append-bottom clearfix">
+	<%= paginate(@entries) %>
+</div><!--pager_col-->
+
+<% if @entries.size.zero? %>
+	<%= t('view.noun.dia_entry') %>がありません。
+
+<% else %>
+
+	<div class="diary_storys_box box_outer">
+		<% @entries.each do |entry| %>
+			<div class="diary_story_box box_outer clearfix">
+				<h5><span><%= link_to body_summary(entry.title, :length => 100), :action => :show, :id => entry.id %></span></h5>
+				<div class="diary_text box_outer small">
+					<p>
+					<%= body_summary(strip_tags(entry.body), :length => 120) %>
+					</p>
+				</div>
+				<div class="span-10 small">
+					<span class="permanent_link">
+						<%= link_to "続きを読む", :action => :show, :id => entry.id %>｜
+					</span>
+					<span class="comment_link"><%=h "コメント#{entry.dia_entry_comments.count}" %>｜</span><!--/comment_link-->
+					<span class="contents_date"><%= l(entry.contributed_at, :format => :short) %></span><!--/contents_date-->
+				</div>
+				<span class="editdelete span-4 small">
+					<% if logged_in? && @diary.mine?(current_base_user) %>
+						<%= link_to "編集する", :action => :edit, :id => entry.id %>｜
+						<%= link_to "削除する", :action => :delete_confirm, :id => entry.id, :cancel_to => "/dia_entry/list" %>
+					<% end %>
+				</span><!--/contents_time-->
+			</div>
+		<% end %>
+	</div><!--/diary_storys_box-->
+
+<% end %>
+
+<div class="pager_box pager_box_top append-bottom clearfix">
+	<%= paginate(@entries) %>
+</div><!--pager_col-->
+
+<% content_for(:sidemenu) do %>
+	
+	<% if logged_in? && @diary.mine?(current_base_user) %>
+	<div  class="W5R4B9df box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+			<div class="box_inner clearfix">
+			<h6><span>menu</span></h6>
+			<ul>
+				<li><%= link_to "下書き#{t('view.noun.dia_diary')}一覧を見る", :controller => 'dia_entry', :action => 'draft_list' %></li>
+			</ul>
+			</div><!--/box_inner-->
+		</div><!--/wrap3 -->
+		</div><!--/wrap2 -->
+		</div><!--/wrap1 -->
+	</div><!--/friend_box-->
+	<% end %>
+	
+	<% unless @recent_dia_entries.size.zero? %>
+	<div  class="W5R4B9df box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+			<div class="box_inner clearfix">
+			<h6><span>最新<%= t('view.noun.dia_entry') %></span></h6>
+			<ul class="newer_entrys">
+				<% @recent_dia_entries.each do |recent_dia_entry| %>
+					<li><%= link_to body_summary(recent_dia_entry.title, :length => 10), :action => :show, :id => recent_dia_entry.id %></li>
+				<% end %>
+			</ul>
+			</div><!--/box_inner-->
+		</div><!--/wrap3 -->
+		</div><!--/wrap2 -->
+		</div><!--/wrap1 -->
+	</div><!--/friend_box-->
+	<% end %>
+
+	<div  class="W5R4B9df box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+			<div class="box_inner clearfix">
+			<h6><span>最新コメント</span></h6>
+			<ul class="newer_entrys">
+				<% @recent_dia_entry_comments.each do |recent_dia_entry_comment|%>
+					<li><%= link_to_user(recent_dia_entry_comment.base_user) %></li>
+					<ul>
+						<li><%= link_to body_summary(recent_dia_entry_comment.dia_entry.title, :length => 8), :action => :show, :id => recent_dia_entry_comment.dia_entry.id %></li>
+					</ul>
+				<% end %>
+			</ul>
+			</div><!--/box_inner-->
+		</div><!--/wrap3 -->
+		</div><!--/wrap2 -->
+		</div><!--/wrap1 -->
+	</div>
+<% end %>

@@ -1,0 +1,66 @@
+<% content_for(:header_title) do %>
+	<%= @entry.dia_diary.base_user.show_name %>の日記
+<% end %>
+<% content_for(:sub_title) do %>
+	<%= h @entry.title %>
+<% end %>
+
+<div style="<%= style_value('small_info_right') %>">
+	<%= datetime_to_s(@entry.contributed_at) %><br />
+	<%= DiaEntry.public_level_name(@entry.public_level) %>
+</div>
+
+<div style="text-align:left;">
+
+<%= hbr @entry.body %>
+<% unless @entry.abm_images.empty? %>
+  <%= image_tag_for_default 'Spec_04.gif' %><br />
+  <div style="background-color:#FFF7E7;">
+  	<%= image_tag_for_default 'Spec_02.gif' %><br />
+  	<% for image in @entry.abm_images %>
+    	<%= link_to(image_tag(url_for_image_column(image, :image, :thumb), :style => 'margin:0 5px;width:64px', :width => '64px'),
+			:action => 'show_image', :id => @entry.id, :image => image.id) %>
+  	<% end %>
+  	<%= image_tag_for_default 'Spec_02.gif' %><br />
+  </div>
+<% end %>
+
+<% if logged_in? && @entry.mine?(current_base_user) %>
+	<%= image_tag_for_default 'Spec_04.gif' %><br />
+	<%= link_to_list_cell "#{t('view.noun.dia_diary')}の編集", :action => 'edit', :id => @entry.id %><br />
+	<%= link_to_list_cell "#{t('view.noun.dia_diary')}の削除", :action => 'delete_confirm', :id => @entry.id, :cancel_to => "/dia_entry/show/#{@entry.id}" %><br />
+<% end %>
+
+</div>
+<%= image_tag_for_default 'Spec_08.gif' %><br />
+
+<!--コメント-->
+<div style="<%= style_value('inner_title') %>">
+  <%= image_tag_for_default 'Spec_02.gif' %><br />
+  　<span style="color:#024873;"></span><%= t('view.noun.dia_entry_comment') %><br />
+  <%= image_tag_for_default 'Spec_02.gif' %>
+</div>
+<%= image_tag_for_default 'Spec_04.gif' %><br />
+
+<div style="text-align:left;">
+
+<span style="color:#024873;"></span><%= link_to_list_cell "#{t('view.noun.dia_entry_comment')}する", :controller => 'dia_entry_comment', :action => 'new', :id => @entry.id %><br />
+<%= image_tag_for_default 'Spec_02.gif' %>
+
+<% @comments.each do |@comment| %>
+	<% list_cell_for do %>
+		<%= render :partial => 'dia_entry_comment/show' %>
+	<% end %>
+<% end %>
+
+<% if @entry.dia_entry_comments.count > AppResources["dia"]["entry_comment_list_size_with_comment"] %>
+	<div style="text-align:right">
+		<%= link_basic_to 'さらに見る', :controller => 'dia_entry_comment', :action => 'list', :id => @entry.id %>
+	</div>
+<% end %>
+
+<% if @entry.dia_entry_comments.count == 0 %>
+	コメントがありません。
+<% end %>
+
+</div>

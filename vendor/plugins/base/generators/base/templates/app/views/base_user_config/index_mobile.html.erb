@@ -1,0 +1,9 @@
+<% content_for(:header_title) do %>
+登録情報変更
+<% end %>
+
+<%= link_basic_to '設定変更', :action => 'edit' %><br/>
+<%= link_basic_to "#{t('view.noun.base_profile')}変更", :controller => 'base_profile', :action => 'edit' %><br/>
+<%= link_basic_to '登録メールアドレス変更', :action => 'mail_reset_input' %><br/>
+<%= link_basic_to 'パスワード変更', :controller => 'base_signup', :action => 'password_set_ask' %><br/>
+<%= link_basic_to 'かんたんログイン設定', :action => 'uid_set_confirm' %><br/>

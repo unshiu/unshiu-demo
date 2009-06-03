@@ -1,0 +1,68 @@
+<%- @pan1="管理者設定" -%><%- @pan2=t('view.noun.base_mail_template') -%><%- @pan3=t('view.noun.base_mail_template_kind') -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_mail_template_kind') %>詳細
+<% end %>
+
+<h3><%= t('view.noun.base_mail_template_kind') %>詳細</h3>
+
+<table border="0" cellpadding="3" cellspacing="1" class="lineColorLW" style="width:609px;">
+<tbody>
+  <tr>
+    <th style="width:140px;"><%= t('activerecord.attributes.base_mail_template_kind.name') %></th>
+    <td><%= h @base_mail_template_kind.name %></td>
+  </tr> 
+ <tr>
+    <th style="width:140px;"><%= t('activerecord.attributes.base_mail_template_kind.description') %></th>
+    <td><%= h @base_mail_template_kind.description %></td>
+  </tr>
+</tbody>
+</table>
+
+<ul class="list">
+	<li><%= link_to "#{t('view.noun.base_mail_template')}新規作成", new_manage_base_mail_template_path(:kind_id => @base_mail_template_kind.id) %></li>
+</ul>
+
+<br/>
+<h4>現在有効な<%= t('view.noun.base_mail_template') %></h4>
+
+<% if @active_mail_templates.nil? %>
+	<%= t('view.noun.base_mail_template') %>がありません。
+	
+<% else %>
+	
+	<table class="lineColorT" style="width:609px;">
+	  <tr>
+		<th style="width:509px;"><%= t('activerecord.attributes.base_mail_template.subject') %></th>
+		<th style="width:109px;"><%= t('activerecord.attributes.base_mail_template.device_type') %></th>
+	  </tr>
+	  <% @active_mail_templates.each do |active_mail_template|%>
+   	  <tr>
+	    <td><%= link_to active_mail_template.subject, manage_base_mail_template_path(active_mail_template) %></td>
+		<td><%=h active_mail_template.view_device_type %></td>
+	  </tr>
+	  <% end %>
+	</table>
+	
+<% end %>
+<br/>
+<h4>下書き<%= t('view.noun.base_mail_template') %></h4>
+
+<% if @draft_mail_templates.size.zero? %>
+	<%= t('view.noun.base_mail_template') %>がありません。
+<% else %>
+	<%= paginate_header(@draft_mail_templates) %>
+	<table class="lineColorT" style="width:609px;">
+	  <tr>
+		<th style="width:309px;"><%= t('activerecord.attributes.base_mail_template.subject') %></th>
+	    <th style="width:150px;"><%= t('activerecord.attributes.base_mail_template.updated_at') %></th>
+	  </tr>  
+	  <% for draft_mail_template in @draft_mail_templates %>
+	  <tr>
+		<td><%= link_to draft_mail_template.subject, manage_base_mail_template_path(draft_mail_template) %></td>
+		<td><%= datetime_to_s(draft_mail_template.updated_at) %></td>
+	  </tr>
+	  <% end %>
+	</table>
+	<%= paginate_links(@draft_mail_templates) %>
+<% end %>

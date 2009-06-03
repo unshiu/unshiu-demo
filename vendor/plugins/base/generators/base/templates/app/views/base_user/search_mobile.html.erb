@@ -1,0 +1,30 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_user') %>検索
+<% end %>
+
+<% form_tag :action => 'list' do %>
+
+  <%= t('activerecord.attributes.base_profile.name') %><br/>
+  <%= text_field_tag 'name' %><br/>
+  <%= t('activerecord.attributes.base_profile.age') %><br/>
+  <%= text_field 'age', 'start', :size => 4 %>〜<%= text_field 'age', 'end', :size => 4  %><br/>
+  <%= t('activerecord.attributes.base_profile.area') %><br/>
+  <%= select_tag 'area', options_for_select([['', '']] + select_type(BaseProfile::PREFECTURES)) %><br/>
+  <%= t('activerecord.attributes.base_profile.sex') %><br/>
+  <% hash2sorted_array(BaseProfile::SEX).each do | sex | %>
+	<%= check_box_tag "sex[#{sex[0]}]" %>
+	<%= sex[1] %>
+  <% end %><br/>
+  <%= t('activerecord.attributes.base_profile.civil_status') %><br/>
+  <% hash2sorted_array(BaseProfile::CIVIL).each do | civil_status | %>
+	<%= check_box_tag "civil_status[#{civil_status[0]}]" %>
+	<%= civil_status[1] %>
+  <% end %><br/>
+
+<br />
+
+<div style="text-align:center">
+	<%= submit_tag '検索' %>
+</div>
+
+<% end %>

@@ -1,0 +1,11 @@
+<% content_for(:header_title) do %>
+<%= current_base_user.show_name %>の<%= t('view.noun.abm_album') %>
+<% end %>
+
+<%= render :partial => 'list' %>
+
+<%= image_tag_for_default 'Spec_08.gif' %><br />
+
+<div style="text-align:left">
+	<%= link_basic_to "#{t('view.noun.abm_album')}を作成する", :action => :new %><br />
+</div>

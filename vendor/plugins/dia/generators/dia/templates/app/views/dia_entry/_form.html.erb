@@ -1,0 +1,192 @@
+<div id="image_hidden_tag"></div>
+<br/>
+
+<label for="title" accesskey="n"><%= t('activerecord.attributes.dia_entry.title') %>：</label>
+<br>
+<%= text_field 'dia_entry', 'title', :size => 50 %>
+<div class="notice">
+	<%= error_message_on_with_label @dia_entry, 'title' %>
+	<%=t 'activerecord.errors.stand_messages.too_long', :count => AppResources[:base][:title_max_length] %>
+</div>
+<br>
+<label for="diary_content" accesskey="n"><%= t('activerecord.attributes.dia_entry.body') %>：</label>
+<br>
+<%= text_area 'dia_entry', 'body', :size => "50x3" %>
+<div id="preview_dia_entry_body" style="display:none"></div>
+<div class="notice">
+	<%= error_message_on_with_label @dia_entry, 'body' %>
+	<%=t 'activerecord.errors.stand_messages.too_long', :count => AppResources[:base][:body_max_length] %>
+</div>
+<br>
+<%= select 'dia_entry', 'public_level', select_type(DiaEntry::PUBLIC_LEVELS) %><br>
+<br>
+
+<div id="dialog" title="画像選択">
+	<% if @abm_albums.size.zero? %>
+		<% "#{t('view.noun.abm_image')}" %>はありません。
+		
+	<% else %>
+		<div class="album clearfix">
+			<% @abm_albums.each do |album| %>
+			<div class="album_title">
+				<%= link_to_function(safe_abm_album_cover_image_view(album.cover_abm_image, :thumb, :size => "70x70"), 
+				            		 "$('#album_image_#{album.id}').show();") %>
+				<%= link_to_function "<span>#{album.title}(#{album.abm_images.count})</span>", "$('#album_image_#{album.id}').show();" %>
+				<%= link_to_function "<div class='ui-icon ui-icon-triangle-1-s'></div>", "$('#album_image_#{album.id}').show();" %>
+				
+			</div>
+			<div id="album_image_<%= album.id %>" class="album_image" style="display:none">
+				<hr/>
+				<ul>
+					<% album.abm_images.each do |image| %>
+						<li><%= image_tag url_for_image_column(image, 'image', :thumb), {:id => "image_#{image.id}", :class => "image_setter"} %></li>
+					<% end %>
+				</ul>
+			</div>
+			<% end %>
+		</div>
+		
+	<% end %>
+</div>
+
+
+<div id="emoji_palette" class="emoji_palette ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable" style="display:none;">
+  <div class="emoji_palette_title ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+    <span class="ui-dialog-title">絵文字</span>
+    <a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button" unselectable="on" style="-moz-user-select: none;"><span class="ui-icon ui-icon-closethick" unselectable="on" style="-moz-user-select: none;">close</span></a>
+  </div>
+
+  <table>
+	<%= render :partial => 'common/emoticons_pad' %>
+  </table>
+
+  <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+    <div class="emoji_palette_title_right">
+      <span class="emoji_palette_close">閉じる</span>
+    </div>
+  </div>
+</div>
+
+<% content_for(:js) do %>
+	<%= stylesheet_link_tag "jquery-theme/ui.all.css", :media => 'all' %>
+	<%= stylesheet_link_tag "jquery.wysiwyg.css", :media => 'all' %>
+	<%= javascript_include_tag "jquery.bgiframe.js" %>
+	<%= javascript_include_tag "jquery.wysiwyg.js" %>
+	
+	<script type="text/javascript">
+	$(function() {
+		
+		$("#dialog").dialog({
+					bgiframe: true,
+					autoOpen: false,
+					height: 500,
+					width: 600,
+					modal: true,
+					buttons: {
+						'閉じる': function() {
+							$(this).dialog('close');
+						}
+					},
+					close: function() {
+						//allFields.val('').removeClass('ui-state-error');
+					}
+		});
+		
+		$('img.image_setter').click(function() {
+			image_id = $(this).context.id.replace("image_", "");
+			img_tag = "<img src=" + $(this).context.src + " />"
+			
+			$("#image_hidden_tag").after("<input type='hidden' name='images[" + image_id + "] />");
+			$("#image_hidden_tag").after(img_tag);
+			
+			$('textarea#dia_entry_body').focus();
+			$('textarea#dia_entry_body').wysiwyg('insertImage', $(this).context.src);
+			
+			$(this).addClass("ui-state-active"); 
+		});
+		
+		$('#abm_album_dialog').click(function() {
+			$('#dialog').dialog('open');
+		}).hover(
+			function(){ 
+				$(this).addClass("ui-state-hover"); 
+			},
+			function(){ 
+				$(this).removeClass("ui-state-hover"); 
+			}
+		).mousedown(function(){
+			$(this).addClass("ui-state-active"); 
+		}).mouseup(function(){
+			$(this).removeClass("ui-state-active");
+		});
+		
+		$('#diary_preview').click(function() {
+			value = $('textarea#dia_entry_body').val();
+			$('.wysiwyg').hide();
+			$('div#preview_dia_entry_body').html(value);
+			$('div#preview_dia_entry_body').show();
+			$(this).hide();
+			$('#diary_edit').show();
+		});
+		
+		$('#diary_edit').click(function() {
+			$('.wysiwyg').show();
+			$('div#preview_dia_entry_body').hide();
+			$(this).hide();
+			$('#diary_preview').show();
+		});
+		
+		$(".emoji_palette_close").bind("click", function(){
+		    $(".emoji_palette").hide("normal");
+		 });
+		
+		$("div.emoji_palette td").bind("click", function(){
+		    if (!this.id)  return;
+		    var input_tag = "textarea#dia_entry_body";
+			var img = $(this).children();
+			
+			$('textarea#dia_entry_body').focus();
+			$('textarea#dia_entry_body').wysiwyg('insertImage', img.attr('src'));
+		});
+		
+		$("div.emoji_palette td").hover(
+			function(){
+			  if (this.id) $(this).css("background-color","#999");
+			},
+			function(){
+			  if (this.id) $(this).css("background-color","#FFF");
+			}
+		);
+	
+		$('textarea#dia_entry_body').wysiwyg({
+		    controls : {
+		        emojiSep : { separator : true },
+		        emoji : {
+		            visible   : true,
+		            exec      : function() { 
+						var top = $('#preview_dia_entry_body').position().top;
+						$("div.emoji_palette").bgiframe().css("top", top + 30).css("left", 50).show("normal").draggable();
+					},
+		            className : 'emoji'
+		        },
+				insertImage : { visible : false }
+		    }
+		});
+		
+		<% unless @images.empty? %><%# 画像設定はwysiwygがレンダリングされたあと　%>
+			<% @images.each do |image| %>
+				var img_tag = '<%= image_tag(url_for_image_column(image, :image, :thumb)) %>';
+
+				$("#image_hidden_tag").after("<input type='hidden' name='images[" + <%= image.id %> + "] />");
+				$("#image_hidden_tag").after(img_tag);
+
+				$('textarea#dia_entry_body').focus();
+				$('textarea#dia_entry_body').wysiwyg('insertImage', '<%= url_for_image_column(image, :image, :thumb) %>');
+
+				$(this).addClass("ui-state-active");
+			<% end %>
+		<% end %>
+	});
+	
+	</script>
+<% end %>

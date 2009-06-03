@@ -1,0 +1,44 @@
+<%- @pan1="#{t('view.noun.base_user')}" -%>
+<%- @pan2="#{t('view.noun.base_user')}検索結果" -%>
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_user') %>検索結果
+<% end %>
+
+<h3><%= t('view.noun.base_user') %>検索結果</h3>
+
+<% if @users.size.zero? %>
+	検索結果がありません。
+<% else %>
+	<%= paginate_header(@users) %>
+	<table class="lineColorT" style="width:609px;">
+	<tr>
+		<th style="width:219px;"><%= t('activerecord.attributes.base_user.login') %></th>
+		<th style="width:70px;"><%= t('activerecord.attributes.base_user.joined_at') %></th>
+		<th style="width:70px;"><%= t('activerecord.attributes.base_user.status') %></th>
+		<th style="width:150px;">
+			<% if @pnt_master %><%= @pnt_master.title %>:<% end %>
+			<%= t('view.noun.pnt_point') %>
+		</th>
+		<th style="width:100px;"></th>
+	</tr>
+	<% for user in @users %>
+	<tr>
+		<td><%= user.login %></td>
+		<td><%= date_to_s(user.joined_at) %></td>
+		<td><%= BaseUser.status_name(user.status) %></td>
+		<td class="textalignR">
+			<% unless user.withdrawal? %>
+				<% if @pnt_master %>
+					<%= PntPoint.find_base_user_point(@pnt_master.id, user.id).try(:point) %>
+				<% end %>
+			<% end %>
+		</td>
+		<td>
+			<%= link_to '詳細', :action => 'show', :id => user.id %>
+			<%= link_to "#{t('view.noun.pnt_point')}履歴", :controller => 'pnt', :action => 'user_history', :id => user.id %>
+		</td>
+	</tr>
+	<% end %>
+	</table>
+	<%= paginate_links(@users) %>
+<% end %>

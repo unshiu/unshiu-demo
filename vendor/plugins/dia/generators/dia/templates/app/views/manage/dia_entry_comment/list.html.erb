@@ -1,0 +1,36 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.dia_entry') -%><%- @pan3="#{t('view.noun.dia_entry_comment')}一覧" -%>
+<% content_for(:header_title) do %>
+<%= t('view.noun.dia_entry_comment') %>一覧
+<% end %>
+
+<h3><%= t('view.noun.dia_entry_comment') %>一覧</h3>
+
+<% if @comments.size.zero? %>
+	<%= t('view.noun.dia_entry_comment') %>がありません。
+	
+<% else %>
+	<%= paginate_header(@comments) %>
+	<table class="lineColorT" style="width:609px;">
+	  <tr>
+		<th style="width:100px;"><%= t('activerecord.attributes.dia_entry_comment.base_user') %></th>
+	    <th style="width:150px;"><%= "#{t('view.noun.dia_entry')}#{t('activerecord.attributes.dia_entry.title')}" %></th>
+	    <th style="width:209px;"><%= t('activerecord.attributes.dia_entry_comment.body') %></th>
+	    <th style="width:120px;"><%= t('activerecord.attributes.dia_entry_comment.created_at') %></th>
+	  </tr>
+	<% for comment in @comments %>
+	<tr>
+		<td><%= link_to_user comment.base_user %></td>
+		<td>
+			<%= link_to comment.dia_entry.title, :controller => 'dia_entry', :action => 'show', :id => comment.dia_entry.id %>
+		</td>
+		<td>
+			<%=h comment.body %>
+		</td>
+		<td>
+			<%= datetime_to_s(comment.created_at) %>
+		</td>
+	</tr>
+	<% end %>
+	</table>
+	<%= paginate_links(@comments) %>
+<% end %>

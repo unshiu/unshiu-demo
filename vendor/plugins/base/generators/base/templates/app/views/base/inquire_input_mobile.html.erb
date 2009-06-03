@@ -1,0 +1,23 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_inquire') %>
+<% end %>
+
+<% form_tag :action => 'inquire_confirm' do %>
+  <div style="<%= style_value('form_style') %>">
+  <%= error_messages_for 'inquire', :object_name => 'base_inquire' %>
+
+  <% unless logged_in? %>
+  	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_inquire.mail_address') %><br />
+	<%= text_field 'inquire', 'mail_address' %><br />
+  <% end %>
+  	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_inquire.body') %><br />
+	<%= text_area 'inquire','body', :size => '50x3' %><br />
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+  </div>
+  <%= image_tag_for_default 'Spec_02.gif' %><br />
+  <div style="text-align:center">
+	<%= hidden_field 'inquire', 'referer' %>
+	<%= submit_tag '確認' %>
+  </div>
+<% end %>
+<%= image_tag_for_default 'Spec_08.gif' %><br />

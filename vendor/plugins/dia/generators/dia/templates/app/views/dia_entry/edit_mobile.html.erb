@@ -1,0 +1,28 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.dia_diary') %>編集
+<% end %>
+
+<div style="text-align:left;">
+
+<% if @images_changed %>
+<div style="color:#024873;">
+<%= t('view.noun.dia_diary') %>に関連付けられた <%= t('view.noun.abm_image') %>の追加・削除の処理はまだ完了していません。
+<%= image_tag_for_default 'Spec_04.gif' %><br />
+</div>
+<% end %>
+
+<% if @dia_entry.draft_flag %>
+<%= link_to_list_cell "下書き#{t('view.noun.dia_diary')}を削除する", :action => 'delete_confirm', :id => @dia_entry.id %><br />
+<% end %>
+<span style="color:#024873;"></span><%= link_to_list_cell '画像を追加する', :action => 'album_list', :type=> 'edit', :entry => @dia_entry.id, :images => @image_ids %><br />
+<span style="font-size:x-small">注意：<%= t('activerecord.attributes.dia_entry.title') %>/<%= t('activerecord.attributes.dia_entry.body') %>/<%= t('activerecord.attributes.dia_entry.public_level') %>ルの変更は保存されません。</span>
+
+<% form_tag :action => 'update_confirm', :id => params[:id] do %>
+  <%= render :partial => 'form' %>
+  <div style="text-align:center;">
+    <%= submit_tag '確認', :name => 'confirm' %>
+	<%= submit_tag '下書き保存', :name => 'draft' %>
+  </div>
+<% end %>
+
+</div>

@@ -1,0 +1,6 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.dia_diary') %>設定変更
+<% end %>
+<%= t('view.noun.dia_diary') %>を編集しました。<br />
+<br />
+<%= link_basic_to "[5]#{t('view.noun.dia_diary')}一覧を見る", {:controller => 'dia_entry', :action => 'list'}, {:accesskey => '5'} %><br />

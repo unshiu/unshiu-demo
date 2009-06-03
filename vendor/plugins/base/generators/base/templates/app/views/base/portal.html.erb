@@ -1,0 +1,299 @@
+<% if has_user_notice_message? %>
+<div class="notice">
+<% if @unread_messages_count && !@unread_messages_count.zero? %>
+	<%= link_to "未読#{t('view.noun.msg_message')}が#{@unread_messages_count}件あります。", :controller => 'msg_message', :action => 'index' %><br/>
+<% end %>
+<% if @friend_applies_count && !@friend_applies_count.zero? %>
+	<%= link_to "#{t('view.noun.base_friend')}申請が#{@friend_applies_count}件あります。", :controller => 'base_friend_apply', :action => 'list' %><br/>
+<% end %>
+<% if @unread_entry_comments_count && !@unread_entry_comments_count.zero? %>
+	<%= link_to "未読#{t('view.noun.dia_entry')}#{t('view.noun.dia_entry_comment')}が#{@unread_entry_comments_count}件あります。", :controller => 'dia_entry', :action => 'show', :id => @oldest_unread_comment.dia_entry_id %><br/>
+<% end %>
+</div>
+<% end %>
+	
+<div class="top_topic_box box_outer">
+	<div class="wrap1">
+	<div class="wrap2">
+	<div class="wrap3">
+	<div class="box_inner">
+		<div class="title">
+			<h2>
+				<span>
+					<img src="/images/default/title/title-1icon.jpg" alt="" >
+					<%= t('view.noun.base_friend') %>の新着<%= t('view.noun.dia_entry') %>
+				</span>
+			</h2>
+		</div>
+		<div class="topic_body">
+			<div class="topic_body_inner clearfix">
+				<% @friend_entries.each do |entry| %>
+					<div class="newsitem clearfix">
+						<p>
+						<% link_to :controller => 'base_profile', :action => 'show', :id => entry.dia_diary.base_user.id do %>
+							<%= safe_profile_view(entry.dia_diary.base_user.base_profile, :thumb, {"width" => 120, "height" => 120, :class => "left"}) %>
+						<% end %>
+						
+						<h6>
+						<span>
+							<%= link_to body_summary(entry.title, :length => 25), :controller => 'dia_entry', :action => 'show', :id => entry.id %>
+						</span>
+						</h6>
+						
+						<div class="date"><%= l(entry.contributed_at, :format => :short)%></div>
+							<%= body_summary(entry.body, :length => 100) %>
+						<div class="more">
+							<%= link_to "もっと読む", :controller => :dia_entry, :action => :show, :id => entry.id %>
+						</div>
+					</div>
+					<hr/>
+				<% end %>
+				
+				<% if @friend_entries.size.zero? %>
+					新着日記はありません。
+				<% else %>
+					<div class="more">
+						<%= link_to 'すべて表示', :controller => 'dia_entry', :action => 'friend_list' %>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	</div><!--/wrap3-->
+	</div><!--/wrap2-->
+	</div><!--/wrap1-->
+</div>
+
+<div class="top_topic_box box_outer">
+	<div class="wrap1">
+	<div class="wrap2">
+	<div class="wrap3">
+	<div class="box_inner">
+		<div class="title">
+			<h2>
+				<span>
+					<img src="/images/default/title/title-1icon.jpg" alt="" >
+					<%= t('view.noun.base_friend') %>の新着<%= t('view.noun.abm_album') %>
+				</span>
+			</h2>
+		</div>
+		<div class="topic_body">
+			<div class="topic_body_inner clearfix">
+				<% @friend_albums.each do |album| %>
+					<div class="newsitem clearfix">
+						<p>
+						<h6><span>
+							<%= link_to body_summary(album.title, :length => 30), :controller => 'abm_album', :action => 'show', :id => album.id %></span></h6>
+						<div class="date"><%= l(album.updated_at, :format => :short)%></div>
+						<div>
+							<%= body_summary(album.body, :length => 65) %>
+						</div>
+						<div class="more">
+							<%= link_to "画像を見る", :controller => :abm_album, :action => :show, :id => album.id %>
+						</div>
+						<p>
+					</div><!--/newsitem-->
+					<hr/>
+				<% end %>
+				
+				<% if @friend_albums.size.zero? %>
+					<%= t('view.noun.base_friend') %>の新着<%= t('view.noun.abm_album') %>はありません。
+				<% else %>
+					<div class="more">
+						<%= link_to 'すべて表示', :controller => 'abm_album', :action => 'friend_list' %>
+					</div>
+				<% end %>
+			</div><!--/topic_body_inner-->
+		</div><!--/topic_body-->
+	</div><!--/box_inner-->
+	</div><!--/wrap3-->
+	</div><!--/wrap2-->
+	</div><!--/wrap1-->
+</div><!--/top_topic-->
+
+<div class="top_topic_box box_outer">
+	<div class="wrap1">
+	<div class="wrap2">
+	<div class="wrap3">
+	<div class="box_inner">
+		<div class="title">
+			<h2>
+				<span>
+					<img src="/images/default/title/title-1icon.jpg" alt="">
+					<%= t('view.noun.dia_entry_comment') %>した<%= t('view.noun.dia_entry') %>
+				</span>
+			</h2>
+		</div>
+		<div class="topic_body">
+			<div class="topic_body_inner clearfix">
+				<% @commented_entries.each do |entry| %>
+					<div class="newsitem clearfix">
+						<p>
+						<% link_to :controller => 'base_profile', :action => 'show', :id => entry.dia_diary.base_user.id do %>
+							<%= safe_profile_view(entry.dia_diary.base_user.base_profile, :thumb, {"width" => 120, "height" => 120, :class => "left"}) %>
+						<% end %>
+						
+						<h6>
+						<span>
+							<%= link_to body_summary(entry.title, :length => 25), :controller => 'dia_entry', :action => 'show', :id => entry.id %>
+						</span>
+						</h6>
+						
+						<div class="date"><%= l(entry.contributed_at, :format => :short)%></div>
+							<%= body_summary(entry.body, :length => 100) %>
+						<div class="more">
+							<%= link_to "もっと読む", :controller => :dia_entry, :action => :show, :id => entry.id %>
+						</div>
+					</div>
+					<hr/>
+				<% end %>
+				
+				<% if @commented_entries.size.zero? %>
+					<%= t('view.noun.dia_entry_comment') %>した<%= t('view.noun.dia_entry') %>はありません。
+				<% else %>
+					<div class="more">
+						<%= link_to 'すべて表示', :controller => 'dia_entry', :action => 'commented_list' %>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div><!--/box_inner-->
+	</div><!--/wrap3-->
+	</div><!--/wrap2-->
+	</div><!--/wrap1-->
+</div><!--/top_topic-->
+
+<div class="top_topic_box box_outer">
+	<div class="wrap1">
+	<div class="wrap2">
+	<div class="wrap3">
+	<div class="box_inner">
+		<div class="title">
+			<h2>
+				<span>
+					<img src="/images/default/title/title-1icon.jpg" alt="">
+					<%= t('view.noun.cmm_community') %>最新<%= t('view.noun.tpc_topic') %>
+				</span>
+			</h2>
+		</div>
+		<div class="topic_body">
+			<div class="topic_body_inner clearfix">
+				<% @community_latest_topics.each do |tpc_community| %>
+					<div class="newsitem clearfix">
+						<p>
+							<% link_to :controller => :cmm, :action => :show, :id => tpc_community.cmm_community_id do %>
+								<%= safe_community_image_view(tpc_community.cmm_community.cmm_image, :thumb, {"width" => 120, "height" => 120, :class => "left"}) %>
+							<% end %>
+						<h6><span><%= link_to body_summary(tpc_community.tpc_topic.title, :length => 25), :controller => :tpc_cmm, :action => 'show', :id => tpc_community.tpc_topic.id %></span></h6>
+						<div class="date"><%= l(tpc_community.tpc_topic.updated_at, :format => :short)%></div>
+						<div>
+							<%= body_summary(tpc_community.tpc_topic.body, :length => 90) %>
+						</div>
+						<div class="more">
+							<%= link_to "もっと読む", :controller => :tpc_cmm, :action => :show, :id => tpc_community.tpc_topic.id %>
+						</div>
+						<p>
+					</div><!--/newsitem-->
+					<hr/>
+				<% end %>
+				
+				<% if @community_latest_topics.size.zero? %>
+					<%= t('view.noun.cmm_community') %>最新<%= t('view.noun.tpc_topic') %>はありません。
+				<% else %>
+					<div class="more">
+						<%= link_to_list_cell 'すべて表示', :controller => 'tpc_cmm', :action => 'latest_list' %>
+					</div>
+				<% end %>
+			</div><!--/topic_body_inner-->
+		</div><!--/topic_body-->
+	</div><!--/box_inner-->
+	</div><!--/wrap3-->
+	</div><!--/wrap2-->
+	</div><!--/wrap1-->
+</div><!--/top_topic-->
+
+
+<div class="top_topic_box box_outer">
+	<div class="wrap1">
+	<div class="wrap2">
+	<div class="wrap3">
+	<div class="box_inner">
+		<div class="title">
+			<h2>
+				<span>
+					<img src="/images/default/title/title-1icon.jpg" alt="">
+					<%= t('view.noun.tpc_comment') %>した<%= t('view.noun.cmm_community') %><%= t('view.noun.tpc_topic') %>
+				</span>
+			</h2>
+		</div>
+		<div class="topic_body">
+			<div class="topic_body_inner clearfix">
+				<% @community_commented_topics.each do |tpc_community| %>
+					<div class="newsitem clearfix">
+						<p>
+							<% link_to :controller => :cmm, :action => :show, :id => tpc_community.cmm_community_id do %>
+								<%= safe_community_image_view(tpc_community.cmm_community.cmm_image, :thumb, {"width" => 120, "height" => 120, :class => "left"}) %>
+							<% end %>
+						<h6><span><%= link_to body_summary(tpc_community.tpc_topic.title, :length => 25), :controller => :tpc_cmm, :action => 'show', :id => tpc_community.tpc_topic.id %></span></h6>
+						<div class="date"><%= l(tpc_community.tpc_topic.updated_at, :format => :short)%></div>
+						<div>
+							<%= body_summary(tpc_community.tpc_topic.body, :length => 90) %>
+						</div>
+						<div class="more">
+							<%= link_to "もっと読む", :controller => :tpc_cmm, :action => :show, :id => tpc_community.tpc_topic.id %>
+						</div>
+						<p>
+					</div><!--/newsitem-->
+					<hr/>
+				<% end %>
+				
+				<% if @community_commented_topics.size.zero? %>
+					<%= t('view.noun.tpc_comment') %>した<%= t('view.noun.cmm_community') %><%= t('view.noun.tpc_topic') %>はありません。
+				<% else %>
+					<div class="more">
+						<%= link_to_list_cell 'すべて表示', :controller => 'tpc_cmm', :action => 'commented_list' %>
+					</div>
+				<% end %>
+			</div><!--/topic_body_inner-->
+		</div><!--/topic_body-->
+	</div><!--/box_inner-->
+	</div><!--/wrap3-->
+	</div><!--/wrap2-->
+	</div><!--/wrap1-->
+</div><!--/top_topic-->
+
+<% content_for(:sidemenu) do %>
+
+<div id="common_friend_col">
+	<div id="common_friend_col_inner" class="append-bottom">
+		<div class="friend_col_tilte"><h6>友達</h6></div>
+		<div class="profile_img_panel">
+			<% current_base_user.friends.each do | friend | %>
+				<%= link_to safe_profile_view(friend.base_profile, :thumb, {"width" => 40, "height" => 40}), :controller => 'base_profile', :action => 'show', :id => friend.id %>
+			<% end %>
+			<div class="more clearfix">
+				<%= link_to "すべて表示", :controller => :base_friend, :action => :list %>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div><!--/common_friend_col_inner-->
+</div><!--/common_friend_col-->
+
+<div id="friend_col">
+	<div id="common_friend_col_inner">
+		<div class="friend_col_tilte"><h6>コミュニティ</h6></div>
+		<div class="profile_img_panel">
+			<% current_base_user.cmm_communities.each do | community | %>
+				<% link_to :controller => :cmm, :action => :show, :id => community.id do %>
+					<%= safe_community_image_view(community.cmm_image, :thumb, {"width" => 40, "height" => 40}) %>
+				<% end %>
+			<% end %>
+			<div class="more clearfix">
+				<%= link_to "すべて表示", :controller => :cmm_user, :action => :list %>
+			</div>
+			<div class="clear"></div>
+		</div><!--/profile_img_panel-->
+	</div><!--/common_friend_col_inner-->
+</div><!--/friend_col-->
+
+<% end %>

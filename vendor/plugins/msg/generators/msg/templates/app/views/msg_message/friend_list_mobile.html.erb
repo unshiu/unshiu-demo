@@ -1,0 +1,17 @@
+<% if @base_friends.size.zero? %>
+	<%= t('view.noun.base_friend') %>がいません。
+
+<% else %>
+	<%= paginate_header(@base_friends) %>
+
+	<% @base_friends.each do |base_friend| %>
+		<% list_cell_for do %>
+			<%= link_to_user_without_emoticon base_friend %>
+			<%= link_to '宛先追加', :action => 'new', :receivers => [base_friend.id].concat(@receivers) %><br/>
+		<% end %>
+	<% end %>
+	
+	<%= paginate_links(@base_friends) %>
+<% end %>
+<br/>
+<span style="color:#f75100;"></span><%= link_to "戻る", {:action => 'new', :receivers => @receivers}, {:accesskey => "5"} %>

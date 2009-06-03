@@ -1,0 +1,42 @@
+<%- @pan1=t('view.noun.base_user') -%><%- @pan2="#{t('view.noun.base_user_file_history')}一覧" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_user_file_history') %>一覧
+<% end %>
+
+<h3><%= t('view.noun.base_user_file_history') %>一覧</h3>
+
+<% if @histories.size.zero? %>
+	履歴はありません。
+<% else %>
+	<%= paginate_header(@histories) %>
+	<table class="lineColorT" style="width:609px;">
+	<tr>
+		<th style="width:120px;"><%= t('activerecord.attributes.base_user_file_history.base_user') %></th>
+		<th style="width:150px;"><%= t('activerecord.attributes.base_user_file_history.created_at') %></th>
+		<th style="width:150px;"><%= t('activerecord.attributes.base_user_file_history.complated_at') %></th>
+		<th style="width:80px;">ダウンロード</th>
+	</tr>
+	<% for history in @histories %>
+	<tr>
+		<td class="textalignC"><%= history.base_user.name %></td>
+		<td class="textalignC"><%= datetime_to_s(history.created_at) %></td>
+		<td class="textalignC">
+			<% if history.complated? %>
+				<%= datetime_to_s(history.complated_at) %>
+			<% else %>
+				-
+			<% end %>
+		</td>
+		<td class="textalignC">
+			<% if history.complated? %>
+				<%= link_to "ダウンロード", :action => :download, :id => history.id %>
+			<% else %>
+				-
+			<% end %>
+		</td>
+	</tr>
+	<% end %>
+	</table>
+	<%= paginate_links(@histories) %>
+<% end %>

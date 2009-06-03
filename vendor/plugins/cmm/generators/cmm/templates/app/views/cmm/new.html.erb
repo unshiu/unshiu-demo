@@ -1,0 +1,40 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.cmm_community') %>作成
+<% end %>
+
+<div>
+	<h2><span><%= t('view.noun.cmm_community') %>を作成する</span></h2>
+</div>
+
+<% form_tag :action => "create_complete" do %>
+	
+	<label for="community_name" accesskey="n"><%= t('activerecord.attributes.cmm_community.name') %>：</label>
+	<br>
+	<%= text_field 'community', 'name', { :class => "span-17", :style => "padding:8px;margin:2px 0px;"} %>
+	<div class="notice">
+		<%= error_message_on_with_label @community, 'name' %>
+		<%=t 'activerecord.errors.stand_messages.too_long', :count => AppResources[:base][:title_max_length] %>
+	</div>
+	<br>
+	<label for="community_profile" accesskey="n"><%= t('activerecord.attributes.cmm_community.profile') %>：</label>
+	<br>
+	<%= text_area 'community', 'profile', :size => '50x3' %>
+	<div class="notice">
+		<%= error_message_on_with_label @community, 'profile' %>
+		<%=t 'activerecord.errors.stand_messages.too_long', :count => AppResources[:base][:body_max_length] %>
+	</div>
+	<label><%= t('activerecord.attributes.cmm_community.join_type') %></label>
+	<div>
+		<%= radio_button 'community', 'join_type', CmmCommunity::JOIN_TYPE_FREE %>自由参加
+		<%= radio_button 'community', 'join_type', CmmCommunity::JOIN_TYPE_NEED_APPROVAL %>管理人の承認が必要
+	</div>
+	
+	<label><%= t('activerecord.attributes.cmm_community.topic_create_level') %></label>
+	<div>
+		<%= radio_button 'community', 'topic_create_level', CmmCommunitiesBaseUser::STATUS_MEMBER %><%= t('view.noun.cmm_community') %>参加者なら誰でも
+		<%= radio_button 'community', 'topic_create_level', CmmCommunitiesBaseUser::STATUS_ADMIN %>管理者のみ
+	</div>
+	
+	<%= submit_button_tag("作成") %>
+	
+<% end %>

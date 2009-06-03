@@ -1,0 +1,21 @@
+<div style="<%= style_value('form_style') %>">
+
+<%= error_messages_for 'message', :object_name => 'msg_message' %>
+
+<!--[form:message]-->
+<span style="color:#f75009;"></span><%= t('activerecord.attributes.msg_message.receiver') %><br />
+<% @receivers.each do |receiver| %>
+	<span style="color:#f75009;"></span><%= link_to_user_without_emoticon receiver %><br />
+	<%= hidden_field_tag 'receivers[]', receiver.id %>
+<% end %>
+<%= link_to "[宛先を追加する]", :action => :friend_list, :receivers => @receivers %><br/>
+<%= hidden_field 'message', 'parent_message_id' %>
+<span style="color:#f75009;"></span><%= t('activerecord.attributes.msg_message.title') %><br />
+<%= text_field 'message', 'title', :size => '50'  %><br />
+<span style="color:#f75009;"></span><%= t('activerecord.attributes.msg_message.body') %><br />
+<%= text_area 'message', 'body', :size => '50x3'  %><br />
+<!--[eoform:message]-->
+
+<%= image_tag_for_default 'Spec_02.gif' %><br />
+</div>
+<%= image_tag_for_default 'Spec_02.gif' %><br />

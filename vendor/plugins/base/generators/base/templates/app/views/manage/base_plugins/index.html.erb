@@ -1,0 +1,29 @@
+<%- @pan1="システム設定" -%><%- @pan2="プラグイン管理" -%><%- @pan3="一覧" -%>
+
+<% content_for(:header_title) do %>
+	プラグイン一覧
+<% end %>
+
+<h3>プラグイン一覧</h3>
+
+<table class="lineColorT" style="width:609px;">
+  <tr>
+    <th style="width:309px;">プラグイン名</th>
+	<th style="width:150px;">version</th>
+	<th style="width:150px;">有効</th>
+  </tr>
+ 
+<% for plugin in Unshiu::Plugins::LIST %>
+  <tr>
+    <td><%= link_to plugin, manage_base_plugin_path(plugin) %></td>
+	<td class="textalignC"><%= Rails::Plugin.new("vendor/plugins/#{plugin}").about["version"] %></td>
+	<td class="textalignC">
+		<% if eval("Unshiu::Plugins.active_#{plugin}?") %>
+			有効
+		<% else %>
+			無効
+		<% end %>
+	</td>
+  </tr>
+<% end %>
+</table>

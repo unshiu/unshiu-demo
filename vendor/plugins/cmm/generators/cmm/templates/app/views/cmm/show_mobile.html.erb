@@ -1,0 +1,105 @@
+<% content_for(:header_title) do %>
+	<%= h @community.name %>
+<% end %>
+
+<% if logged_in? %>
+	<div style="<%= style_value('small_info_right') %>">
+	<% if @community.joined?(current_base_user.id) %>
+		参加しています
+	<% elsif @community.applying?(current_base_user.id) %>
+		参加申請中です
+	<% else %>
+		参加していません
+	<% end%>
+	</div>
+<% end %>
+
+<table>
+	<tr>
+	<td style="vertical-align:top;">
+		<%= safe_community_image_view(@image, :thumb, {"width" => 96, "height" => 96}) %>
+	</td>
+	<td>
+		<span style="font-size:small;">
+	  	<% if logged_in? %>
+			<% if @community.rejected?(current_base_user.id) %>
+		
+			<% elsif @community.admin?(current_base_user.id) %>
+		
+			<% elsif @community.joined?(current_base_user.id) %>
+		
+			<% elsif @community.join_type_free?%>
+				<%= link_basic_to '参加する', :action => 'join_confirm', :id => @community.id %><br/>
+		
+			<% elsif @community.applying?(current_base_user.id) %>
+		
+			<% else %>
+				<%= link_basic_to '参加申請する', :action => 'join_confirm', :id => @community.id %><br/>
+			<% end%>
+		<% end %>
+	
+		<%= link_basic_to "メンバー一覧(#{@community.joined_users.size})", :controller => 'cmm_member', :action => 'list', :id => @community.id %><br/>
+		<%= link_basic_to "#{t('view.noun.tpc_topic')}一覧(#{@topics.size})", :controller => 'tpc_cmm', :action => 'list', :id => @community.id %><br/>
+		<%= link_basic_to "#{t('view.noun.tpc_topic')}検索", :controller => 'tpc_cmm', :action => 'search', :id => @community.id %><br/>
+	
+		<% if logged_in? %>
+			<% if @community.topic_creatable?(current_base_user.id) %>
+				<%= link_basic_to "#{t('view.noun.tpc_topic')}を作る", :controller => 'tpc', :action => 'new_cmm_topic', :id => @community.id %><br/>
+			<% end %>
+			<% if @community.joined?(current_base_user.id) && !@community.admin?(current_base_user.id) %>
+				<%= link_basic_to '脱退する', :action => 'resign_confirm', :id => @community.id %><br/>
+			<% end %>
+		<% end %>	
+		</span>	
+	</td>
+	</tr>
+</table>
+
+<br />
+<%= hbr @community.profile %>
+<br />
+
+<div style="<%= style_value('inner_title') %>">
+	<span style="color:#024873;"></span>新着<%= t('view.noun.tpc_topic') %><br />
+</div>
+
+<% if @topics.size.zero? %>
+	<%= t('view.noun.tpc_topic') %>がありません。
+
+<% else %>
+
+	<% @topics.each do |topic| %>
+		<% list_cell_for do %>
+			<%= link_to_list_cell "#{topic.tpc_topic.title}(#{topic.tpc_topic.tpc_comments.count})", :controller => 'tpc_cmm', :action => 'show', :id => topic.id %>
+			<%= notice_new_if_new(topic.tpc_topic.created_at) %><br />
+			<%= link_to_user topic.tpc_topic.base_user %>
+			<%= date_or_time(topic.tpc_topic.created_at) %><br />
+		<% end %>
+	<% end %>
+	<div style="text-align:right">
+	    <%= image_tag_for_default 'Spec_02.gif' %><br />
+		>><%= link_basic_to "一覧", :controller => 'tpc_cmm', :action => 'list', :id =>@community.id %>
+	</div>
+
+<% end %>
+
+<% if logged_in? && @community.admin?(current_base_user.id) %>
+	<br />
+	
+	<div style="<%= style_value('inner_title') %>">
+  		管理メニュー
+	</div>
+
+		<%= link_basic_to "#{t('view.noun.cmm_community')}を編集する", :controller => 'cmm_admin', :action => 'edit', :id => @community.id %><br/>
+		<%= link_basic_to "#{t('view.noun.cmm_community')}画像を設定する", :controller => 'cmm_admin', :action => 'mail', :id => @community.id %><br/>
+		<%= link_basic_to 'メンバー管理', :controller => 'cmm_admin', :action => 'member_list', :id => @community.id %><br/>
+		<%= link_basic_to "#{t('activerecord.constant.status.status_rejected')}(#{@community.rejected_users.size})", 
+		                  :controller => 'cmm_admin', :action => 'member_list', :id => @community.id, 
+		                  :state => CmmCommunitiesBaseUser::STATUS_REJECTED %><br/>
+		<% if @community.join_type_need_approval?%>
+			<%= link_basic_to "参加申請中のユーザー(#{@community.applying_users.size})", 
+			              :controller => 'cmm_admin', :action => 'member_list', :id => @community.id, 
+			              :state => CmmCommunitiesBaseUser::STATUS_APPLYING %><br/>
+		<% end %>
+		<%= link_basic_to "#{t('view.noun.cmm_community')}を削除する", :controller => 'cmm_admin', :action => 'destroy_confirm', :id => @community.id %>
+<% end %>

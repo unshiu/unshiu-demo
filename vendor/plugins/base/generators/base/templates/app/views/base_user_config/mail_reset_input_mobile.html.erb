@@ -1,0 +1,23 @@
+<% content_for(:header_title) do %>
+登録メールアドレス変更
+<% end %>
+
+新しいメールアドレスを入力してください。<br/>
+入力されたメールアドレスにメールが送信されますので、記載のURLにアクセスし、変更を完了してください。<br />
+<br />
+現在のメールアドレス<br/>
+<%= current_base_user.email %><br/>
+<br/>
+<% form_tag :action => 'mail_reset_confirm' do %>
+
+<div style="<%= style_value('form_style') %>">
+	<%= error_messages_for 'maf', :object_name => 'base_mail_address_reset_form' %>
+	新しいメールアドレス<br />
+	<%= text_field_tag 'new_mail_address', @new_mail_address %><br />
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+</div>
+<%= image_tag_for_default 'Spec_02.gif' %><br />
+<div style="text-align:center">
+	<%= submit_tag '確認' %>
+</div>
+<% end %>

@@ -1,0 +1,33 @@
+common: &common
+  manager_mail_address: mobilesns-dev@sample.unshiu.jp
+  
+  standard_list_size: 30
+  
+development:
+  mng_user_action_hitory_archive_file_path: public/system/files/mng_user_action_hitory_archive
+  
+  apache_log_dir: /var/log/apache2
+  apache_access_log_filename: access_log
+  apache_home: /etc/apache2
+  mysql_conf_file: /etc/my.cnf
+  <<: *common
+  
+test:
+  mng_user_action_hitory_archive_file_path: test/file
+  
+  apache_log_dir: test/file
+  apache_access_log_filename: mng_system_apache_log.txt
+  apache_home: test/file
+  
+  mysql_conf_file: test/file/mng_system_my_cnf_sample.txt
+  <<: *common
+
+production:
+  mng_user_action_hitory_archive_file_path: public/system/files/mng_user_action_hitory_archive
+  
+  apache_log_dir: /var/log/apache2
+  apache_access_log_filename: access_log
+  apache_home: /usr/local/apache/extra
+  
+  mysql_conf_file: /etc/mysql/my.cnf
+  <<: *common

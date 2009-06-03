@@ -1,0 +1,31 @@
+<% content_for(:header_title) do %>
+	<%= h @album.title %>の<%= t('view.noun.abm_image_comment') %>
+<% end %>
+
+<% if @comments.size.zero? %>
+	<%= t('view.noun.abm_image_comment') %>はありません。
+	
+<% else %>
+	<%= paginate(@comments) %>
+	
+	<div id="abm_image_comments" class="diary_storys_box box_outer">
+		<%= render :partial => "comment", :collection => @comments %>
+	</div><!--/diary_storys_box-->
+	
+    <%= paginate(@comments) %>
+<% end %>
+ 
+<% content_for(:sidemenu) do %>
+<div  class="W5R4B9df box_outer">
+	<div class="wrap1">
+	<div class="wrap2">
+	<div class="wrap3">
+		<div class="box_inner clearfix">
+		<h6><span>menu</span></h6>
+			<%= link_to "画像に戻る", :controller => :abm_image, :action => :show, :id => @image.id %>
+		</div><!--/box_inner-->
+	</div><!--/wrap3 -->
+	</div><!--/wrap2 -->
+	</div><!--/wrap1 -->
+</div><!--/friend_box-->
+<% end %>

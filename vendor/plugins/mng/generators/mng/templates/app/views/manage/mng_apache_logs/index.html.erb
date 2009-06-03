@@ -1,0 +1,27 @@
+<%- @pan1="システム設定" -%><%- @pan2="アクセスログ" -%><%- @pan3="一覧" -%>
+
+<% content_for(:header_title) do %>
+	Apache Log 一覧
+<% end %>
+
+<h3>Apache Log 一覧</h3>
+
+<% if @mng_apache_logs.size.zero? %>
+	アクセスログはありません。
+	
+<% else %>
+	<table class="lineColorT" style="width:609px;">
+	<tr>
+		<th style="width:309px;">ファイル名</th>
+		<th style="width:150px;">最終アクセス日時</th>
+		<th style="width:150px;">サイズ(byte)</th>
+	</tr>
+	<% for mng_apache_log in @mng_apache_logs %>
+	<tr>
+		<td><%= link_to mng_apache_log.filename, download_manage_mng_apache_log_path(mng_apache_log.filename) %></td>
+		<td><%= datetime_to_s(mng_apache_log.mtime) %></td>
+		<td><%= mng_apache_log.filesize.bytes %></td>
+	</tr>
+	<% end %>
+	</table>
+<% end %>

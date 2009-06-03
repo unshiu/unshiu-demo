@@ -1,0 +1,20 @@
+<div id="left02">
+  <div class="sideWrap">
+    <h4><p><%= @pan2 -%></p></h4>
+    <div class="sideMenu">
+      <ul>
+        <li><%= link_to "#{t('view.noun.dia_entry')}一覧", :controller => 'dia_entry', :action => 'list' %></li>
+        <li><%= link_to "#{t('view.noun.dia_entry_comment')}一覧", :controller => 'dia_entry_comment', :action => 'list' %></li>
+      </ul>
+    </div>
+
+	<h4><p><%= t('view.noun.dia_entry') %>検索</p></h4>
+	<div class="sideMenu">
+	<% form_tag :controller => 'dia_entry', :action => 'search' do %>
+		<%= text_field_tag 'keyword', @keyword %>
+		<%= submit_tag '検索' %>
+	<% end %>
+	</div>
+	
+	</div>
+</div><!-- /left02 -->

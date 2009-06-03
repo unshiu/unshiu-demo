@@ -1,0 +1,2 @@
+module ManageAbmImageCommentHelperModule
+end

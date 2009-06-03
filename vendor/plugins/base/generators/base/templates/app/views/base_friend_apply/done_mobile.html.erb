@@ -1,0 +1,6 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_friend') %>申請
+<% end %>
+<%= @user.show_name %>に<%= t('view.noun.base_friend') %>申請しました。<br />
+<br />
+<span style="color:#f75100;"></span><%= link_basic_to @user.show_name + "のプロフィールに戻る", {:controller => 'base_profile', :action => 'show', :id => @user.id}, {:accesskey => '5'} %>

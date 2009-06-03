@@ -1,0 +1,15 @@
+<%- @pan1="管理者設定" -%><%- @pan2="#{t('view.noun.base_ng_word')}" -%><%- @pan3="新規作成" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_ng_word') %>新規作成
+<% end %>
+
+<h3><%= t('view.noun.base_ng_word') %>新規作成</h3>
+
+<% form_tag :action => 'confirm' do %>
+	<%= render :partial => 'form' %>
+
+	<div class="bot_btn">
+		<%= mng_submit_tag '確認' %>
+	</div>
+<% end %>

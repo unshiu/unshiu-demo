@@ -1,0 +1,9 @@
+	<%= image_tag_for_default 'Spec_04.gif' %><br />
+    <div style="text-align:center">
+        <%= image_tag url_for_image_column(@image, 'image', :large) %>
+    </div>
+	<%= image_tag_for_default 'Spec_08.gif' %><br />
+    <div>
+        <%= t('activerecord.attributes.abm_image.body') %><br/>
+        <%= hbr @image.body %>
+    </div>

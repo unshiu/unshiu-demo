@@ -1,0 +1,47 @@
+<%- @pan1="SNS設定" -%><%- @pan2="#{t('view.noun.cmm_community')}" -%><%- @pan3="#{@community.name}の#{t('view.noun.cmm_communities_base_user')}" -%>
+
+<% content_for(:header_title) do %>
+	<%= h @community.name %><%= cmm_member_status(@state) %>一覧
+<% end %>
+
+<h3><%= h @community.name %>の<%= cmm_member_status(@state) %></h3>
+
+<% if @members.size.zero? %>
+	該当する<%= t('view.noun.cmm_communities_base_user') %>はいません。
+<% else %>
+	<%= paginate_header @members %>
+	<table class="lineColorT" style="width:609px;">
+		<tr>
+			<th><%= t('activerecord.attributes.cmm_communities_base_user.created_at') %></th>
+			<th><%= t('activerecord.attributes.cmm_communities_base_user.updated_at') %></th>
+			<th><%= t('activerecord.attributes.cmm_communities_base_user.base_user') %></th>
+			<th><%= t('activerecord.attributes.cmm_communities_base_user.status') %></th>
+		</tr>
+		<% @members.each do |member| %>
+			<tr>
+				<td><%= datetime_to_s member.created_at %></td>
+				<td>
+					<% if member.applying? || member.rejected? %>
+					    -
+					<% else %>
+						<%= datetime_to_s member.updated_at %>
+					<% end %>
+				</td>
+				<td><%= link_to_user member.base_user %></td>
+				<td class="textalignC">
+					<% if member.admin? %>
+						<%= t('activerecord.constant.status.status_admin') %>
+					<% elsif member.subadmin? %>
+						<%= t('activerecord.constant.status.status_subadmin') %>
+					<% elsif member.guest? %>
+						<%= t('activerecord.constant.status.status_guest') %>
+					<% elsif member.rejected? %>
+						<%= t('activerecord.constant.status.status_rejected') %>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+	</table>
+	<%= paginate_links @members %>
+<% end %>
+

@@ -1,0 +1,2 @@
+module AceFootmarksHelper
+end

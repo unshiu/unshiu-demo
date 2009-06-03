@@ -1,0 +1,99 @@
+<%- @pan1="メール" -%><%- @pan2="#{t('view.noun.mlg_magazine')}配信履歴" -%>
+
+<% content_for(:header_title) do %>
+  <%= t('view.noun.mlg_magazine') %>配信履歴
+<% end %>
+
+<h3><%= t('view.noun.mlg_magazine') %>配信設定</h3>
+
+<%= error_messages_for 'mlg_magazine' %>
+
+<% form_tag :action => 'confirm' do %>
+  <%= hidden_field 'mlg_magazine', 'id' %>
+
+<table class="lineColorL" style="width:609px;">
+<tbody>
+  <tr>
+    <th style="width:140px;"><%= t('activerecord.attributes.mlg_magazine.title') %></th>
+    <td><%= @mlg_magazine.title %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;"><%= t('activerecord.attributes.mlg_magazine.send_at') %></th>
+    <td>
+		<%= datetime_select 'mlg_magazine', 'send_at', :use_month_numbers => true %>
+		<%= adjusted_datetime 'mlg_magazine', 'send_at' %>
+	</td>
+  </tr>
+</tbody>
+</table>
+
+<h4>対象設定</h4>
+
+<table class="lineColorL" style="width:609px;">
+<tbody>
+	<tr>
+		<th style="width:140px;"><%= t('activerecord.attributes.base_user.joined_at') %></th>
+		<td>
+			<%= date_select 'joined_at', 'start', :use_month_numbers => true, :include_blank => true %>〜
+			<%= date_select 'joined_at', 'end', :use_month_numbers => true, :include_blank => true %>
+			<%= adjusted_datetime 'joined_at', 'start' %>
+			<%= adjusted_datetime 'joined_at', 'end' %>
+		</td>
+	</tr>
+	<tr>
+		<th><label name="user_age"><%= t('activerecord.attributes.base_profile.age') %></label></th>
+		<td><%= text_field 'age', 'start', :size => 4 %>〜
+		<%= text_field 'age', 'end', :size => 4  %></td>
+	</tr>
+	<tr>
+		<th>性別</th>
+		<td>
+		<% hash2sorted_array(BaseProfile::SEX).each do | sex | %>
+		<%= check_box_tag "sex[#{sex[0]}]" %>
+			<%= sex[1] %>
+		<% end %>
+		</td>
+	</tr>
+	<tr>
+		<th><label name="base_user_profile_area"><%= t('activerecord.attributes.base_profile.area') %></label></th>
+		<td><% hash2sorted_array(BaseProfile::PREFECTURES).each do | area | %>
+		<%= check_box_tag "area[#{area[0]}]" %>
+		<%= area[1] %>
+		<% end %></td>
+	</tr>
+	<tr>
+		<th><label name="base_user_profile_civil_status"><%= t('activerecord.attributes.base_profile.civil_status') %></label></th>
+		<td><% hash2sorted_array(BaseProfile::CIVIL).each do | civil_status | %>
+		<%= check_box_tag "civil_status[#{civil_status[0]}]" %>
+		<%= civil_status[1] %>
+		<% end %></td>
+	</tr>
+	<tr>
+		<th><label name="profile_point"><%= t('view.noun.pnt_point') %></label></th>
+		<td><% if master_select? %>
+		<%= select_tag "pnt_master[id]", options_from_collection_for_select(@pnt_masters, "id", "title") %>
+		<% else %>
+		<%= hidden_field 'pnt_master', 'id', :value => @pnt_masters.first.id %>
+		<% end %>
+		<%= text_field 'point', 'start_point', :size => 10 %>～<%= text_field 'point', 'end_point', :size => 10  %></td>
+	</tr>
+	<tr>
+		<th><label name="user_base_carrier_id"><%= t('activerecord.attributes.base_user.base_carrier') %></label></th>
+		<td><% for carrier in @carriers %>
+		<%= check_box_tag "base_carrier_id[#{carrier.id}]" %>
+		<%= carrier.name %>
+		<% end %></td>
+	</tr>
+	<tr>
+		<th><label name="receive_mail_magazine_flag"><%= t('view.noun.mlg_magazine') %>許可</label></th>
+		<td><%= check_box_tag "receive_mail_magazine_flag", '1', :checked=>true %><%= t('view.noun.mlg_magazine') %>許可のユーザのみ
+	</td>
+	</tr>
+</tbody>
+</table>
+
+<div class="bot_btn">
+	<%= mng_submit_tag "確認" %>
+</div>
+
+<% end %>

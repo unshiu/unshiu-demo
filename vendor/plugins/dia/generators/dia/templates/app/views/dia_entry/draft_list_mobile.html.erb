@@ -1,0 +1,24 @@
+<% content_for(:header_title) do %>
+	下書き<%= t('view.noun.dia_diary') %>一覧
+<% end %>
+
+<div style="text-align:left">
+	
+<% if @entries.size.zero? %>
+	下書き<%= t('view.noun.dia_diary') %>がありません。
+
+<% else %>
+	<%= paginate_header(@entries) %>
+
+	<% @entries.each do |entry| %>
+	    <% list_cell_for do %>
+	    	<%= date_or_time(entry.updated_at) %>
+			<%= link_to_list_cell "#{entry.title}(#{entry.dia_entry_comments.count})", :action => 'edit', :id => entry.id %>
+			<%= link_to_list_cell "[削除]", :action => 'delete_confirm', :id => entry.id %><br />
+	    <% end %>
+	<% end %>
+
+	<%= paginate_links(@entries) %>
+<% end %>
+
+</div>

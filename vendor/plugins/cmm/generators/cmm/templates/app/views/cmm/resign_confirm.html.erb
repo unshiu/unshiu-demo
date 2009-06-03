@@ -1,0 +1,15 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.cmm_community') %>脱退
+<% end %>
+<% content_for(:sub_title) do %>
+	<%= h @community.name %>
+<% end %>
+
+<div class="warning">
+	<%= h @community.name %>から本当に脱退しますか？
+</div>
+
+<% form_tag :action => 'resign_complete', :id => @community.id do %>
+	<%= submit_button_tag '脱退' %>
+	<%= cancel_button_tag %>
+<% end %>

@@ -1,0 +1,8 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.abm_album') %><%= t('view.noun.abm_image') %><%= t('view.noun.abm_image_comment') %>削除
+<% end %>
+<%= t('view.noun.abm_image_comment') %>を削除しました。<br />
+<br />
+<%= link_basic_to "#{t('view.noun.abm_image_comment')}一覧に戻る", :controller => 'abm_image_comment', :action => 'comments', :id => @abm_image_id %>
+
+<hr style="<%= style_value('hr1') %>">

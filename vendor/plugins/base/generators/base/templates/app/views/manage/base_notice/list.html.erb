@@ -1,0 +1,28 @@
+<%- @pan1="SNS設定" -%><%- @pan2="#{t('view.noun.base_notice')}" -%><%- @pan3="#{t('view.noun.base_notice')}一覧" -%>
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_notice') %>一覧
+<% end %>
+
+<h3><%= t('view.noun.base_notice') %>一覧</h3>
+
+<% if @notices.size.zero? %>
+	<%= t('view.noun.base_notice') %>がありません。
+<% else %>
+	<%= paginate_header(@notices) %>
+	<table class="lineColorT" style="width:609px;">
+	  <tr>
+	    <th style="width:309px;"><%= t('activerecord.attributes.base_notice.title') %></th>
+	    <th style="width:150px;"><%= t('activerecord.attributes.base_notice.start_datetime') %></th>
+	    <th style="width:150px;"><%= t('activerecord.attributes.base_notice.end_datetime') %></th>
+	  </tr>
+  
+	<% for base_notice in @notices %>
+	  <tr>
+	    <td><%= link_to base_notice.title, :action => 'show', :id => base_notice.id %></td>
+	    <td><%= datetime_to_s(base_notice.start_datetime) %></td>
+	    <td><%= datetime_to_s(base_notice.end_datetime) %></td>
+	  </tr>
+	<% end %>
+	</table>
+	<%= paginate_links(@notices) %>
+<% end %>

@@ -1,0 +1,10 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.cmm_community') %>作成
+<% end %>
+
+<% form_tag :action => "create_confirm" do %>
+	<%= render :partial => 'form' %>
+	<div style="text-align:center">
+		<%= submit_tag '確認' %>
+	</div>
+<% end %>

@@ -1,0 +1,20 @@
+<% content_for(:header_title) do %>
+登録メールアドレス変更
+<% end %>
+
+入力したメールアドレスをもう一度確認し、「送信」ボタンを押してください。
+
+<% form_tag :action => 'mail_reset_send' do %>
+
+<div style="<%= style_value('form_style') %>">
+	新しいメールアドレス<br/>
+	<%= @new_mail_address %><br/>
+	<%= hidden_field_tag 'new_mail_address', @new_mail_address %>
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+</div>
+<%= image_tag_for_default 'Spec_02.gif' %><br />
+<div style="text-align:center">
+	<%= submit_tag '送信' %>
+	<%= cancel_tag %>
+</div>
+<% end %>

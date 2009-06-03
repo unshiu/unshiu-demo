@@ -1,0 +1,26 @@
+<% content_for(:header_title) do %>
+ゴミ箱<%= t('view.noun.msg_message') %>
+<% end %>
+<% content_for(:sub_title) do %>
+<%= h @message.title %>
+<% end %>
+<% if @message.sender?(current_base_user) %>
+<%= t('activerecord.attributes.msg_message.receiver') %><br />
+<span style="color:#f75009;"></span><%= link_to_user_without_emoticon @message.msg_receivers[0].base_user %><br />
+<% else %>
+<%= t('activerecord.attributes.msg_sender.base_user') %><br />
+<%= link_to_user(@message.msg_sender.base_user) %><br />
+<% end %>
+<br />
+<%= t('activerecord.attributes.msg_message.body') %><br />
+<%= hbr @message.body %>
+
+<%= image_tag_for_default 'Spec_08.gif' %><br />
+
+<% if @message.sender?(current_base_user) %>
+  <%= link_basic_to '元に戻す', :controller => 'msg_sender', :action => 'restore_confirm', :id => @message.id %><br />
+  <%= link_basic_to 'ゴミ箱から削除する', :controller => 'msg_sender', :action => 'delete_completely_confirm', :id => @message.id %>
+<% else %>
+  <%= link_basic_to '元に戻す', :controller => 'msg_receiver', :action => 'restore_confirm', :id => @message.id %><br />
+  <%= link_basic_to 'ゴミ箱から削除する', :controller => 'msg_receiver', :action => 'delete_completely_confirm', :id => @message.id %>
+<% end %>

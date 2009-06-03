@@ -1,0 +1,40 @@
+<div class="diary_comment_box box_outer clearfix diary_comment_list">
+	<div class="diary_comment_author">
+		<% link_to :controller => 'base_profile', :action => 'show', :id => comment.base_user_id do %>
+			<%= safe_profile_view(comment.base_user.base_profile, :thumb, {"width" => 70, "height" => 70, :class => "left", :alt => h(comment.base_user.show_name)}) %>
+		<% end %>
+		<div class="username"><%= link_to_user comment.base_user %></div>
+	</div>
+	<div class="comment_box">
+		<div class="comment_wrap">
+			<div class="wrap1">
+			<div class="wrap2">
+			<div class="wrap3">
+				<div class="box_inner">
+					<% if comment.not_invisibled_by_anyone? %>
+						<div class="diary_text box_outer small comment_text">
+							<p><%= hbr comment.body %></p>
+						</div>
+						<div class="span-10 small comment_text">
+							<span class="contents_date"><%= l(comment.created_at, :format => :short) %></span>
+							<% if logged_in? && comment.deletable?(current_base_user) %>
+									|&nbsp;<span class="contents_date"><%= link_to "削除する", :controller => 'dia_entry_comment', :action => 'delete_confirm', :id => comment.id %></span>
+							<% end %>
+						</div>
+						
+					<% else %>
+					  <% if comment.invisibled_by_writer? %>
+					  	<%= t('activerecord.attributes.dia_entry_comment.deleter_writer') %>によって削除されました。
+					  <% elsif comment.invisibled_by_owner? %>
+					  	<%= t('activerecord.attributes.dia_entry_comment.deleter_owner') %>によって削除されました。
+					  <% elsif comment.invisibled_by_manager? %>
+					  	<%= t('activerecord.attributes.dia_entry_comment.deleter_manager') %>によって削除されました。
+					  <% end %>
+					<% end %>
+				</div>
+			</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>

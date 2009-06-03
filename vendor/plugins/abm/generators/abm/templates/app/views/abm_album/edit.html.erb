@@ -1,0 +1,24 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.abm_album') %>編集
+<% end %>
+
+<% form_tag :action => "update", :id => params[:id] do %>
+	<label for="title" accesskey="n"><%= t('activerecord.attributes.abm_album.title') %>：</label><br/>
+    <p><%= text_field 'album', 'title', :size => 50 %></p>
+	<div class="notice">
+		<%= error_message_on_with_label @album, 'title' %>
+		<%=t 'activerecord.errors.stand_messages.too_long', :count => AppResources[:base][:title_max_length] %>
+	</div>
+    <label for="title" accesskey="n"><%= t('activerecord.attributes.abm_album.body') %>：</label><br/>
+	<p><%= text_area 'album', 'body', :size => '50x3' %></pb>
+   	<div class="notice">
+		<%= error_message_on_with_label @album, 'body' %>
+		<%=t 'activerecord.errors.stand_messages.too_long', :count => AppResources[:base][:body_max_length] %>
+	</div>
+	
+	<p><label for="title" accesskey="n"><%= t('activerecord.attributes.abm_album.public_level') %>：</label></p>
+    <p><%= select 'album', 'public_level', select_type(AbmAlbum::PUBLIC_LEVELS) %></p>
+	
+	<%= submit_button_tag("編集") %>
+	
+<% end %>

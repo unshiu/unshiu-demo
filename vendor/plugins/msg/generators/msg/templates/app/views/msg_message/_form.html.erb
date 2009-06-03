@@ -1,0 +1,64 @@
+<div id="receiver_list" class="line span-20 last clearfix">
+	<ul id="receiver_list_target" class="clearfix">
+		<% @receivers.each do |receiver|%>
+			<%= hidden_field_tag "receivers", receiver.id %>
+			<li class="small">
+				<%= link_to safe_profile_view(receiver.base_profile, :thumb, {"width" => 40, "height" => 40, :class => "left"}), :controller => 'base_profile', :action => 'show', :id => receiver.id %>
+				<div class="receiver_data">
+					<div class="receiver_name clearfix"><%= receiver.name %></div>
+					<span class="ui-icon ui-icon-close"></span>
+					<div class="delete clearfix ">
+						<%= link_to_function "<span class='receiver_delete'>削除</span>", "$(this).parent().remove()" %>
+						<span class="ui-icon ui-icon-trash" alt="" src=""/></span>
+					</div>
+				</div>
+			</li>
+		<% end %>
+	</ul>
+	<span class="balloon_arrow"></span>
+</div>
+
+<label for="receiver" accesskey="n"><%= t('activerecord.attributes.msg_message.receiver') %>：</label>
+<br>
+	<%= text_field 'receiver', 'base_user', :size => '50'  %>
+	<div class="notice">
+		送信したいユーザの名前を入力してください。
+	</div>
+<br>
+<label for="message_content" accesskey="n"><%= t('activerecord.attributes.msg_message.title') %>：</label>
+<br>
+<%= text_field 'message', 'title', :size => '50'  %>
+<div class="notice">
+	<%= error_message_on_with_label @message, 'title' %>
+	<%=t 'activerecord.errors.stand_messages.too_long', :count => AppResources[:base][:title_max_length] %>
+</div>
+<br>
+<label for="diary_content" accesskey="n"><%= t('activerecord.attributes.msg_message.body') %>：</label>
+<br>
+<%= text_area 'message', 'body', :size => "50x3" %>
+<div class="notice">
+	<%= error_message_on_with_label @message, 'body' %>
+	<%=t 'activerecord.errors.stand_messages.too_long', :count => AppResources[:base][:body_max_length] %>
+</div>
+
+<% content_for(:js) do %>
+	<%= javascript_include_tag 'jquery.bgiframe' %>
+	<%= javascript_include_tag 'jquery.jsonSuggest' %>
+	<%= stylesheet_link_tag "jsonSuggest" %>
+	
+	<script type="text/javascript">
+		$(function() {
+			$.getJSON("/msg_message/receivers_remote", function(data) {
+				$('input#receiver_base_user').jsonSuggest(data, {
+					maxResults: 20,
+					onSelect: select_receiver
+				});
+			});
+		});
+		
+		function select_receiver (item) {
+			<%= remote_function :url => {:action => 'receiver'}, 
+			                    :with => "'receiver[id]=' + item.id + '&receiver[text]=' + item.text + '&receiver[extra]=' + item.extra + '&receiver[image]=' + item.image" %>
+		}
+	</script>
+<% end %>

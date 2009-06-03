@@ -1,0 +1,21 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_friend') %>申請
+<% end %>
+<%= @user.show_name %>に<%= t('view.noun.base_friend') %>申請を行いますか？<br />
+<br />
+<% form_tag :action => 'create', :id => @user.id do %>
+
+<div style="<%= style_value('form_style') %>">
+	<span style="color:#f75009;"></span>申請メッセージ<br/>
+	<%= params[:apply_message] %><br />
+	<%= hidden_field_tag 'apply_message', params[:apply_message] %>
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+</div>
+<%= image_tag_for_default 'Spec_02.gif' %><br />
+
+<div style="text-align:center">
+	<%= submit_tag '申請' %>
+	<%= cancel_tag %>
+</div>
+<% end %>
+<%= image_tag_for_default 'Spec_08.gif' %><br />

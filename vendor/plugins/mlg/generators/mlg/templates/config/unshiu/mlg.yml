@@ -1,0 +1,27 @@
+common: &common
+  # 送信処理をする区切り
+  deliver_limit_size: 100
+  
+development:
+  smtp_settings_address: localhost
+  smtp_settings_port: 25
+  send_from: magazine@sample.unshiu.jp
+  # 一括追加処理をする区切り
+  add_target_users_size: 10
+  <<: *common
+  
+test:
+  smtp_settings_address: localhost
+  smtp_settings_port: 25
+  add_target_users_size: 10
+  deliver_limit_size: 1
+  send_from: magazine@sample.unshiu.jp
+  <<: *common
+
+production:
+  smtp_settings_address: localhost
+  smtp_settings_domain: sample.unshiu.jp
+  smtp_settings_port: 25
+  add_target_users_size: 1000
+  send_from: magazine@sample.unshiu.jp
+  <<: *common

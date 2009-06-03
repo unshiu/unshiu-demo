@@ -1,0 +1,14 @@
+<div class="diary_story_box box_outer clearfix">
+	<div class="diary_text box_outer small">
+		<p><%=h comment.body %></p>
+	</div>
+	<div class="span-10 small">
+		<span class="contents_date"><%=h comment.updated_at.strftime('%Y年%m月%d日') %></span><!--/contents_date-->
+		<span class="contents_time"><%=h comment.updated_at.strftime('%H:%M') %></span><!--/contents_time-->
+	</div>
+	<span class="editdelete span-4 small">
+		<% if logged_in? && comment.deletable?(current_base_user) %>
+			<%= link_to '削除する', :controller => 'abm_image_comment', :action => 'confirm_delete_comment', :id => comment.id, :cancel_to => "/abm_image/show/#{@image.id}" %>
+		<% end %><br />
+	</span><!--/contents_time-->
+</div>

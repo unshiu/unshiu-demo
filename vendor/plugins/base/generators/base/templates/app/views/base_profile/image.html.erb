@@ -1,0 +1,16 @@
+<% form_for :upload_file, :url => {:action => :image_upload }, :method => :post, :html => { :multipart => true } do |f| %>
+	<%= hidden_field_tag 'id', @base_profile.id %>
+	<fieldset>
+		
+		<ol>
+			<li>
+				<label for="photo_file">Photo File</label>
+				<%= f.file_field :image %>
+				<%= error_message_on_with_label @base_profile, 'image' %>
+			</li>
+		</ol>
+	</fieldset>
+	<div class="buttons">
+		<%= f.submit 'Upload Image', :class => 'button upload' %>
+	</div>
+<% end %>

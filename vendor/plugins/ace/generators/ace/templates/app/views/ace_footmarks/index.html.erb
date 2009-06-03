@@ -1,0 +1,20 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.ace_footmark') %>一覧
+<% end %>
+
+<% if @footmarks.size.zero? %>
+	<%= t('view.noun.ace_footmark') %>がありません。
+
+<% else %>
+	<%= paginate_header(@footmarks) %>
+
+	<% @footmarks.each do |footmark| %>
+		<% list_cell_for do %>
+			<%= date_or_time(footmark.updated_at) %>
+			<%= link_to_user_without_emoticon footmark.base_user %>
+		<% end %>
+	<% end %>
+
+	<%= paginate_links(@footmarks) %>
+
+<% end %>

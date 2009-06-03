@@ -1,0 +1,43 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.abm_album') -%><%- @pan3="#{t('view.noun.abm_image_comment')}の削除確認" -%>
+<% content_for(:header_title) do %>
+	<%= t('view.noun.abm_image_comment') %>の削除確認
+<% end %>
+
+<h3><%= t('view.noun.abm_image_comment') %>の削除確認</h3>
+
+<p class="dialog">
+	以下の<%= t('view.noun.abm_image_comment') %>を削除します。よろしいですか？
+</p>
+
+<% form_tag :action => 'delete', :id => @comment.id do %>
+  <div class="bot_btn">
+    <%= mng_submit_tag '削除する' %>
+    <%= mng_cancel_tag %>
+  </div>
+<% end %>
+<br />
+
+<table class="lineColorT" style="width:609px;">
+	<tr>
+		<th width="150px"><%= t('activerecord.attributes.abm_image_comment.base_user') %></th>
+		<th width="150px"><%= t('activerecord.attributes.abm_image_comment.created_at') %></th>
+		<th width="259px"><%= t('activerecord.attributes.abm_image_comment.body') %></th>
+	</tr>
+	<tr>
+		<td><%= @comment.base_user.show_name %></td>
+		<td><%= datetime_to_s(@comment.created_at) %></td>
+		<td>
+			<% if @comment.not_invisibled_by_anyone? %>
+				<%= hbr @comment.body %>
+			<% else %>
+  				<% if @comment.invisibled_by_writer? %>
+  					<%= t('view.noun.abm_image_comment') %>投稿者によって削除されました。
+  				<% elsif @comment.invisibled_by_owner? %>
+  					<%= t('view.noun.abm_image') %>投稿者によって削除されました。
+  				<% elsif @comment.invisibled_by_manager? %>
+  					システム管理者によって削除されました。
+  				<% end %>
+			<% end %>
+		</td>
+	</tr>
+</table>

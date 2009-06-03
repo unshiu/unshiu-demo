@@ -1,0 +1,10 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.msg_message') %>送信
+<% end %>
+<% form_tag :action => 'confirm' do %>
+  <%= render :partial => 'form' %>
+  <div style="text-align:center">
+    <%= submit_tag "確認", :name => 'confirm' %>
+    <%= submit_tag "下書き保存", :name => 'draft' %>
+  </div>
+<% end %>

@@ -1,0 +1,47 @@
+<%- @pan1="#{t('view.noun.base_user')}" -%><%- @pan2="#{t('view.noun.base_user')}数遷移" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_user') %>数遷移
+<% end %>
+
+<h3><%= t('view.noun.base_user') %>数推移</h3>
+
+<script type="text/javascript">
+<!--
+	$(document).ready(function(){
+		$('#graphtabs').tabs({ fx: { opacity: 'toggle' } }).tabs();
+	});
+// -->
+</script>
+
+<div id="graphtabs">
+  <ul>
+    <li><a href="#graphtabs-1"><span>入退会者数</span></a></li>
+    <li><a href="#graphtabs-2"><span>総ユーザ数</span></a></li>
+  </ul>
+  <div id="graphtabs-1">
+    <%= @transit_graph %>
+  </div>
+
+  <div id="graphtabs-2">
+   	<%= @all_transit_graph %>
+  </div>
+</div>
+<br/>
+
+<table class="lineColorT" style="width:609px;">
+	<tr>
+		<th>日付</th>
+		<th><%= t('view.noun.base_user') %>数</th>
+		<th>入会者数</th>
+		<th>退会者数</th>
+	</tr>
+  <% @infos.each do |info| %>
+	<tr>
+		<td><%= info[:date] %></td>
+		<td><%= info[:all] %></td>
+		<td><%= info[:join] %></td>
+		<td><%= info[:quit] %></td>
+	</tr>
+  <% end %>
+</table>

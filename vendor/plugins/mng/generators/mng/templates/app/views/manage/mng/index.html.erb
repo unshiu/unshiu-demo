@@ -1,0 +1,5 @@
+<p>メニューを選択してください</p>
+
+<% unless @system.login_passowrd_security? %>
+	<span class="attention">管理者パスワードがシステム標準のものです。セキュリティを考慮し変更してください。</span>
+<% end %>

@@ -1,0 +1,25 @@
+<% content_for(:header_title) do %>
+<%= @entry.dia_diary.base_user.show_name %>の日記
+<% end %>
+<% content_for(:sub_title) do %>
+<%= t('view.noun.dia_entry_comment') %>投稿
+<% end %>
+
+<% form_tag :action => 'confirm', :id => @entry.id do %>
+
+<div style="<%= style_value('form_style') %>">
+
+<%= error_messages_for 'comment', :object_name => 'dia_entry_comment' %>
+
+<span style="color:#f75009;"></span><%= t('activerecord.attributes.dia_entry_comment.body') %><br />
+<%= text_area 'comment', 'body', :size => "50x3" %><br />
+
+</div>
+
+<%= image_tag_for_default 'Spec_02.gif' %><br />
+
+<div style="text-align:center;">
+<%= submit_tag '確認' %>
+</div>
+
+<% end %>

@@ -1,0 +1,50 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_notice') %>
+<% end %>
+
+<div class="top_topic_box box_outer">
+	<div class="wrap1">
+	<div class="wrap2">
+	<div class="wrap3">
+	<div class="box_inner">
+		<div class="title">
+			<h2><span><img src="/images/default/title/title-1icon.jpg" alt="" >管理者からのお知らせ</span></h2>
+		</div>
+		
+		<div class="topic_body">
+			<div class="topic_body_inner clearfix">
+					<div class="newsitem clearfix">
+						<p>
+						<h6><span><%= @notice.title %></span></h6>
+						<div class="date"><%= l(@notice.start_datetime.to_date) %></div>
+						<div>
+							<%= @notice.body %>
+						</div>
+						<p>
+					</div><!--/newsitem-->
+					<hr/>
+				
+			</div><!--/topic_body_inner-->
+		</div><!--/topic_body-->
+	</div><!--/box_inner-->
+	</div><!--/wrap3-->
+	</div><!--/wrap2-->
+	</div><!--/wrap1-->
+</div><!--/top_topic-->
+
+<% content_for(:sidemenu) do %>
+<div class="W5R4B9df side_topic_box box_outer">
+	<div class="wrap1">
+	<div class="wrap2">
+	<div class="wrap3">
+	<div class="box_inner clearfix">
+		<h5 class=" caps"><span>menu</span></h5>
+		<ul class="menu_list">
+			<li><%= link_to "#{t('view.noun.base_notice')}一覧", :action => :list %></li>
+		</ul>
+	</div><!--/side_col_inner-->
+	</div><!--/wrap3-->
+	</div><!--/wrap2-->
+	</div><!--/wrap1-->
+</div><!--/side_topic_box-->
+<% end %>

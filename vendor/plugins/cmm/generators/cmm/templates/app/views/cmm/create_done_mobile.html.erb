@@ -1,0 +1,5 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.cmm_community') %>作成
+<% end %>
+
+<%= link_basic_to "作成した#{t('view.noun.cmm_community')}に移動", :controller => 'cmm', :action => 'show', :id => params[:id] %>

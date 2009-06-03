@@ -1,0 +1,57 @@
+<%- @pan1="システム設定" -%><%- @pan2="設定情報" -%><%- @pan3="サーバ基本設定" -%>
+
+<% content_for(:header_title) do %>
+	サーバ基本設定
+<% end %>
+
+<h3>サーバ基本設定</h3>
+
+<table class="lineColorL" style="width:609px;">
+	<tr>
+		<th width="30%">ドメイン</th>
+		<td><%=h AppResources[:init][:application_domain] %></td>
+	</tr>
+	<tr>
+		<th width="30%">ディスク容量</th>
+		<td><%= df_format(@system.df) %></td>
+	</tr>
+	<tr>
+		<th width="30%">BackgrounDRb設定情報</th>
+		<td><%= backgrourndrb_info_format(@system.backgrourndrb_worker_info) %></td>
+	</tr>
+	<tr>
+		<th width="30%">Apache設定情報</th>
+		<td><%=hbr @system.httpd_vhosts_conf %></td>
+	</tr>
+	<tr>
+		<th width="30%">DNS</th>
+		<td><%=hbr @system.dig %></td>
+	</tr>
+	<tr>
+		<th width="30%">DNS MX</th>
+		<td><%=hbr @system.dig_mx %></td>
+	</tr>
+</table>
+
+<h4>ミドルウェア自動起動設定</h4>
+
+<table class="lineColorL" style="width:609px;">
+	<% @system.chkconfigs.each_pair do |key, value| %>
+	<tr>
+		<th width="30%"><%= key %></th>
+		<td><%= value %></td>
+	</tr>
+	<% end %>
+</table>
+
+<h4>cron設定</h4>
+
+<table class="lineColorL" style="width:609px;">
+	<% @system.crons.each_pair do |key, value| %>
+	<tr>
+		<th width="30%"><%= key %></th>
+		<td><%= value %></td>
+	</tr>
+	<% end %>
+</table>
+

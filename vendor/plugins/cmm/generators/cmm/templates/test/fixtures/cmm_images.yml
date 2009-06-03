@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: cmm_images
+#
+#  id               :integer(4)      not null, primary key
+#  cmm_community_id :integer(4)      not null
+#  image            :string(255)
+#  created_at       :datetime
+#  updated_at       :datetime
+#  deleted_at       :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  cmm_community_id: 1
+  image: 2545254646_374965b106.jpg
+two:
+  id: 2
+  cmm_community_id: 2
+  image: 2577257468_606a481736.jpg
+c:
+  id: 3
+  cmm_community_id: 3
+  image: logo.gif
+  

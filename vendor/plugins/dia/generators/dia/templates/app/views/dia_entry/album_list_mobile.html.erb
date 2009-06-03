@@ -1,0 +1,37 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.abm_album') %>一覧
+<% end %>
+<% content_for(:sub_title) do %>
+	<%= t('view.noun.dia_diary') %>への<%= t('view.noun.abm_image') %>追加
+<% end %>
+
+<div style="text-align:left">
+
+<% if @albums.size.zero? %>
+	<%= t('view.noun.abm_album') %>がありません。<br />
+	<%= link_basic_to "#{t('view.noun.abm_album')}を作成してください", :controller => 'abm_album', :action => 'new' %>
+	
+<% else %>
+	<%= t('view.noun.abm_album') %>を選択してください。<br />
+
+	<%= paginate_header(@albums) %>
+	
+	<% @albums.each do |album| %>
+	    <% list_cell_for do %>
+			<%= date_or_time(album.updated_at) %>
+	    	<%= link_to_list_cell "#{album.title}(#{album.abm_images.count})", :action => 'album_show', :id => album.id, :type => @type, :entry => @entry_id, :images => @image_ids %>
+			<%= notice_new_if_new(album.updated_at) %>    
+	    <% end %>
+	<% end %>
+
+	<%= paginate_links(@albums) %>
+
+<% end %>
+
+<hr style="<%= style_value('hr1') %>">
+
+<div style="text-align:left">
+	<%= link_basic_to '戻る', @back_url %><br/>
+</div>
+
+</div>

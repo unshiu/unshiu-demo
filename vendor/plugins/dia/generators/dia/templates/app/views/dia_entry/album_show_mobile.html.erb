@@ -1,0 +1,38 @@
+<%content_for(:header_title) do %>
+<%= t('view.noun.abm_album') %>詳細
+<%end %>
+<% content_for(:sub_title) do %>
+<%= t('view.noun.dia_diary') %>への<%= t('view.noun.abm_image') %>追加
+<% end %>
+
+<%= t('view.noun.abm_album') %>のタイトル<br/>
+<%= h @album.title %><br/>
+
+<% if @images.empty? %>
+	<br/>
+	<%= t('view.noun.abm_image') %>がありません。<br/>
+<% else %>
+
+<%= paginate_header(@images) %>
+
+  追加する<%= t('view.noun.abm_image') %>を選択してください。
+  <% form_tag :action => 'add_images', :album_id => @album.id, :type => @type, :entry => @entry_id, :old_images => @image_ids do %>
+  	<div style="background-color:#FFF7E7;">
+	<% for image in @images %>
+    	<%= image_tag(url_for_image_column(image, :image, :thumb), :style => 'margin:0 5px;width:64px;float:left;', :width => '64px') %>
+		<%= check_box_tag "images[#{image.id}]" %><br />
+		<div style="clear:both;"></div>
+		<%= image_tag_for_default 'Spec_02.gif' %><br />
+	<% end %>
+	</div>
+	<%= submit_tag '追加' %>
+  <% end %>
+
+<%= paginate_links(@images) %>
+
+<% end %>
+
+<hr style="<%= style_value('hr1') %>">
+
+<%= link_basic_to '戻る', @back_url %><br/>
+<%= image_tag_for_default 'Spec_02.gif' %><br />

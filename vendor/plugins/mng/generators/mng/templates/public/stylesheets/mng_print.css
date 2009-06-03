@@ -1,0 +1,33 @@
+#header_wrap,
+#left,
+#left02,
+#right,
+#footer {
+	display: none;
+}
+
+body {
+	width: 640px;
+	color: #000000;
+	background:#FFFFFF;
+}
+
+a:link,
+a:visited {
+	text-decoration: underline;
+	color: #000000;
+}
+
+#layout {
+	background:#FFFFFF;
+}
+
+#contents,
+#main {
+	float: none ;
+	width: auto !important;
+}
+
+h3 {
+	height: 20px !important;
+}

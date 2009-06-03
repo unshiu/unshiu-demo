@@ -1,0 +1,105 @@
+<% content_for(:header_title) do %>
+	<% if logged_in? %>
+		<%= t('view.noun.common_portal') %>
+	<% else %>
+		<%= t('view.noun.top_page') %>
+	<% end %>
+<% end %>
+	  
+<!--ページ内リンク-->
+<span style="color:#F79927">&#xE683;</span><a href="#diary"><span style="color:#636363"><%= t('view.noun.dia_entry') %></span></a>
+<span style="color:#F79927">&#xE681;</span><a href="#album"><span style="color:#636363"><%= t('view.noun.abm_album') %></span></a>
+<span style="color:#F79927">&#xE656;</span><a href="#community"><span style="color:#636363"><%= t('view.noun.cmm_community') %></span></a>
+<span style="color:#F79927">&#xE689;</span><a href="#topic"><span style="color:#636363"><%= t('view.noun.tpc_topic') %></span></a>	  
+<br />
+<br />
+
+<%= render :partial => 'notices' %>
+
+<a id="diary"></a>
+<div style="<%= style_value('inner_title') %>">
+  <span style="color:#024873;"></span>新着<%= t('view.noun.dia_entry') %><br />
+</div>
+
+<div style="text-align:left">
+
+<% @entries.each do |entry| %>
+	<% list_cell_for do %>
+		<%= link_to_list_cell "#{entry.title}(#{entry.dia_entry_comments.count})", :controller => 'dia_entry', :action => 'show', :id => entry.id %>
+		<%= notice_new_if_new(entry.contributed_at) %><br />
+		<%= link_to_user entry.dia_diary.base_user %>
+		<%= date_or_time(entry.contributed_at) %>
+	<% end %>
+<% end %>
+
+</div>
+
+<div style="text-align:right">
+     >><%= link_to_list_cell '一覧', :controller => 'dia_entry', :action => 'public_list' %><br />
+</div>
+<br />
+
+<a id="album"></a>
+<div style="<%= style_value('inner_title') %>">
+  <span style="color:#024873;"></span>新着<%= t('view.noun.abm_album') %><br />
+</div>
+
+<div style="text-align:left">
+
+<% @albums.each do |album| %>
+	<% list_cell_for do %>
+    	<%= link_to_list_cell "#{album.title}(#{album.abm_images.count})", :controller => 'abm_album', :action => 'show', :id => album.id %>
+		<%= notice_new_if_new(album.updated_at) %><br />
+		<%= link_to_user album.base_user %>
+		<%= date_or_time(album.updated_at) %><br />
+	<% end %>
+<% end %>
+
+</div>
+
+<div style="text-align:right">
+     >><%= link_to_list_cell '一覧', :controller => 'abm_album', :action => 'public_list' %><br />
+</div>
+<br />
+
+<a id="community"></a>
+<div style="<%= style_value('inner_title') %>">
+  <span style="color:#024873;">&#xE656;</span>新着<%= t('view.noun.cmm_community') %><br />
+</div>
+<div style="text-align:left">
+
+<% @communities.each do |community| %>
+	<% list_cell_for do %>
+    	<%= link_to_list_cell "#{community.name}", :controller => 'cmm', :action => 'show', :id => community.id %>
+		<%= notice_new_if_new(community.updated_at) %><br />
+	<% end %>
+<% end %>
+
+</div>
+
+<div style="text-align:right">
+     >><%= link_to_list_cell '一覧', :controller => 'cmm', :action => 'list' %><br />
+</div>
+<br />
+
+<a id="topic"></a>
+<div style="<%= style_value('inner_title') %>">
+  <span style="color:#FF0000"></span>新着<%= t('view.noun.tpc_topic') %><br />
+</div>
+	  
+<div style="text-align:left">
+	
+<% @topics.each do |topic| %>
+	<% list_cell_for do %>
+    	<%= link_to_list_cell topic.tpc_topic.title, :controller => 'tpc_cmm', :action => 'show', :id => topic.id %>
+		<%= notice_new_if_new(topic.created_at) %><br />
+		<%= link_to_user topic.tpc_topic.base_user %>
+    	<%= date_or_time(topic.tpc_topic.latest_at) %>
+    <% end %>
+<% end %>
+
+</div>
+
+<div style="text-align:right">
+    >><%= link_to_list_cell '一覧', :controller => 'tpc_cmm', :action => 'public_list' %><br />
+</div>

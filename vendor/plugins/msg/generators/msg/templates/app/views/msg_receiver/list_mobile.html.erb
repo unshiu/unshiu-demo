@@ -1,0 +1,40 @@
+<% content_for(:header_title) do %>
+	受信<%= t('view.noun.msg_message') %>一覧
+<% end %>
+
+<% if @messages.size.zero? %>
+	<%= t('view.noun.msg_message') %>がありません。
+
+<% else %>
+
+	<%= paginate_header(@messages) %>
+	<% form_tag :action => 'delete_messages_confirm' do %>
+
+	<table style="border:0px;">
+	<% @messages.each do |message| %>
+		<tr>
+		<td>
+			<span style="font-size:small;">
+			<% list_cell_for do %>
+	    		<%= link_to_list_cell "#{message.title}#{message.msg_receiver(current_base_user.id).unread}#{message.msg_receiver(current_base_user.id).replied}", :action => 'show', :id => message.id %><br/>
+				<%= link_to_user message.msg_sender.base_user %>
+				<%= date_or_time(message.updated_at) %><br />
+			<% end %>
+	  		</span>
+		</td>
+		<td>
+			<%= check_box_tag "del[#{message.id}]", message.id %>
+	  	</td>
+		</tr>
+	<% end %>
+	</table>
+
+	<%= paginate_links(@messages) %>
+	<br />
+
+	<div style="text-align:center">
+	<%= submit_tag "選択した#{t('view.noun.msg_message')}をゴミ箱へ" %>
+	</div>
+
+	<% end %>
+<% end %>

@@ -1,0 +1,23 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.msg_message') %><%= t('view.noun.msg_notify') %>
+<% end %>
+<% content_for(:sub_title) do %>
+<%= h @message.title %>
+<% end %>
+<%= render :partial => 'msg_receiver/show' %>
+<hr style="<%= style_value('hr1') %>">
+<% form_tag :action => 'create', :id => @message.id do %>
+
+<div style="<%= style_value('form_style') %>">
+  <span style="color:#f75009;"></span><%= t('activerecord.attributes.msg_notify.comment') %><br />
+  <%= hbr @notify.comment %>
+  <%= hidden_field 'notify', 'comment' %>
+  <%= image_tag_for_default 'Spec_02.gif' %><br />
+</div>
+<%= image_tag_for_default 'Spec_02.gif' %><br />
+
+  <div style="text-align:center">
+    <%= submit_tag "通報" %>
+    <%= cancel_tag %>
+  </div>
+<% end %>

@@ -1,0 +1,224 @@
+<div class="clearfix">
+	<div id="contents_title" class="span-12">
+		<h2><span>
+			<% if @form.keyword.blank? %>
+				全体検索
+			<% else %>
+				検索：&quot;<%= @form.keyword %>&quot;
+			<% end %>
+		</span></h2>
+	</div>
+</div>
+
+<div id="tpc_rows_header" class="clearfix">
+
+	<ul id="searchresultmenu" class="button_bar clearfix small">
+		<li class="first_child">
+			<% link_to :base_search => {:keyword => @form.keyword, :scope => 'base_user' } do %>
+				<span class="<%= "button_on" if @form.scope == "base_user" %>"><%= t('view.noun.base_user') %></span>
+			<% end %>
+			</li>
+		<li>
+			<% link_to :base_search => {:keyword => @form.keyword, :scope => 'dia' } do %>
+				<span class="<%= "button_on" if @form.scope == "dia" %>"><%= t('view.noun.dia_diary') %></span>
+			<% end %>
+		<li>
+			<% link_to :base_search => {:keyword => @form.keyword, :scope => 'abm' } do %>
+				<span class="<%= "button_on" if @form.scope == "abm" %>"><%= t('view.noun.abm_image') %></span>
+			<% end %>
+		</li>
+		<li class="last_child">
+			<% link_to :base_search => {:keyword => @form.keyword, :scope => 'cmm' } do %>
+				<span class="<%= "button_on" if @form.scope == "cmm" %>"><%= t('view.noun.cmm_community') %></span>
+			<% end %>
+		</li>
+	</ul>
+
+	<% unless @results.size.zero? %>
+		<div class="pager_box pager_box_top clear clearfix">
+			<%= paginate @results %>
+		</div><!--pager_box-->
+	<% end %>
+</div><!--/message_rows_header-->
+
+
+<div class="top_topic_box box_outer">
+<div class="wrap1">
+<div class="wrap2">
+<div class="wrap3">
+<div class="box_inner">
+
+<% if @results.size.zero? %>
+	検索結果はありません。
+<% else %>
+	<% @results.each do |result| %>
+		<% if @form.scope == "base_user" %>
+			<div class="diary_story_box box_outer clearfix community_topic_list">
+				<div class="community_topic_author">
+					<% link_to :controller => 'base_profile', :action => 'show', :id => result.id do %>
+						<%= safe_profile_view(result.base_profile, :thumb, {"width" => 70, "height" => 70, :alt => result.name })%>
+					<% end %>
+				</div>
+				<div class="community_topic_text">
+					<h6>
+						<span>
+							<% link_to :controller => 'base_profile', :action => 'show', :id => result.id do %>
+								<img src="/images/default/icon/profile.gif" width="20" height="20" border="0" align="left">
+								<%= link_to_user result %>
+							<% end %>
+						</span>
+					</h6>
+					<div class="diary_text box_outer small">
+						<p>
+							<% if UserRelationSystem.accessible?(current_base_user, result.id, result.base_profile.try(:introduction_public_level)) %>
+								<%= body_summary(result.base_profile.try(:introduction), :length => 80) %>
+							<% end %>
+						</p>
+					</div>
+					<div class="span-8 small">
+						<span class="permanent_link">
+							<%= link_to "詳細を見る", :controller => 'base_profile', :action => 'show', :id => result.id %>｜
+						</span>
+						<% if logged_in? %>
+							<% if BaseFriend.friend?(current_base_user.id, result.id) %>
+								<span class="permanent_link">友達です</span>
+					
+							<% elsif current_base_user.me?(result.id) %>
+								<span class="permanent_link">あなたです</span>
+					
+							<% else %>
+								<span class="permanent_link">
+									<%= link_to "#{t('view.noun.base_friend')}申請をする", :controller => 'base_friend_apply', :action => 'new', :id => result.id %>
+								</span>
+							<% end %>
+						<% end %>
+					</div>
+
+				<span class="editdelete span-6 small">
+					<span class="ui-icon ui-icon-pencil" style="float:left;"></span>
+					<% if MsgMessage.acceptable?(current_base_user, result.id) %>
+						<%= link_to "#{t('view.noun.msg_message')}を送る", :controller => 'msg_message', :action => 'new', :id => result.id, :receivers => [result.id] %>｜
+					<% end %>
+				</span>
+
+				</div>
+			</div>
+		<% elsif @form.scope == "dia"%>
+			<div class="diary_story_box box_outer clearfix community_topic_list">
+				<div class="community_topic_author">
+					<% link_to :controller => 'base_profile', :action => 'show', :id => result.dia_diary.base_user_id do %>
+						<%= safe_profile_view(result.dia_diary.base_user.base_profile, :thumb, {"width" => 70, "height" => 70, :alt => result.dia_diary.base_user.name })%>
+					<% end %>
+				</div>
+				<div class="community_topic_text">
+					<h6>
+						<span>
+							<% link_to :controller => 'dia_entry', :action => 'show', :id => result.id do %>
+								<img src="/images/default/icon/diary.gif" width="20" height="20" border="0" align="left">
+								<%= body_summary(result.title, :length => 50) %>
+							<% end %>
+						</span>
+					</h6>
+					<div class="diary_text box_outer small">
+						<p>
+							<%= body_summary(result.body, :length => 50) %>
+						</p>
+					</div>
+					<div class="span-10 small">
+						<span class="permanent_link">
+							<%= link_to "続きを読む", :controller => 'dia_entry', :action => 'show', :id => result.id %>｜
+						</span>
+						<span class="comment_link"><%=h "コメント#{result.dia_entry_comments.count}" %>｜</span>
+						<span class="contents_date"><%=h result.contributed_at.strftime('%Y年%m月%d日') %></span>
+						<span class="contents_time"><%=h result.contributed_at.strftime('%H:%M') %></span>
+					</div>
+				</div>
+			<!--/contents_time-->
+			</div>
+		<% elsif @form.scope == "abm"%>
+			<div class="diary_story_box box_outer clearfix community_topic_list">
+				<div class="community_topic_author">
+					<% link_to :controller => :abm_image, :action => :show, :id => result.id do %>
+						<%= image_tag url_for_image_column(result, 'image', :thumb), { :size => "70x70", :class => "left", :alt => h(result.title) }%><% end %>
+				</div>
+				<div class="community_topic_text">
+					<h6>
+						<span>
+							<% link_to :controller => :abm_image, :action => :show, :id => result.id do %>
+								<img src="/images/default/icon/photo.gif" width="20" height="20" border="0" align="left">
+								<%= body_summary(result.title, :length => 50) %>
+							<% end %>
+						</span>
+					</h6>
+					<div class="diary_text box_outer small">
+						<p>
+							<%= body_summary(result.body, :length => 50) %>
+						</p>
+					</div>
+					<div class="span-10 small">
+						<span class="permanent_link"><%=h result.abm_album.base_user.name %>｜</span>
+						<span class="permanent_link">
+							<%= link_to "続きを読む", :controller => :abm_image, :action => :show, :id => result.id %>｜
+						</span>
+						<span class="comment_link"><%=h "コメント#{result.abm_image_comments.count}" %>｜</span>
+						<span class="contents_date"><%=h result.updated_at.strftime('%Y年%m月%d日') %></span>
+						<span class="contents_time"><%=h result.updated_at.strftime('%H:%M') %></span>
+					</div>
+				</div>
+			</div>
+		<% elsif @form.scope == "cmm"%>
+			<div class="diary_story_box box_outer clearfix community_topic_list">
+				<div class="community_topic_author">
+					<%= safe_community_image_view(result.cmm_image, :thumb, {"width" => 70, "height" => 70, :class => "left", :alt => result.name}) %>
+				</div>
+				<div class="community_topic_text">
+					<h6>
+						<span>
+							<% link_to :controller => :cmm, :action => 'show', :id => result.id do %>
+								<img src="/images/default/icon/diary.gif" width="20" height="20" border="0" align="left">
+								<%= body_summary(result.name, :length => 50) %>
+							<% end %>
+						</span>
+					</h6>
+					<div class="diary_text box_outer small">
+						<p>
+							<%= body_summary(result.profile, :length => 50) %>
+						</p>
+					</div>
+					<div class="span-8 small">
+						<span class="permanent_link">
+							<%= link_to "続きを読む", :controller => :cmm, :action => :show, :id => result.id %>｜
+						</span>
+						<span class="comment_link">メンバー<%=h result.joined_users.size %>｜</span><!--/comment_link-->
+						<% if logged_in? %>
+							<span class="permanent_link">
+								<% if result.user_status_name(current_base_user.id).blank? %>
+									あなたは参加していません
+								<% else %>
+									あなたは<%= result.user_status_name(current_base_user.id) %>です
+								<% end %>
+							</span>
+						<% end %>
+					</div>
+				</div>
+				<span class="editdelete span-6 small">
+					<span class="ui-icon ui-icon-pencil" style="float:left;"></span>
+					<% unless result.joined?(current_base_user.id) %>
+						<%= link_to '参加する', { :controller => :cmm, :action => 'join_complete', :id => result.id } %>
+					<% end %>
+				</span>
+			</div>
+		<% end %>
+	<% end %>
+<% end %>
+
+</div>
+</div><!--/wrap3-->
+</div><!--/wrap2-->
+</div><!--/wrap1-->
+
+<% unless @results.size.zero? %>
+	<div class="pager_box pager_box_top clear clearfix">
+		<%= paginate @results %>
+	</div><!--pager_box-->
+<% end %>

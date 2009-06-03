@@ -1,0 +1,5 @@
+<%= t('activerecord.attributes.abm_album.body') %><br/>
+<%= hbr @album.body %><br/>
+<br/>
+<%= t('activerecord.attributes.abm_album.public_level') %><br/>
+<%= h AbmAlbum.public_level_name(@album.public_level) %>

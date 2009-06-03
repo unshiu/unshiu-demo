@@ -1,0 +1,31 @@
+<% content_for(:header_title) do %>
+設定変更
+<% end %>
+
+<% form_tag :action => 'update' do %>
+
+	<div style="<%= style_value('form_style') %>">
+		<span style="color:#f75009;"></span>サービスからの通知メールを受け取る<br />
+		<%= mail_receive_setting_message(@base_user.receive_system_mail?) %>
+		<%= hidden_field 'base_user', 'receive_system_mail_flag' %><br />
+	
+		<span style="color:#f75009;"></span>メールマガジンを受け取る<br />
+		<%= mail_receive_setting_message(@base_user.receive_mail_magazine?) %>
+		<%= hidden_field 'base_user', 'receive_mail_magazine_flag' %><br />
+	
+		<span style="color:#f75009;"></span><%= t('view.noun.msg_message') %>を誰から受け取る？<br />
+		<%= message_accept_level_label(@base_user.message_accept_level) %>
+		<%= hidden_field 'base_user', 'message_accept_level' %><br />
+	
+		<span style="color:#f75009;"></span><%= t('view.noun.dia_entry') %>公開レベル初期値<br />
+		<%= DiaEntry.public_level_name(@dia_diary.default_public_level) %>
+		<%= hidden_field 'dia_diary', 'default_public_level' %><br />
+		<%= image_tag_for_default 'Spec_02.gif' %><br />
+	</div>
+
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+	<div style="text-align:center">
+		<%= submit_tag '変更' %>
+		<%= cancel_tag %>
+	</div>
+<% end %>

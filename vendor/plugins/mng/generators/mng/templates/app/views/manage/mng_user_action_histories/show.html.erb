@@ -1,0 +1,18 @@
+<%- @pan1="管理者設定" -%><%- @pan2=t('view.noun.mng_user_action_history') -%><%- @pan3="詳細" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.mng_user_action_history') %>詳細
+<% end %>
+
+<h3><%= t('view.noun.mng_user_action_history') %>詳細</h3>
+
+<table class="lineColorL" style="width:609px;">
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_user.login') %></th>
+		<td><%=h @mng_user_action_history.base_user.login %></td>
+	</tr>
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.mng_user_action_history.user_action') %></th>
+		<td><%= h @mng_user_action_history.user_action %></td>
+	</tr>
+</table>

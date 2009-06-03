@@ -1,0 +1,76 @@
+<% content_for(:header_title) do %>
+	<%= h @user.show_name %>の所属<%= t('view.noun.cmm_community') %>一覧
+<% end %>
+
+<% if @communities.size.zero? %>
+	所属<%= t('view.noun.cmm_community') %>はありません。
+
+<% else %>
+
+	<div id="tpc_rows_header" class="clearfix">
+		<div class="pager_box pager_box_top clear clearfix">
+			<%= paginate @communities %>
+		</div><!--pager_box-->
+	</div>
+
+	<div class="top_topic_box box_outer">
+	<div class="wrap1">
+	<div class="wrap2">
+	<div class="wrap3">
+	<div class="box_inner">
+
+		<% @communities.each do |community| %>
+		<div class="diary_story_box box_outer clearfix community_topic_list">
+			<div class="community_topic_author">
+				<% link_to :controller => :cmm, :action => :show, :id => community.cmm_community_id do %>
+					<%= safe_community_image_view(community.cmm_community.cmm_image, :thumb, {"width" => 70, "height" => 70, :class => "left", :alt => community.cmm_community.name}) %>
+				<% end %>
+			</div>
+			<div class="community_topic_text">
+				<h6><span><%= link_to h(community.cmm_community.name), :controller => :cmm, :action => 'show', :id => community.cmm_community.id %></span></h6>
+				<div class="diary_text box_outer small">
+					<p>
+						<%= truncate(community.cmm_community.profile, 90) %>
+					</p>
+				</div>
+				<div class="span-10 small">
+					<span class="permanent_link">
+						<%= link_to "詳細を見る", :controller => :cmm, :action => 'show', :id => community.cmm_community.id %>｜
+					</span><!--/permanent_link-->
+					<span class="comment_link">メンバー<%=h community.cmm_community.joined_users.size %>｜</span><!--/comment_link-->
+					<span class="permanent_link">
+						あなたは<%= community.cmm_community.user_status_name(current_base_user.id) %>です
+					</span>
+				</div>
+			</div>
+		<!--/contents_time-->
+		</div>
+		<% end %>
+
+	</div>
+	</div><!--/wrap3-->
+	</div><!--/wrap2-->
+	</div><!--/wrap1-->
+
+	<div class="pager_box  pager_box_bottom prepend-top clearfix">
+		<%= paginate @communities %>
+	</div><!--pager_box-->
+
+</div>
+<% end %>
+
+<% content_for(:sidemenu) do %>
+<div  class="W5R4B9df box_outer">
+	<div class="wrap1">
+	<div class="wrap2">
+	<div class="wrap3">
+		<div class="box_inner clearfix">
+		<h6><span>menu</span></h6>
+		<%= link_basic_to "コミュニティ作成", :controller => :cmm, :action => :new %>
+
+		</div><!--/box_inner-->
+	</div><!--/wrap3 -->
+	</div><!--/wrap2 -->
+	</div><!--/wrap1 -->
+</div><!--/friend_box-->
+<% end %>

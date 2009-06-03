@@ -1,0 +1,104 @@
+# == Schema Information
+#
+# Table name: base_profiles
+#
+#  id                        :integer(4)      not null, primary key
+#  base_user_id              :integer(4)      not null
+#  name                      :string(100)
+#  name_public_level         :integer(4)
+#  kana_name                 :string(100)
+#  kana_name_public_level    :integer(4)
+#  introduction              :text
+#  introduction_public_level :integer(4)
+#  sex                       :integer(4)
+#  sex_public_level          :integer(4)
+#  civil_status              :integer(4)
+#  civil_status_public_level :integer(4)
+#  birthday                  :date
+#  birthday_public_level     :integer(4)
+#  created_at                :datetime
+#  updated_at                :datetime
+#  deleted_at                :datetime
+#  image                     :string(255)
+#  area                      :string(255)
+#  area_public_level         :integer(4)
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+a:
+  id: 1
+  base_user_id: 1
+  name: てすと1
+  name_public_level: 1
+  sex: 1
+  civil_status: 1
+  birthday: 1980/01/01
+  introduction: じこしょうかい
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+b:
+  id: 2
+  base_user_id: 2
+  name: てすと2
+  name_public_level: 1
+  sex: 2
+  civil_status: 1
+  birthday: 1967/12/03
+  introduction: じこしょうかい
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+c:
+  id: 3
+  base_user_id: 3
+  name: てすと3
+  name_public_level: 1
+  sex: 2
+  civil_status: 1
+  birthday: 1999/05/22
+  introduction: じこしょうかい
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+d:
+  id: 4
+  base_user_id: 4
+  name: テスト4
+  name_public_level: 1
+  sex: 2
+  civil_status: 1
+  birthday: 1987/07/30
+  introduction: じこしょうかい
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+e:
+  id: 5
+  base_user_id: 5
+  name: テスト5
+  name_public_level: 1
+  sex: 2
+  civil_status: 1
+  birthday: 1982/03/23
+  introduction: じこしょうかい
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+f:
+  id: 6
+  base_user_id: 6
+  name: テスト6
+  name_public_level: 1
+  civil_status: 1
+  sex: 1
+  birthday: 1981/01/31
+  introduction: じこしょうかい
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+g:
+  id: 7
+  base_user_id: 7
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+h:
+  id: 8
+  base_user_id: 8
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  deleted_at: <%= Time.now.to_s :db %>

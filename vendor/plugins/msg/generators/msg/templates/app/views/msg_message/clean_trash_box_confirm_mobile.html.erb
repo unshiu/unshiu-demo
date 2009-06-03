@@ -1,0 +1,11 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.msg_message') %>削除
+<% end %>
+ゴミ箱を空にします。よろしいですか？
+
+<% form_tag :action => 'clean_trash_box' do %>
+  <div style="text-align:center">
+    <%= submit_tag '空にする' %>
+	<%= cancel_tag %>
+  </div>
+<% end %>

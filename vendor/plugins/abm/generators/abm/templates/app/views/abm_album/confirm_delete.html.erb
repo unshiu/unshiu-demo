@@ -1,0 +1,19 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.abm_album') %>削除
+<% end %>
+
+<div class="notice">
+	<%= t('view.noun.abm_album') %>「<%= @album.title %>」を削除してよろしいでしょうか？
+	
+	<% unless @album.abm_images.empty? %>
+	    この<%= t('view.noun.abm_album') %>に含まれる<%= t('view.noun.abm_image') %>(<%= @album.abm_images.count %>枚)も同時に削除されます。ご注意ください。
+	<% end %>
+</div>
+
+<% form_tag :action => :delete, :id => @album.id do %>
+	<%= hidden_field_tag 'cancel_to', params[:cancel_to] %>
+	
+	<%= submit_button_tag("削除") %>
+	<%= cancel_button_tag %>
+	
+<% end %>

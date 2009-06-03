@@ -1,0 +1,26 @@
+<% content_for(:header_title) do %>
+	<%= @entry.dia_diary.base_user.show_name %>の<%= t('view.noun.dia_diary') %>
+<% end %>
+
+<div style="text-align:left">
+
+<span style="color:#024873;"></span><%= link_to_list_cell "#{t('view.noun.dia_entry_comment')}する", :controller => 'dia_entry_comment', :action => 'new', :id => @entry.id %><br />
+<%= image_tag_for_default 'Spec_02.gif' %>
+
+<% if @comments.size.zero? %>
+	<%= t('view.noun.dia_entry_comment') %>がありません。<br />
+
+<% else %>
+	<%= paginate_header(@comments) %>
+
+	<% @comments.each do |@comment| %>
+		<% list_cell_for do %>
+			<%= render :partial => 'dia_entry_comment/show' %>
+		<% end %>
+	<% end %>
+	
+	<%= paginate_links(@comments) %>
+
+<% end %>
+
+</div>

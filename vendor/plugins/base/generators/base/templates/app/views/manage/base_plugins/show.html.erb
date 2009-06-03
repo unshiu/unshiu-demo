@@ -1,0 +1,77 @@
+<%- @pan1="システム設定" -%><%- @pan2="プラグイン管理" -%><%- @pan3="#{@plugin}" -%>
+
+<% content_for(:header_title) do %>
+	プラグイン詳細
+<% end %>
+
+<h3>プラグイン詳細</h3>
+
+<table border="0" cellpadding="3" cellspacing="1" class="lineColorLW" style="width:609px;">
+<tbody>
+	<tr>
+		<th style="width:140px;">プラグイン名</th>
+		<td>
+			<%= h @plugin %>
+		</td>
+	</tr>
+	<tr>
+		<th style="width:140px;">version</th>
+		<td>
+			<%= h @plugin_info["version"] %>
+		</td>
+	</tr>
+	<tr>
+		<th style="width:140px;">author</th>
+		<td>
+			<%= h @plugin_info["author"] %>
+		</td>
+	</tr>
+	<tr>
+	    <th style="width:140px;">homepage</th>
+	  	<td>
+			<%= h @plugin_info["homepage"] %>
+		</td>
+	</tr>
+	<tr>
+	    <th style="width:140px;">summary</th>
+	    <td>
+			<%= h @plugin_info["summary"] %>
+		</td>
+    </tr>
+	<tr>
+	    <th style="width:140px;">description</th>
+	    <td>
+			<%= h @plugin_info["description"] %>
+		</td>
+    </tr>
+	<tr>
+	    <th style="width:140px;">license</th>
+	    <td>
+			<%= h @plugin_info["license"] %>
+		</td>
+    </tr>
+</tbody>
+</table>
+
+<h4>プラグイン新着情報</h4>
+
+<% if @plugin_news.size.zero? %>
+	プラグイン新着情報はありません。
+<% else %>
+	<table class="lineColorT" style="width:609px;">
+	  <tr>
+	    <th style="width:150px;">タイトル</th>
+	    <th style="width:309px;">詳細</th>
+	    <th style="width:150px;">日付</th>
+	  </tr>
+  
+	<% for news in @plugin_news %>
+	  <tr>
+	    <td><%= news.title %></td>
+	    <td><%= news.description %></td>
+	    <td><%= datetime_to_s(news.date) %></td>
+	  </tr>
+	<% end %>
+	</table>
+<% end %>
+

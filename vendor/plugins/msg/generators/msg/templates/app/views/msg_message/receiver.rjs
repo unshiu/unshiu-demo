@@ -1,0 +1,2 @@
+page.insert_html :bottom, 'receiver_list_target', render(:partial => "receiver", :locals => {:receiver => @receiver})
+page.visual_effect :highlight, "receiver_list"

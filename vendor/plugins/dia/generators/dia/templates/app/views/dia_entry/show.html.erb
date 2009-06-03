@@ -1,0 +1,141 @@
+<div class="clearfix">
+	<div id="contents_title" class="span-12">
+		<h2><span><%= datetime_to_s(@entry.contributed_at) %></span></h2>
+	</div>
+</div>
+
+
+<div class="diary_storys_box box_outer clearfix">
+	<div class="diary_story_box diary_show">
+		<h4><span><%= link_to @entry.title, :action => :show, :id => @entry.id %></span></h4>
+		<div class="diary_text box_outer small">
+			<p>
+				<%= @entry.body %>
+			</p>
+		</div>
+		<div class="span-10 small">
+			<span class="permanent_link"><a href="">この記事のURL</a>｜</span><!--/permanent_link-->
+			<span class="comment_link"><%=h "コメント#{@entry.dia_entry_comments.count}" %>｜</span><!--/comment_link-->
+			<span class="contents_date"><%= l(@entry.contributed_at, :format => :short) %></span><!--/contents_date-->
+		</div>
+	</div>
+</div>
+
+<% if logged_in? %>
+	<div id="message_rows_header" class="clearfix">
+		<ul class="menu_list">
+			<li><a href="#anchor_comment" class=" button"><span><img src="" alt="">コメントする</span></a></li>
+		</ul>
+	</div>
+<% end %>
+
+<div id="tpc_rows_header" class="clearfix">
+	<div class="cmm_alart">
+
+	<ul id="searchresultmenu" class="button_bar clearfix small">
+		<li class="first_child">
+			<%= link_to "<span>新着順に並び替え</span>", :action => "show", :id => @entry.id, :comment_order => 'desc' %>
+		</li>
+		<li class="last_child">
+			<%= link_to "<span>古い順に並び替え</span>", :action => "show", :id => @entry.id, :comment_order => 'asc' %>
+		</li>
+	</ul>
+	</div>
+	
+	<div class="pager_box pager_box_top clear clearfix">
+		<%= paginate @comments %>
+	</div><!--pager_box-->
+	
+</div>
+
+<div class="diary_comments_box box_outer">
+<div class="wrap1">
+<div class="wrap2">
+<div class="wrap3">
+<div class="box_inner">
+
+	<!-- comment  -->
+	<div id="dia_entry_comments">
+		<%= render :partial => 'dia_entry_comment/comment', :collection => @comments %>
+	</div>
+	
+	<div class="pager_box pager_box_top clear clearfix">
+		<%= paginate @comments %>
+	</div><!--pager_box-->
+	
+	<%= link_to "一覧をみる", :controller => 'dia_entry_comment', :action => 'list', :id => @entry.id %><br />
+</div>
+</div>
+</div><!--/wrap3-->
+</div><!--/wrap2-->
+</div><!--/wrap1-->
+
+<a id="anchor_comment"></a>
+<% if logged_in? %>
+	<div id="message_rows_footer" class="clearfix">
+		<div id="dia_entry_comment_message" ></div>
+	
+		<% form_remote_tag :url => {:controller => :dia_entry_comment, :action =>"create_remote", :id => @entry.id} do %>
+			<ul class="menu_list">
+				<label for="diary_content" accesskey="n">コメント：</label>
+				<br>
+				<%= text_area 'comment', 'body', :size => '50x3', :class => "span-17", :style => "padding:9px;margin:2px 0px" %>
+				<div class="notice">
+					<%= error_message_on_with_label @comment, 'body' %>
+					<%=t 'activerecord.errors.stand_messages.too_long', :count => AppResources[:base][:body_max_length] %>
+				</div>
+				<br>
+				<%= submit_button_tag("コメント投稿") %>
+			</ul>
+		<% end %>
+	</div>
+<% else %>
+<p>
+<%= t('view.noun.dia_entry_comment') %>をつけたい場合は
+<%= link_to "こちら", :controller => "base_user", :action => "login", :return_to => "/dia_entry/show/#{@entry.id}" %>
+からログインしてください。
+</p>
+<% end %>
+
+<% content_for(:sidemenu) do %>
+	
+	<% unless @recent_dia_entries.size.zero? %>
+	<div  class="W5R4B9df box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+			<div class="box_inner clearfix">
+			<h6><span>最新<%= t('view.noun.dia_entry') %></span></h6>
+			<ul class="newer_entrys">
+				<% @recent_dia_entries.each do |recent_dia_entry| %>
+					<li><%= link_to body_summary(recent_dia_entry.title, :length => 10), :action => :show, :id => recent_dia_entry.id %></li>
+				<% end %>
+			</ul>
+			</div><!--/box_inner-->
+		</div><!--/wrap3 -->
+		</div><!--/wrap2 -->
+		</div><!--/wrap1 -->
+	</div><!--/friend_box-->
+	<% end %>
+
+	<div  class="W5R4B9df box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+			<div class="box_inner clearfix">
+			<h6><span>最新コメント</span></h6>
+			<ul class="newer_entrys">
+				<% @recent_dia_entry_comments.each do |recent_dia_entry_comment|%>
+					<li><%= link_to_user(recent_dia_entry_comment.base_user) %></li>
+					<ul>
+						<li><%= link_to body_summary(recent_dia_entry_comment.dia_entry.title, :length => 8), :action => :show, :id => recent_dia_entry_comment.dia_entry.id %></li>
+					</ul>
+				<% end %>
+			</ul>
+			</div><!--/box_inner-->
+		</div><!--/wrap3 -->
+		</div><!--/wrap2 -->
+		</div><!--/wrap1 -->
+	</div>
+	
+<% end %>

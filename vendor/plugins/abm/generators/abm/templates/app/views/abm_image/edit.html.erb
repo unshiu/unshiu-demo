@@ -1,0 +1,25 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.abm_album') %><%= t('view.noun.abm_image') %>編集
+<% end %>
+
+<%= image_tag url_for_image_column(@image, 'image', :large) %><br/>
+
+<div>
+    <% form_tag :action => :update, :id => @image.id do %>
+
+		<label for="title" accesskey="n"><%= t('activerecord.attributes.abm_image.title') %>：</label><br/>
+		<p><%= text_field "image", "title", { :class => "span-17", :style => "padding:8px;margin:2px 0px;" } %></p>
+		<div class="notice">
+			<%= error_message_on_with_label @image, 'title' %>
+			<%=t 'activerecord.errors.stand_messages.too_long', :count => AppResources[:base][:title_max_length] %>
+		</div>
+	    <label for="body" accesskey="n"><%= t('activerecord.attributes.abm_image.body') %>：</label><br/>
+		<p><%= text_area 'image', 'body', :size => '50x3' %></p>
+	   	<div class="notice">
+			<%= error_message_on_with_label @image, 'body' %>
+			<%=t 'activerecord.errors.stand_messages.too_long', :count => AppResources[:base][:body_max_length] %>
+		</div>
+		
+		<%= submit_button_tag("編集") %>
+    <% end %>
+</div>

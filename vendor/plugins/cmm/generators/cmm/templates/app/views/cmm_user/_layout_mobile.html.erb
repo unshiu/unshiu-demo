@@ -1,0 +1,12 @@
+<%= yield %>
+
+<hr style="<%= style_value('hr1') %>">
+
+<%= link_basic_to "所属#{t('view.noun.cmm_community')}一覧", :controller => 'cmm_user', :action=> 'list' %><br/>
+<% if @user && @user.me?(current_base_user.id) %>
+<%= link_basic_to "申請中#{t('view.noun.cmm_community')}一覧", :controller => 'cmm_user', :action=> 'applying_list' %><br/>
+<% end %>
+<%= link_basic_to "全#{t('view.noun.cmm_community')}一覧", :controller => 'cmm', :action=> 'list' %><br/>
+<%= link_basic_to "新しい#{t('view.noun.cmm_community')}を作成する", :controller => 'cmm', :action=> 'new' %><br/>
+
+<%= image_tag_for_default 'Spec_08.gif' %><br />

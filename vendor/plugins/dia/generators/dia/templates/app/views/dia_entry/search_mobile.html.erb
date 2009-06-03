@@ -1,0 +1,22 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.dia_diary') %>検索
+<% end %>
+
+<div style="text-align:left;">
+
+キーワード検索
+<% form_tag :action => 'search' do %>
+	<%= text_field_tag 'keyword', @keyword %><br />
+	<div style="text-align:center;">
+		<%= submit_tag '検索' %>
+	</div>
+<% end %>
+<br /><br />
+
+<% if @entries.size.zero? %>
+	見つかりませんでした。<br/><br/>
+<% else %>
+	<%= render :partial => 'multi_user_list' %>
+<% end %>
+
+</div>

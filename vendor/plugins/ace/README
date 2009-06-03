@@ -1,0 +1,25 @@
+Ace
+===
+
+Introduction goes here.
+
+
+Example
+=======
+
+*アクセスログの例
+
+ログイン、非ログイン関係なしにつかえます。
+
+<!-- view -->
+<%= access_log %>
+
+*足跡の例
+
+ログイン済みの場合のみつかえます。
+
+<!-- view -->
+<%= footmark(@footmark.uuid) %>
+
+
+Copyright (c) 2008 [name of plugin creator], released under the MIT license

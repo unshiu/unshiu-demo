@@ -1,0 +1,3 @@
+module Manage::BaseMailTemplateKindsHelper
+  include ManageBaseMailTemplateKindsHelperModule
+end

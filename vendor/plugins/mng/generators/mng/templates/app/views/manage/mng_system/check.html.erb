@@ -1,0 +1,83 @@
+<%- @pan1="システム設定" -%><%- @pan2="設定情報" -%><%- @pan3="サービスインストール情報チェック" -%>
+
+<% content_for(:header_title) do %>
+	サービスインストール情報チェック
+<% end %>
+
+<h3>サービスインストール情報チェック</h3>
+
+<p class="dialog">すべての項目が「OK」でない場合、システムに何らかの問題が生じる可能性があります。</p>
+
+<table class="lineColorL" style="width:609px;">
+	<tr>
+		<th width="30%">環境</th>
+		<td>
+			<% if @system.production? %>
+				OK
+			<% else %>
+				<span class="attention">システム稼働環境(<%= RAILS_ENV %>)が適切ではありません。サービス提供用として解放している場合は見直をしてください。</span>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<th width="30%">管理者パスワード</th>
+		<td>
+			<% if @system.login_passowrd_security? %>
+				OK
+			<% else %>
+				<span class="attention">システム標準のものです。セキュリティを考慮し変更してください。</span>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<th width="30%">ファイル書き込み権限</th>
+		<td>
+			<% if @system.file_writable? %>
+				OK
+			<% else %>
+				<span class="attention">画像などをアップロードした際のファイル出力ディレクトリに書き込み権限がありません。</span>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<th width="30%">アプリケーションログ</th>
+		<td>
+			<% if @system.output_rails_log? %>
+				OK
+			<% else %>
+				<span class="attention">アプリケーションログの出力が確認できませんでした。</span>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<th width="30%">アクセスログ</th>
+		<td>
+			<% if @system.output_apache_access_log? %>
+				OK
+			<% else %>
+				<span class="attention">アクセスログの出力が確認できませんでした。mng.ymlの設定と出力ディレクトリを確認してください。</span>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<th width="30%">アクセスログローテート</th>
+		<td>
+			<% if @system.output_apache_access_log_with_logrotate? %>
+				OK
+			<% else %>
+				<span class="attention">アクセスログをローテートしていません。アクセスログが一定量を超えるとシステムダウンの危険性があります。</span>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<th width="30%">MySQLスロークエリログ</th>
+		<td>
+			<% if @system.mysql_slow_query_log? %>
+				OK
+			<% else %>
+				<span class="attention">MySQLのスロークエリログの設定が確認できません。運用時のチューニングを考慮し本番環境では必ず出力してください。</span>
+			<% end %>
+		</td>
+	</tr>
+	
+</table>

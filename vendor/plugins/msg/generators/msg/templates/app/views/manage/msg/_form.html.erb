@@ -1,0 +1,25 @@
+<%= error_messages_for 'message', :object_name => 'msg_message' %>
+
+<!--[form:message]-->
+<table class="lineColorL" style="width:609px;">
+	<tbody>
+  		<tr>
+			<th style="width:140px;">宛先</th>
+			<td>
+				<% if @user %>
+					<%= link_to_user @user %>
+				<% else %>
+					全<%= t('view.noun.base_user') %>
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<th style="width:140px;"><%= t('activerecord.attributes.msg_message.title') %></th>
+			<td><%= text_field 'message', 'title' %><td>
+		</tr>
+		<tr>
+			<th style="width:140px;"><%= t('activerecord.attributes.msg_message.body') %></th>
+			<td><%= text_area 'message', 'body' %></td>
+		</tr>
+</table>
+<!--[eoform:message]-->

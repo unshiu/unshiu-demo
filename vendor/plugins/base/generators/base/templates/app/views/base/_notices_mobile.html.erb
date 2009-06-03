@@ -1,0 +1,36 @@
+<!--お知らせ-->
+お知らせ
+
+<div style="text-align:left">
+
+<% if @notices.size.zero? %>
+	<%= t('view.noun.base_notice') %>はありません。<br />
+
+<% else %>
+	<% @notices.each do |notice| %>
+    	<% list_cell_for do %>
+      		<%= link_to_list_cell notice.title, :controller => 'base_notice', :action => 'show', :id => notice.id %>
+	  		<%= notice_new_if_new(notice.start_datetime) %><br />
+      		<%= date_to_s(notice.start_datetime) %>
+      	<% end %>
+	<% end %>
+<% end %>
+
+</div>
+
+<div style="text-align:right">
+	   >><%= link_to_list_cell "一覧", :controller => 'base_notice', :action => 'list' %><br />
+</div>
+
+<span style="color:#FF0000">[PR][PR][PR][PR][PR]</span><br />
+
+<% if @unread_messages_count && @unread_messages_count != 0 %>
+	<%= link_basic_to "未読#{t('view.noun.msg_message')}が#{@unread_messages_count}件あります。", :controller => 'msg_receiver', :action => 'list' %><br />
+<% end %>
+<% if @friend_applies_count && @friend_applies_count != 0 %>
+	<%= link_basic_to "#{t('view.noun.base_friend')}申請が#{@friend_applies_count}件あります。", :controller => 'base_friend_apply', :action => 'list' %><br />
+<% end %>
+<% if @unread_entry_comments_count && @unread_entry_comments_count != 0 %>
+	<%= link_basic_to "未読#{t('view.noun.dia_entry')}#{t('view.noun.dia_entry_comment')}が#{@unread_entry_comments_count}件あります。", :controller => 'dia_entry', :action => 'show', :id => @oldest_unread_comment.dia_entry_id %><br />
+<% end %>
+<br/>

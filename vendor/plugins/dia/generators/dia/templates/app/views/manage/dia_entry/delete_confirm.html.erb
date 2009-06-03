@@ -1,0 +1,18 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.dia_entry') -%><%- @pan3="#{t('view.noun.dia_entry')}の削除確認" -%>
+<% content_for(:header_title) do %>
+	<%= t('view.noun.dia_entry') %>の削除確認
+<% end %>
+
+<h3><%= t('view.noun.dia_entry') %>の削除確認</h3>
+
+<p class="dialog">
+	以下の<%= t('view.noun.dia_entry') %>を削除します。<%= t('view.noun.dia_entry') %>につけられた<%= t('view.noun.dia_entry_comment') %>も削除されますが、よろしいですか？
+</p>
+
+<% form_tag :action => 'delete', :id => @entry.id do %>
+	<div class="bot_btn">
+		<%= mng_submit_tag '削除する' %>
+		<%= mng_cancel_tag %>
+	</div>
+<% end %>
+<%= render :partial => 'show' %>

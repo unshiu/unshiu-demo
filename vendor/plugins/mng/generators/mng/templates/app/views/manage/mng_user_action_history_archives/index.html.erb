@@ -1,0 +1,37 @@
+<%- @pan1="管理者設定" -%><%- @pan2=t('view.noun.mng_user_action_history')-%><%- @pan3=t('view.noun.mng_user_action_history_archive') -%>
+
+<% content_for(:header_title) do %>
+	<%= @pan3 %>
+<% end %>
+
+<h3><%= @pan3 %></h3>
+
+<% if @mng_user_action_history_archives.size.zero? %>
+	<%= t('view.noun.mng_user_action_history_archive') %>はありません。
+<% else %>
+	<%= paginate_header(@mng_user_action_history_archives) %>
+	<table class="lineColorT" style="width:609px;">
+	  <tr>
+		<th><%= t('activerecord.attributes.mng_user_action_history_archive.end_datetime') %>〜<%= t('activerecord.attributes.mng_user_action_history_archive.start_datetime') %></th>
+	    <th style="width:120px"><%= t('activerecord.attributes.mng_user_action_history_archive.filesize') %></th>
+		<th style="width:120px"><%= t('activerecord.attributes.mng_user_action_history_archive.created_at') %></th>
+		<th style="width:120px" >ダウンロード</th>
+	  </tr>
+  
+	<% for mng_user_action_history_archive in @mng_user_action_history_archives %>
+	  <tr>
+	    <td>
+			<%=h datetime_to_date(mng_user_action_history_archive.end_datetime) %>〜
+			<%=h datetime_to_date(mng_user_action_history_archive.start_datetime) %>
+		</td>
+	    <td class="textalignR"><%=h mng_user_action_history_archive.filesize %></td>
+		<td><%=h datetime_to_s(mng_user_action_history_archive.created_at) %></td>
+		<td class="textalignC">
+			<%= link_to "ダウンロード", download_manage_mng_user_action_history_archive_path(mng_user_action_history_archive) %>
+		</td>
+	  </tr>
+	<% end %>
+	</table>
+	<%= paginate_links(@mng_user_action_history_archives) %>
+<% end %>
+

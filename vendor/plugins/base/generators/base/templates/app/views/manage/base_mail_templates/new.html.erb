@@ -1,0 +1,59 @@
+<%- @pan1="管理者設定" -%><%- @pan2=t('view.noun.base_mail_template') -%><%- @pan3="新規作成" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_mail_template') %>作成
+<% end %>
+
+<h3><%= t('view.noun.base_mail_template') %>作成</h3>
+
+<% form_for :base_mail_template, :url => create_confirm_new_manage_base_mail_template_path do |f| %>
+	<%= f.error_messages %>
+	
+	<table border="0" cellpadding="3" cellspacing="1" class="lineColorLW" style="width:609px;">
+	<tbody>
+		<tr>
+			<th style="width:140px;">
+				<label for="base_mail_temlate_base_mail_template_kind_id">
+					<%= t('activerecord.attributes.base_mail_template.base_mail_template_kind') %>
+				</label>
+			</th>
+			<td><%= f.select 'base_mail_template_kind_id', @base_mail_template_kinds.collect { |m| [m.name, m.id] } %></td>
+		</tr>
+		<tr>
+			<th style="width:140px;">
+				<label for="base_mail_temlate_content_type"><%= t('activerecord.attributes.base_mail_template.content_type') %></label>
+			</th>
+			<td><%= f.select 'content_type', BaseMailTemplate.content_types %></td>
+		</tr>
+		<tr>
+			<th style="width:140px;">
+				<label for="base_mail_temlate_device_type"><%= t('activerecord.attributes.base_mail_template.device_type') %></label>
+			</th>
+			<td><%= f.select 'device_type', BaseMailTemplate.device_types %></td>
+		</tr>
+		<tr>
+			<th style="width:140px;">
+				<label for="base_mail_temlate_subject"><%= t('activerecord.attributes.base_mail_template.subject') %></label>
+			</th>
+			<td><%= f.text_field 'subject' %></td>
+		</tr>
+		<tr>
+		    <th style="width:140px;">
+				<label for="base_mail_temlate_body"><%= t('activerecord.attributes.base_mail_template.body') %></label>
+			</th>
+		  	<td><%= f.text_area 'body' , :rows=>8 , :cols=>45 %></td>
+		</tr>
+		<tr>
+		    <th style="width:140px;">
+				<label for="base_mail_temlate_footer_flag"><%= t('activerecord.attributes.base_mail_template.footer_flag') %>
+			</th>
+		    <td><%= f.check_box 'footer_flag' %></td>
+	    </tr>
+		
+	</tbody>
+	</table>
+
+	<div class="bot_btn">
+		<%= mng_submit_tag "確認" %>
+	</div>
+<% end %>

@@ -1,0 +1,18 @@
+<%- @pan1="管理者設定" -%><%- @pan2=t('view.noun.base_mail_template') -%><%- @pan3="有効設定" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_mail_template') %>有効設定
+<% end %>
+
+<h3><%= t('view.noun.base_mail_template') %>有効設定</h3>
+
+<% form_for @base_mail_template, :url => active_manage_base_mail_template_path do |f| %>
+	<%= f.hidden_field 'id' %>
+	
+	<div class="bot_btn">
+		<%= mng_submit_tag "設定" %>
+		<%= mng_cancel_tag %>
+	</div>
+<% end %>
+<br/>
+<%= render :partial => 'confirm' %>

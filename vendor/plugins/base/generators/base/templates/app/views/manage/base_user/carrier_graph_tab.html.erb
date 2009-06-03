@@ -1,0 +1,10 @@
+<div style="float: left;"><%= @carrier_graph %></div>
+<table class="lineColorL" style="width:309px;padding-left:10px">
+	<% @count_carriers.each_with_index do | count_carrier, index | %>
+	<tr>
+		<th><%= count_carrier %></th>
+		<td><%= @carrier_names[index] %></td>
+	</tr>
+	<% end %>
+</table>
+<div class="clear"></div>

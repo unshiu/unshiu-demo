@@ -1,0 +1,17 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.msg_message') %>削除
+<% end %>
+<% content_for(:sub_title) do %>
+<%= @message.title %>
+<% end %>
+
+この受信<%= t('view.noun.msg_message') %>をゴミ箱から完全に削除します。よろしいですか？
+
+<% form_tag :action => 'delete_completely', :id => @message.id do %>
+  <div style="text-align:center">
+    <%= submit_tag '削除' %>
+    <%= cancel_tag %>
+  </div>
+<% end %>
+<%= image_tag_for_default 'Spec_08.gif' %><br />
+<%= render :partial => 'show' %>
