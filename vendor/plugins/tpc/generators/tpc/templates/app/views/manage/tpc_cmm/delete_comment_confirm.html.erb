@@ -1,0 +1,33 @@
+<%- @pan1="SNS設定" -%>
+<%- @pan2="#{t('view.noun.cmm_community')}" -%>
+<%- @pan3= body_summary(@topic.tpc_topic.title, :length => 40) -%>
+
+<% content_for(:header_title) do %>
+	<%= body_summary(@topic.tpc_topic.title, :length => 40) %>
+<% end %>
+
+<h3><%= t('view.noun.tpc_comment') %>削除確認</h3>
+
+以下の<%= t('view.noun.tpc_comment') %>を削除します。よろしいですか？
+
+<% form_tag :action => 'delete_comment_complete', :id => @comment.id do %>
+  <div class="bot_btn">
+    <%= mng_submit_tag '削除する' %>
+    <%= mng_cancel_tag %>
+  </div>
+<% end %>
+
+<br />
+
+<table class="lineColorT" style="width:609px;">
+	<tr>
+		<th width="150px"><%= t('activerecord.attributes.tpc_comment.base_user') %></th>
+		<th width="259px"><%= t('activerecord.attributes.tpc_comment.body') %></th>
+		<th width="150px"><%= t('activerecord.attributes.tpc_comment.created_at') %></th>
+	</tr>
+	<tr>
+		<td><%= link_to_user @comment.base_user %></td>
+		<td><%= hbr @comment.body %></td>
+		<td><%= l(@comment.created_at) %></td>
+	</tr>
+</table>

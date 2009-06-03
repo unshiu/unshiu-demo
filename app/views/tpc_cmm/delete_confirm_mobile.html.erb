@@ -1,0 +1,19 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.tpc_topic') %>削除
+<% end %>
+<% content_for(:sub_title) do %>
+<%= h @topic.tpc_topic.title %>
+<% end %>
+
+この<%= t('view.noun.tpc_topic') %>を削除していいですか？<br/>
+<br/>
+<%= t('activerecord.attributes.tpc_topic.body') %><br/>
+<%= hbr @topic.tpc_topic.body %>
+
+<%= image_tag_for_default 'Spec_04.gif' %><br />
+<% form_tag :action => 'delete_complete', :id => @topic.id do %>
+	<div style="text-align:center">
+		<%= submit_tag '削除' %>
+		<%= cancel_tag %>
+	</div>
+<% end %>

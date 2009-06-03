@@ -1,0 +1,20 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.pnt_point') %>履歴
+<% end %>
+<% content_for(:sub_title) do %>
+現在の総<%= t('view.noun.pnt_point') %>
+<% end %>
+<%= @all_point %><%= t('view.noun.pnt_point') %><br/>
+<% if @pnt_points.empty? %>
+
+<% elsif @pnt_points.size == 1 %>
+<br/>
+<%= link_basic_to '履歴を見る', :action => "history", :id => @pnt_points[0].id %>
+<%= image_tag_for_default 'Spec_08.gif' %><br />
+<% else %>
+<ul>
+	<% @pnt_points.each do | pnt_point | %>
+	<li><%= pnt_point.pnt_master.title %>: <%= pnt_point.point%> </li>
+	<% end %>
+</ul>
+<% end %>

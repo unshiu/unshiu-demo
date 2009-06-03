@@ -1,0 +1,44 @@
+<%- @pan1="#{t('view.noun.pnt_point')}" -%><%- @pan2="月別#{t('view.noun.pnt_point')}発行履歴" -%>
+<% content_for(:header_title) do %>
+月別<%= t('view.noun.pnt_point') %>発行履歴
+<% end %>
+<h3>月別<%= t('view.noun.pnt_point') %>発行履歴</h3>
+
+<table class="lineColorL" style="width:609px;">
+	<tr>
+		<th width="20%">総<%= t('activerecord.attributes.pnt_history_summary.sum_issue_point') %></th>
+		<td><%= number_with_delimiter(@sum_issue_point) %></td>
+	</tr>
+	<tr>
+		<th width="20%">総<%= t('activerecord.attributes.pnt_history_summary.sum_use_point') %></th>
+		<td><%= number_with_delimiter(@sum_use_point) %></td>
+	</tr>
+</table>
+<br/>
+
+<% if @month_summaries.size.zero? %>
+	<%= t('view.noun.pnt_point') %>発行履歴はありません。
+	
+<% else %>
+	<table class="lineColorT" width="609px">
+		<tr>
+			<th><%= t('activerecord.attributes.pnt_history_summary.created_at') %></th>
+			<th><%= t('activerecord.attributes.pnt_history_summary.sum_issue_point') %></th>
+			<th><%= t('activerecord.attributes.pnt_history_summary.sum_use_point') %></th>
+			<th><%= t('activerecord.attributes.pnt_history_summary.record_count') %></th>
+			<th><%= t('activerecord.attributes.pnt_history_summary.updated_at') %></th>
+			<th></th>
+		</tr>
+	
+		<% @month_summaries.each do |month_summary| %>
+		<tr>
+			<td><%= data_year_month(month_summary.created_at) %></td>
+			<td><%= number_with_delimiter(month_summary.sum_issue_point) %></td>
+			<td><%= number_with_delimiter(month_summary.sum_use_point) %></td>
+			<td><%= number_with_delimiter(month_summary.record_count) %></td>
+			<td><%= datetime_to_s(month_summary.updated_at) %></td>
+			<td><%= link_to "ダウンロード", :action => :export, :id => month_summary.id %></td>
+		</tr>
+		<% end %>
+	</table>
+<% end %>

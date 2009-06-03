@@ -1,0 +1,32 @@
+<%- @pan1="#{t('view.noun.pnt_point')}" -%><%- @pan2="マスタ管理" -%><%- @pan3="#{t('view.noun.pnt_master')}一覧" -%>
+<% content_for(:header_title) do %>
+	<%= t('view.noun.pnt_master') %>一覧
+<% end %>
+
+<h3><%= t('view.noun.pnt_master') %>一覧</h3>
+
+<ul class="list">
+	<li><%= link_to "新しく#{t('view.noun.pnt_master')}を作る", :action => :new %></li>
+</ul>
+
+<% if @pnt_masters.size.zero? %>
+	<%= t('view.noun.pnt_master') %>がありません。
+<% else %>
+	<%= paginate_header @pnt_masters %>
+	<table class="lineColorT" width="609px">
+	<tr>
+		<th><%= t('activerecord.attributes.pnt_master.title') %></th>
+		<th><%= t('activerecord.attributes.pnt_master.created_at') %></th>
+		<th><%= t('activerecord.attributes.pnt_master.updated_at') %></th>
+	</tr>
+
+	<% @pnt_masters.each do |@pnt_master| %>
+		<tr>
+			<td><%= link_to @pnt_master.title, :action => :show, :id => @pnt_master.id %></td>
+			<td><%= @pnt_master.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+			<td><%= @pnt_master.updated_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+		</tr>
+	<% end %>
+	</table>
+	<%= paginate_links @pnt_masters %>
+<% end %>

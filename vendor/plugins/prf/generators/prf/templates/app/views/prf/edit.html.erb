@@ -1,0 +1,62 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.prf_profile') %>編集
+<% end %>
+
+<% form_tag :action => 'update' do %>
+
+	<%= error_messages_for 'profile', :object_name => 'prf_profile' %>
+
+	<% @question_set.prf_question_set_partials.each do |qsp| %>
+
+	<dl>
+		<dt><%= h qsp.prf_question.body %></dt>
+	
+		<dd>
+			<% if qsp.prf_question.type_select? %>
+				<select name="q[<%= qsp.prf_question.id %>]">
+					<%= prf_options(qsp.prf_question, @new_answers) %>
+				</select>
+			<% elsif qsp.prf_question.type_radio? %>
+				<% qsp.prf_question.prf_choices.each do |choice| %>
+				<div><%= prf_radio(choice, @new_answers) %></div>
+				<% end %>
+			<% elsif qsp.prf_question.type_checkbox? %>
+				<% qsp.prf_question.prf_choices.each do |choice| %>
+				<div><%= prf_checkbox(choice, @new_answers) %></div>
+				<% end %>
+			<% elsif qsp.prf_question.type_text? %>
+				<div><%= prf_text(qsp.prf_question, @new_answers) %></div>
+			<% elsif qsp.prf_question.type_textarea? %>
+				<div><%= prf_textarea(qsp.prf_question, @new_answers) %></div>
+			<% end %>
+		</dd>
+		<% end %>
+	</dl>
+	
+	<dl>
+		<dt><%= t('activerecord.attributes.prf_profile.public_level') %></dt>
+		<dt><%= select 'prf_profile', 'public_level', select_type(PrfProfile::PUBLIC_LEVELS) %></dt>
+	</dl>
+	
+	<%= submit_button_tag("変更") %>
+	
+<% end %>
+
+<% content_for(:sidemenu) do %>
+	
+	<div class="W5R4B9df side_topic_box box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="box_inner clearfix">
+			<h5 class=" caps"><span>menu</span></h5>
+			<ul class="menu_list">
+				<li><%= link_to "#{t('view.noun.prf_profile')}に戻る", :action => 'show', :id => @prf_profile.base_user_id %></li>
+			</ul>
+		</div><!--/side_col_inner-->
+		</div><!--/wrap3-->
+		</div><!--/wrap2-->
+		</div><!--/wrap1-->
+	</div><!--/side_topic_box-->
+
+<% end %>

@@ -1,3 +1,0 @@
-module ManageMngUserHelperModule
-  include ManageBaseUserHelperModule
-end

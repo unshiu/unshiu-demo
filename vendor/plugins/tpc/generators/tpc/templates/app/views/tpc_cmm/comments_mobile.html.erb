@@ -1,0 +1,21 @@
+<% content_for(:header_title) do %>
+	<%= h @topic.tpc_topic.title %>
+<% end %>
+
+<% if !@comments || @comments.size.zero? %>
+	<%= t('view.noun.tpc_comment') %>はありません。
+	
+<% else %>
+	<%= paginate_header @comments %>
+
+	<%= link_basic_to "#{t('view.noun.tpc_comment')}を書く", :action => 'new_comment', :id => @topic.id %><br/>
+
+	<% @comments.each do |@comment| %>
+		<% list_cell_for do %>
+			<%= render :partial => 'show_comment' %>
+		<% end %>
+	<% end %>
+
+	<%= paginate_links @comments %>
+
+<% end %>

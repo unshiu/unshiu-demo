@@ -1,0 +1,5 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.prf_profile') %>編集 完了
+<% end %>
+
+<%= link_to "#{t('view.noun.prf_profile')}に戻る", :action => 'show', :id => current_base_user.id %>

@@ -1,0 +1,39 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.prf_profile') -%><%- @pan3="#{t('view.noun.prf_choice')}作成確認" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.prf_choice') %>作成確認
+<% end %>
+
+<h3><%= t('view.noun.prf_choice') %>作成確認</h3>
+
+<% form_tag :action => "create_choice", :id => @question.id do %>
+	<table class="lineColorT" style="width:609px;">
+		<tr>
+			<th>選択肢</th>
+			<th>自由記述欄</th>
+		</tr>
+		<% @choices.each do |prf_choice| %>
+		<tr>
+			<td>
+				<%= prf_choice.body %>
+				<%= hidden_field_tag 'choice[][body]', prf_choice.body %>
+			</td>
+			<td class="textalignC">
+				<% if prf_choice.free_area_type_text? %>
+					<%= t('activerecord.constant.type.text') %>
+				<% elsif prf_choice.free_area_type_textarea? %>
+					<%= t('activerecord.constant.type.textarea') %>
+				<% else %>
+					-
+				<% end %>
+				<%= hidden_field_tag 'choice[][free_area_type]', prf_choice.free_area_type %>
+			</td>
+		</tr>
+		<% end %>
+	</table>
+	
+	<div class="bot_btn">
+		<%= mng_submit_tag '作成' %>
+		<%= mng_cancel_tag %>
+	</div>
+<% end %>

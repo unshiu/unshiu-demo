@@ -1,0 +1,19 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.prf_profile') %>公開設定
+<% end %>
+<% form_tag :action => 'public_level_update' do %>
+	<div style="<%= style_value('form_style') %>">
+		<div>
+			<span style="color:#f75009;"></span><%= t('activerecord.attributes.prf_profile.public_level') %><br />
+			<%= PrfProfile.public_level_name(@prf_profile.public_level) %>
+			<%= hidden_field 'prf_profile', 'public_level' %>
+		</div>
+		<%= image_tag_for_default 'Spec_02.gif' %><br />
+	</div>
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+	<div style="text-align:center">
+		<%= submit_tag '設定' %>
+		<%= cancel_tag %>
+	</div>
+<% end %>
+

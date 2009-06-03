@@ -1,0 +1,56 @@
+<%- @pan1="SNS設定" -%><%- @pan2="コミュニティ" -%><%- @pan3= "#{t('view.noun.tpc_topic')}詳細" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.tpc_topic') %>詳細
+<% end %>
+
+<h3><%= t('view.noun.tpc_topic') %>詳細</h3>
+
+<ul class="list">
+	<li><%= link_to "#{t('view.noun.tpc_topic')}を削除する", :action => 'delete_confirm', :id => @topic.id %></li>
+</ul>
+
+<%= render :partial => 'show'%>
+
+<h3>この<%= t('view.noun.tpc_topic') %>のコメント</h3>
+<% if !@comments || @comments.size == 0%>
+	<%= t('view.noun.tpc_comment') %>はありません。
+<% else %>
+	<%= paginate_header @comments %>
+<table class="lineColorT" style="width:609px;">
+	<tr>
+		<th width="150px"><%= t('activerecord.attributes.tpc_comment.base_user') %></th>
+		<th width="150px"><%= t('activerecord.attributes.tpc_comment.created_at') %></th>
+		<th width="259px"><%= t('activerecord.attributes.tpc_comment.body') %></th>
+		<th width="50px">削除</th>
+	</tr>
+<% for comment in @comments %>
+	<tr>
+		<td><%= link_to_user comment.base_user %></td>
+		<td><%= datetime_to_s(comment.created_at) %></td>
+		<td>
+			<% if comment.invisibled_by_anyone? %>
+				<% if comment.invisibled_by_writer? %>
+  					<%= t('view.noun.tpc_comment') %>投稿者によって削除されました。
+  				<% elsif comment.invisibled_by_owner? %>
+  					<%= t('view.noun.cmm_community') %>管理者によって削除されました。
+  				<% elsif comment.invisibled_by_manager? %>
+  					システム管理者によって削除されました。
+  				<% end %>
+			<% else %>
+  				<%= hbr comment.body %>
+			<% end %>
+		</td>
+		<td align="center">
+			<% if comment.invisibled_by_anyone? %>
+				削除済み
+			<% else %>
+				<%= link_to '削除', :action => 'delete_comment_confirm', :id => comment.id %>
+			<% end %>
+		</td>
+		
+	</tr>
+<% end %>
+</table>
+	<%= paginate_links @comments %>
+<% end %>

@@ -1,0 +1,134 @@
+<script Language="JavaScript">
+	
+	$(function() {
+		if(<%= !@pnt_filter.start_at.nil? %>) {
+			$('#pnt_filter_limit_day_check').attr("checked", true);
+		} else {
+			$('#pnt_filter_start_at_1i').attr("disabled", true);
+			$('#pnt_filter_start_at_2i').attr("disabled", true);
+			$('#pnt_filter_start_at_3i').attr("disabled", true);
+			$('#pnt_filter_start_at_4i').attr("disabled", true);
+			$('#pnt_filter_start_at_5i').attr("disabled", true);
+			$('#pnt_filter_end_at_1i').attr("disabled", true);
+			$('#pnt_filter_end_at_2i').attr("disabled", true);
+			$('#pnt_filter_end_at_3i').attr("disabled", true);
+			$('#pnt_filter_end_at_4i').attr("disabled", true);
+			$('#pnt_filter_end_at_5i').attr("disabled", true);
+		}
+		
+		if($('#pnt_filter_stock').val().length > 0) {
+			$('#pnt_filter_limit_point_check').attr("checked", true);
+		} else {
+			$('#pnt_filter_stock').attr("disabled", true);
+		}
+		
+		if($('#pnt_filter_rule_day').val().length > 0 || $('#pnt_filter_rule_count').val().length > 0) {
+			$('#pnt_filter_rule_check').attr("checked", true);
+		} else {
+			$('#pnt_filter_rule_day').attr("disabled", true);
+			$('#pnt_filter_rule_count').attr("disabled", true);
+		}
+		
+		$("#pnt_filter_limit_day_check").click(function() {
+			if (this.checked) {
+			 	$("#pnt_filter_start_at_1i").removeAttr("disabled");
+				$("#pnt_filter_start_at_2i").removeAttr("disabled");
+				$("#pnt_filter_start_at_3i").removeAttr("disabled");
+				$("#pnt_filter_start_at_4i").removeAttr("disabled");
+				$("#pnt_filter_start_at_5i").removeAttr("disabled");
+				$("#pnt_filter_end_at_1i").removeAttr("disabled");
+				$("#pnt_filter_end_at_2i").removeAttr("disabled");
+				$("#pnt_filter_end_at_3i").removeAttr("disabled");
+				$("#pnt_filter_end_at_4i").removeAttr("disabled");
+				$("#pnt_filter_end_at_5i").removeAttr("disabled");
+			} else {
+				$('#pnt_filter_start_at_1i').attr("disabled", true);
+				$('#pnt_filter_start_at_2i').attr("disabled", true);
+				$('#pnt_filter_start_at_3i').attr("disabled", true);
+				$('#pnt_filter_start_at_4i').attr("disabled", true);
+				$('#pnt_filter_start_at_5i').attr("disabled", true);
+				$('#pnt_filter_end_at_1i').attr("disabled", true);
+				$('#pnt_filter_end_at_2i').attr("disabled", true);
+				$('#pnt_filter_end_at_3i').attr("disabled", true);
+				$('#pnt_filter_end_at_4i').attr("disabled", true);
+				$('#pnt_filter_end_at_5i').attr("disabled", true);
+			}
+		});
+		
+		$("#pnt_filter_limit_point_check").click(function() {
+			if (this.checked) {
+			 	$("#pnt_filter_stock").removeAttr("disabled");
+			} else {
+				$('#pnt_filter_stock').attr("disabled", true);
+			}
+		});
+		
+		$("#pnt_filter_rule_check").click(function() {
+			if (this.checked) {
+				$("#pnt_filter_rule_day").removeAttr("disabled");
+				$("#pnt_filter_rule_count").removeAttr("disabled");
+			} else {
+				$('#pnt_filter_rule_day').attr("disabled", true);
+				$('#pnt_filter_rule_count').attr("disabled", true);
+			}
+		});
+		
+	});
+
+</script>
+
+<%= error_messages_for 'pnt_filter' %>
+
+<%= hidden_field 'pnt_filter', 'id' %>
+<%= hidden_field 'pnt_filter', 'pnt_master_id' %>
+	
+<table class="lineColorL" style="width:609px;">
+<tbody>
+  <tr>
+    <th style="width:20%;"><%= t('activerecord.attributes.pnt_filter_master.title') %></th>
+    <td><%= select_tag "pnt_filter[pnt_filter_master_id]", options_from_collection_for_select(@pnt_filter_masters, "id", "title", @pnt_filter.pnt_filter_master_id) %></td>
+  </tr>
+  <tr>
+    <th><%= t('activerecord.attributes.pnt_filter.summary') %></th>
+    <td><%= text_field 'pnt_filter', 'summary', :size => '50' %></td>
+  </tr>
+  <tr>
+    <th><label name="pnt_filter_point"><%= t('activerecord.attributes.pnt_filter.point') %></th>
+	<td><%= text_field 'pnt_filter', 'point', :size => '12' %></td>
+  </tr>
+  <tr>
+    <th>配布期限</th>
+	<td>
+	<p><input type="checkbox" id="pnt_filter_limit_day_check" />
+		<label name="pnt_filter_limit_day_check">配布期限を設ける</label></p>
+	<p><label name="pnt_filter_start_at"><%= t('activerecord.attributes.pnt_filter.start_at') %></label><br/>
+		<%= datetime_select 'pnt_filter', 'start_at', :use_month_numbers => true %>
+		<%= adjusted_datetime 'pnt_filter', 'start_at' %>
+
+	<p><label name="pnt_filter_end_at"><%= t('activerecord.attributes.pnt_filter.end_at') %></label><br/>
+		<%= datetime_select 'pnt_filter', 'end_at', :use_month_numbers => true %>
+		<%= adjusted_datetime 'pnt_filter', 'end_at' %>
+	</td>
+  </tr>
+  <tr>
+  	<th>配布上限</th>
+	<td>
+	<p><input type="checkbox" id="pnt_filter_limit_point_check" />
+		<label name="pnt_filter_limit_point_check">配布上限を設ける</label></p>
+
+	<p><label name="pnt_filter_stock"><%= t('activerecord.attributes.pnt_filter.stock') %></label><br/>
+		<%= text_field 'pnt_filter', 'stock', :size => '12', :value => @pnt_filter.show_limit %></p>
+	</td>
+  </tr>
+  <tr>
+  	<th>配布ルール</th>
+	<td>
+	<p><input type="checkbox" id="pnt_filter_rule_check" />
+		<label name="pnt_filter_rule_check">配布ルールを設ける</label></p>
+
+	<p><label name="pnt_filter_rule">配布ルール</label><br/>
+		最大<%= text_field 'pnt_filter', 'rule_day', :size => '3' %>日に<%= text_field 'pnt_filter', 'rule_count', :size => '3' %>回受け取れる</p>例) 1日に1回, 1日に10回
+	</td>
+  </tr>
+</tbody>
+</table>

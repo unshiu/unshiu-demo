@@ -1,0 +1,13 @@
+<%- @pan1="#{t('view.noun.pnt_point')}" -%><%- @pan2="一括登録" -%>
+<% content_for(:header_title) do %>
+一括登録
+<% end %>
+<h3>一括登録</h3>
+
+<% form_tag :action => 'add_process' do %>
+	<p>全<%= @line_count %>件あります。</p>
+	
+	<%= hidden_field 'pnt_import', 'file_name', :value => @tmp_file %>
+    <%= submit_tag "処理する" %>
+	<%= cancel_tag %>
+<% end %>

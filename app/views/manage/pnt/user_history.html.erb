@@ -1,0 +1,70 @@
+<%- @pan1="#{t('view.noun.pnt_point')}" -%><%- @pan2="#{t('view.noun.base_user')}履歴" -%>
+<% content_for(:header_title) do %>
+	<%= t('view.noun.pnt_point') %>履歴
+<% end %>
+
+<h3><%= t('view.noun.pnt_point') %>履歴</h3>
+
+<table class="lineColorL" style="width:609px;">
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_user.login') %></th>
+		<td><%=h @base_user.login %></td>
+	</tr>
+	<tr>
+		<th width="20%">現在総<%= t('view.noun.pnt_point') %></th>
+		<td><%=h @base_user_point %></td>
+	</tr>
+</table>
+<br/>
+
+<% if @point_histories.nil? || @point_histories.size.zero? %>
+	<p><%= t('view.noun.pnt_point') %>履歴はありません。</p>
+<% else %>
+	<table class="lineColorT" width="609px">
+		<tr>
+			<th><%= t('activerecord.attributes.pnt_filter_master.title') %></th>
+			<th><%= t('activerecord.attributes.pnt_history.message') %></th>
+			<th><%= t('activerecord.attributes.pnt_history.difference') %></th>
+			<th><%= t('activerecord.attributes.pnt_history.updated_at') %></th>
+		</tr>
+		<% @point_histories.each do |point_hisotry| %>
+		<tr>
+			<td><%= point_hisotry.pnt_point.pnt_master.title %></td>
+			<td><%= point_hisotry.message %></td>
+			<td class="textalignC"><%= point_hisotry.difference %></td>
+			<td class="textalignC"><%= point_hisotry.updated_at.strftime('%Y/%m/%d') %></td>
+		</tr>
+		<% end %>
+	</table>
+<% end %>
+<br />
+
+<h3><%= t('view.noun.pnt_point') %>の増減処理</h3>
+
+<% form_tag :action => 'confirm' do %>
+<%= error_messages_for 'pnt_history' %>
+<table class="lineColorL" width="609px">
+		<% if master_select? %>
+	<tr>
+		<th><%= t('activerecord.attributes.pnt_filter_master.title') %></th>
+		<td>
+			<%= select_tag "pnt_master[id]", options_from_collection_for_select(@pnt_masters, "id", "title") %>
+		</td>
+	</tr>
+		<% else %>
+			<%= hidden_field 'pnt_master', 'id', :value => @pnt_masters.first.id %>
+		<% end %>
+	<tr>
+		<th><%= t('activerecord.attributes.pnt_history.message') %></th>
+		<td><%= text_field 'pnt_history', 'message', :size => '50' %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.pnt_history.difference') %></th>
+		<td><%= text_field 'pnt_history', 'difference', :size => '12' %>pt</td>
+	</tr>
+</table>
+<div class="bot_btn">
+	<%= hidden_field 'base_user', 'id', :value => @base_user.id %>
+   	<%= mng_submit_tag "履歴に追加する" %>
+</div>
+<% end %>

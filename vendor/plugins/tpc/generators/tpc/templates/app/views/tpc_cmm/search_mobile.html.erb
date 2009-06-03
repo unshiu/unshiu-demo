@@ -1,0 +1,32 @@
+<% content_for(:header_title) do %>
+	<%= @community.name %>の<%= t('view.noun.tpc_topic') %>検索
+<% end %>
+
+キーワード検索
+<% form_tag :action => 'search' do %>
+	<%= text_field_tag 'keyword', @keyword %>
+	<%= image_tag_for_default 'Spec_04.gif' %><br />
+	<div style="text-align:center;">
+		<%= submit_tag '検索' %>
+	</div>
+<% end %>
+<%= image_tag_for_default 'Spec_08.gif' %><br />
+
+<% if @topics.size.zero? %>
+	見つかりませんでした。
+<% else %>
+
+	<%= paginate_header @topics %>
+
+	<% @topics.each do |topic| %>
+		<% list_cell_for do %>
+	    	<%= link_to_list_cell "#{topic.tpc_topic.title}(#{topic.tpc_topic.tpc_comments.count})", :controller => 'tpc_cmm', :action => 'show', :id => topic.id %>
+			<%= notice_new_if_new(topic.tpc_topic.created_at) %><br />
+			<%= link_to_user topic.tpc_topic.base_user %>
+			<%= date_or_time(topic.tpc_topic.created_at) %>
+		<% end %>
+	<% end %>
+
+	<%= paginate_links @topics %>
+
+<% end %>

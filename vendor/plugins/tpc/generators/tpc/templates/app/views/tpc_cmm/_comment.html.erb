@@ -1,0 +1,38 @@
+<div class="diary_story_box box_outer clearfix community_topic_list">
+	<% if comment.not_invisibled_by_anyone? %>
+		<div class="community_topic_author">
+			<div class="username"><%= link_to_user comment.base_user %></div>
+		</div>
+		<div class="comment_box">
+			<div class="comment_wrap2">
+				<div class="wrap1">
+				<div class="wrap2">
+				<div class="wrap3">
+					<div class="box_inner">
+						<div class="diary_text box_outer small comment_text">
+							<p>
+								<%= hbr comment.body %>
+							</p>
+						</div>
+						<div class="span-10 small comment_text">
+							<span class="contents_date"><%= l(comment.created_at, :format => :short) %></span>
+							<% if logged_in? && deletable_comment?(comment) %>
+								|&nbsp;<%= link_basic_to '削除', :action => 'delete_comment_confirm', :id => comment.id %>
+							<% end %>
+						</div>
+					</div>
+				</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	<% else %>
+		<% if comment.invisibled_by_writer? %>
+			<%= t('view.noun.tpc_comment') %>投稿者によって削除されました。
+		<% elsif comment.invisibled_by_owner? %>
+			<%= t('view.noun.cmm_community') %>管理者によって削除されました。
+		<% elsif comment.invisibled_by_manager? %>
+			システム管理者によって削除されました。
+		<% end %>
+	<% end %>
+</div>

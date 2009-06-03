@@ -1,2 +1,0 @@
-module ManageBaseMailTemplatesHelperModule
-end

@@ -1,0 +1,141 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.prf_profile') %>
+<% end %>
+<% content_for(:sub_title) do %>
+	<%= @user.show_name %>
+<% end %>
+
+<% content_for(:header_profile) do %>
+	<div id="profiles_col" class="container  prepend-top">
+
+		<div id="profile_image_col" class="span-2 first ">
+			<% link_to :controller => 'prf_profile', :action=> 'show', :id => @user.prf_profile.id do %>
+				<%= safe_profile_view(@user.prf_profile.prf_image, :large, { :width => "40", :height => "40" }) %>
+			<% end %>
+		</div><!--/profile_image_col-->
+
+		<div id="profile_detail_col" class="span-22  last ">
+			<div id="profile_detail_col_inner" class="">
+				<div id="profile_name" class="profile_details">		
+					<%= link_to @user.show_name, :controller => 'prf_profile', :action=> 'show', :id => @user.prf_profile.id %>
+				</div><!--/profile_name-->
+			</div><!--/profile_detail_col_inner-->
+		</div><!--/profile_detail_col-->
+
+		<% if logged_in? && !current_base_user.me?(@user.id) %>
+			<div id="profile_logtime"  class="profile_details">
+				最終ログインは<%= login_status(@user.latest_login) %>です。
+			</div><!--/profile_logtime-->
+		<% end %>
+	</div><!--/profiles_col-->
+<% end %>
+
+<dl>
+	<% @question_set.prf_question_set_partials.each do |qsp| %>
+		<% ans = qsp.prf_question.answer_by_prf_profile_id(@user.prf_profile.id) %>
+		
+		<% if !ans.nil? && prf_accessible?(@user.prf_profile) %>
+			<dt><%= h qsp.prf_question.body %></dt>
+			
+			<dd>
+			<% if qsp.prf_question.type_select? || qsp.prf_question.type_radio? %>
+				<%= h ans.prf_choice.body %>
+				<% if qsp.prf_question.type_radio? && ans.body != nil && ans.body.size > 0 && ans.prf_choice.has_free_area? %>
+					(<%= h ans.body %>)
+				<% end %>
+			<% elsif qsp.prf_question.type_text? || qsp.prf_question.type_textarea? %>
+				<%= h ans.body %>
+			<% elsif qsp.prf_question.type_checkbox? %>
+				<% ans.each do |a| %>
+					<%= h a.prf_choice.body %>
+					<% if a.body != nil && a.body.size > 0 && a.prf_choice.has_free_area? %>
+						(<%= h a.body %>)
+					<% end %>
+				 	/ 
+				<% end %>
+			<% end %>
+			</dd>
+		<% else %>
+			<dt><%= h qsp.prf_question.body %></dt>
+			<dd>未公開</dd>
+		<% end %>
+	<% end %>
+</dl>
+
+<% content_for(:sidemenu) do %>
+	<div id="friend_box" class="box_outer clearfix">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="box_inner">
+			<div class="title"><h6><%= t('view.noun.base_friend') %></h6></div>
+			<div class="profile_img_panel">
+				<% @user.friends.each do | friend | %>
+					<%= link_to safe_profile_view(friend.base_profile, :thumb, {"width" => 40, "height" => 40}), :controller => 'base_profile', :action => 'show', :id => friend.id %>
+				<% end %>
+			</div><!--/profile_img_panel-->
+			<div class="more ">
+				<%= link_to "すべて表示", :controller => :base_friend, :action => :list, :id => @user.id %>
+			</div>
+		</div><!--/box_inner-->
+		</div><!-- /wrap3 -->
+		</div><!-- /wrap2 -->
+		</div><!-- /wrap1 -->
+	</div><!--/friend_box-->
+	
+	<div id="friend_box" class="box_outer clearfix">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="box_inner">
+			<div class="title"><h6><%= t('view.noun.cmm_community') %></h6></div>
+			<div class="profile_img_panel">
+				<% @user.cmm_communities.each do | community | %>
+					<% link_to :controller => :cmm, :action => :show, :id => community.id do %>
+						<%= safe_community_image_view(community.cmm_image, :thumb, {"width" => 40, "height" => 40}) %>
+					<% end %>
+				<% end %>
+			</div><!--/profile_img_panel-->
+			<div class="more ">
+				<%= link_to "すべて表示", :controller => :cmm_user, :action => :list, :id => @user.id %>
+			</div>
+		</div><!--/box_inner-->
+		</div><!-- /wrap3 -->
+		</div><!-- /wrap2 -->
+		</div><!-- /wrap1 -->
+	</div><!--/friend_box-->
+	
+	<div class="W5R4B9df side_topic_box box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="box_inner clearfix">
+			<h5><span>menu</span></h5>
+			<ul class="menu_list">
+				<% if logged_in? && !current_base_user.me?(@user.id) %>
+
+					<% if MsgMessage.acceptable?(current_base_user, @user.id) %>
+						<li><%= link_to "#{t('view.noun.msg_message')}を送る", :controller => 'msg_message', :action => 'new', :id => @user.id %></li>
+					<% end %>
+					<% unless BaseFriend.friend?(current_base_user.id, @user.id) %>
+						<li><%= link_to "#{t('view.noun.base_friend')}申請をする", :controller => 'base_friend_apply', :action => 'new', :id => @user.id %></li>
+					<% end %>
+					<% unless BaseFavorite.favorite?(current_base_user.id, @user.id) %>
+						<li><%= link_to "#{t('view.noun.base_favorite')}に追加する", :controller => 'base_favorite', :action => 'add', :id => @user.id %></li>
+					<% end %>
+				<% end %>
+				
+				<li><%= link_to "#{t('view.noun.dia_entry')}一覧(#{@entries.size})", :controller => 'dia_entry', :action => 'list', :id => @user.id %></li>
+				<li><%= link_to "#{t('view.noun.abm_album')}一覧(#{@albums.size})", :controller => 'abm_album', :action => 'list', :id => @user.id %></li>
+				<% if logged_in? && @user.me?(current_base_user.id) %>
+					<li><%= link_to "#{t('view.noun.prf_profile')}を編集する", :action => 'edit' %></li>
+					<li><%= link_to "#{t('view.noun.prf_profile')}画像を設定する", :action => 'image' %></li>
+				<% end %>
+			</ul>
+		</div><!--/side_col_inner-->
+		</div><!--/wrap3-->
+		</div><!--/wrap2-->
+		</div><!--/wrap1-->
+	</div><!--/side_topic_box-->
+
+<% end %>

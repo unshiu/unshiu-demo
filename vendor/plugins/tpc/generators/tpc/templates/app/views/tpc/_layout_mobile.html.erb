@@ -1,0 +1,7 @@
+<%= yield %>
+
+<hr style="<%= style_value('hr1') %>"/>
+
+<span style="color:#f75100;"></span><%= link_basic_to "#{t('view.noun.cmm_community')}に戻る", {:controller => 'cmm', :action => 'show', :id => @community.id}, {:accesskey => "5"} %>
+
+<%= image_tag_for_default 'Spec_08.gif' %><br />

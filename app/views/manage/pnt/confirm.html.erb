@@ -1,0 +1,44 @@
+<%- @pan1="#{t('view.noun.pnt_point')}" -%><%- @pan2="#{t('view.noun.base_user')}履歴" -%><%- @pan3="#{t('view.noun.pnt_point')}増減処理" -%>
+<% content_for(:header_title) do %>
+	<%= t('view.noun.pnt_point') %>増減処理
+<% end %>
+
+<h3><%= t('view.noun.pnt_point') %>増減処理</h3>
+
+<% form_tag :action => 'create' do %>
+<table class="lineColorL" width="609px">
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.base_user.login') %></th>
+		<td>
+			<%= @pnt_history.pnt_point.base_user.login %>
+			<%= hidden_field 'base_user', 'id' %>
+		</td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.pnt_filter_master.title') %></th>
+		<td>
+			<%= @pnt_master.title %>
+			<%= hidden_field 'pnt_master', 'id' %>
+		</td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.pnt_history.message') %></th>
+		<td>
+			<%= @pnt_history.message %>
+			<%= hidden_field 'pnt_history', 'message' %>
+		</td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.pnt_history.difference') %></th>
+		<td>
+			<%= @pnt_history.difference %>pt
+			<%= hidden_field 'pnt_history', 'difference' %>
+		</td>
+	</tr>
+</table>
+
+<div class="bot_btn">
+	<%= mng_submit_tag "実行する" %>
+	<%= mng_cancel_tag %>
+</div>
+<% end %>

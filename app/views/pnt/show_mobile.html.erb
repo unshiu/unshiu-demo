@@ -1,0 +1,20 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.pnt_point') %>履歴一覧
+<% end %>
+
+<% if @pnt_histories.size.zero? %>
+	利用履歴はありません。<br />
+<% else %>
+
+	<%= paginate_header(@pnt_histories) %>
+
+	<% @pnt_histories.each do |pnt_history| %>
+		<% list_cell_for do %>
+			<%= pnt_history.message %> : <%= pnt_history.difference %><br/>
+			<%= datetime_to_s(pnt_history.updated_at) %>
+		<% end %>
+	<% end %>
+
+	<%= paginate_links(@pnt_histories) %>
+
+<% end %>

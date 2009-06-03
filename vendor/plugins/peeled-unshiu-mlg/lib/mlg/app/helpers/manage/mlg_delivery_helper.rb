@@ -1,3 +1,0 @@
-module ManageMlgDeliveryHelperModule
-  include ManageMlgHelperModule
-end

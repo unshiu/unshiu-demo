@@ -1,0 +1,41 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.prf_profile') -%><%- @pan3=@prf_question.body -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.prf_choice') %>編集確認
+<% end %>
+
+<h3><% @prf_question.body %> <%= t('view.noun.prf_choice') %>編集確認</h3>
+
+<% form_tag :action => "edit_choice_update", :id => @prf_choice.id do %>
+	<%= hidden_field 'prf_choice', 'free_area_type' %>
+	
+	<table border="0" cellpadding="3" cellspacing="1" class="lineColorLW" style="width:609px;">
+	<tbody>
+	  <tr>
+	    <th style="width:120px;"><%= t('activerecord.attributes.prf_choice.body') %></th>
+	    <td>
+			<%= @prf_choice.body %>
+			<%= hidden_field 'prf_choice', 'body' %>
+		</td>
+	  </tr>
+	　　<% if @prf_choice.has_free_area? %>
+	  <tr>
+	    <th style="width:120px;"><%= t('activerecord.attributes.prf_choice.free_area_type') %></th>
+	    <td>
+			<% if @prf_choice.free_area_type_text? %>
+				自由記述欄あり(<%= t('activerecord.constant.type.text') %>)
+			<% elsif @prf_choice.free_area_type_textarea? %>
+				自由記述欄あり(<%= t('activerecord.constant.type.textarea') %>)
+			<% end %>
+		</td>
+	  </tr>
+	　　<% end %>
+	</tbody>
+	</table>
+
+	<div class="bot_btn">
+		<%= mng_submit_tag '編集' %>
+		<%= mng_cancel_tag %>
+	</div>
+	
+<% end %>

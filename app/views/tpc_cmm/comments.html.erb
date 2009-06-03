@@ -1,0 +1,76 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.tpc_comment') %>一覧
+<% end %>
+<% content_for(:sub_title) do %>
+	<%= h @topic.tpc_topic.title %>
+<% end %>
+
+
+<div class="clearfix">
+	<div id="contents_title" class="span-12">
+		<h2><span><%= t('view.noun.tpc_comment') %>一覧</span></h2>
+	</div>
+</div>
+
+<div class="top_topic_box box_outer">
+<div class="wrap1">
+<div class="wrap2">
+<div class="wrap3">
+<div class="box_inner">
+	
+	<% if @comments.size.zero? %>
+		<%= t('view.noun.tpc_comment') %>はありません。
+	<% else %>
+		<%= render :partial => 'comment', :collection => @comments %>
+	<% end %>
+	</div>
+
+</div>
+</div><!--/wrap3-->
+</div><!--/wrap2-->
+</div><!--/wrap1-->
+
+<div class="pager_box  pager_box_bottom prepend-top clearfix">
+	<%= paginate @comments %>
+</div><!--pager_box-->
+
+<% content_for(:sidemenu) do %>
+	<div  class="W5R4B9df box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+			<div class="box_inner clearfix">
+			<h6><span>menu</span></h6>
+			<ul>
+				<li><%= link_to "#{t('view.noun.tpc_topic')}に戻る", :action => 'show', :id => @topic.tpc_topic %></li>
+			</ul>
+			</div><!--/box_inner-->
+		</div><!--/wrap3 -->
+		</div><!--/wrap2 -->
+		</div><!--/wrap1 -->
+	</div><!--/friend_box-->
+	
+	<div id="friend_box" class="box_outer clearfix">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="box_inner">
+			<div class="title"><h6>メンバー</h6></div>
+			<div class="profile_img_panel">
+				<% @members.each do |member| %>
+					<% link_to :controller => :base_profile, :action => :show, :id => member.base_user_id do %>
+						<%= safe_profile_view(member.base_user.base_profile, :thumb, {:size => "40x40", :alt => member.base_user.show_name}) %>
+						<span><%=h member.base_user.show_name %></span>
+					<% end %>
+				<% end %>
+			</div><!--/profile_img_panel-->
+			<div class="more ">
+				<%= link_to "すべて表示", :controller => :cmm_member, :action => :list, :id  => @topic.cmm_community.id%>
+			</div>
+		</div><!--/box_inner-->
+		</div><!-- /wrap3 -->
+		</div><!-- /wrap2 -->
+		</div><!-- /wrap1 -->
+	</div><!--/friend_box-->
+<% end %>
+

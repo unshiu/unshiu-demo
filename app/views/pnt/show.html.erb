@@ -1,0 +1,69 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.pnt_point') %>履歴
+<% end %>
+
+<div class="clearfix">
+	<div id="contents_title" class="span-15">
+		<h2>保持<%= t('view.noun.pnt_point') %>:<span class="high_light"><%= @all_point %></span>ポイント</span></h2>
+	</div>
+</div>
+
+<div class="clearfix">
+
+	<div class="clearfix">
+		<ul id="point_box_1" class="button_bar small">
+			<li class="first_child">
+				<%= link_to "<span class='button_on'>ポイントTOP</span>", :action => :index %>
+			</li>
+		</ul>
+		<span class="point_service"><%= t('view.noun.pnt_point') %>種別：</span>
+		<ul　id="point_box_2" class="button_bar clearfix small">
+			<% @pnt_points.each do | pnt_point | %>
+			<li>
+				<%= link_to "<span>#{pnt_point.pnt_master.title}</span>", :action => :show, :id => pnt_point.id %>
+			</li>
+			<% end %>
+		</ul>
+	</div>
+	
+	<% if @pnt_histories %>
+	
+		<table id="point_show" cellspacing="0" cellpadding="0">
+			<caption>
+				<div class="clearfix">
+					<div class="point_history_title">
+						<%=h @pnt_histories.to_a[0].pnt_point.pnt_master.title %>
+					</div>
+					<%= paginate @pnt_histories %>
+				</div>
+			</caption>
+				<thead>
+				<tr>
+					<th>年月日</th>
+					<th>サービス名</th>
+					<th>獲得/利用ポイント</th>
+					<th>残ポイント</th>
+				</tr>
+				</thead>
+				<tfoot>
+				</tfoot>
+			<tbody>
+				<% @pnt_histories.each do |pnt_history| %>
+				<tr class="<%= cycle('', 'even') %>">
+					<td><%= datetime_to_s(pnt_history.updated_at) %></td>
+					<td><%=h pnt_history.message %></td>
+					<td class="point_vary point_<%= point_difference_type(pnt_history.difference) %>">
+						<%=h pnt_history.difference %>
+					</td>
+					<td class="point_whole"><%=h pnt_history.amount %></td>
+				</tr>
+				<% end %>			
+			</tbody>
+		</table>
+	
+	<% else %>
+		履歴はありません。
+	<% end %>
+</div>
+
+<%= paginate @pnt_histories %>

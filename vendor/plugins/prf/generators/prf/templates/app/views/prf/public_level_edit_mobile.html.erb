@@ -1,0 +1,19 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.prf_profile') %>公開設定
+<% end %>
+
+<% form_tag :action => 'public_level_confirm' do %>
+	<div style="<%= style_value('form_style') %>">
+		<%= error_messages_for 'prf_profile' %>
+		<div>
+			<span style="color:#f75009;"></span><%= t('activerecord.attributes.prf_profile.public_level') %><br />
+			<%= select 'prf_profile', 'public_level', select_type(PrfProfile::PUBLIC_LEVELS) %>
+		</div>
+		
+		<%= image_tag_for_default 'Spec_02.gif' %><br />
+	</div>
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+	<div style="text-align:center">
+		<%= submit_tag '確認' %>
+	</div>
+<% end %>

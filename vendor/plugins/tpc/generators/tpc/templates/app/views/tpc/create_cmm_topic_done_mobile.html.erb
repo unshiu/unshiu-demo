@@ -1,0 +1,5 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.tpc_topic') %>作成
+<% end %>
+
+<%= link_basic_to "作成した#{t('view.noun.tpc_topic')}を見る", :controller => 'tpc_cmm', :action => 'show', :id => @topic_info.id %><br />

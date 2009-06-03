@@ -1,0 +1,40 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.prf_profile') %>
+<% end %>
+<% content_for(:sub_title) do %>
+	編集確認
+<% end %>
+
+<% form_tag :action => 'update' do %>
+
+<% @question_set.prf_question_set_partials.each do |qsp| %>
+<div>
+	<h3><%= qsp.prf_question.body %></h3>
+	<% if qsp.prf_question.type_select? || qsp.prf_question.type_radio? %>
+		<% answer = @new_answers[qsp.prf_question_id] %>
+		<%= h answer_label(answer) %>
+		<%= hidden_field_tag "q[#{qsp.prf_question.id}]", answer.prf_choice_id %>
+		<% if !answer.prf_choice.nil? && answer.prf_choice.has_free_area? %>
+			<%= hidden_field_tag "c[#{qsp.prf_question.id}][#{answer.prf_choice_id}]", answer.body %>
+		<% end %>
+	<% elsif qsp.prf_question.type_checkbox? %>
+		<% if @new_answers[qsp.prf_question_id] %>
+			<% for answer in @new_answers[qsp.prf_question_id] %>
+				<%= h answer_label(answer) %>
+				<%= hidden_field_tag "q[#{qsp.prf_question.id}][#{answer.prf_choice_id}]", answer.prf_choice_id %>
+				<% if answer.prf_choice.has_free_area? %>
+					<%= hidden_field_tag "c[#{qsp.prf_question.id}][#{answer.prf_choice_id}]", answer.body %>
+				<% end %>
+			<% end %>
+		<% end %>
+	<% elsif qsp.prf_question.type_text? || qsp.prf_question.type_textarea? %>
+		<%= hbr @new_answers[qsp.prf_question_id].body %>
+		<%= hidden_field_tag "q[#{qsp.prf_question.id}]", @new_answers[qsp.prf_question_id].body %>
+	<% end %>
+</div>
+<% end %>
+	<div>
+		<%= submit_tag '決定' %>
+		<%= cancel_tag %>
+	</div>
+<% end %>

@@ -1,2 +1,0 @@
-module MsgReceiverHelperModule  
-end

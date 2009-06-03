@@ -1,0 +1,20 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.tpc_comment') %>削除
+<% end %>
+
+以下の<%= t('view.noun.tpc_comment') %>を削除していいですか？
+
+<hr style="<%= style_value('hr1') %>"/>
+
+<div style="<%= style_value('small_info_right') %>">
+<%= h @comment.base_user.show_name %><br/>
+</div>
+<%= hbr @comment.body %>
+
+<%= image_tag_for_default 'Spec_04.gif' %><br />
+<% form_tag :action => 'delete_comment_complete', :id => @comment.id do %>
+	<div style="text-align:center">
+		<%= submit_tag '削除' %>
+		<%= cancel_tag %>
+	</div>
+<% end %>
