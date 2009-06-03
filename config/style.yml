@@ -1,0 +1,24 @@
+body: '' #　空であることを明記するために''を書いている
+hr: margin:5px 0px 5px 0px;
+
+ad: margin:10px 0px 10px 0px;text-align:center;
+header_title: border:1px solid black;margin:0px 10px 0px 10px;
+
+sub_title: background-color:#6299C5; color:#636363;
+sub_title_hr: background-color:#000000; height:2px;
+small_info_right: text-align:right;font-size:x-small;
+
+error_div: background-color:#FFE7E7;width:90%;padding:2px;margin:4px auto;border:1px solid #FFCBE2;
+error_div_message: color:#024873;
+
+# リストで偶数行と奇数行
+list_even: background-color:#FFF7E7;
+list_odd: # nothing
+
+list_cell: color:#F75200
+
+form_style: background-color:#FFF7E7; text-align:left;
+inner_title: background-color:#6299C5; color:#636363; text-align:left;
+hr1: border-style:solid; border-color:#6299C5; background-color:#75BF2A; height:1px;
+
+footer: background-color:#000000; color:#FFFFFF; text-align:center

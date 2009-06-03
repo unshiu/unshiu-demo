@@ -1,0 +1,12 @@
+<div id="footer_col"　class="span-24">
+	<div id="footer_box" class="container">
+		<div class="copyright">Copyright&copy; 2001-<%= Time.now.strftime("%Y") %> Drecom Co.,Ltd. All Rights Reserved.</div>
+		<div class="link">
+			<%= link_to "このサイトについて", :controller => :base_guides %>&nbsp;&nbsp;
+			<%= link_to "お問い合わせ", :controller => :base, :action => 'inquire_input' %>&nbsp;&nbsp;	
+			<%= link_to "規約", :controller => :base_terms %>&nbsp;&nbsp;
+			<%= link_to "プライバシーポリシー", :controller => :base_privacy %>&nbsp;&nbsp;
+			<%= link_to "モバイル", :controller => :base_guides, :action => 'mobile' %>
+		</div>
+	</div><!--/footer_box-->
+</div><!--/footer_col-->

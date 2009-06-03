@@ -1,0 +1,39 @@
+common: &common
+
+  service_name: unshiu                                           # サービス名
+
+  session_key: _unshiu_session_id                                # セッションの名称
+  application_domain: localhost:3000
+  
+  # 画像設置rootディレクトリ
+  file_column_image_web_root: system/images/
+  file_column_image_root_path: public/system/images
+  
+  # chkconfig出力ディレクトリ
+  chkconfig_outputfile_path: public/system/files/chkconfig
+  # crontab出力ディレクトリ
+  crontab_outputfile_path: public/system/files/cron
+  
+  # メール送信設定
+  action_mailer_setting_address: mail.sample.unshiu.jp
+  action_mailer_setting_port: 25
+  action_mailer_setting_domain: sample.unshiu.jp
+  # 送信先アドレスが存在しなかった際にメールが返されるアドレス
+  return_path_adddress: root@sample.unshiu.jp
+  
+  # tokyotyrant
+  tokyotyrant_on : false # 利用するか
+  tokyotyrant_timeout: 60
+
+development:
+  <<: *common
+
+test:
+  tokyotyrant_on : true
+
+  file_column_image_root_path: test/tmp/file_column
+  <<: *common
+
+production:
+  application_domain: sample.unshiu.jp
+  <<: *common

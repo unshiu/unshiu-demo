@@ -1,0 +1,7 @@
+page.replace_html "#{@model_name}_#{@field_name}_3i", ""
+(1..@day_count).each do |i|
+  page.insert_html :bottom, "#{@model_name}_#{@field_name}_3i", "<option value=\"#{i}\">#{i}</option>"
+end
+# 年月を選択すると、日の選択が1に戻るのを回避。
+# ただし、31日を選択した状態で2月などを選択すると、エラーが起こるのでその場合は1日を選択する
+page["#{@model_name}_#{@field_name}_3i"].selectedIndex = (@day.to_i <= @day_count) ? (@day.to_i - 1) : 0

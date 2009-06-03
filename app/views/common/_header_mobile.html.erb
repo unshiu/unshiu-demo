@@ -1,0 +1,36 @@
+<!--トップロゴ-->
+<div style="background-color:#FFFFFF; text-align:center;">
+	<img alt="unshiu" src="/images/default/logo.gif"><br />
+</div>
+
+<!--ページロゴ-->
+<div style="font-size:medium; background-color:#6299C5; color:#636363; text-align:center;">
+	<%= @content_for_header_title ||= "HOME" %>
+	<br />
+</div>
+<br/>
+<!--広告バナー-->
+<%= image_tag_for_default 'banner.jpg' %><br />
+<br />
+
+<div style="text-align:right">
+<% if logged_in? %>
+	<span style="color:#FF0000">&#xE6D8;</span>
+	<%= link_to_portal "#{t('view.noun.my_portal')}", {:controller => 'base', :action => 'portal'}, {:accesskey => 0} %><br />
+<% else %>
+	<span style="color:#FF0000">&#xE6AE;</span>
+	<%= link_to_menu "#{t('view.noun.base_user')}登録", { :controller => 'base_signup', :action => 'presignup' } %><br/>
+	<span style="color:#FF0000">&#xE6D8;</span>
+	<%= link_to_portal "ログイン", {:controller => 'base_user', :action => 'login', :return_to => controller.request.request_uri}, {:utn => 'utn'} %><br />
+<% end %>
+</div>
+
+<% unless @content_for_sub_title.empty? %>
+
+	<div style="<%= style_value('sub_title') %>">
+		<%= @content_for_sub_title %><br />
+	</div>
+
+<% end %>
+
+<%= render 'common/flash_info' %>

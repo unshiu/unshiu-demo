@@ -1,0 +1,267 @@
+﻿/* -------------------------------------------------------------- 
+
+	unshiu expand styles.css
+
+	------------------------
+	# Typography
+	# Container
+	# Pager
+	# Menu
+	  - Menu Lists
+	  - Menu Search
+	# Profile
+	# Sub Menu
+	# Contents
+	# Side Contents
+	  - Friend Box
+
+-------------------------------------------------------------- */
+
+/*
+   typography
+-------------------------------------------------------------- */
+body {font-size:93%;color:#222;background:#fff;font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;}
+h1, h2, h3, h4, h5, h6 {font-weight:normal;color:#111;}
+h1 {font-size:3em;line-height:1;margin-bottom:0.5em;}
+h2 {font-size:2em;margin-bottom:0.75em;}
+h3 {font-size:1.5em;line-height:1;margin-bottom:1em;}
+h4 {font-size:1.2em;line-height:1.25;margin-bottom:1.25em;}
+h5 {font-size:1em;font-weight:bold;margin-bottom:1.5em;}
+h6 {font-size:1em;font-weight:bold;}
+
+
+a {color:#009;text-decoration:none;}
+a:link {color:#009;text-decoration:none;}
+a:focus, a:hover {color:#000;text-decoration:underline;}
+
+/* container
+-------------------------------------------------------------- */
+
+#container_inner{background:#b2b2b2;}
+#header{
+	padding-top:20px;
+	background:#b2b2b2;
+}
+#header_inner{
+}
+/* pager
+-------------------------------------------------------------- */
+.pager{
+font-size:93%;
+}
+.turnover{
+	float:right;
+}
+.turnover span{
+	display:block;
+	float:left;
+	width:8em;
+	text-align:center;
+}
+.turnover span a{
+	margin:auto;
+}
+.pagenation span {
+	background:#f2f2f2;
+	margin:1px;
+	width:3em;
+}
+.pagenation span a {
+	padding-left:1em;
+	padding-right:1em;
+	line-height:1.2em;
+}
+
+/* Menu
+-------------------------------------------------------------- */
+#logo{
+	margin-top:0px;
+}
+/* Menu
+-------------------------------------------------------------- */
+/* Menu typography
+-------------------------------------------------------------- */
+/* Menu Lists
+-------------------------------------------------------------- */
+#menu ul          {  margin:0px;list-style-type: none;font-weight:bold;}
+#menu li a,
+#menu li a:link,
+#menu li a:hover{
+		display:block;	margin-left:4px;padding-left:34px;line-height:32px;color:#ffffff;	background-repeat:no-repeat;}
+#menu li #menu_top a,#menu li #menu_top a:link{margin-left:0px;padding-left:0px;}
+#menu_home a{	background:url(/images/default/icon/menu_home.gif);}
+#menu_mypage a{	background:url(/images/default/icon/menu_mypage.gif);}
+#menu_messagebox a{	background:url(/images/default/icon/menu_mail.gif);}
+#menu_communication a{	background:url(/images/default/icon/menu_community.gif);}
+#menu_properties a{	background:url(/images/default/icon/menu_properties.gif);}
+
+#menu_home          a:hover {	background:url(/images/default/icon/menu_home.gif);}
+#menu_mypage        a:hover {	background:url(/images/default/icon/menu_mypage.gif);}
+#menu_messagebox    a:hover {	background:url(/images/default/icon/menu_mail.gif);}
+#menu_communication a:hover {	background:url(/images/default/icon/menu_community.gif);}
+#menu_properties    a:hover {	background:url(/images/default/icon/menu_properties.gif);}
+
+#menu_list li  {	position: relative;float:left;}
+#menu_list ul {
+	position: absolute;
+	top: -999em;
+	left: -1px;
+}
+#menu_list li:hover ul,
+#menu_list li.sfHover ul {
+	top: 40px;
+}
+#menu_list ul li {
+	border: 0;
+	float: none;
+}
+#menu_list ul a {
+	width: 100px;
+	border: 1px solid #000;
+	border-bottom: 0;
+	padding-right: 20px;
+	white-space: nowrap;
+}
+
+
+/* Menu Search
+-------------------------------------------------------------- */
+#search_col{
+}
+#search_col_inner{
+	background-color:#ffffff;
+	background-image:url(/images/default/icon/search_col.gif);
+}
+#search_col ul    { list-style-type: none; }
+
+#search_list{
+	float:left;
+	margin:0px;
+	margin-left:30px;
+}
+#search_inputfield{
+	float:left;
+	line-height:36px;
+}
+#search_inputfield input{
+	color:#727272;
+	border-width:0px;
+}
+#search_inputfield input:hover{
+	color:#999999;
+	border-width:0px;
+}
+
+/* Profile
+-------------------------------------------------------------- */
+#profile_image_col{
+	float:left;
+}
+#profile_image_col a{
+	margin:0pt 1.5em 1.5em ;
+}
+#profile_detail_col{
+	color:#fff;
+}
+#contact_send_message_col{
+	background:#ffffff;
+	text-align:center;
+	margin:auto;
+}
+/* Sub Menu
+-------------------------------------------------------------- */
+
+/* Sub Menu Table
+-------------------------------------------------------------- */
+#sub_menu table{
+	border-collapse:separate;
+	border:solid 1px #232323;
+	margin-bottom:0em;
+}
+#sub_menu_table td{
+	background:#ffffff;
+	height:40px;
+}
+.sub_menu_title a{
+	text-align:center;
+	margin:auto;
+}
+
+.sub_menu_on td{
+	border: solid 1px #000000;
+}
+
+/* Sub Menu List
+-------------------------------------------------------------- */
+#sub_menu ul    { list-style-type: none; font-weight:bold;}
+#sub_menu_list li{
+	float:left;
+}
+.sub_menu_on{background:#ffffff;}
+.sub_menu_off{background:#ffffff;}
+
+#sub_menu .tab_on{margin:0px 1px 0px 1px;padding:1px 0px 2px 0px;}
+#sub_menu .tab_off{margin:1px 1px 1px 1px;background-image:url(/images/default/gradation.gif);}
+
+#sub_menu a:hover .tab_off{
+	margin:0px 1px 0px 1px;padding:1px 0px 1px 0px;
+	background:#eeeeee;
+}
+#sub_menu a img{
+	margin:4px;
+}
+#sub_menu a .sub_menu_title{
+	color:#737373;
+}
+#sub_menu a:hover .sub_menu_title{
+	color:#737373;
+	text-decoration:underline;
+}
+.sub_menu_title_col{
+	margin-left:-40px;
+	width:100%;
+	float:right;
+	vertical-align:32;
+}
+.sub_menu_title{
+	margin-left:32px;
+	text-align:center;
+	line-height:40px;
+}
+/* Contents
+-------------------------------------------------------------- */
+#contents_inner{
+	background:#ffffff;
+}
+
+/* Side_Contents
+-------------------------------------------------------------- */
+#side_contents_inner{
+	text-align:center;
+	margin:auto;
+}
+/* Side_Contents
+					 Friend Box
+-------------------------------------------------------------- */
+#common_friend_col .title{
+	width:100%;
+	text-align:left;
+}
+#common_friend_col{
+	background:#e9e9e9;
+}
+#common_friend_col .box{
+	background:#e9e9e9;
+}
+#friend_col .box{
+	background:#e9e9e9;
+}
+.friend_col_tilte{
+	text-align:left;
+}
+#common_friend_col_inner img{
+	margin:2px;
+}
+#profile_img_panel a img span{
+	float:lef;
+}

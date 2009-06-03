@@ -1,0 +1,48 @@
+server:
+  memcached: memcached
+  address: 0.0.0.0
+  port: 11211
+  memory: 512
+  user: user
+
+defaults:
+  ttl: 180
+  readonly: false
+  urlencode: false
+  c_threshold: 10000
+  compression: true
+  debug: false
+  namespace: app
+  sessions: false
+  session_servers: false
+  fragments: false
+  memory: 64
+  servers: localhost:11211
+  benchmarking: true
+  raise_errors: true
+  fast_hash: false
+  fastest_hash: false
+
+development:
+  sessions: false
+  fragments: false
+  servers: localhost:11211
+
+# turn off caching
+test: 
+  disabled: true
+
+testserver:
+  user: user
+  memory: 512
+  benchmarking: false
+  servers:
+    - server
+
+production:
+  user: user
+  memory: 512
+  benchmarking: false
+  raise_errors: false # memcacheが落ちてもサービスは継続する
+  servers:
+    - <%= memcache_server %>

@@ -1,0 +1,22 @@
+<div id="profiles_col" class="container  prepend-top">
+
+	<div id="profile_image_col" class="span-2 first ">
+		<% link_to :controller => 'base_profile', :action=> 'show', :id => base_user.id do %>
+			<%= safe_profile_view(base_user.base_profile, :large, { :width => "40", :height => "40" }) %>
+		<% end %>
+	</div><!--/profile_image_col-->
+
+	<div id="profile_detail_col" class="span-22  last ">
+		<div id="profile_detail_col_inner" class="">
+			<div id="profile_name" class="profile_details">		
+				<%= link_to base_user.show_name, :controller => 'base_profile', :action=> 'show', :id => base_user.id %>
+			</div><!--/profile_name-->
+		</div><!--/profile_detail_col_inner-->
+	</div><!--/profile_detail_col-->
+
+	<% if logged_in? && !current_base_user.me?(base_user.id) %>
+		<div id="profile_logtime"  class="profile_details">
+			最終ログインは<%= login_status(base_user.latest_login) %>です。
+		</div><!--/profile_logtime-->
+	<% end %>
+</div><!--/profiles_col-->

@@ -1,0 +1,44 @@
+<a href="#2" accesskey="2" name="2"></a>
+
+<!--トップロゴ-->
+      <div style="background-color:#000000; color:#FFFFFF; text-align:right;">
+        <%= image_tag_for_default 'Spec_04.gif' %><br />
+        サイト名<br />
+        <%= image_tag_for_default 'Spec_04.gif' %>
+      </div>
+
+<!--ページロゴ-->
+      <div style="font-size:medium; background-color:#6299C5; color:#FFFFFF; text-align:center;">
+        <%= image_tag_for_default 'Spec_04.gif' %><br />
+        <%= @content_for_header_title ||= "HOME" %><br />
+        <%= image_tag_for_default 'Spec_04.gif' %>
+      </div>
+      <%= image_tag_for_default 'Spec_08.gif' %><br />
+	  
+	  <div style="text-align:right">
+	  	<% if logged_in? %>
+	  		<span style="color:#FF0000">&#xE6D8;</span>
+	  		<%= link_to_portal "#{t('view.noun.my_portal')}", {:controller => 'base', :action => 'portal'}, {:accesskey => 0} %><br />
+		<% else %>
+	  		<span style="color:#FF0000">&#xE6D8;</span>
+	  		<%= link_to_portal "ログイン", {:controller => 'base_user', :action => 'login', :return_to => controller.request.request_uri}, {:utn => 'utn'} %><br />
+		<% end %>
+	  </div>
+
+<a id="top"></a>
+
+<% if @content_for_sub_title != nil %>
+
+<div style="<%= style_value('sub_title') %>">
+  <div style="<%= style_value('sub_title_hr') %>">
+  	<%= image_tag_for_default 'Spec_02.gif' %><br/>
+  </div>
+  <%= image_tag_for_default 'Spec_02.gif' %><br />
+  <%= @content_for_sub_title %><br />
+  <%= image_tag_for_default 'Spec_02.gif' %>
+</div>
+<%= image_tag_for_default 'Spec_04.gif' %><br />
+
+<% end %>
+
+<%= render 'common/flash_info' %>

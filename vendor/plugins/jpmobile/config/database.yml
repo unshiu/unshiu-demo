@@ -1,0 +1,15 @@
+development:
+  jpmobile:
+    adapter: mysql
+    database: unshiu_development
+    username: unshiu
+    password: unshiu 
+    host: localhost
+
+test:
+  jpmobile:
+    adapter: mysql
+    database: unshiu_test
+    username: unshiu
+    password: unshiu 
+    host: localhost

@@ -1,0 +1,15 @@
+<div style="<%= style_value('ad') %>">
+<%= image_tag 'banner_big.jpg' %><br />
+[AD]　テキスト広告テキスト広告
+</div>
+
+<hr>
+
+<% if logged_in? %>
+<%= link_basic_to '[1]トップ', {:controller => 'base', :action => 'portal'}, {:accesskey => 1} %><br />
+<%= link_basic_to 'ログアウト', :controller => 'base_user', :action => 'logout' %><br />
+<hr>
+<%= link_basic_to '友達をこのサービスに招待する', :controller => 'base_invite', :action => 'new' %>
+<% else %>
+<%= link_basic_to '[1]トップ', {:controller => 'base', :action => 'index'}, {:accesskey => 1} %><br />
+<% end %>

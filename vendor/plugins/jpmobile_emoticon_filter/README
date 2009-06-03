@@ -1,0 +1,26 @@
+JpmobileEmoticonFilter
+======================
+
+Jpmobileの内部表現（Unicode）を絵文字（imgタグ）に変換できるようになります。
+全てdocomoのUnicode表現に変換した後、対応する絵文字のIMGタグで置換します。
+絵文字の画像は添付していません。
+TypePadの絵文字画像をダウンロードして、RAILS_ROOT/images/emoticons/*.gifに置いてください。
+（ファイル名はそのままで）
+絵文字画像のライセンスに基づいて使用してください。
+
+Example
+=======
+
+class MobileController < ApplicationController
+  mobile_filter :hankaku => true
+end
+
+class PcController < ApplicationController
+  emoticon_filter  # これだけでOK
+end
+
+emoticon_filterのオプションはとりあえず以下のようなのを用意してます。
+:classname => 'emoticon'  # 絵文字IMG要素のクラス名
+:path      => 'emoticons' # 絵文字画像のパス（imagesからの相対パス）
+
+Copyright (c) 2008 taslam, released under the MIT license

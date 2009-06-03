@@ -1,0 +1,187 @@
+require 'mongrel_cluster/recipes'
+require File.join(File.dirname(__FILE__), 'boot')
+require File.join(File.dirname(__FILE__), '../config/environment')
+require File.join(File.dirname(__FILE__), '../lib/app_resources.rb')
+
+# -----------------------------------------------------------
+# server basic setting 
+# -----------------------------------------------------------
+#set :use_sudo, false
+set :user_ip, "124\.32\.97\.(234|236)"
+
+# -----------------------------------------------------------
+# user setting 
+# -----------------------------------------------------------
+set :user_name, "user_name"
+
+# -----------------------------------------------------------
+# application setting 
+# -----------------------------------------------------------
+set :application, "unshiu"
+set :deploy_to, "/usr/local/site/#{application}"
+
+# -----------------------------------------------------------
+# scm setting 
+# -----------------------------------------------------------
+set :scm_command, 'env LANG=C svn'
+set :repository_version, ENV['version']
+set :ssh_options, :forward_agent => true
+set :repository, ""
+default_run_options[:pty] = true
+set :user, ""
+
+# =========================================================================
+# recipes
+# =========================================================================
+require File.join(File.dirname(__FILE__), "deployments/#{ENV['RAILS_ENV']}/recipes")
+
+# =========================================================================
+# Tasks
+# =========================================================================
+
+after  :"deploy:update",   :"config:setup"
+after  :"deploy:update",   :"mongrel:cluster:restart"
+after  :"deploy:update",   :"apache:restart"
+after  :"deploy:update",   :"backgroundrb:stop"
+after  :"deploy:update",   :"backgroundrb:start"
+
+namespace :config do
+
+  desc "Copy configuration files for specific environment. (see config/deployments/)"
+  task :setup do
+    deployments = File.join(File.dirname(__FILE__), 'deployments')
+    environment = File.join(deployments, deployment_code)
+    
+    RAILS_ROOT = current_path
+    
+    Dir.chdir(environment) do |path|
+      Dir.glob("*.{yml,rb,conf}") do |file|
+        next if file == 'recipes.rb'
+        config = ERB.new(File.read(file))
+        put config.result(binding), File.join(current_path, "config", file)
+      end
+    end
+    
+  end
+
+end
+
+namespace :memcached do
+
+  desc "start memcached server process."
+  task :start, :roles => :memcached do
+    run "#{current_path}/script/memcached start"
+  end
+
+
+  desc "stop memcached server process."
+  task :stop, :roles => :memcached do
+    run "#{current_path}/script/memcached stop"
+  end
+
+
+  desc "restart memcached server process."
+  task :restart, :roles => :memcached do
+    run "#{current_path}/script/memcached restart"
+  end
+
+end
+
+namespace :backgroundrb do
+
+  desc "start backgroundrb server process."
+  task :start, :roles => :backgroundrb do
+    run "cd #{current_path} && RAILS_ENV=#{backgroundrb_environment} nohup ./script/backgroundrb start 2>&1 1>/dev/null"
+  end
+
+
+  desc "stop backgroundrb server process."
+  task :stop, :roles => :backgroundrb do
+    run "cd #{current_path} && ./script/backgroundrb stop"
+  end
+
+
+  desc "restart backgroundrb server process."
+  task :restart, :roles => :backgroundrb do
+    run "cd #{current_path} && ./script/backgroundrb restart"
+  end
+
+end
+
+namespace :apache do
+
+  desc "Copy configuration files for specific environment. (see config/deployments/apache)"
+  task :setup, :roles => :web do
+    confdir = File.join(File.dirname(__FILE__), "deployments/#{deployment_code}/apache/")
+  
+    Dir.chdir(confdir) do |path|
+      Dir.glob("**/*.conf") do |file|
+        config = ERB.new(File.read(file), nil, 2)
+        put config.result(binding), File.join(apache_home, "conf", file)
+      end
+    end
+  end
+
+  desc "start apache server process."
+  task :start, :roles => :web do
+    run "/etc/init.d/apache start"
+  end
+
+
+  desc "stop memcached server process."
+  task :stop, :roles => :web do
+    run "/etc/init.d/apache stop"
+  end
+
+
+  desc "restart memcached server process."
+  task :restart, :roles => :web do
+    run "/etc/init.d/apache restart"
+  end
+
+end
+
+namespace :deploy do
+  namespace :web do
+    desc "web server mentenance mode start"
+    task :disable, :roles => :web, :except => { :no_release => true } do
+      require 'erb'
+      on_rollback { run "rm #{shared_path}/system/maintenance.html" }
+
+      reason = ENV['REASON']
+      deadline = ENV['UNTIL']
+	    
+      template = File.read(File.join(File.dirname(__FILE__), "../public/maintenance.html"))
+      result = ERB.new(template).result(binding)
+
+      put result, "#{shared_path}/system/maintenance.html", :mode => 0644
+    end
+    
+    desc "web server mentenance mord stop"
+    task :enable, :roles => :web, :except => { :no_release => true } do
+      run "rm #{shared_path}/system/maintenance.html"
+    end
+  end
+end
+
+namespace :deploy_check do
+  
+  desc "web server chkconfig check"
+  task :web_chkconfig, :roles => :web do
+    run "chkconfing --list | grep httpd2"
+    run "ruby #{current_path}/script/check_chkconfig.rb httpd2 #{current_path}/#{AppResources[:init][:chkconfig_outputfile_path]}/"
+  end
+  
+  desc "db server chkconfig check"
+  task :db_chkconfig, :roles => :db do
+    run "chkconfing --list | grep mysql"
+    run "ruby #{current_path}/script/check_chkconfig.rb mysql #{current_path}/#{AppResources[:init][:chkconfig_outputfile_path]}/"
+  end
+
+  desc "all server cron check"
+  task :crontab, :roles => {:web, :db} do
+    run "crontab -l"
+    run "ruby #{current_path}/script/check_cron.rb #{current_path}/#{AppResources[:init][:crontab_outputfile_path]}"
+  end
+  
+end

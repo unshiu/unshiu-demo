@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML lang="ja-JP">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title><%= (@content_for_header_title ||= "HOME").strip %> - <%= (@content_for_sub_title ||= "").strip %> - unshiu</title>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'unshiu' %>
+
+  <%= yield :js %>
+
+  <%= stylesheet_link_tag "blueprint/screen.css", :media => 'all' %>
+  <%= stylesheet_link_tag "blueprint/plugins/buttons/screen", :media => 'all' %>
+  <%= stylesheet_link_tag "blueprint/plugins/fancy-type/screen", :media => 'all' %>
+  <%= stylesheet_link_tag "jquery-theme/ui.all.css", :media => 'all' %>
+  <%= stylesheet_link_tag "styles", :media => 'all' %>
+
+</head>
+
+<BODY id="domainname" class="" >
+<div id="container_col" class="container showgrid">
+	<div id="container_box" class="clearfix">
+		<div id="header_col" class="container">
+			<div id="header_box">
+				<div id="logo_col" class="span-6 first">
+					<div id="logo_box" >
+						<a href="/"><img src="/images/default/logo/logo-white.gif" width="195" height="67" border="0"></a>
+					</div><!--/logo_box-->
+				</div><!--/logo_col-->
+				
+				<div id="menu_and_header_search_col" class="span-18 last">
+					<%= render 'common/header_search' %>
+					<%= render 'common/header_menu' %>
+				</div><!--/search_col_prepend-->
+					
+				<% if @content_for_header_profile %>
+					<%= yield :header_profile %>
+				<% else %>
+					<% if logged_in? %>
+						<%= render :partial => 'common/header_profile', :locals => {:base_user => current_base_user} %>
+					<% end %>
+				<% end %>
+				<div class="clear"></div>
+				
+				<% if logged_in? %>
+					<%= render 'common/header_submenu' %>
+				<% end %>
+				
+				</div><!--/menu_and_search_col-->
+			</div><!--/header_inner-->
+		</div><!--/header-->
+		
+		<div id="contents_col" class="container">
+			<div id="contents_box" class="clearfix">
+				<div id="main_contents_col" class="span-18 prepend-top  ">
+					<div id="main_contents_box">
+					
+					<%= render 'common/flash_info' %>
+		
+					<%= yield  %>
+				
+					</div><!--/main_contents_inner-->
+				</div><!--/main_contents-->
+				
+				<div id="side_contents_col" class="span-6 prepend-top last">
+					<div id="side_contents_box">
+		
+					<%= yield :sidemenu %>
+					
+					</div><!--/side_contents_inner-->
+				</div><!--/side_contents-->
+				<br class="clear">
+			</div><!--/contents_inner-->
+		</div><!--/contents-->
+		
+		<%= render 'common/footer' %>
+		
+	</div><!--/container_inner-->
+</div><!--/container-->
+</BODY>
+</HTML>

@@ -1,0 +1,53 @@
+<script type="text/javascript">
+
+  $(function() {
+		$("ul#sub_sub_menu_list").css({display:"none"}),
+		$("li#addmenu").live('click',function() {
+			$("ul#sub_sub_menu_list").animate(
+				{height: "toggle"},
+				{duration: "fast"}
+			);
+		});
+
+		setup_sub_menu_drag_and_drop();
+  });
+
+  function setup_sub_menu_drag_and_drop() {
+		$("ul#sub_sub_menu_list li.draggable_menu").draggable({containment : '#sub_menu_col'});
+		$("ul#sub_menu_list li.draggable_menu").draggable({containment : '#sub_menu_col'});
+		$("ul#sub_menu_list li.draggable_menu").droppable({
+			activeClass : 'droppable-hover',
+			drop: function(event, ui) {
+				var num = $(this).attr("id").match(/submenu_number_(\d+)/)[1];
+				var base_menu_master_id = ui.draggable.attr("id").match(/submenu_master_id_(\d+)/)[1];
+				
+				<%= remote_function(:url => {:controller => 'base', :action=>'menus_update'}, 
+				                   	:with =>"'base_menu_master_id='+base_menu_master_id+'&num='+num") %>
+			}
+		});
+  }
+
+
+</script>
+
+<div id="sub_menu_col" class="prepend-top container">
+<ul id="sub_menu_list" class="sub_menu_tab">
+		<%= sub_tab_menus %>
+		
+		<li class="span-2 " id="addmenu">
+			<a href="#">
+			<div class="submenu_inner sub_menu_off tab_off">
+				<div class="sub_menu_title_col">
+					<div class="sub_menu_title hide">
+						その他機能を選択もしくはメニューに追加
+					</div>
+				</div>
+				<img src="/images/default/icon/addmenu.gif" width="32" height="32" border="0" alt="">
+			</div>
+			</a>
+				<ul id="sub_sub_menu_list" class="sub_menu_tab">
+					<%= sub_sub_tab_menus %>
+				</ul>
+		</li>
+</ul>
+</div><!--/sub_menu-->

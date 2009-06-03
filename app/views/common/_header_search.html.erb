@@ -1,0 +1,39 @@
+<div id="header_search_col" class="span-12 prepend-6 first last" style="text-align:right;">
+	<div style="float:right">
+		<% if logged_in? %>
+			<%= current_base_user.login %> | 
+			<%= link_to "ログアウト", :controller => :base_user, :action => :logout %>
+			<% if current_base_user_manage? %>
+				| <%= link_to "管理画面", :controller => 'manage/mng', :action => :index %>
+			<% end %>
+			&nbsp;
+		<% end %>
+	</div>
+	<div class="clear"></div>
+	<div id="header_search_box_wrap" class="clearfix clear">
+		<div id="header_search_box" class="clearfix clear">
+		<% form_tag :controller => 'base', :action => 'search' do %>
+			<a href="#" style="">
+				<img src="/images/default/icon/search_col.gif" alt="" style="">
+				<span id="header_search_category">▼ユーザ</span>
+				<img src="/images/default/icon/naviarrow_under.gif" alt="" style="">
+			</a>
+			<%= text_field 'base_search', 'keyword', {:class => "span-4"} %>
+			<%= hidden_field('base_search', 'scope', :value => "base_user") %>
+			
+			<%= submit_button_tag("検索")%>
+		<% end %>
+		</div><!--/header_search_box-->
+	</div><!--/header_search_box_wrap-->
+
+		
+</div><!--/header_search_col-->
+
+<div id="search_list" class="span-4 prepend-16">
+	<ul id="" class="clear" class="span-4 prepend-16">
+		<li class="first_child current"><a id="base_user" href="#">ユーザ</a></li>
+		<li><a id="abm" href="#">写真</a></li>
+		<li><a id="dia" href="#">日記</a></li>
+		<li class="last_child"><a id="cmm" href="#">コミュニティ</a></li>
+	</ul>
+</div>

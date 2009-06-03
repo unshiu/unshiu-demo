@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="<%= charset %>"?>	
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja-JP" lang="ja-JP">
+<head>
+<meta id="Description" content="" />
+<title><%= (@content_for_header_title ||= "HOME").strip %> - <%= (@content_for_sub_title ||= "").strip %> - unshiu</title>
+<meta http-equiv="Content-Type" content="text/html; charset=<%= charset %>" />
+
+<meta name="keyword" content="" />
+<meta name="viewport" content="width=240">
+</head>
+
+<body bgcolor="#FFFFFF" vlink="#F75200">
+<style type="text/css">
+<![CDATA[a:link{color:#F75200}a:focus{color:#FFFFFF}]]><br />
+</style>
+
+<div style="font-size:small; color:#636363; text-align:center;">
+
+<%= render 'common/header_without_ad' %>
+
+<div style="text-align:left;">
+
+<%= yield  %>
+
+</div>
+
+<div style="<%= style_value('ad') %>">
+<br />
+<%= image_tag_for_default 'banner_big.jpg' %><br />
+<br />
+</div>
+
+<%= render 'common/footer' %>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!-- /* menu */ -->
+<div id="header_menu_col" class="prepend-2 span-18 first last">
+	<div id="menu" class="span-18 prepend-top first last clearfix">
+		<ul id="menu_list">
+			<li id="menu_top">
+				<%= link_to 'トップ', :controller => :base, :action => :index %>
+			</li>
+			<% if logged_in? %>
+			<li id="menu_mypage" class="prepend-1">
+				<%= link_to 'マイページ', :controller => :base, :action => :portal %>
+			</li>
+			<li id="menu_messagebox">
+				<%= link_to '受信箱', :controller => :msg_message, :action => :index %>
+			</li>
+			<li id="menu_communication">
+				<span>コミュニケーション<img src="/images/default/icon/naviarrow_under.gif" alt="option"></span>
+				<ul>
+					<li id="menu_friendsearch"><%= link_to '友達検索', :controller => :base_friend, :action => :list %></li>
+					<li id="menu_community"><%= link_to 'コミュニティ', :controller => :cmm_user, :action => :list %></li>
+				</ul>
+			</li>
+			<li id="menu_properties" class="prepend-1">
+				<%= link_to '設定', :controller => :base_user_config, :action => :index %>
+			</li>
+			<% end %>
+		</ul>
+	</div><!--/menu-->
+</div><!--/menu_prepend-->

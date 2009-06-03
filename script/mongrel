@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+# Capistrano から mongrel_cluster を起動するとログインユーザのホームディレクトリを
+# カレントディレクトリとして Mongrel を起動する。
+# そうすると、Mongrel の実効ユーザに権限を変更したあとでログインユーザのホームディレクトリに戻ろうと
+# するためエラーが起こる。
+# 対処法として、先にアプリケーションのディレクトリに移動してから Mongrel を起動するスクリプトを用意した。
+
+require 'yaml'
+
+filepath = File.join(File.dirname(__FILE__), "../config/mongrel_cluster.yml")
+filepath = File.expand_path(filepath)
+raise "Configuration file not found at #{filepath}" unless File.exists?(filepath)
+
+configuration = YAML.load(File.read(filepath))
+Dir.chdir(configuration["cwd"]) if configuration["cwd"]
+
+system "/usr/local/bin/mongrel_rails", ARGV[0], "-C", filepath
+

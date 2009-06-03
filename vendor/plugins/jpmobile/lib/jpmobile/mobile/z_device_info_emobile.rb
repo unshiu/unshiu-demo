@@ -1,0 +1,11 @@
+Jpmobile::Mobile::Emobile::DEVICE_INFO = 
+{"H11T"=>
+  {:flash=>true,
+   :flash_version=>"2.0",
+   :ssl=>true,
+   :name=>"H11T",
+   :css=>true,
+   :gif=>true,
+   :gps=>false,
+   :jpg=>true,
+   :png=>true}}

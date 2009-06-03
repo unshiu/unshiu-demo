@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="<%= charset %>"?>	
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja-JP" lang="ja-JP">
+<head>
+<meta id="Description" content="" />
+<title><%= (@content_for_header_title ||= "HOME").strip %> - <%= (@content_for_sub_title ||= "").strip %> - unshiu</title>
+<meta http-equiv="Content-Type" content="text/html; charset=<%= charset %>" />
+
+<meta name="keyword" content="" />
+<meta name="viewport" content="width=240">
+</head>
+
+<body bgcolor="#FFFFFF" link="#000099" vlink="#336699">
+<%= style_tag_for_mobile %>
+
+<div style="font-size:small; color:#636363; text-align:center;">
+<!--トップロゴ-->
+<%= image_tag_for_default 'logo.gif' %>
+<a id="top"></a>
+<!--広告バナー-->
+<%= image_tag_for_default 'banner.jpg' %><br />
+<br />
+
+<%= render 'common/flash_info' %>
+
+<%= yield  %>
+
+<%= render 'common/footer' %>
+
+</div>
+</body>
+</html>

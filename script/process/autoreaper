@@ -1,0 +1,115 @@
+#!/usr/bin/env ruby
+
+# autoreaper
+# <maiha@wota.jp>
+
+######################################################################
+### FileObserver
+
+require 'find'
+
+module Autoreaper
+  VERSION = '0.1'
+
+  class FileObserver
+    def initialize(options = {})
+      @options  = options
+      @callback = @options[:callback] || method(:updated)
+
+      @options[:path]   ||= '.'
+      @options[:ignore] ||= ignore_pattern
+      @options[:accept] ||= accept_pattern
+
+      @mtimes = Hash.new 0
+    end
+
+    def run
+      loop do
+        wait_for_changes
+        @callback.call
+      end
+    end
+
+    private
+      def accept_pattern
+        nil
+      end
+
+      def ignore_pattern
+        /((swp|~|rej|orig)$|\/\.?#)/o
+      end
+
+      def find_files
+        result = {}
+        Find.find @options[:path] do |f|
+          Find.prune if @exceptions and f =~ @exceptions and test ?d, f
+
+          next if @options[:accept] and f !~ @options[:accept]
+          next if test ?d, f
+
+          filename = f.sub(/^\.\//, '')
+
+          result[filename] = File.stat(filename).mtime.to_i rescue next
+        end
+        return result
+      end
+
+      def find_updated_files(files=find_files)
+        updated = files.select { |filename, mtime|
+          0 < @mtimes[filename] and @mtimes[filename] < mtime
+        }
+
+        # mark mtime
+        files.each do |filename, mtime|
+          @mtimes[filename] = mtime
+        end
+
+        @updated_files = updated
+      end
+
+      def wait_for_changes
+        begin
+          sleep @options[:sleep] || 1
+        end until find_updated_files.any?
+      end
+
+      def updated
+        puts "updated: %s" % @updated_files.map{|i| i.first}.join(', ')
+      end
+  end
+
+  class Reaper < FileObserver
+    private
+      def updated
+        system("ruby script/process/reaper")
+      end
+  end
+
+  class MongrelCluster < FileObserver
+    private
+      def updated
+        system("mongrel_rails cluster::restart")
+      end
+  end
+end
+
+
+if $0 == __FILE__
+  dir      = File.dirname(__FILE__) + '/../../'
+  observer = Autoreaper::FileObserver
+  options  = { :accept   => /\.rb$/ }
+
+  Dir.chdir(dir) do
+    command = ARGV.shift.to_s.strip
+    case command
+    when 'lighttpd', 'mongrel' then observer = Autoreaper::Reaper
+    when 'mongrel_cluster'     then observer = Autoreaper::MongrelCluster
+    when ''                     # nop (maybe test)
+    else
+      options[:callback] = proc{system(command)}
+    end
+
+    puts "starting autoreaper(%s)" % observer
+    observer.new(options).run
+  end
+end

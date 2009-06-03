@@ -1,0 +1,29 @@
+# ローカルとローカルテスト環境用の　memcached　設定ファイルです。
+# 実稼働サーバ等の設定はdeployments以下の設定ファイルに記述します。
+#
+defaults:
+  ttl: 1800
+  readonly: false
+  urlencode: false
+  c_threshold: 10000
+  compression: true
+  debug: false
+  namespace: app
+  sessions: false
+  session_servers: false
+  fragments: false
+  memory: 64
+  servers: localhost:11211
+  benchmarking: true
+  raise_errors: true
+  fast_hash: false
+  fastest_hash: false
+
+development:
+  sessions: false
+  fragments: false
+  servers: localhost:11211
+
+# on caching
+test: 
+# disabled: true # testでも有効にする

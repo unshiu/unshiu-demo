@@ -1,0 +1,14 @@
+--- 
+:backgroundrb: 
+  :ip: 127.0.0.1
+  :port: 11006
+  :environment: <%= backgroundrb_environment %> 
+  :debug_log: false
+  :log: foreground
+
+:schedules:
+<%% require 'unshiu/plugins' %>
+<%% Unshiu::Plugins::ACTIVE_LIST.each do |plugin| %>
+<%% plugin_path = "#{RAILS_ROOT}/vendor/plugins/#{plugin}/schedules.yml" %>
+<%%= IO.read(plugin_path) if File.exist?(plugin_path) %>
+<%% end %>

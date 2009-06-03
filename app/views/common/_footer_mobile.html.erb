@@ -1,0 +1,45 @@
+<a id="menu"></a>
+
+<!--会員メニュー-->
+会員メニュー<br />
+<div style="text-align:left">
+	<%= link_to_menu '初めての方へ', :controller => 'base_guides' %><br />
+	<% unless logged_in? %>
+		<%= link_to_menu "#{t('view.noun.base_user')}登録", { :controller => 'base_signup', :action => 'presignup' } %><br />
+	<% end %>
+	<%= link_to_menu "#{t('view.noun.base_user')}情報･規約･方針", :controller => 'base_terms' %><br />
+	<%= link_to_menu '機種変更時のご注意', :controller => 'base', :action => 'device_change' %><br />
+	<% unless logged_in? %>
+		<%= link_to_menu 'パスワードを忘れてしまったら', :controller => 'base_signup', :action => 'password_remind_ask' %><br/>
+	<% end %>
+	<%= link_to_menu 'お問い合わせ', :controller => 'base', :action => 'inquire_input' %><br />
+	<% if logged_in? && !current_base_user_manage? %>
+		<%= link_to_menu '退会', :controller => 'base_signup', :action => 'quit_confirm' %><br />
+	<% end %>
+	<%= link_to_menu '対応端末', :controller => 'base', :action => 'device' %><br />
+</div>
+
+<div style="text-align:left">
+<% if logged_in? %>
+	<%= link_to_menu "#{t('view.noun.my_portal')}へ戻る", {:controller => 'base', :action => 'portal'}, {:accesskey => 0} %><br />
+	[*]<%= link_to_menu "#{t('view.noun.common_portal')}へ戻る", {:controller => 'base', :action => 'index'}, {:accesskey => '*'} %><br />
+	<%= link_to_menu 'ログアウト', :controller => 'base_user', :action => 'logout' %><br />
+	<%= link_to_menu '検索', :controller => 'base', :action => 'search' %><br />
+	<%= link_to_menu '登録情報変更', :controller => 'base_user_config', :action => 'index' %><br />
+	<%= link_to_menu '友達をこのサービスに招待する', :controller => 'base_invite', :action => 'new' %><br />
+<% else %>
+	<%= link_to_menu '[1]トップへ戻る', {:controller => 'base', :action => 'index', :anchor => 'top'}, {:accesskey => 1} %><br />
+	<%= link_to_menu 'ログイン', :controller => 'base_user', :action => 'login', :return_to => controller.request.request_uri %><br />
+	<%= link_to_menu '検索', :controller => 'base', :action => 'search' %><br />
+<% end %>
+</div>
+
+<div style="text-align:right">
+	<a href="#top"><span style="color:#FF0000">▲ﾍﾟｰｼﾞTOPへ</span></a><br />
+</div>
+
+
+<div style="<%= style_value('footer') %>">
+	提供　株式会社○○○<br />
+	株式会社ﾄﾞﾘｺﾑ<br />
+</div>
