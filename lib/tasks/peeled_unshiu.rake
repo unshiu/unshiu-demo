@@ -32,12 +32,11 @@ namespace :peeled_unshiu do
     end
     
     desc 'all　unshiu plugin trunk install.'
-    task :install_plugin_trunk_all, "user"
-    task :install_plugin_trunk_all do |task, args|
+    task :install_plugin_trunk_all do
       task.set_arg_names ["user"]
-      Unshiu::Plugins::EXTERNAL_LIST.each do |plugin|
+      Unshiu::Plugins::LIST.each do |plugin|
         system "rm -rf vendor/plugins/#{plugin}" if File.exist?("vendor/plugins/#{plugin}")
-        system "ruby script/install git://github.com/unshiu/peeled-unshiu-#{plugin}.git"
+        system "ruby script/plugin install git://github.com/unshiu/peeled-unshiu-#{plugin}.git"
       end
     end
     

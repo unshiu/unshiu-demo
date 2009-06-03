@@ -1,0 +1,41 @@
+<div id="left02">
+  <div class="sideWrap">
+    <h4><p><%= @pan2 -%></p></h4>
+    <div class="sideMenu">
+      <ul>
+        <li><%= link_to "#{t('view.noun.cmm_community')}一覧", :controller => 'cmm', :action => 'list' %></li>
+        <li><%= link_to "#{t('view.noun.tpc_topic')}一覧", :controller => 'tpc_cmm', :action => 'alllist' %></li>
+      </ul>
+    </div>
+
+	<% if @community %>
+		<h4><p><%= @community.name -%></p></h4>
+		<div class="sideMenu">
+			<ul>
+				<li><%= link_to "#{t('view.noun.cmm_community')}詳細", :controller => 'cmm', :action => 'show', :id => @community.id %>
+				<li><%= link_to "#{t('view.noun.tpc_topic')}一覧", :controller => 'tpc_cmm', :action => 'list', :id => @community.id %>(<%= @community.tpc_topics.size %>)</li>
+				<li><%= link_to "#{t('view.noun.cmm_communities_base_user')}一覧", :controller => 'cmm', :action => 'member_list', :id => @community.id %>(<%= @community.joined_users.size %>)</li>
+				<li><%= link_to "#{t('activerecord.constant.status.status_rejected')}一覧", :controller => 'cmm', :action => 'member_list', :state => CmmCommunitiesBaseUser::STATUS_REJECTED, :id => @community.id %>(<%= @community.rejected_users.size %>)</li>
+				<% if @community.join_type_need_approval? %>
+					<li><%= link_to "#{t('activerecord.constant.status.status_applying')}一覧", :controller => 'cmm', :action => 'member_list', :state => CmmCommunitiesBaseUser::STATUS_APPLYING, :id => @community.id %>(<%= @community.applying_users.size %>)</li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<h4><p>検索</p></h4>
+	<div class="sideMenu">
+		<% form_tag :controller => 'cmm', :action => 'search_redirector' do %>
+			<%= text_field_tag 'keyword', @keyword %>
+			<%= submit_tag '検索' %>
+			<div><%= radio_button_tag 'type', 0, 'checked' %><%= t('view.noun.cmm_community') %></div>
+			<div><%= radio_button_tag 'type', 1 %>全ての <%= t('view.noun.tpc_topic') %></div>
+			<% if @community %>
+				<div><%= radio_button_tag 'type', 2 %>この<%= t('view.noun.cmm_community') %>の<%= t('view.noun.tpc_topic') %></div>
+				<%= hidden_field_tag 'id', @community.id %>
+			<% end %>
+		<% end %>
+	</div>
+	
+	</div>
+</div><!-- /left02 -->

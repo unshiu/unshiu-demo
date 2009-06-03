@@ -1,0 +1,13 @@
+<% content_for(:header_title) do %>
+受信<%= t('view.noun.msg_message') %>
+<% end %>
+<% content_for(:sub_title) do %>
+<%= h @message.title %>
+<% end %>
+
+<%= render :partial => 'show' %>
+<hr style="<%= style_value('hr1') %>">
+<%= link_basic_to '返信する', :controller => 'msg_message', :action => 'reply', :id => @message.id %><br />
+<%= link_basic_to '引用つきで返信する', :controller => 'msg_message', :action => 'reply_with_quotation', :id => @message.id %><br />
+<%= link_basic_to 'ゴミ箱に入れる', :action => 'delete_confirm', :id => @message.id %><br />
+<%= link_basic_to "#{t('view.noun.msg_message')}を通報する", :controller => 'msg_notify', :action => 'new', :id => @message.id %><br />

@@ -1,0 +1,8 @@
+= unshiu Base plugin 
+
+unshiu用のユーザ管理、複数のプラグインに関わる機能、その他共通基盤となるpluginです。
+
+== 利用方法
+
+$ ruby script/generate base base
+

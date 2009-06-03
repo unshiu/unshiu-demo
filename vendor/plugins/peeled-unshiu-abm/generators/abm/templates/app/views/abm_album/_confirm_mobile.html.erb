@@ -1,0 +1,19 @@
+<div style="<%= style_value('form_style') %>">
+	  <div>
+       	<span style="color:#f75009;"></span><%= t('activerecord.attributes.abm_album.title') %><br />
+		<%= h @album.title %>
+        <%= hidden_field 'album', 'title' %><br />
+      </div>
+      <div>
+		<span style="color:#f75009;"></span><%= t('activerecord.attributes.abm_album.body') %><br />
+		<%= hbr @album.body %>
+        <%= hidden_field 'album', 'body' %><br />
+      </div>
+	  <div>
+    	<span style="color:#f75009;"></span><%= t('activerecord.attributes.abm_album.public_level') %><br />
+		<%= AbmAlbum.public_level_name(@album.public_level) %>
+    	<%= hidden_field 'album', 'public_level' %>
+	  </div>
+	  <%= image_tag_for_default 'Spec_02.gif' %><br />
+</div>
+<%= image_tag_for_default 'Spec_02.gif' %><br />

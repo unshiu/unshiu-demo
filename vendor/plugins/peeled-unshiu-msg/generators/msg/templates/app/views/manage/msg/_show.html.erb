@@ -1,0 +1,22 @@
+<table class="lineColorL" style="width:609px;">
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.msg_message.updated_at') %></th>
+		<td><%= datetime_to_s(@message.updated_at) %></td>
+	</tr>
+	<tr>
+		<th><%= t('view.noun.msg_sender') %></th>
+		<td><%= sender_name(@message) %></td>
+	</tr>
+	<tr>
+		<th><%= t('view.noun.msg_receiver') %></th>
+		<td><%= receiver_names(@message) %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.msg_message.title') %></th>
+		<td><%= @message.title %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.msg_message.body') %></th>
+		<td><%= hbr @message.body %></td>
+	</tr>
+</table>

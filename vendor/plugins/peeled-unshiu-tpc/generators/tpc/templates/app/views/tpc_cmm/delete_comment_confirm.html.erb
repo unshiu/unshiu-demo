@@ -1,0 +1,17 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.tpc_comment') %>削除
+<% end %>
+
+<div class="warning">
+	以下の<%= t('view.noun.tpc_comment') %>を削除していいですか？
+</div>
+
+<%= h @comment.base_user.show_name %><br/>
+<%= hbr @comment.body %>
+
+<% form_tag :action => 'delete_comment_complete', :id => @comment.id do %>
+	
+	<%= submit_button_tag("削除") %>
+	<%= cancel_button_tag %>
+	
+<% end %>

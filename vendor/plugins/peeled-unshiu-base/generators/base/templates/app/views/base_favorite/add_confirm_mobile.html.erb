@@ -1,0 +1,11 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_favorite') %>追加
+<% end %>
+<%= @user.show_name %>を<%= t('view.noun.base_favorite') %>に追加しますか？
+
+<div style="text-align:center">
+<% form_tag :action => 'add', :id => @user.id do %>
+<%= submit_tag '追加' %>
+<%= cancel_tag %>
+<% end %>
+</div>

@@ -1,0 +1,28 @@
+<%- @pan1="メール" -%><%- @pan2="#{t('view.noun.mlg_magazine')}を新規作成" -%>
+<% content_for(:header_title) do %>
+  <%= t('view.noun.mlg_magazine') %>を新規作成
+<% end %>
+
+<h3><%= t('view.noun.mlg_magazine') %>を新規作成</h3>
+
+<% form_tag :action => 'confirm' do %>
+
+	<%= error_messages_for 'mlg_magazine' %>
+	<table class="lineColorL" style="width:609px;">
+	<tbody>
+	  <tr>
+	    <th style="width:140px;"><%= t('activerecord.attributes.mlg_magazine.title') %></th>
+	    <td><%= text_field 'mlg_magazine', 'title', :size => 50 %></td>
+	  </tr>
+	  <tr>
+	    <th style="width:140px;"><%= t('activerecord.attributes.mlg_magazine.body') %></th>
+	    <td><%= text_area 'mlg_magazine', 'body', :size => '50x10' %></td>
+	  </tr>
+	</tbody>
+	</table>
+	<div class="bot_btn">
+		<%= mng_submit_tag "確認" %>
+	</div>
+	
+<% end %>
+

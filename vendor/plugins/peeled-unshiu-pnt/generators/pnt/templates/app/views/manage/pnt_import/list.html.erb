@@ -1,0 +1,51 @@
+<%- @pan1="#{t('view.noun.pnt_point')}" -%><%- @pan2="一括登録" -%>
+<% content_for(:header_title) do %>
+一括登録
+<% end %>
+<h3>一括登録</h3>
+
+<ul class="list">
+	<li><%= link_to '一括登録をする', :action => :new %></li>
+</ul>
+<br />
+
+<% if @pnt_file_update_histories.size.zero? %>
+    登録履歴はありません。
+
+<% else %>
+	<%= paginate_header @pnt_file_update_histories %>
+	
+	<table class="lineColorT" width="609px">
+		<tr>
+			<th><%= t('activerecord.attributes.pnt_file_update_history.file_name') %></th>
+			<th><%= t('activerecord.attributes.pnt_file_update_history.record_count') %></th>
+			<th><%= t('activerecord.attributes.pnt_file_update_history.success_count') %></th>
+			<th><%= t('activerecord.attributes.pnt_file_update_history.fail_count') %></th>
+			<th>状態</th>
+			<th><%= t('activerecord.attributes.pnt_file_update_history.created_at') %></th>
+			<th><%= t('activerecord.attributes.pnt_file_update_history.complated_at') %></th>
+		</tr>
+		<% @pnt_file_update_histories.each do |pnt_file_update_history| %>
+		<tr>
+			<td><%= pnt_file_update_history.file_name %></td>
+			<td><%= pnt_file_update_history.record_count %></td>
+			<td><%= pnt_file_update_history.success_count %></td>
+			<td><%= pnt_file_update_history.fail_count %></td>
+			<td><% if pnt_file_update_history.complated? %>
+					完了
+				<% else %>
+					処理中です
+				<% end %></td>
+			<td><%= pnt_file_update_history.created_at.strftime('%Y/%m/%d') %></td>
+			<td><% if pnt_file_update_history.complated? %>
+					<%= pnt_file_update_history.complated_at.strftime('%Y/%m/%d') %>
+				<% else %>
+					-
+				<% end %>
+			</td>
+		</tr>
+		<% end %>
+	</table>
+	
+	<%= paginate_links @pnt_file_update_histories %>
+<% end %>

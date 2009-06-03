@@ -1,0 +1,48 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.dia_entry') -%><%- @pan3="#{t('view.noun.dia_entry')}詳細" -%>
+
+<% content_for(:header_title) do %>
+<%= t('view.noun.dia_entry') %>詳細
+<% end %>
+
+<ul class="list">
+	<li><%= link_to "#{t('view.noun.dia_entry')}の削除", :action => 'delete_confirm', :id => @entry.id %></li>
+</ul>
+
+<h3><%= t('view.noun.dia_entry') %>詳細</h3>
+<%= render :partial => 'show' %>
+<br/>
+<h3><%= t('view.noun.dia_entry_comment') %></h3>
+<% if @entry.dia_entry_comments.count.zero? %>
+	<%= t('view.noun.dia_entry_comment') %>がありません。
+	
+<% else %>
+	<table class="lineColorT" style="width:609px;">
+		<tr>
+			<th width="150px"><%= t('activerecord.attributes.dia_entry_comment.base_user') %></th>
+			<th width="150px"><%= t('activerecord.attributes.dia_entry_comment.created_at') %></th>
+			<th width="259px"><%= t('activerecord.attributes.dia_entry_comment.body') %></th>
+			<th width="50px">削除</th>
+		</tr>
+		<% for comment in @comments %>
+		<tr>
+			<td><%= link_to_user comment.base_user %></td>
+			<td><%= datetime_to_s(comment.created_at) %></td>
+			<td>
+				<p><%= hbr comment.body %></p>
+				<% if comment.invisibled_by_writer? %>
+  					<span class="attention"><%= t('activerecord.attributes.dia_entry_comment.deleter_writer') %>によって削除されました。</span>
+  				<% elsif comment.invisibled_by_owner? %>
+  					<span class="attention"><%= t('activerecord.attributes.dia_entry_comment.deleter_owner') %>によって削除されました。</span>
+  				<% elsif comment.invisibled_by_manager? %>
+  					<span class="attention"><%= t('activerecord.attributes.dia_entry_comment.deleter_manager') %>によって削除されました。</span>
+  				<% end %>
+			</td>
+			<td class="textalignC">
+				<% if comment.not_invisibled_by_anyone? %>
+					<%= link_to '削除', :controller => 'dia_entry_comment', :action => 'delete_confirm', :id => comment.id %>
+				<% end %>
+			</td>
+		</tr>
+		<% end %>
+	</table>
+<% end %>

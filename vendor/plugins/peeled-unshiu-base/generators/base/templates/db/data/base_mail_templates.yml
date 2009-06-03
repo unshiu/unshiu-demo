@@ -1,0 +1,648 @@
+# == Schema Information
+#
+# Table name: base_mail_templates
+#
+#  id                         :integer(4)      not null, primary key
+#  base_mail_template_kind_id :integer(4)      not null
+#  content_type               :string(255)     not null
+#  subject                    :string(255)     not null
+#  body                       :text            default(""), not null
+#  active_flag                :boolean(1)
+#  footer_flag                :boolean(1)
+#  deleted_at                 :datetime
+#  created_at                 :datetime
+#  updated_at                 :datetime
+#
+
+a-mobile:
+  id: 1
+  base_mail_template_kind_id: 1
+  content_type: 'text/plain'
+  subject: footer
+  body: |
+    (C)DRECOM
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+a-pc:
+  id: 2
+  base_mail_template_kind_id: 1
+  content_type: 'text/plain'
+  subject: footer
+  body: |
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Copyright(c) 2001-2009 Drecom Co.,Ltd. All Rights Reserved.
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+b-mobile:
+  id: 3
+  base_mail_template_kind_id: 2
+  content_type: 'text/plain'
+  subject: "[unshiu] 仮登録を受け付けました"
+  body: |
+    仮登録して頂きありがとうございます。
+    以下の URL から本登録を行ってください。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+b-pc:
+  id: 4
+  base_mail_template_kind_id: 2
+  content_type: 'text/plain'
+  subject: "[unshiu] 仮登録を受け付けました"
+  body: |
+    仮登録して頂きありがとうございます。
+    以下の URL から本登録を行ってください。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+d-mobile:
+  id: 5
+  base_mail_template_kind_id: 3
+  content_type: 'text/plain'
+  subject: "[unshiu] 登録は完了しています"
+  body: |
+    送信いただいたメールアドレスはすでに登録済みです。
+    以下の URL からアクセスし、ログインしてください。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+d-pc:
+  id: 6
+  base_mail_template_kind_id: 3
+  content_type: 'text/plain'
+  subject: "[unshiu] 登録は完了しています"
+  body: |
+    送信いただいたメールアドレスはすでに登録済みです。
+    以下の URL からアクセスし、ログインしてください。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>  
+e-mobile:
+  id: 7
+  base_mail_template_kind_id: 4
+  content_type: 'text/plain'
+  subject: "[unshiu] 登録完了しました"
+  body: |
+    登録が完了しました。
+    以下の URL からアクセスしてください。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+e-pc:
+  id: 8
+  base_mail_template_kind_id: 4
+  content_type: 'text/plain'
+  subject: "[unshiu] 登録完了しました"
+  body: |
+    登録が完了しました。
+    以下の URL からアクセスしてください。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+f-mobile:
+  id: 9
+  base_mail_template_kind_id: 5
+  content_type: 'text/plain'
+  subject: "[unshiu] メールアドレスの変更について"
+  body: |
+    以下の URL にアクセスしてメールアドレスの変更を完了してください。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+f-pc:
+  id: 10
+  base_mail_template_kind_id: 5
+  content_type: 'text/plain'
+  subject: "[unshiu] メールアドレスの変更について"
+  body: |
+    以下の URL にアクセスしてメールアドレスの変更を完了してください。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+g-mobile:
+  id: 11
+  base_mail_template_kind_id: 6
+  content_type: 'text/plain'
+  subject: "[unshiu] 友達の申請がされました"
+  body: |
+    <%%= to_name %>
+
+    <%%= from.show_name %>から友達申請が来ています。
+
+    申請メッセージ
+    ------------------------------------------
+    <%%= message %>
+    ------------------------------------------
+
+    以下のURLから友達承認を行ってください。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+g-pc:
+  id: 12
+  base_mail_template_kind_id: 6
+  content_type: 'text/plain'
+  subject: "[unshiu] 友達の申請がされました"
+  body: |
+    <%%= to_name %>
+
+    <%%= from.show_name %>から友達申請が来ています。
+
+    申請メッセージ
+    ------------------------------------------
+    <%%= message %>
+    ------------------------------------------
+
+    以下のURLから友達承認を行ってください。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+h-mobile:
+  id: 13
+  base_mail_template_kind_id: 7
+  content_type: 'text/plain'
+  subject: "[unshiu] サービス招待"
+  body: |
+    <%%= from.show_name %>からサービスへ招待されています。
+
+    招待メッセージ
+    ------------------------------------------
+    <%%= message %>
+    ------------------------------------------
+
+    以下の URL から登録を行ってください。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+h-pc:
+  id: 14
+  base_mail_template_kind_id: 7
+  content_type: 'text/plain'
+  subject: "[unshiu] サービス招待"
+  body: |
+    <%%= from.show_name %>からサービスへ招待されています。
+
+    招待メッセージ
+    ------------------------------------------
+    <%%= message %>
+    ------------------------------------------
+
+    以下の URL から登録を行ってください。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+i-mobile:
+  id: 15
+  base_mail_template_kind_id: 8
+  content_type: 'text/plain'
+  subject: "[unshiu] パスワードの再設定について"
+  body: |
+    以下の URL からパスワードの再設定を行ってください。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+i-pc:
+  id: 16
+  base_mail_template_kind_id: 8
+  content_type: 'text/plain'
+  subject: "[unshiu] パスワードの再設定について"
+  body: |
+    以下の URL からパスワードの再設定を行ってください。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+j-mobile:
+  id: 17
+  base_mail_template_kind_id: 9
+  content_type: 'text/plain'
+  subject: "[unshiu] 日記投稿が成功しました"
+  body: |
+
+    タイトル「<%%= title %>」の日記の投稿が完了しました。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+j-pc:
+  id: 18
+  base_mail_template_kind_id: 9
+  content_type: 'text/plain'
+  subject: "[unshiu] 日記投稿が成功しました"
+  body: |
+
+    タイトル「<%%= title %>」の日記の投稿が完了しました。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+k-mobile:
+  id: 19
+  base_mail_template_kind_id: 10
+  content_type: 'text/plain'
+  subject: "[unshiu] 投稿に問題が発生しました"
+  body: |
+    メール処理中にエラーが発生しました。
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+k-pc:
+  id: 20
+  base_mail_template_kind_id: 10
+  content_type: 'text/plain'
+  subject: "[unshiu] 投稿に問題が発生しました"
+  body: |
+    メール処理中にエラーが発生しました。
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+l-mobile:
+  id: 21
+  base_mail_template_kind_id: 11
+  content_type: 'text/plain'
+  subject: "[unshiu] 日記投稿に問題が発生しました"
+  body: |
+    投稿された日記の保存中にエラーが発生しました。
+
+    日記を投稿する場合は件名と本文を必ず記載してください。
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+l-pc:
+  id: 22
+  base_mail_template_kind_id: 11
+  content_type: 'text/plain'
+  subject: "[unshiu] 日記投稿に問題が発生しました"
+  body: |
+    投稿された日記の保存中にエラーが発生しました。
+
+    日記を投稿する場合は件名と本文を必ず記載してください。
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+m-mobile:
+  id: 23
+  base_mail_template_kind_id: 12
+  content_type: 'text/plain'
+  subject: "[unshiu] 日記にコメントがされました"
+  body: |
+    日記「<%%= entry_title %>」に
+    <%%= commented_name %>がコメントしました。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+m-pc:
+  id: 24
+  base_mail_template_kind_id: 12
+  content_type: 'text/plain'
+  subject: "[unshiu] 日記にコメントがされました"
+  body: |
+    日記「<%%= entry_title %>」に
+    <%%= commented_name %>がコメントしました。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+n-mobile:  
+  id: 25
+  base_mail_template_kind_id: 13
+  content_type: 'text/plain'
+  subject: "[unshiu] 写真投稿が成功しました"
+  body: |
+    タイトル「<%%= title %>」の画像の投稿が完了しました。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+n-pc:
+  id: 26
+  base_mail_template_kind_id: 13
+  content_type: 'text/plain'
+  subject: "[unshiu] 写真投稿が成功しました"
+  body: |
+    タイトル「<%%= title %>」の画像の投稿が完了しました。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+o-mobile:
+  id: 27
+  base_mail_template_kind_id: 14
+  content_type: 'text/plain'
+  subject: "[unshiu] 写真投稿に問題が発生しました"
+  body: |
+    投稿された画像の保存中にエラーが発生しました。
+
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+o-pc:
+  id: 28
+  base_mail_template_kind_id: 14
+  content_type: 'text/plain'
+  subject: "[unshiu] 写真投稿に問題が発生しました"
+  body: |
+    投稿された画像の保存中にエラーが発生しました。
+
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+p-mobile:
+  id: 29
+  base_mail_template_kind_id: 15
+  content_type: 'text/plain'
+  subject: "[unshiu] プロフィール画像投稿に成功しました"
+  body: |
+    プロフィール画像の投稿が完了しました。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+p-pc:
+  id: 30
+  base_mail_template_kind_id: 15
+  content_type: 'text/plain'
+  subject: "[unshiu] プロフィール画像投稿に成功しました"
+  body: |
+    プロフィール画像の投稿が完了しました。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+q-mobile:
+  id: 31
+  base_mail_template_kind_id: 16
+  content_type: 'text/plain'
+  subject: "[unshiu] プロフィール画像投稿に問題が発生しました"
+  body: |
+    投稿された画像の保存中にエラーが発生しました。
+
+    <%%= reason %>
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+q-pc:
+  id: 32
+  base_mail_template_kind_id: 16
+  content_type: 'text/plain'
+  subject: "[unshiu] プロフィール画像投稿に問題が発生しました"
+  body: |
+    投稿された画像の保存中にエラーが発生しました。
+
+    <%%= reason %>
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+r-mobile:
+  id: 33
+  base_mail_template_kind_id: 17
+  content_type: 'text/plain'
+  subject: "[unshiu] マイプロフ画像投稿に成功しました"
+  body: |
+    プロフィール画像の投稿が完了しました。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+r-pc:
+  id: 34
+  base_mail_template_kind_id: 17
+  content_type: 'text/plain'
+  subject: "[unshiu] マイプロフ画像投稿に成功しました"
+  body: |
+    プロフィール画像の投稿が完了しました。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+s-mobile:
+  id: 35
+  base_mail_template_kind_id: 18
+  content_type: 'text/plain'
+  subject: "[unshiu] マイプロフ画像投稿に問題が発生しました"
+  body: |
+    投稿された画像の保存中にエラーが発生しました。
+
+    <%%= reason %>
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+s-pc:
+  id: 36
+  base_mail_template_kind_id: 18
+  content_type: 'text/plain'
+  subject: "[unshiu] マイプロフ画像投稿に問題が発生しました"
+  body: |
+    投稿された画像の保存中にエラーが発生しました。
+
+    <%%= reason %>
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+t-mobile:
+  id: 37
+  base_mail_template_kind_id: 19
+  content_type: 'text/plain'
+  subject: "[unshiu] コミュニティ画像投稿に成功しました"
+  body: |
+    コミュニティ「<%%= name %>」に画像を設定しました。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+t-pc:
+  id: 38
+  base_mail_template_kind_id: 19
+  content_type: 'text/plain'
+  subject: "[unshiu] コミュニティ画像投稿に成功しました"
+  body: |
+    コミュニティ「<%%= name %>」に画像を設定しました。
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+u-mobile:
+  id: 39
+  base_mail_template_kind_id: 20
+  content_type: 'text/plain'
+  subject: "[unshiu] プロフィール画像投稿に問題が発生しました"
+  body: |
+    投稿された画像の保存中にエラーが発生しました。
+
+    <%%= reason %>
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+u-pc:
+  id: 40
+  base_mail_template_kind_id: 20
+  content_type: 'text/plain'
+  subject: "[unshiu] プロフィール画像投稿に問題が発生しました"
+  body: |
+    投稿された画像の保存中にエラーが発生しました。
+
+    <%%= reason %>
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+v-mobile:
+  id: 41
+  base_mail_template_kind_id: 21
+  content_type: 'text/plain'
+  subject: "[unshiu] メッセージ新着のお知らせ"
+  body: |
+    <%%= to_name %>
+
+    <%%= from.show_name %>からメッセージが届いています
+
+    メッセージ
+    「<%%= message.title %>」
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 1
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+v-pc:
+  id: 42
+  base_mail_template_kind_id: 21
+  content_type: 'text/plain'
+  subject: "[unshiu] メッセージ新着のお知らせ"
+  body: |
+    <%%= to_name %>
+
+    <%%= from.show_name %>からメッセージが届いています
+
+    メッセージ
+    「<%%= message.title %>」
+
+    <%%= url %>
+  active_flag: true
+  footer_flag: true
+  device_type: 2
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>

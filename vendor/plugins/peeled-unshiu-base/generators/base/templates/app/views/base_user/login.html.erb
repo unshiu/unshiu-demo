@@ -1,0 +1,35 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.login') %>
+<% end %>
+
+<div class="signup" class="clearfix">
+	<div id="signup_box" class="W5R4B9df box_outer clearfix">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="box_inner clearfix">
+			<h6 class="W5R4B9df caps"><span><%= t('view.noun.login') %></span></h6>
+			<% form_tag do -%>
+				
+				<p><label for="login"><%= t('activerecord.attributes.base_user.login') %></label><br/>
+				<%= text_field_tag 'login', nil, {:class => "span-15"} %></p>
+
+				<p><label for="password"><%= t('activerecord.attributes.base_user.password') %></label><br/>
+				<%= password_field_tag 'password', nil, {:class => "span-15"} %></p>
+				
+				<!-- Uncomment this if you want this functionality
+				<p><label for="remember_me">Remember me:</label>
+				<%= check_box_tag 'remember_me' %></p>
+				-->
+			
+				<div class="clearfix prepend-0">
+					<%= hidden_field_tag 'return_to', params[:return_to] %>
+					<%= submit_button_tag("ログイン") %>
+				</div>
+			<% end %>
+		</div>
+		</div><!--/wrap3-->
+		</div><!--/wrap2-->
+		</div><!--/wrap1-->
+	</div>
+</div>

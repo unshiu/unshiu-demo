@@ -1,0 +1,12 @@
+<% content_for(:header_title) do %>
+<%= @entry.dia_diary.base_user.show_name %>の<%= t('view.noun.dia_diary') %>
+<% end %>
+<% content_for(:sub_title) do %>
+<%= @entry.title %>
+<% end %>
+<%= image_tag url_for_image_column(@image, :image, :large) %><br />
+<%= image_tag_for_default 'Spec_08.gif' %><br />
+
+<div style="text-align:left;">
+<%= link_basic_to "#{t('view.noun.dia_diary')}に戻る", :action => 'show', :id => @entry.id %>
+</div>

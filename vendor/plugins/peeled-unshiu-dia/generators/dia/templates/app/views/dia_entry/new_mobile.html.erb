@@ -1,0 +1,22 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.dia_entry') %>投稿
+<% end %>
+
+<div style="text-align:left;">
+
+<% unless params[:images] %>
+<span style="color:#024873;"></span><%= link_to_list_cell "メールから#{t('view.noun.dia_entry')}を投稿する", :action => 'mail' %><br />
+<% end %>
+
+<span style="color:#024873;"></span><%= link_to_list_cell "#{t('view.noun.abm_image')}を追加する", :action => 'album_list', :type => 'new', :images => @image_ids %><br />
+<span style="font-size:x-small">注意：<%= t('activerecord.attributes.dia_entry.title') %>/<%= t('activerecord.attributes.dia_entry.body') %>/<%= t('activerecord.attributes.dia_entry.public_level') %>の変更は保存されません。</span>
+
+<% form_tag :action => 'confirm' do %>
+  <%= render :partial => 'form' %>
+  <div style="text-align:center;">
+    <%= submit_tag '確認', :name => 'confirm' %>
+	<%= submit_tag '下書き保存', :name => 'draft' %>
+  </div>
+<% end %>
+
+</div>

@@ -1,0 +1,20 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.login') %>
+<% end %>
+<%= render :partial => 'simple_login' %>
+<br/>
+<hr style="<%= style_value('hr1') %>">
+
+<% form_tag do -%>
+<%= error_messages_for 'base_login_form' %>
+
+<%= t('activerecord.attributes.base_user.login') %><br/>
+<%= text_field_tag 'login' %><br/>
+<%= t('activerecord.attributes.base_user.password') %><br/>
+<%= password_field_tag 'password', nil, numeric_text_field_options %><br/>
+
+<div style="text-align:center">
+	<%= hidden_field_tag 'return_to', params[:return_to] %>
+	<%= submit_tag "#{t('view.noun.login')}" %>
+</div>
+<% end -%>

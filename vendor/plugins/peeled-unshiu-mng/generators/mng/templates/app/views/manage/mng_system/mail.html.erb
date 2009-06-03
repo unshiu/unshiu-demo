@@ -1,0 +1,22 @@
+<%- @pan1="システム設定" -%><%- @pan2="設定情報" -%><%- @pan3="メール設定" -%>
+
+<% content_for(:header_title) do %>
+	メール設定
+<% end %>
+
+<h3>メール設定</h3>
+
+<table class="lineColorL" style="width:609px;">
+	<tr>
+		<th width="30%">SMTPサーバ</th>
+		<td><%=h AppResources[:init][:action_mailer_setting_address] %></td>
+	</tr>
+	<tr>
+		<th width="30%">Port</th>
+		<td><%=h AppResources[:init][:action_mailer_setting_port] %></td>
+	</tr>
+	<tr>
+		<th width="30%">ドメイン</th>
+		<td><%=h AppResources[:init][:action_mailer_setting_domain] %></td>
+	</tr>
+</table>

@@ -1,0 +1,33 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.dia_entry') -%><%- @pan3="#{t('view.noun.dia_entry')}一覧" -%>
+<% content_for(:header_title) do %>
+<%= t('view.noun.dia_entry') %>一覧
+<% end %>
+
+<h3><%= t('view.noun.dia_entry') %>一覧</h3>
+
+<% if @entries.size != 0 %>
+<%= paginate_header(@entries) %>
+<table class="lineColorT" style="width:609px;">
+  <tr>
+    <th style="width:150px;"><%= t('activerecord.attributes.dia_entry.contributed_at') %></th>
+    <th style="width:150px;"><%= t('activerecord.attributes.dia_diary.base_user') %></th>
+    <th style="width:309px;"><%= t('activerecord.attributes.dia_entry.title') %></th>
+  </tr>
+<% for entry in @entries %>
+<tr>
+	<td>
+		<%= datetime_to_s(entry.contributed_at) %>
+	</td>
+	<td>
+		<%= link_to_user entry.dia_diary.base_user %>
+	</td>
+	<td>
+		<%= link_to "#{h entry.title}(#{entry.dia_entry_comments.count})", :action => 'show', :id => entry.id %>
+	</td>
+</tr>
+<% end %>
+</table>
+<%= paginate_links(@entries) %>
+<% else %>
+<%= t('view.noun.dia_entry') %>がありません。
+<% end %>

@@ -1,0 +1,64 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.tpc_comment') %>した<%= t('view.noun.tpc_topic') %>一覧
+<% end %>
+
+<div class="clearfix">
+	<div id="contents_title" class="span-12">
+		<h2><span><%= t('view.noun.tpc_comment') %>した<%= t('view.noun.tpc_topic') %>一覧</span></h2>
+	</div>
+</div>
+
+<div class="top_topic_box box_outer">
+<div class="wrap1">
+<div class="wrap2">
+<div class="wrap3">
+<div class="box_inner">
+	
+	<% if @topics.size.zero? %>
+		<%= t('view.noun.tpc_topic') %>はありません。
+	<% else %>
+	
+		<% @topics.each do |topic| %>
+			<div class="diary_story_box box_outer clearfix community_topic_list">
+				<div class="community_topic_author">
+					<% link_to :controller => :cmm, :action => :show, :id => topic.cmm_community_id do %>
+						<%= safe_community_image_view(topic.cmm_community.cmm_image, :thumb, {"width" => 70, "height" => 70, :class => "left"}) %>
+					<% end %>
+				<div class="username"><%=h truncate(topic.cmm_community.name, :length => 8) %></div>
+				</div>
+				<div class="community_topic_text">
+					<h6>
+						<span>
+						<%= link_to body_summary(topic.tpc_topic.title, :length => 40), :controller => 'tpc_cmm', :action => 'show', :id => topic.id %>
+						</span>
+					</h6>
+					<div class="diary_text box_outer small">
+						<p>
+						<%= body_summary(topic.tpc_topic.body, :length => 100) %>
+						</p>
+					</div>
+					<div class="span-10 small">
+						<span class="permanent_link">
+							<%= link_to "続きを読む", :controller => 'tpc_cmm', :action => 'show', :id => topic.id %>｜
+						</span><!--/permanent_link-->
+						<span class="comment_link">
+							<%= link_to "コメント#{topic.tpc_topic.tpc_comments.count}", :controller => 'tpc_cmm', :action => 'show', :id => topic.id %>｜
+						</span><!--/comment_link-->
+						<span class="contents_date">
+							<%= l(topic.tpc_topic.updated_at, :format => :short) %>
+						</span><!--/contents_date-->
+					</div>
+				</div>
+			</div>
+		<% end %>
+	<% end %>
+	</div>
+
+</div>
+</div><!--/wrap3-->
+</div><!--/wrap2-->
+</div><!--/wrap1-->
+
+<div class="pager_box  pager_box_bottom prepend-top clearfix">
+	<%= paginate @topics %>
+</div><!--pager_box-->

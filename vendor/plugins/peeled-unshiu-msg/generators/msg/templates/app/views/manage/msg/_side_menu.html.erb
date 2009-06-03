@@ -1,0 +1,14 @@
+<div id="left02">
+  <div class="sideWrap">
+    <h4><p><%= @pan1 -%></p></h4>
+    <div class="sideMenu">
+      <ul>
+        <li><%= link_to "全#{t('view.noun.msg_message')}", :action => 'list' %></li>
+		<li><%= link_to "通報された#{t('view.noun.msg_message')}", :action => 'notify_list' %></li>
+		<li><%= link_to "#{t('view.noun.mng_user')}送信#{t('view.noun.msg_message')}", :action => 'sent_list' %></li>
+		<li><%= link_to "#{t('view.noun.msg_message')}作成", :action => 'new' %></li>
+      </ul>
+    </div>
+  </div>
+</div><!-- /left02 -->
+

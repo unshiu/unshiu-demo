@@ -1,0 +1,9 @@
+<% content_for(:header_title) do %>
+エラー
+<% end %>
+
+<%= @error_message %>(<%= @error_code %>)<br />
+<% if @next_url != nil %>
+<br />
+<%= link_basic_to '戻る', :url => @next_url %>
+<% end %>

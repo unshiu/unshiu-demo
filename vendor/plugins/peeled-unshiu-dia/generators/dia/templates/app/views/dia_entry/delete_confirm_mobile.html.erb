@@ -1,0 +1,23 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.dia_diary') %>削除
+<% end %>
+
+<div style="text-align:left;">
+
+<%= t('activerecord.attributes.dia_entry.title') %><br />
+「<%= @entry.title %>」<br />
+の<%= t('view.noun.dia_diary') %>を削除します。
+この<%= t('view.noun.dia_diary') %>に<%= t('view.noun.dia_entry_comment') %>が存在した場合、<%= t('view.noun.dia_entry_comment') %>も同時に削除されます。
+よろしいですか？<br />
+
+</div>
+
+<%= image_tag_for_default 'Spec_02.gif' %><br />
+
+<% form_tag :action => @delete_action_name, :id => @entry.id do %>
+  <%= hidden_field_tag 'cancel_to', params[:cancel_to] %>
+  <div style="text-align:center;">
+    <%= submit_tag '削除する' %>
+    <%= cancel_tag %>
+  </div>
+<% end %>

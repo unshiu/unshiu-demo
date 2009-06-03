@@ -1,0 +1,10 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.dia_diary') %>設定変更
+<% end %>
+
+<% form_tag :action => 'update_confirm', :id => @diary.id do %>
+  <%= render :partial => 'form' %>
+  <div style="text-align:center">
+    <%= submit_tag '内容を確認する' %>
+  </div>
+<% end %>

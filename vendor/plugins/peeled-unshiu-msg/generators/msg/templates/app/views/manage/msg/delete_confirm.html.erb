@@ -1,0 +1,19 @@
+<%- @pan1="SNS設定" -%><%- @pan2="#{t('view.noun.msg_message')}" -%><%- @pan3="#{t('view.noun.msg_message')}の削除確認" -%>
+<% content_for(:header_title) do %>
+<%= t('view.noun.msg_message') %>の削除確認
+<% end %>
+
+<h3><%= t('view.noun.msg_message') %>の削除確認</h3>
+
+<p class="dialog">
+	以下の<%= t('view.noun.msg_message') %>を削除します。よろしいですか？
+</p>
+
+<% form_tag :action => 'delete', :id => @message.id do %>
+  <div class="bot_btn">
+    <%= mng_submit_tag '削除する' %>
+    <%= mng_cancel_tag %>
+  </div>
+<% end %>
+
+<%= render :partial => 'show' %>

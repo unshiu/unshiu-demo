@@ -1,0 +1,8 @@
+<%= yield %>
+
+<% if @image %>
+<span style="color:#f75100;"></span><%= link_basic_to "この#{t('view.noun.abm_image')}のトップへ", {:action => 'show', :id => @image.id, :anchor => "top"}, {:accesskey => "5"} %><br/>
+<%= link_basic_to "この#{t('view.noun.abm_album')}のトップへ", :controller => 'abm_album', :action => 'show', :id => @image.abm_album_id %><br/>
+<%= link_basic_to "#{t('view.noun.abm_album')}のトップへ", :controller => 'abm_album', :action => 'index' %><br/>
+<%= image_tag_for_default 'Spec_08.gif' %><br />
+<% end %>

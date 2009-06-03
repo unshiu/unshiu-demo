@@ -1,0 +1,25 @@
+<table class="lineColorL" style="width:609px;">
+<tbody>
+  <tr>
+    <th style="width:100px;"><%= t('activerecord.attributes.base_error.error_code') %></th>
+    <td>
+    	<%= @base_error.error_code %>
+		<%= hidden_field 'base_error', 'error_code' %>
+	</td>
+  </tr>
+  <tr>
+    <th style="width:100px;"><%= t('activerecord.attributes.base_error.message') %></th>
+    <td>
+    	<%= @base_error.message %>
+		<%= hidden_field 'base_error', 'message' %>
+	</td>
+  </tr>
+  <tr>
+    <th style="width:100px;"><%= t('activerecord.attributes.base_error.coping') %></th>
+    <td>
+    	<%= @base_error.coping %>
+		<%= hidden_field 'base_error', 'coping' %>
+	</td>
+  </tr>
+</tbody>
+</table>

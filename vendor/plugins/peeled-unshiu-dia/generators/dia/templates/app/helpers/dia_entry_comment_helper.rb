@@ -1,0 +1,3 @@
+module DiaEntryCommentHelper
+  include DiaEntryCommentHelperModule
+end

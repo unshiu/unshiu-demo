@@ -1,0 +1,6 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.dia_diary') %>削除
+<% end %>
+<br />
+<%= link_to "[5]#{t('view.noun.dia_diary')}一覧を見る", {:controller => 'dia_entry', :action => 'list'}, {:accesskey => '5'} %><br />
+<%= link_to "下書き#{t('view.noun.dia_diary')}一覧を見る", :controller => 'dia_entry', :action => 'draft_list' %><br />

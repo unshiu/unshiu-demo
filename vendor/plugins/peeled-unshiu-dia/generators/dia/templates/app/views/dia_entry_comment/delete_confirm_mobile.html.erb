@@ -1,0 +1,20 @@
+<% content_for(:header_title) do %>
+<%= @entry.dia_diary.base_user.show_name %>の<%= t('view.noun.dia_diary') %>
+<% end %>
+<% content_for(:sub_title) do %>
+<%= t('view.noun.dia_entry_comment') %>削除
+<% end %>
+
+<div style="text-align:left;">
+
+<%= t('view.noun.dia_entry_comment') %><br />
+「<%= @comment.body %>」<br />
+を削除します。よろしいですか？<br />
+<br />
+<% form_tag :action => 'delete', :id => @comment.id do %>
+  <div style="text-align:center;">
+    <%= submit_tag '削除する' %>
+  </div>
+<% end %>
+
+</div>

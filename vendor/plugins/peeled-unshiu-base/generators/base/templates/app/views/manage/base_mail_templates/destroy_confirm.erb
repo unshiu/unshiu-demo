@@ -1,0 +1,17 @@
+<%- @pan1="管理者設定" -%><%- @pan2=t('view.noun.base_mail_template') -%><%- @pan3="削除確認" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_mail_template') %>削除確認
+<% end %>
+
+<h3><%= t('view.noun.base_mail_template') %>削除確認</h3>
+
+<% form_for @base_mail_template, :url => manage_base_mail_template_path(@base_mail_template), :html => { :method => :delete } do |f| %>
+	
+	<div class="bot_btn">
+		<%= mng_submit_tag "削除" %>
+		<%= mng_cancel_tag %>
+	</div>
+<% end %>
+<br/>
+<%= render :partial => 'confirm' %>

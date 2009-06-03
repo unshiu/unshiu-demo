@@ -1,0 +1,22 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_user') %>検索結果
+<% end %>
+
+<% if @users.size.zero? %>
+	見つかりませんでした。<br /><br />
+
+<% else %>
+	<%= paginate_header(@users) %>
+
+	<% @users.each do |user| %>
+		<% list_cell_for do %>
+			<%= link_to_user_without_emoticon user %>
+		<% end %>
+	<% end %>
+
+	<%= paginate_links(@users) %>
+
+	<hr style="<%= style_value('hr1') %>">
+<% end %>
+
+<%= link_basic_to '検索に戻る', :action => 'search' %>

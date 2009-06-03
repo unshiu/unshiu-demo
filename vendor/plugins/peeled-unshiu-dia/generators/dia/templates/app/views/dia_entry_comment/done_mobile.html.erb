@@ -1,0 +1,8 @@
+<% content_for(:header_title) do %>
+<%= @entry.dia_diary.base_user.show_name %>の<%= t('view.noun.dia_diary') %>
+<% end %>
+<% content_for(:sub_title) do %>
+<%= t('view.noun.dia_entry_comment') %>投稿
+<% end %>
+<%= t('view.noun.dia_diary') %>に<%= t('view.noun.dia_entry_comment') %>を投稿しました。<br />
+<br />

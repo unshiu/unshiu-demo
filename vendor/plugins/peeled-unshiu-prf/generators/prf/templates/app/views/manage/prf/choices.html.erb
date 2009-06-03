@@ -1,0 +1,84 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.prf_profile') -%><%- @pan3="#{h(@question.body)}" -%>
+<% content_for(:header_title) do %>
+	<%=h @question.body %>
+<% end %>
+
+<ul class="list">
+	<li><%= link_to '編集', :action => 'edit', :id => @question.id %></li>
+	<li><%= link_to '削除', :action => 'delete_question_confirm', :id => @question.id %></li>
+</ul>
+
+<h3><%= @question.body %></h3>
+
+<p>
+<% if @question.type_select? %>
+	<%= t('activerecord.constant.type.select') %>
+<% elsif @question.type_radio? %>
+	<%= t('activerecord.constant.type.radio') %>
+<% elsif @question.type_checkbox? %>
+	<%= t('activerecord.constant.type.checkbox') %>
+<% elsif @question.type_text? %>
+	<%= t('activerecord.constant.type.text') %>
+<% elsif @question.type_textarea? %>
+	<%= t('activerecord.constant.type.textarea') %>
+<% end %>
+の<%= t('view.noun.prf_question') %>です。
+</p>
+<br/>
+<% if @question.selectable? %>
+	<h3>現在の選択肢</h3>
+	<% if @question.prf_choices.size.zero? %>
+		<p>現在、<%= t('view.noun.prf_choice') %>は設定されておりません。
+		<%= t('view.noun.prf_choice') %>を追加してください。</p>
+		
+	<% else %>
+		<table class="lineColorT" style="width:609px;">
+			<tr>
+				<th>選択肢</th>
+				<th>自由記述欄</th>
+				<th>操作</th>
+			</tr>
+			<% @question.prf_choices.each do |choice| %>
+			<tr>
+				<td><%= choice.body %></td>
+				<td>
+					<% if choice.free_area_type_text? %>
+						<%= t('activerecord.constant.type.text') %>
+					<% end %>
+					<% if choice.free_area_type_textarea? %>
+						<%= t('activerecord.constant.type.textarea') %>
+					<% end %>
+				</td>
+				<td class="textalignC">
+					<%= link_to '編集', :action => 'edit_choice', :id => choice.id  %>
+					<%= link_to '削除', :action => 'delete_choice_confirm', :id => choice.id %>
+				</td>
+			</tr>
+			<% end %>
+		</table>
+	<% end %>
+	<br/>
+	<h3>追加する<%= t('view.noun.prf_choice') %></h3>
+	<% form_tag :action => "create_choice_confirm", :id => @question.id do %>
+		<ul>
+		<% @choices.each do |choice| %>
+			<li>
+			選択肢: <%= text_field_tag 'choice[][body]', choice.body %>
+			<% unless @question.type_select? %>
+			<%= select_tag "choice[][free_area_type]",
+				options_for_select([[ '自由記述欄なし', PrfChoice::CHOICE_FREE_AREA_TYPE_NONE],
+				 ["#{t('activerecord.constant.type.text')}", PrfChoice::CHOICE_FREE_AREA_TYPE_TEXT],
+				 ["#{t('activerecord.constant.type.textarea')}", PrfChoice::CHOICE_FREE_AREA_TYPE_TEXTAREA]], 
+				choice.free_area_type)  %>
+			<% end %>
+			</li>
+		<% end %>
+		</ul>
+		<br/>
+		<div>
+			<%= mng_submit_tag '追加確認' %>
+		</div>
+	<% end %>
+<% else %>
+	自由記述なので選択肢は作成できません。
+<% end %>

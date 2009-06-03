@@ -1,0 +1,38 @@
+<%- @pan1="管理者設定" -%><%- @pan2="#{t('view.noun.base_error_code')}" -%><%- @pan3="#{t('view.noun.base_error_code')}一覧" -%>
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_error_code') %>一覧
+<% end %>
+<h3><%= t('view.noun.base_error_code') %>一覧</h3>
+
+<% if @base_errors.size != 0 %>
+<%= paginate_header(@base_errors) %>
+<table class="lineColorT" style="width:609px;">
+<tr>
+	<th width="80px">
+		<%= t('activerecord.attributes.base_error.error_code') %>
+	</th>
+	<th width="300px">
+		<%= t('activerecord.attributes.base_error.message') %>
+	</th>
+	<th width="50px">
+		詳細
+	</th>
+</tr>
+<% for base_error in @base_errors %>
+<tr>
+	<td class="textalignC">
+		<%= base_error.error_code %>
+	</td>
+	<td>
+		<%= base_error.message %>
+	</td>
+	<td class="textalignC">
+		<%= link_to "編集", :action => 'edit', :id => base_error.id %>
+	</td>
+</tr>
+<% end %>
+</table>
+<%= paginate_links(@base_errors) %>
+<% else %>
+	<%= t('view.noun.base_error_code') %>がありません
+<% end %>

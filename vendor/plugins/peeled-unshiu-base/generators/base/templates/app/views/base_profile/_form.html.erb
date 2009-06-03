@@ -1,0 +1,35 @@
+<div>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_profile.name') %><br />
+	<%= text_field 'profile', 'name' %><br />
+	<%= hidden_field 'profile', 'name_public_level' %>
+</div>
+<div>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_profile.sex') %><br />
+	<%= select 'profile', 'sex', select_type(BaseProfile::SEX) %><br />
+	<%= select 'profile', 'sex_public_level', select_type(BaseProfile::PUBLIC_LEVELS) %>
+</div>
+<div>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_profile.area') %><br />
+	<%= select 'profile', 'area', select_type(BaseProfile::PREFECTURES), :selected => @profile.area.to_i %><br />
+	<%= select 'profile', 'area_public_level', select_type(BaseProfile::PUBLIC_LEVELS) %>
+</div>
+<div>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_profile.civil_status') %><br />
+	<%= select 'profile', 'civil_status', select_type(BaseProfile::CIVIL) %><br />
+	<%= select 'profile', 'civil_status_public_level', select_type(BaseProfile::PUBLIC_LEVELS) %>
+</div>
+<div>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_profile.birthday') %><br />
+	(20080401か2008/04/01の形式で入力してください)<br />
+	<% if @profile && @profile.birthday %>
+		<%= text_field_tag 'profile[birthday]', @profile.birthday.strftime('%Y%m%d'), numeric_text_field_options %>
+	<% else %>
+		<%= text_field_tag 'profile[birthday]', nil, numeric_text_field_options %>
+	<% end %><br />
+	<%= select 'profile', 'birthday_public_level', select_type(BaseProfile::PUBLIC_LEVELS) %>
+</div>
+<div>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_profile.introduction') %><br />
+	<%= text_area 'profile', 'introduction', :size => '50x3' %><br />
+	<%= select 'profile', 'introduction_public_level', select_type(BaseProfile::PUBLIC_LEVELS) %>
+</div>

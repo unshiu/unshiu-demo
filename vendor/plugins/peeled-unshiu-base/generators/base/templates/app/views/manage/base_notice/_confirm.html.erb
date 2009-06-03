@@ -1,0 +1,28 @@
+<%= error_messages_for 'base_notice' %>
+
+<!--[form:base_notice]-->
+<table border="0" cellpadding="3" cellspacing="1" class="lineColorLW" style="width:609px;">
+<tbody>
+  <tr>
+    <th style="width:140px;"><label for="base_notice_start_datetime"><%= t('activerecord.attributes.base_notice.start_datetime') %></label></th>
+    <td><%= hidden_field_tag 'base_notice[start_datetime]', datetime_for_hidden(@base_notice.start_datetime) %>
+    <%= datetime_to_s(@base_notice.start_datetime) %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;"><%= t('activerecord.attributes.base_notice.end_datetime') %></th>
+    <td><%= hidden_field_tag 'base_notice[end_datetime]', datetime_for_hidden(@base_notice.end_datetime)  %>
+    <%= datetime_to_s(@base_notice.end_datetime) %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;"><%= t('activerecord.attributes.base_notice.title') %></th>
+    <td><%= hidden_field 'base_notice', 'title'  %>
+    <%= h @base_notice.title %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;"><%= t('activerecord.attributes.base_notice.body') %></th>
+    <td><%= hidden_field 'base_notice', 'body'  %>
+    <%= br @base_notice.body %></td>
+  </tr>
+</tbody>
+</table>
+<!--[eoform:base_notice]-->

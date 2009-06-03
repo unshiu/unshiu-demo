@@ -1,0 +1,20 @@
+<div style="<%= style_value('form_style') %>">
+	<%= error_messages_for 'image', :object_name => 'abm_image' %>
+
+    <div>
+		<span style="color:#f75009;"></span><%= t('activerecord.attributes.abm_image.title') %><br />
+		<%= text_field "image", "title" %>
+    </div>
+    <div>
+    	<span style="color:#f75009;"></span><%= t('activerecord.attributes.abm_image.body') %><br />
+        <%= text_area "image", "body", :size => '50x3' %>
+    </div>
+	
+	<div style="text-align:center">
+		<%= image_tag_for_default 'Spec_04.gif' %><br />
+		<%= image_tag url_for_image_column(@image, 'image', :large) %><br />
+		<%= image_tag_for_default 'Spec_02.gif' %><br />
+	</div>
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+</div>
+<%= image_tag_for_default 'Spec_02.gif' %><br />

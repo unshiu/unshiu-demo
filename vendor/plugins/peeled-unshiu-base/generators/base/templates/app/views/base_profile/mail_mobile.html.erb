@@ -1,0 +1,14 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_profile') %>画像メール投稿
+<% end %>
+
+<div style="text-align:left;">
+以下のリンクよりメール送信画面を開いて指定のアドレスに画像を添付したメールを送信してください。
+添付された画像が<%= t('view.noun.base_profile') %>画像として設定されます。
+以前の<%= t('view.noun.base_profile') %>画像は破棄されますのでご注意ください。
+また、画像が大きい場合には自動的に圧縮されますのでご了承ください。
+</div>
+<%= image_tag_for_default 'Spec_08.gif' %><br />
+<div style="text-align:center;">
+<span style="color:#024873;"></span><%= mail_to @mail_address, "#{t('view.noun.base_profile')}画像をメールで投稿" %>
+</div>

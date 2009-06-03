@@ -1,0 +1,13 @@
+<%content_for(:header_title) do %>
+<%= t('view.noun.abm_album') %>作成
+<%end %>
+<div>
+    <% form_tag :action => 'create' do %>
+	　　<%= render :partial => 'confirm' %>
+	  <div style="text-align:center">
+	  	<%= submit_tag "作成" %>
+	  	<%= cancel_tag %>
+	  </div>
+	<%end %>
+</div>
+<%= image_tag_for_default 'Spec_08.gif' %><br />

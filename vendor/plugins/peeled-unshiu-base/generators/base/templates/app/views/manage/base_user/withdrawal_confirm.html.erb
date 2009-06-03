@@ -1,0 +1,16 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.base_user') -%><%- @pan3="#{t('view.noun.base_user')}強制退会" -%>
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_user') %>強制退会確認
+<% end %>
+<h3><%= t('view.noun.base_user') %>強制退会確認</h3>
+
+<p class="dialog">次の<%= t('view.noun.base_user') %>を強制退会させます。よろしいですか？</p>
+
+<% form_tag :action => 'withdrawal', :id => @base_user.id do %>
+  <div class="bot_btn">
+    <%= mng_submit_tag '強制退会' %>
+    <%= mng_cancel_tag %>
+  </div>
+<% end %>
+<%= render :partial => 'show' %>
+

@@ -1,0 +1,26 @@
+<%- @pan1="管理者設定" -%><%- @pan2=t('view.noun.base_mail_template') -%><%- @pan3="#{t('view.noun.base_mail_template_kind')}一覧" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_mail_template_kind') %>一覧
+<% end %>
+
+<h3><%= t('view.noun.base_mail_template_kind') %>一覧</h3>
+
+<% if @base_mail_template_kinds.size.zero? %>
+	<%= t('view.noun.base_mail_template_kind') %>がありません。
+<% else %>
+	<%= paginate_header(@base_mail_template_kinds) %>
+	<table class="lineColorT" style="width:609px;">
+	  <tr>
+		<th style="width:309px;"><%= t('activerecord.attributes.base_mail_template_kind.name') %></th>
+	  </tr>
+  
+	<% for base_mail_template_kind in @base_mail_template_kinds %>
+	  <tr>
+	    <td><%= link_to base_mail_template_kind.name, manage_base_mail_template_kind_path(base_mail_template_kind)%></td>
+	  </tr>
+	<% end %>
+	</table>
+	<%= paginate_links(@base_mail_template_kinds) %>
+<% end %>
+

@@ -1,0 +1,11 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.dia_diary') %>編集
+<% end %>
+
+<% form_tag :action => 'update', :id => params[:id] do %>
+  <%= render :partial => 'confirm' %>
+  <div style="text-align:center">
+    <%= submit_tag '編集' %>
+    <%= cancel_tag %>
+  </div>
+<% end %>

@@ -1,0 +1,167 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.my_portal') %>
+<% end %>
+
+<div style="text-align:right">
+  	<span style="color:#FF0000"></span>
+  	<%= link_to_portal "#{t('view.noun.common_portal')}", {:controller => 'base', :action => 'index'}, {:accesskey => '*'} %>
+    <br />
+</div>
+
+<!--ページ内リンク-->
+<span style="color:#F75200"></span><a href="#diary"><span style="color:#636363">新着<%= t('view.noun.dia_entry') %></span></a>
+<span style="color:#F75200"></span><a href="#album"><span style="color:#636363">新着<%= t('view.noun.abm_album') %></span></a>
+<a href="#commented_diary"><span style="color:#636363"><%= t('view.noun.dia_entry_comment') %>した<%= t('view.noun.dia_entry') %></span></a><br />
+<a href="#topic"><span style="color:#636363">新着<%= t('view.noun.tpc_topic') %></span></a>
+<a href="#commented_topic"><span style="color:#636363"><%= t('view.noun.tpc_comment') %>した<%= t('view.noun.tpc_topic') %></span></a><br />
+<br />
+
+<%= render :partial => 'notices' %>
+
+<div style="text-align:left;">
+<table>
+<tr>
+<td style="vertical-align:top;">
+	<%= safe_profile_view(@profile, :thumb, {"width" => 96, "height" => 96}) %>
+</td>
+<td>
+	<span style="font-size:small;">
+	<%= link_to_list_cell "#{t('view.noun.msg_message')}", :controller => 'msg_message', :action => 'index' %><br />
+	<%= link_to_list_cell "#{t('view.noun.dia_entry')}を見る(#{@dia_entries_count})", :controller => 'dia_entry', :action => 'list' %><br />
+	<%= link_to_list_cell "#{t('view.noun.dia_entry')}を書く", :controller => 'dia_entry', :action => 'new' %><br />
+	<%= link_to_list_cell "#{t('view.noun.ace_footmark')}", ace_footmarks_path %><br />
+	<%= link_to_list_cell "#{t('view.noun.abm_album')}(#{@abm_albums_count})", :controller => 'abm_album', :action => 'index' %><br />
+	<%= link_to_list_cell "#{t('view.noun.base_profile')}", :controller => 'base_profile', :action=> 'show', :id => current_base_user.id %><br/>
+	<% if Unshiu::Plugins.active_prf? %>
+		<%= link_to_list_cell "#{t('view.noun.prf_profile')}", :controller => 'prf', :action=> 'show', :id => current_base_user.id %><br/>
+	<% end %>
+	<%= link_to_list_cell "#{t('view.noun.cmm_community')}(#{@communities_count})", :controller => 'cmm_user', :action => 'list' %><br/>
+	<%= link_to_list_cell "#{t('view.noun.base_friend')}(#{@friends_count})", :controller => 'base_friend', :action => 'list' %><br />
+	<%= link_to_list_cell "#{t('view.noun.base_favorite')}(#{@favorites_count})", :controller => 'base_favorite', :action => 'list' %><br />
+	<%= link_to_list_cell "#{t('view.noun.pnt_point')}", :controller => 'pnt', :action => 'index' %><br />
+	</span>
+</td>
+</tr>
+</table>
+</div>
+
+<br />
+
+<a id="diary"></a>
+<div style="<%= style_value('inner_title') %>">
+  <span style="color:#024873;"></span><%= t('view.noun.base_friend') %>の新着<%= t('view.noun.dia_entry') %><br />
+</div>
+<br />
+
+<div style="text-align:left">
+
+<% @friend_entries.each do |entry| %>
+	<% list_cell_for do %>
+    	<%= link_to_list_cell "#{entry.title}(#{entry.dia_entry_comments.count})", :controller => 'dia_entry', :action => 'show', :id => entry.id %>
+		<%= notice_new_if_new(entry.contributed_at) %><br />
+		<%= link_to_user entry.dia_diary.base_user %>
+		<%= date_or_time(entry.contributed_at) %>
+	<% end %>
+<% end %>
+
+</div>
+
+<div style="text-align:right">
+     >><%= link_to_list_cell '一覧', :controller => 'dia_entry', :action => 'friend_list' %><br />
+</div>
+<br />
+
+<a id="album"></a>
+<div style="<%= style_value('inner_title') %>">
+  <span style="color:#024873;"></span><%= t('view.noun.base_friend') %>の新着<%= t('view.noun.abm_album') %><br />
+</div>
+<br />
+
+<div style="text-align:left">
+
+<% @friend_albums.each do |album| %>
+	<% list_cell_for do %>
+    	<%= link_to_list_cell "#{album.title}(#{album.abm_images.count})", :controller => 'abm_album', :action => 'show', :id => album.id %>
+		<%= notice_new_if_new(album.updated_at) %><br />
+		<%= link_to_user album.base_user %>
+		<%= date_or_time(album.updated_at) %>
+	<% end %>
+<% end %>
+
+</div>
+
+<div style="text-align:right">
+     >><%= link_to_list_cell '一覧', :controller => 'abm_album', :action => 'friend_list' %><br />
+</div>
+<br />
+
+<a id="commented_diary"></a>
+<div style="<%= style_value('inner_title') %>">
+  <span style="color:#024873;"></span><%= t('view.noun.dia_entry_comment') %>した<%= t('view.noun.dia_entry') %><br />
+</div>
+<br />
+
+<div style="text-align:left">
+
+<% @commented_entries.each do |entry| %>
+	<% list_cell_for do %>
+    	<%= link_to_list_cell "#{entry.title}(#{entry.dia_entry_comments.count})", :controller => 'dia_entry', :action => 'show', :id => entry.id %>
+		<%= notice_new_if_new(entry.last_commented_at) %><br />
+		<%= link_to_user entry.dia_diary.base_user %>
+		<%= date_or_time(entry.last_commented_at) %>
+	<% end %>
+<% end %>
+
+</div>
+
+<div style="text-align:right">
+     >><%= link_to_list_cell '一覧', :controller => 'dia_entry', :action => 'commented_list' %><br />
+</div>
+<br />
+
+<a id="topic"></a>
+<div style="<%= style_value('inner_title') %>">
+  <span style="color:#024873;"></span><%= t('view.noun.cmm_community') %>最新<%= t('view.noun.tpc_topic') %><br />
+</div>
+<br />
+
+<div style="text-align:left">
+	
+<% @community_latest_topics.each do |topic| %>
+	<% list_cell_for do %>
+    	<%= link_to_list_cell topic.tpc_topic.title, :controller => 'tpc_cmm', :action => 'show', :id => topic.id %>
+		<%= notice_new_if_new(topic.tpc_topic.latest_at) %><br />
+		<%= link_to_user topic.tpc_topic.base_user %>
+    	<%= date_or_time(topic.tpc_topic.latest_at) %>
+    <% end %>
+<% end %>
+
+</div>
+
+<div style="text-align:right">
+    >><%= link_to_list_cell '一覧', :controller => 'tpc_cmm', :action => 'latest_list' %><br />
+</div>
+<br />
+
+<a id="commented_topic"></a>
+<div style="<%= style_value('inner_title') %>">
+  <span style="color:#024873;"></span><%= t('view.noun.tpc_comment') %>した<%= t('view.noun.cmm_community') %><%= t('view.noun.tpc_topic') %><br />
+</div>
+<br />
+
+<div style="text-align:left">
+
+<% @community_commented_topics.each do |topic| %>
+	<% list_cell_for do %>
+    	<%= link_to_list_cell topic.tpc_topic.title, :controller => 'tpc_cmm', :action => 'show', :id => topic.id %>
+		<%= notice_new_if_new(topic.tpc_topic.latest_at) %><br />
+		<%= link_to_user topic.tpc_topic.base_user %>
+    	<%= date_or_time(topic.tpc_topic.latest_at) %>
+    <% end %>
+<% end %>
+
+</div>
+
+<div style="text-align:right">
+    >><%= link_to_list_cell '一覧', :controller => 'tpc_cmm', :action => 'commented_list' %><br />
+</div>

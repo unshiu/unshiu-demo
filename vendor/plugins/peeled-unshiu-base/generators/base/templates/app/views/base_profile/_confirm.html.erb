@@ -1,0 +1,50 @@
+<div>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_profile.name') %><br />
+	<%= h @profile.name %><br />
+	(<%= BaseProfile.public_level_name(@profile.name_public_level) %>)
+	<%= hidden_field 'profile', 'name' %>
+	<%= hidden_field 'profile', 'name_public_level' %>
+</div>
+<div>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_profile.sex') %><br />
+	<%= BaseProfile.sex_kind_name(@profile.sex) %><br />
+	(<%= BaseProfile.public_level_name(@profile.sex_public_level) %>)
+	<%= hidden_field 'profile', 'sex' %>
+	<%= hidden_field 'profile', 'sex_public_level' %>
+</div>
+<div>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_profile.area') %><br />
+	<%= BaseProfile.area_kind_name(@profile.area) %><br />
+	(<%= BaseProfile.public_level_name(@profile.area_public_level) %>)
+	<%= hidden_field 'profile', 'area' %>
+	<%= hidden_field 'profile', 'area_public_level' %>
+</div>
+<div>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_profile.civil_status') %><br />
+	<%= BaseProfile.civil_status_kind_name(@profile.civil_status) %><br />
+	(<%= BaseProfile.public_level_name(@profile.civil_status_public_level) %>)
+	<%= hidden_field 'profile', 'civil_status' %>
+	<%= hidden_field 'profile', 'civil_status_public_level' %>
+</div>
+<div>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_profile.birthday') %><br />
+	<% if @profile.birthday %>
+	<%= h @profile.birthday.strftime('%Y/%m/%d') %>
+	<% else %>
+	未入力
+	<% end %><br />
+	(<%= BaseProfile.public_level_name(@profile.birthday_public_level) %>)
+	<%= hidden_field 'profile', 'birthday' %>
+	<%= hidden_field 'profile', 'birthday_public_level' %>
+</div>
+<div>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_profile.introduction') %><br />
+	<% if @profile.introduction.blank? %>
+	未入力
+	<% else %>
+	<%= hbr @profile.introduction %>
+	<% end %><br />
+	(<%= BaseProfile.public_level_name(@profile.introduction_public_level) %>)
+	<%= hidden_field 'profile', 'introduction' %>
+	<%= hidden_field 'profile', 'introduction_public_level' %>
+</div>

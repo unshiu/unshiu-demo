@@ -1,0 +1,43 @@
+<%content_for(:header_title) do %>
+<%= @image.abm_album.base_user.show_name %>の<%= t('view.noun.abm_album') %>
+<%end %>
+<%content_for(:sub_title) do %>
+<%= h @image.title %>
+<%end %>
+<div>
+    <%= render :partial => 'show_image' %>
+    <table width="100%">
+        <tr>
+            <td align="left">
+               <%= link_to_next "<<", @image %>
+            </td>
+            <td align="right">
+               <%= link_to_previous ">>", @image %>
+            </td>
+        </tr>
+    </table>
+
+    <% unless @image.abm_image_comments.empty? %>
+        <%= link_basic_to "#{t('view.noun.abm_image_comment')}を見る(#{@image.abm_image_comments.count})", :controller => 'abm_image_comment', :action => :comments, :id => @image.id %>
+    <% else %>
+        <%= t('view.noun.abm_image_comment') %>はありません。
+    <% end %>
+    <br/>
+      
+    <%= link_basic_to "#{t('view.noun.abm_image_comment')}を書く", :controller => 'abm_image_comment', :action => :new_comment, :id => @image.id %><br/>
+    <% if logged_in? && current_base_user.me?(@image.abm_album.base_user_id) %>
+	    <%= link_basic_to "編集する", :action => :edit, :id => @image.id %><br />
+        <%= link_basic_to "削除する", :action => 'confirm_delete', :id => @image.id %><br/>
+		<%= link_basic_to "この#{t('view.noun.abm_image')}で#{t('view.noun.dia_entry')}を書く", :controller => 'dia_entry', :action => 'new', :images => [@image.id].to_s %>
+		
+		<hr style="<%= style_value('hr1') %>">
+		
+        <% form_tag :action => :confirm_move_album, :id => @image.id do%>
+        <%= t('view.noun.abm_album') %>間移動<br/>
+            <%= select_tag("abm_album_id", options_for_select(@albums.collect {|p| [ p.title, p.id ] }, @image.abm_album_id)) %><br/>
+            <%= submit_tag "確認" %>
+        <% end %>
+    <% end %>
+	<hr style="<%= style_value('hr1') %>">
+
+</div>

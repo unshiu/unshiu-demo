@@ -1,0 +1,16 @@
+<div style="float: left;"><%= @sex_graph %></div>
+<table class="lineColorL" style="width:309px;padding-left:10px">
+	<tr>
+		<th>男性</th>
+		<td><%= @count_male %></td>
+	</tr>
+	<tr>
+		<th>女性</th>
+		<td><%= @count_female %></td>
+	</tr>
+	<tr>
+		<th>未設定</th>
+		<td><%= @all_user_count - @count_male - @count_female %></td>
+	</tr>
+</table>
+<div class="clear"></div>

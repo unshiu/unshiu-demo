@@ -1,0 +1,91 @@
+<ul id="messageboxsubmenu_delete" class="button_bar clearfix small">
+	<li class="first_child"><a id="msg_garbage"><span>ゴミ箱へ移動</span></a></li>
+</ul>
+<ul id="messageboxsubmenu_readstatus" class="button_bar clearfix small">
+	<li class="first_child"><a id="msg_read"><span>既読にする</span></a></li>
+	<li class="last_child"><a id="msg_unread"><span>未読にする</span></a></li>
+</ul>
+<ul id="messageboxsubmenuselect" class="menu_line clear clearfix  small">
+	<li class="first_child"><a id="msg_all_check"><span>すべて選択する</span></a></li>
+	<li><a id="msg_all_uncheck"><span>選択を解除する</span></a></li>
+	<li><a id="msg_read_check"><span>既読を選択する</span></a></li>
+	<li class="last_child"><a id="msg_unread_check"><span>未読を選択する</span></a></li>
+</ul>
+
+<% content_for(:js) do %>
+
+	<script type="text/javascript">
+	$(function() {
+		
+		$("#msg_all_check").click(function(){
+			$("#msg_form :checkbox:not(:checked)").attr("checked", "checked");
+			$("tr.message").css({"background-color":"#F1F1F1"});
+		});
+		
+		$("#msg_all_uncheck").click(function(){
+			$("#msg_form :checkbox:checked").attr("checked", "");
+			$("tr.message").css({"background-color":"#FFFFFF"});
+		});
+		
+		$("#msg_read_check").click(function(){
+			$("#msg_form tr.read :checkbox:not(:checked)").attr("checked", "checked");
+			$("tr.read").css({"background-color":"#F1F1F1"});
+		});
+		
+		$("#msg_unread_check").click(function(){
+			$("#msg_form tr.new :checkbox:not(:checked)").attr("checked", "checked");
+			$("tr.new").css({"background-color":"#F1F1F1"});
+		});
+		
+		$("#msg_garbage").click(function(){
+			var query = get_checkbox_query();
+			if(query != '') {
+				<%= remote_function(:url => {:controller => 'msg_receiver', :action=>'delete_messages_remote'}, :with =>"query") %>
+			} else {
+				// alert
+			}
+		});
+		
+		$("#msg_read").click(function(){
+			var query = get_checkbox_query();
+			if(query != '') {
+				<%= remote_function(:url => {:controller => 'msg_receiver', :action=>'read_messages_remote'}, :with =>"query") %>
+			} else {
+				// alert
+			}
+		});
+		
+		$("#msg_unread").click(function(){
+			var query = get_checkbox_query();
+			if(query != '') {
+				<%= remote_function(:url => {:controller => 'msg_receiver', :action=>'unread_messages_remote'}, :with =>"query") %>
+			} else {
+				// alert
+			}
+		});
+		
+		// reload 時にスタイルを維持
+		$("#msg_form :checked").each(function(){
+			$("tr#message_" + $(this).attr("value")).css({"background-color":"#F1F1F1"});
+		});
+		
+		$("#msg_form :checkbox").click(function(){
+			if($(this).attr('checked') == true) {
+				$("tr.message").css({"background-color":"#F1F1F1"});
+			} else {
+				$("tr.message").css({"background-color":"#FFFFFF"});
+			}
+		});
+		
+	});
+	
+	function get_checkbox_query() {
+		var query = '';
+		$("#msg_form :checked").each(function(){
+			query += "message_ids[]=" + $(this).attr("value") + "&"
+		});
+		return query;
+	}
+	</script>
+<% end %>
+

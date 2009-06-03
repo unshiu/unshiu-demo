@@ -1,0 +1,21 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_friend') %>申請
+<% end %>
+<%= @user.show_name %>への<%= t('view.noun.base_friend') %>申請のメッセージを入力してください。
+
+<% form_tag :action => 'confirm', :id => @user.id do %>
+
+<div style="<%= style_value('form_style') %>">
+	<%= error_messages_for 'bfaf', :object_name => 'base_friend_apply_form' %>
+	<span style="color:#f75009;"></span>申請メッセージ<br/>
+	<%= text_area_tag 'apply_message', params[:apply_message], :size => '50x3' %>
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+</div>
+<%= image_tag_for_default 'Spec_02.gif' %><br />
+
+<div style="text-align:center">
+	<%= submit_tag '確認' %>
+</div>
+
+<% end %>
+<%= image_tag_for_default 'Spec_02.gif' %><br />

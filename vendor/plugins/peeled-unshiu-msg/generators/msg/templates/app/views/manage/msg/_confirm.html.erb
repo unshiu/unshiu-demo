@@ -1,0 +1,20 @@
+<table class="lineColorL" style="width:609px;">
+	<tr>
+		<th>宛先</th>
+		<td>
+			<% if @user %>
+				<%= link_to_user @user %>
+			<% else %>
+				全<%= t('view.noun.base_user') %>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.msg_message.title') %></th>
+		<td><%= @message.title %><%= hidden_field 'message', 'title' %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.msg_message.body') %></th>
+		<td><%= hbr @message.body %><%= hidden_field 'message', 'body' %></td>
+	</tr>
+</table>

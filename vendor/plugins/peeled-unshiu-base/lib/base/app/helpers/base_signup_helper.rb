@@ -1,0 +1,2 @@
+module BaseSignupHelperModule
+end

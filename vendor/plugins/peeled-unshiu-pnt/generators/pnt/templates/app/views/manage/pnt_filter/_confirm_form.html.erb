@@ -1,0 +1,50 @@
+<%= hidden_field 'pnt_filter', 'id' %>
+<%= hidden_field 'pnt_filter', 'pnt_master_id' %>
+<table class="lineColorL" style="width:609px;">
+<tbody>
+  <tr>
+    <th style="width:20%;"><%= t('activerecord.attributes.pnt_filter_master.title') %></th>
+    <td><%= @pnt_filter.pnt_filter_master.title %>
+		<%= hidden_field 'pnt_filter', 'pnt_filter_master_id' %></td>
+  </tr>
+  <tr>
+    <th><%= t('activerecord.attributes.pnt_filter.summary') %></th>
+    <td><%= @pnt_filter.summary %>
+		<%= hidden_field 'pnt_filter', 'summary' %></td>
+  </tr>
+  <tr>
+    <th><label name="pnt_filter_point"><%= t('activerecord.attributes.pnt_filter.point') %></th>
+	<td><%= @pnt_filter.point %>
+		<%= hidden_field 'pnt_filter', 'point' %></td>
+  </tr>
+  <tr>
+    <th>配布期限</th>
+	<td>
+	<% if has_limit_day? %>
+		<%= l(@pnt_filter.start_at, :format => :short) %>〜<%= l(@pnt_filter.end_at, :format => :short) %>
+	<% end %>
+	<%= hidden_field 'pnt_filter', 'start_at' %>
+	<%= hidden_field 'pnt_filter', 'end_at' %>
+	</td>
+  </tr>
+  <tr>
+  	<th>配布上限</th>
+	<td>
+	<% if has_limit_stock? %>
+		<%= @pnt_filter.stock %>
+	<% end %>
+	<%= hidden_field 'pnt_filter', 'stock' %>
+	</td>
+  </tr>
+  <tr>
+  	<th>配布ルール</th>
+	<td>
+	<% if has_limit_rule? %>
+		最大<%= @pnt_filter.rule_day %>日に<%= @pnt_filter.rule_count %>回受け取れる
+	<% end %>
+	<%= hidden_field 'pnt_filter', 'rule_day' %>
+	<%= hidden_field 'pnt_filter', 'rule_count' %>
+	</td>
+  </tr>
+</tbody>
+</table>

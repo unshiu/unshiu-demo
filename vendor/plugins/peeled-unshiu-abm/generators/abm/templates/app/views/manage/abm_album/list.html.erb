@@ -1,0 +1,33 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.abm_album') -%><%- @pan3="#{t('view.noun.abm_album')}一覧" -%>
+<% content_for(:header_title) do %>
+<%= t('view.noun.abm_album') %>一覧
+<% end %>
+
+<h3><%= t('view.noun.abm_album') %>一覧</h3>
+
+<% if @albums.size != 0 %>
+<%= paginate_header(@albums) %>
+<table class="lineColorT" style="width:609px;">
+  <tr>
+    <th style="width:150px;"><%= t('activerecord.attributes.abm_album.updated_at') %></th>
+    <th style="width:150px;"><%= t('activerecord.attributes.abm_album.base_user') %></th>
+    <th style="width:309px;"><%= t('activerecord.attributes.abm_album.title') %></th>
+  </tr>
+<% for album in @albums %>
+<tr>
+	<td>
+		<%= datetime_to_s(album.updated_at) %>
+	</td>
+	<td>
+		<%= link_to_user album.base_user %>
+	</td>
+	<td>
+		<%= link_to "#{album.title}(#{album.abm_images.count})", :action => 'show', :id => album.id %>
+	</td>
+</tr>
+<% end %>
+</table>
+<%= paginate_links(@albums) %>
+<% else %>
+<%= t('view.noun.abm_album') %>がありません。
+<% end %>

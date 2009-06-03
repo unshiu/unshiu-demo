@@ -1,0 +1,10 @@
+<% content_for(:header_title) do %>
+検索
+<% end %>
+
+<% if logged_in? %><% end %><%# FIXIME なぜかlink_toだけではsession_idの強制追加がおこらないので %>
+
+<%= link_to "#{t('view.noun.base_user')}検索", :controller => :base_user, :action => 'search' %><br/>
+<%= link_to "#{t('view.noun.dia_entry')}検索", :controller => :dia_entry, :action => 'search' %><br/>
+<%= link_to "#{t('view.noun.cmm_community')}検索", :controller => 'cmm', :action => 'search' %><br/>
+<br />

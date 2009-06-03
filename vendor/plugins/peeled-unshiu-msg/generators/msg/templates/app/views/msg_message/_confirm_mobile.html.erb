@@ -1,0 +1,17 @@
+<div style="<%= style_value('form_style') %>">
+<span style="color:#f75009;"></span><%= t('activerecord.attributes.msg_message.receiver') %><br />
+<% @receivers.each do |receiver| %>
+	<span style="color:#f75009;"></span><%= link_to_user_without_emoticon receiver %><br />
+	<%= hidden_field_tag 'receivers', receiver.id %>
+<% end %>
+<%= hidden_field 'message', 'parent_message_id' %>
+<span style="color:#f75009;"></span><%= t('activerecord.attributes.msg_message.title') %><br />
+<%= @message.title %>
+<%= hidden_field 'message', 'title' %><br />
+<span style="color:#f75009;"></span><%= t('activerecord.attributes.msg_message.body') %><br />
+<%= hbr @message.body %>
+<%= hidden_field 'message', 'body' %>
+
+<%= image_tag_for_default 'Spec_02.gif' %><br />
+</div>
+<%= image_tag_for_default 'Spec_02.gif' %><br />

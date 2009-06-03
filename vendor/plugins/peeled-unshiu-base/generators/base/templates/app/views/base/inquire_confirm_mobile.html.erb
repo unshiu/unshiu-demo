@@ -1,0 +1,22 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_inquire') %>
+<% end %>
+
+<% form_tag :action => 'inquire' do %>
+  <div style="<%= style_value('form_style') %>">
+  	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_inquire.mail_address') %><br />
+	<%= @inquire.mail_address %>
+	<%= hidden_field 'inquire', 'mail_address' %><br />
+  	<span style="color:#f75009;"></span><%= t('activerecord.attributes.base_inquire.body') %><br />
+	<%= hbr @inquire.body %>
+	<%= hidden_field 'inquire', 'body' %><br />
+	<%= hidden_field 'inquire', 'referer' %>
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+  </div>
+  <%= image_tag_for_default 'Spec_02.gif' %><br />
+  <div style="text-align:center">
+	<%= submit_tag '送信' %>
+	<%= cancel_tag %>
+  </div>
+<% end %>
+<%= image_tag_for_default 'Spec_08.gif' %><br />

@@ -1,0 +1,5 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.abm_album') %>作成
+<% end %>
+
+<%= link_basic_to "作成した#{t('view.noun.abm_album')}を表示する", :action => 'show', :id => @album.id %>

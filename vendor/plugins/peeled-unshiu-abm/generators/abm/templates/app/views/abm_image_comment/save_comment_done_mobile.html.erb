@@ -1,0 +1,9 @@
+<%content_for(:header_title) do %>
+<%= t('view.noun.abm_album') %><%= t('view.noun.abm_image') %><%= t('view.noun.abm_image_comment') %>投稿
+<%end %>
+
+<%= t('view.noun.abm_image_comment') %>を投稿しました。<br/>
+<br/>
+<%= link_basic_to "#{t('view.noun.abm_image_comment')}を投稿した#{t('view.noun.abm_image')}を見る", {:action => 'comments', :id => @image.id}, {:accesskey => "5"} %><br/>
+
+<hr style="<%= style_value('hr1') %>">

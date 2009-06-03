@@ -1,0 +1,16 @@
+<li class="first_child <%= current_submenu_class(current_menu, 'received') %>">
+	<span class="ui-icon ui-icon-mail-open" alt="" src=""/></span>
+	<%= link_to '受信箱<span class="total">(' + @received_count + ')</span>', :controller => 'msg_message' %>
+</li>
+<li class="<%= current_submenu_class(current_menu, 'sent') %>">
+	<span class="ui-icon ui-icon-mail-closed" alt="" src=""/></span>
+	<%= link_to '送信箱<span class="total">(' + @sent_count + ')</span>', :controller => 'msg_sender', :action => 'list' %>
+</li>
+<li class="<%= current_submenu_class(current_menu, 'draft') %>">
+	<span class="ui-icon ui-icon-pencil" alt="" src=""/></span>
+	<%= link_to '下書き<span class="total">(' + @draft_count + ')</span>', :controller => 'msg_message', :action => 'draft_list' %>
+</li>
+<li class="first_child <%= current_submenu_class(current_menu, 'garbage') %>">
+	<span class="ui-icon ui-icon-trash" alt="" src=""/></span>
+	<%= link_to 'ゴミ箱<span class="total">(' + @garbage_count + ')</span>', :controller => 'msg_message', :action => 'garbage_list' %>
+</li>

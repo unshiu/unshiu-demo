@@ -1,0 +1,49 @@
+common: &common
+  # アルバム一覧の1ページに表示する数
+  album_list_size: 8
+  album_list_size_mobile: 5
+  
+  # ポータルに表示する友だちアルバム一覧の最大数
+  portal_album_list_size: 3
+  
+  # プロフィールに表示する友だちアルバム一覧の最大数
+  profile_album_list_size: 3
+  
+  # アルバム画像一覧の1ページに表示する数
+  image_list_size: 9
+  image_list_size_mobile: 3
+
+  # 画像ページで前後に表示する画像数
+  image_list_around_size: 3
+  
+  # 画像コメント一覧の1ページに表示する数
+  image_comments_list_size_for_abm_image: 3 # 画像ページでのコメント数
+  image_comments_list_size: 10
+  image_comments_list_size_mobile: 5
+
+  # ポータルに表示する場合などのアルバムのキャッシュ時間(sec)
+  abm_album_cache_time: 600
+
+  image_allow_format: ["gif", "png", "jpg"]
+  swf_image_allow_format: *.jpg;*.png;*.jpeg;*.gif
+  
+development:
+  # 1ファイルあたりの最大容量
+  file_size_max_image_size: 5M
+  # 1ユーザあたりの最大容量
+  user_size_max_image_size: 100M
+  # システム全体の総画像最大容量
+  system_size_max_image_size: 500M
+  <<: *common
+  
+test:
+  file_size_max_image_size: 10K
+  user_size_max_image_size: 12K
+  system_size_max_image_size: 16K
+  <<: *common
+
+production:
+  file_size_max_image_size: 5M
+  user_size_max_image_size: 1G
+  system_size_max_image_size: 1T
+  <<: *common

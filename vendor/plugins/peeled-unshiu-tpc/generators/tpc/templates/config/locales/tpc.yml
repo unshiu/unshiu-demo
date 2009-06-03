@@ -1,0 +1,70 @@
+--- 
+ja-JP: 
+  activerecord: 
+    models: 
+      tpc_topic: 
+      tpc_topic_abm_image: 
+      tpc_comment_abm_image: 
+      tpc_topic_cmm_community: 
+      tpc_comment: 
+    attributes: 
+      tpc_topic: 
+        created_at: "作成日"
+        title: "タイトル"
+        body: "本文"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        base_user: "ユーザ"
+        last_commented_at: "最終コメント日"
+      tpc_topic_abm_image: 
+        tpc_topic: "トピック"
+        created_at: "作成日"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        abm_image: "画像"
+      tpc_comment_abm_image: 
+        created_at: "作成日"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        tpc_comment: "トピックコメント"
+        abm_image: "画像"
+      tpc_topic_cmm_community: 
+        tpc_topic: "トピック"
+        created_at: "作成日"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        cmm_community: "コミュニティ"
+        public_level: "公開レベル"
+      tpc_comment: 
+        tpc_topic: "トピック"
+        created_at: "作成日"
+        title: "タイトル"
+        body: "本文"
+        updated_at: "更新日"
+        base_user: "ユーザ"
+    constant: 
+      tpc_topic: 
+        public_level_all: "全員へ公開"
+        public_level_logged_in: "ログインしている人のみ公開"
+      tpc_relation_system: 
+        public_level_participant: "コミュニティ参加者のみ公開"
+        public_level_user: "ユーザまで公開"
+        public_level_all: "全員に公開"
+      tpc_topic_cmm_community: 
+        public_level_participant: "参加者のみ公開"
+  view: 
+    noun: 
+      tpc_topic: "トピック"
+      tpc_topic_abm_image: "トピック画像"
+      cmm_community: "コミュニティ"
+      tpc_comment_abm_image: "コメント画像"
+      tpc_topic_cmm_community: "コミュニティトピック"
+      tpc_comment: "コメント"
+    flash:
+      notice:
+        tpc_topic_create: "トピックを作成しました。"
+        tpc_topic_delete: "トピックを削除しました。"
+        tpc_comment_delete: "トピックコメントを削除しました。"
+        tpc_comment_create: "トピックにコメントを追加しました。"
+      error:
+        tpc_comment_create: "トピックコメントの投稿に問題が発生しました。"

@@ -1,0 +1,14 @@
+<%- @pan1="管理者設定" -%><%- @pan2="#{t('view.noun.base_error_code')}" -%><%- @pan3="編集" -%>
+
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_error_code') %>編集
+<% end %>
+
+<h3><%= t('view.noun.base_error_code') %>編集</h3>
+
+<% form_tag :action => 'update_confirm', :id => params[:id] do %>
+	<%= render :partial => 'form' %>
+	<div class="bot_btn">
+		<%= mng_submit_tag '確認' %>
+	</div>
+<% end %>

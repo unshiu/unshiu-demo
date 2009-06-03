@@ -1,0 +1,5 @@
+<%= t('activerecord.attributes.msg_message.receiver') %><br />
+<span style="color:#f75009;"></span><%= link_to_user_without_emoticon(@message.msg_receivers[0].base_user) %><br />
+<br />
+<%= t('activerecord.attributes.msg_message.body') %><br />
+<%= hbr @message.body %>

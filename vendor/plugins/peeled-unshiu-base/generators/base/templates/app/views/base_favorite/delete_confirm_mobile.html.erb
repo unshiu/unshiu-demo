@@ -1,0 +1,11 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_favorite') %>削除
+<% end %>
+<%= @favorite.favorite.show_name %>を<%= t('view.noun.base_favorite') %>から削除しますか？<br />
+
+<div style="text-align:center">
+<% form_tag :action => 'delete', :id => @favorite.id do %>
+<%= submit_tag '削除' %>
+<%= cancel_tag %>
+<% end %>
+</div>

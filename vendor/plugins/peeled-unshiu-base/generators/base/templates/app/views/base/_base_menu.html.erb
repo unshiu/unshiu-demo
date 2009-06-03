@@ -1,0 +1,27 @@
+<ul id="sub_menu_list" class="sub_menu_tab">
+		<% @base_menus.each do |base_menu|%>
+			<li id="submenu_number_<%= base_menu.num %> submenu_master_id_<%= base_menu.base_menu_master_id %>" class="span-4 draggable_menu">
+				<%= sub_tab_menu(base_menu.base_menu_master.name, base_menu.base_menu_master.icon, base_menu.base_menu_master.url)%>
+			</li>
+		<% end %>
+		
+		<li class="span-2 " id="addmenu">
+			<a href="#">
+			<div class="submenu_inner sub_menu_off tab_off">
+				<div class="sub_menu_title_col">
+					<div class="sub_menu_title hide">
+						その他機能を選択もしくはメニューに追加
+					</div>
+				</div>
+				<img src="/images/default/icon/addmenu.gif" width="32" height="32" border="0" alt="">
+			</div>
+			</a>
+				<ul id="sub_sub_menu_list" class="sub_menu_tab">
+					<% @base_sub_menus.each do |base_menu|%>
+						<li id="submenu_number_<%= base_menu.num %> submenu_master_id_<%= base_menu.base_menu_master_id %>" class="span-4  draggable_menu">
+							<%= sub_tab_menu(base_menu.base_menu_master.name, base_menu.base_menu_master.icon, base_menu.base_menu_master.url)%>
+						</li>
+					<% end %>
+				</ul>
+		</li>
+</ul>

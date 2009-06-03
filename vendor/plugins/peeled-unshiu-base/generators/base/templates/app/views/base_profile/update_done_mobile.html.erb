@@ -1,0 +1,7 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_profile') %>編集
+<% end %>
+
+<%= t('view.noun.base_profile') %>を変更しました。<br />
+<br />
+<span style="color:#f75100;"></span><%= link_basic_to "#{t('view.noun.base_profile')}に戻る", {:action => 'show', :id => current_base_user.id}, {:accesskey => 5} %>

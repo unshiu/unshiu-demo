@@ -1,0 +1,61 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.abm_album') %>
+<% end %>
+<% content_for(:sub_title) do %>
+	<%= current_base_user.show_name %>の<%= t('view.noun.abm_album') %>
+<% end %>
+
+<div class="clearfix">
+	<div id="contents_title" class="span-12"><h2><span>アルバム一覧</span></h2></div>
+	<ul class="menu_list">
+		<li>
+			<%= link_add_menu_to "#{t('view.noun.abm_album')}を追加", {:controller => :abm_album, :action => :new} %>
+		</li>
+	</ul>
+</div>
+
+<div class="pager_box pager_box_top append-bottom clearfix">
+	<%= paginate(@albums) %>
+</div><!--pager_col-->
+
+<% @albums.each do |album| %>
+	<div class="diary_story_box box_outer clearfix community_topic_list">
+		<div class="community_topic_author">
+			<% link_to :controller => :abm_album, :action => :show, :id => album.id do %>
+				<%= safe_abm_album_cover_image_view(album.cover_abm_image, :thumb, { :size => "70x70", :class => "left", :alt => h(album.title) }) %>
+			<% end %>
+		</div>
+		<div class="community_topic_text">
+			<h6>
+				<span>
+					<% link_to :controller => :abm_album, :action => :show, :id => album.id do %>
+						<%= body_summary(album.title, :length => 40) %>
+					<% end %>
+				</span>
+			</h6>
+			<div class="diary_text box_outer small">
+				<p>
+					<%= body_summary(album.body, :length => 40) %>
+				</p>
+			</div>
+			<div class="span-10 small">
+				<span class="permanent_link">
+					<%= link_to "#{t('view.noun.abm_image')}を見る", :controller => :abm_album, :action => :show, :id => album.id %>｜
+				</span>
+				<span class="comment_link"><%=h "#{t('view.noun.abm_image')}枚数#{album.abm_images.count}" %>｜</span>
+				<span class="contents_date"><%= l(album.updated_at, :format => :short) %></span>
+			</div>
+			<span class="editdelete span-4 small">
+				<%= link_to "編集する", :action => :edit, :id => album.id %>｜
+				<%= link_to "削除する", :action => :confirm_delete, :id => album.id, :cancel_to => "/abm_album/index" %>
+			</span>
+		</div>
+	</div>
+<% end %>
+
+<div class="pager_box  pager_box_bottom prepend-top clearfix">
+	<%= paginate(@albums) %>
+</div><!--pager_box-->
+
+<% content_for(:sidemenu) do %>
+<% end %>

@@ -1,0 +1,82 @@
+common: &common
+  
+  # メールアドレス
+  system_mail_address: sendonly@unshiu.drecom.jp
+
+  # ユーザー
+  user_list_size: 5
+
+  # 友だち
+  portal_friend_list_size: 3 
+  friend_list_size: 5
+
+  # お気に入り
+  portal_favorite_list_size: 3 
+  favorite_list_size: 5
+
+  # お知らせ
+  # 現状、ポータルでは、ポータルへの掲載期間を指定できるため、数による制限はかけていません
+  portal_notice_list_size: 3
+  notice_list_size: 5
+  
+  search_result_list_size: 10
+  
+  # 文字数制限（全体共通）
+  # 基本パッケージとしてはここの値を使う
+  # カスタマイズで一部変えたい場合は、個別の yml に書いてそれを使う
+  title_max_length: 100
+  body_max_length: 5000
+  comment_max_length: 2000
+  name_max_length: 30
+  email_max_length: 255
+  
+  # New絵文字を表示する日数
+  notice_new_tearm: 3
+  
+  # メニューマスタファイル
+  menu_master_file: config/unshiu/base_menu_master.yml
+  # メニューを表示できる最大数
+  menu_max_size: 5
+  
+  ##############################
+  # 以下、管理。別ファイルに移動するかも 
+  ##############################
+  
+  # ユーザー推移数csvを出力するパス
+  user_transit_file_path: public/system/files/base_user_transit
+  
+  # ユーザーCSV関連
+  # 1回にまとめて処理するユーザーの数。小さすぎると効率が悪く、大き過ぎるとメモリを食う
+  user_csv_one_time_size: 10000
+  # 出力パス
+  user_csv_file_path: public/system/files/base_user
+  
+  plugin_news_url: http://unshiu.drecom.jp/news
+  
+  image_allow_format: ["gif", "png", "jpg"]
+  
+development:
+  # 1ファイルあたりの最大容量
+  file_size_max_image_size: 5M
+  registration_mail_address: registration@unshiu.drecom.jp
+  <<: *common
+
+test:
+  file_size_max_image_size: 10K
+  
+  registration_mail_address: registration@test
+  user_transit_file_path: test/tmp/base_user_transit
+  user_csv_file_path: test/tmp/base_user
+  
+  menu_master_file: test/fixtures/base_menu_master.yml
+  menu_max_size: 2
+  <<: *common
+
+production:
+  file_size_max_image_size: 5M
+  
+  # 自動送信 FROM メールアドレス
+  system_mail_address: sendonly@unshiu.drecom.jp
+  # 登録用空メール送信先
+  registration_mail_address: registration@unshiu.drecom.jp
+  <<: *common

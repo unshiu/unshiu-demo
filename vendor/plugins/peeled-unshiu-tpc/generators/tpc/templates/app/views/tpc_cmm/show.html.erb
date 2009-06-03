@@ -1,0 +1,124 @@
+<% content_for(:header_title) do %>
+	<%= "#{t('view.noun.tpc_topic')} #{@topic.tpc_topic.title}" %>
+<% end %>
+
+<div class="clearfix">
+		<div id="contents_title" class="span-12"><h2><span>トピック</span></h2></div>
+</div>
+
+<div class="topic_story_box box_outer clearfix community_topic_list">
+	<div class="community_topic_text">
+		<h4><span><%= link_to @topic.tpc_topic.title, :action => :show, :id => @topic.id %></span></h4>
+		<div class="topic_text box_outer small">
+			<p>
+			<%= hbr @topic.tpc_topic.body %>
+			</p>
+		</div>
+		<div class="span-10 small">
+			<span class="author_link">posted by 
+				<% link_to :controller => :base_profile, :action => :show, :id => @topic.tpc_topic.base_user_id do %>
+					<%= safe_profile_view(@topic.tpc_topic.base_user.base_profile, :thumb, {:size => "40x40", :alt => h(@topic.tpc_topic.base_user.show_name)}) %>
+					<span><%=h @topic.tpc_topic.base_user.show_name %></span>
+				<% end %>｜</span><!--/permanent_link-->
+			<span class="contents_date"><%= l(@topic.tpc_topic.created_at, :format => :short) %></span><!--/contents_date-->
+			<span class="contents_date">
+				<% if deletable? @topic %>
+					| <%= link_to "削除する", :action => 'delete_confirm', :id => @topic.id %>
+				<% end %>
+			</span><!--/contents_date-->
+		</div>
+	</div>
+	
+</div>
+
+
+<div id="tpc_rows_header" class="clearfix">
+	<div class="cmm_alart">
+
+	<ul id="searchresultmenu" class="button_bar clearfix small">
+		<li class="first_child">
+			<%= link_to "<span>新着順に並び替え</span>", :action => "show", :id => @topic.id, :comment_order => 'desc' %>
+		</li>
+		<li class="last_child">
+			<%= link_to "<span>古い順に並び替え</span>", :action => "show", :id => @topic.id, :comment_order => 'asc' %>
+		</li>
+	</ul>
+	</div>
+	
+	<div class="pager_box pager_box_top clear clearfix">
+		<%= paginate @comments %>
+	</div><!--pager_box-->
+	
+</div><!--/message_rows_header-->
+
+
+<div class="top_topic_box box_outer">
+<div class="wrap1">
+<div class="wrap2">
+<div class="wrap3">
+	<div class="box_inner">
+
+		<!-- comment  -->
+		<div id="tpc_topic_comments">
+			<%= render :partial => 'comment', :collection => @comments %>
+		</div>
+
+		<div class="pager_box pager_box_top clear clearfix">
+			<%= paginate @comments %>
+		</div><!--pager_box-->
+		
+	<%= link_to "一覧をみる", :action => 'comments', :id => @topic.id %><br />
+	</div>
+</div>
+</div><!--/wrap3-->
+</div><!--/wrap2-->
+</div><!--/wrap1-->
+
+<% if logged_in? %>
+	<span id="tpc_topic_comment_message"></span>
+	
+	<% form_remote_tag :url => {:action =>"create_remote", :id => @topic.id} do %>
+		<%= hidden_field 'comment', 'tpc_topic_id', :value => @topic.tpc_topic.id %>
+	
+		<label for="body" accesskey="n"><%= t('activerecord.attributes.tpc_comment.body') %></label><br/>
+		<p><%= text_area 'comment', 'body', :size => '50x3' %></p>
+	   	<div class="notice">
+			<%= error_message_on_with_label @comment, 'body' %>
+			<%=t 'activerecord.errors.stand_messages.too_long', :count => AppResources[:base][:body_max_length] %>
+		</div>
+	
+		<%= submit_button_tag("コメント投稿") %>
+	
+	<% end %>
+<% else %>
+<p>
+<%= t('view.noun.tpc_comment') %>をつけたい場合は
+<%= link_to "こちら", :controller => "base_user", :action => "login", :return_to => "/tpc_cmm/show/#{@topic.id}" %>
+からログインしてください。
+</p>
+<% end %>
+	
+<% content_for(:sidemenu) do %>
+	<div id="friend_box" class="box_outer clearfix">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="box_inner">
+			<div class="title"><h6>メンバー</h6></div>
+			<div class="profile_img_panel">
+				<% @members.each do |member| %>
+					<% link_to :controller => :base_profile, :action => :show, :id => member.base_user_id do %>
+						<%= safe_profile_view(member.base_user.base_profile, :thumb, {:size => "40x40", :alt => member.base_user.show_name}) %>
+						<span><%=h member.base_user.show_name %></span>
+					<% end %>
+				<% end %>
+			</div><!--/profile_img_panel-->
+			<div class="more ">
+				<%= link_to "すべて表示", :controller => :cmm_member, :action => :list, :id  => @community.id%>
+			</div>
+		</div><!--/box_inner-->
+		</div><!-- /wrap3 -->
+		</div><!-- /wrap2 -->
+		</div><!-- /wrap1 -->
+	</div><!--/friend_box-->
+<% end %>

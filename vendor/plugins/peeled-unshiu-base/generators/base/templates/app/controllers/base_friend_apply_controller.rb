@@ -1,0 +1,3 @@
+class BaseFriendApplyController < ApplicationController
+  include BaseFriendApplyControllerModule
+end

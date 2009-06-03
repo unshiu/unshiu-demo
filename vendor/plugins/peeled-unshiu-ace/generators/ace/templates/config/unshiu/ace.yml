@@ -1,0 +1,35 @@
+common: &common
+  access_log_server: http://log.unshiu.jp/
+  
+  footmark_list_size: 5
+  footmark_max_size: 30
+  
+  commit_unit: 5000 
+  client_id : 1
+  
+development:
+  database: unshiu_development
+  username: unshiu
+  password: unshiu 
+  host: localhost
+
+  target_pattern: "/usr/local/site/carbon/logs/*.log.*"
+  <<: *common
+
+test:
+  database: unshiu_test
+  username: unshiu
+  password: unshiu 
+  host: localhost
+
+  target_pattern: "/../spec/fixtures/file/*.log.*"
+  <<: *common
+
+production:
+  database: unshiu_production
+  username: unshiu
+  password: unshiu 
+  host: localhost
+
+  target_pattern: "/../spec/fixtures/file/*.log.*"
+  <<: *common

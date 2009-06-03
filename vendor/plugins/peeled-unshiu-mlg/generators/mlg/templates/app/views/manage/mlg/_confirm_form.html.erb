@@ -1,0 +1,16 @@
+<%= hidden_field 'mlg_magazine', 'id'%>
+
+<table class="lineColorL" style="width:609px;">
+<tbody>
+  <tr>
+    <th style="width:140px;"><%= t('activerecord.attributes.mlg_magazine.title') %></th>
+    <td><%= @mlg_magazine.title %>
+		<%= hidden_field 'mlg_magazine', 'title' %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;"><%= t('activerecord.attributes.mlg_magazine.body') %></th>
+    <td><%= br(@mlg_magazine.body) %>
+		<%= hidden_field 'mlg_magazine', 'body' %></td>
+  </tr>
+</tbody>
+</table>

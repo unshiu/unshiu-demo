@@ -1,0 +1,16 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.abm_album') %><%= t('view.noun.abm_image') %>削除
+<% end %>
+
+<div class="warning">
+    以下の<%= t('view.noun.abm_image') %>を 削除します。よろしいですか？<br/>
+</div>
+
+<%= image_tag url_for_image_column(@image, 'image', :large) %>
+<%= t('activerecord.attributes.abm_image.body') %><br/>
+<%= hbr @image.body %>
+
+<% form_tag :action => :delete, :id => @image.id do %>
+	<%= submit_button_tag("削除") %>
+    <%= cancel_button_tag %>
+<% end %>

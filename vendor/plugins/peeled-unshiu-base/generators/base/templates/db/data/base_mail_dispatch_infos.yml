@@ -1,0 +1,52 @@
+# == Schema Information
+# Schema version: 110
+#
+# Table name: base_mail_dispatch_infos
+#
+#  id           :integer(11)   not null, primary key
+#  mail_address :string(255)   
+#  model_name   :string(255)   
+#  method_name  :string(255)   
+#  model_id     :integer(11)   
+#  created_at   :datetime      
+#  updated_at   :datetime      
+#  deleted_at   :datetime      
+#  base_user_id :integer(11)   
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+a:
+  id: 1
+  mail_address: ude0000000000000@drecom.co.jp
+  model_name: DiaEntry
+  method_name: receive
+  model_id: 1
+  base_user_id: 1
+b:
+  id: 2
+  mail_address: upp0000000000000@drecom.co.jp
+  model_name: PrfProfile
+  method_name: receive
+  model_id: 1
+  base_user_id: 1
+c:
+  id: 3
+  mail_address: uaa0000000000000@drecom.co.jp
+  model_name: AbmAlbum
+  method_name: save_with_mail
+  model_id: 1
+  base_user_id: 1
+d:
+  id: 4
+  mail_address: ubp0000000000000@drecom.co.jp
+  model_name: BaseProfile
+  method_name: receive
+  model_id: 1
+  base_user_id: 1
+e:
+  id: 5
+  mail_address: ucc0000000000000@drecom.co.jp
+  model_name: CmmCommunity
+  method_name: receive
+  model_id: 1
+  base_user_id: 1

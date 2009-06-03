@@ -1,0 +1,5 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.abm_album') %>編集
+<% end %>
+
+<%= link_basic_to "編集した#{t('view.noun.abm_album')}を表示する", :action => 'show', :id => @album.id %>

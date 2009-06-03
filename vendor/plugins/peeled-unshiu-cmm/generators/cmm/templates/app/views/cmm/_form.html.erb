@@ -1,0 +1,29 @@
+<div style="<%= style_value('form_style') %>">
+	<%= error_messages_for 'community', :object_name => 'cmm_community' %>
+	<div>
+		<span style="color:#f75009;"></span><%= t('activerecord.attributes.cmm_community.name') %><br />
+		<%= text_field 'community', 'name'%>
+	</div>
+	<div>
+		<span style="color:#f75009;"></span><%= t('activerecord.attributes.cmm_community.profile') %><br />
+		<div>
+			<%= text_area 'community', 'profile', :size => '50x3' %>
+		</div>
+	</div>
+	<div>
+		<span style="color:#f75009;"></span><%= t('activerecord.attributes.cmm_community.join_type') %>
+		<div>
+			<%= radio_button 'community', 'join_type', CmmCommunity::JOIN_TYPE_FREE %>自由参加
+			<%= radio_button 'community', 'join_type', CmmCommunity::JOIN_TYPE_NEED_APPROVAL %>管理人の承認が必要
+		</div>
+	</div>
+	<div>
+		<span style="color:#f75009;"></span><%= t('activerecord.attributes.cmm_community.topic_create_level') %>
+		<div>
+			<%= radio_button 'community', 'topic_create_level', CmmCommunitiesBaseUser::STATUS_MEMBER %><%= t('view.noun.cmm_community') %>参加者なら誰でも
+			<%= radio_button 'community', 'topic_create_level', CmmCommunitiesBaseUser::STATUS_ADMIN %>管理者のみ
+		</div>
+	</div>
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+</div>
+<%= image_tag_for_default 'Spec_02.gif' %><br />

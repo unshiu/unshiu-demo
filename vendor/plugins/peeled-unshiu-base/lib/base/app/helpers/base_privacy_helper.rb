@@ -1,0 +1,2 @@
+module BasePrivacyHelperModule
+end

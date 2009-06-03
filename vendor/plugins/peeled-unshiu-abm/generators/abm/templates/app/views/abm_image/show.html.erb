@@ -1,0 +1,88 @@
+<% content_for(:header_title) do %>
+<%= @image.abm_album.base_user.show_name %>の<%= t('view.noun.abm_album') %>
+<% end %>
+
+<% content_for(:header_profile) do %>
+	<%= render :partial => "common/header_profile", :locals => {:base_user => @image.abm_album.base_user} %>
+<% end %>
+
+<table>
+    <tr>
+		<% @abm_image_previouses.each do |image| %>
+			<td><%= link_to (image_tag(url_for_image_column(image, 'image', :thumb))), :action => :show, :id => image.id %></td>
+		<% end %>
+		<td><%= image_tag url_for_image_column(@image, 'image', :thumb) %></td>
+        <% @abm_image_nexts.each do |image| %>
+			<td><%= link_to (image_tag(url_for_image_column(image, 'image', :thumb))), :action => :show, :id => image.id %></td>
+		<% end %>
+    </tr>
+</table>
+
+<div>
+<%= image_tag url_for_image_column(@image, 'image', :large) %>
+</div>
+
+<label for="body" accesskey="n"><%= t('activerecord.attributes.abm_image.body') %>：</label>
+<br>
+<%= hbr @image.body %>
+
+<hr>
+
+<% if @abm_image_comments.empty? %>
+	<%= t('view.noun.abm_image_comment') %>はありません。
+<% end %>
+
+<div id="abm_image_comments" class="diary_storys_box box_outer">
+	<%= render :partial => "abm_image_comment/comment", :collection => @abm_image_comments %>
+</div><!--/diary_storys_box-->
+
+<% unless @abm_image_comments.size.zero? %>
+	<%= link_to "さらに見る", :controller => 'abm_image_comment', :action => :comments, :id => @image.id %>
+<% end %>
+<br/>
+ 
+<div id="abm_image_comment_message"></div>
+<% if logged_in? %>
+	<% form_remote_tag :url => {:controller => :abm_image_comment, :action =>"update_remote", :id => @image.id} do %>
+		<label for="body" accesskey="n"><%= t('activerecord.attributes.abm_image_comment.body') %>：</label>
+		<br>
+	    <%= text_area "comment", "body", :size => '50x3', :class => "span-17", :style => "padding:9px;margin:2px 0px" %>
+
+		<%= submit_button_tag("コメント投稿") %>
+	<% end %>
+<% else %>
+	<p>
+	<%= t('view.noun.abm_image_comment') %>をつけたい場合は
+	<%= link_to "こちら", :controller => "base_user", :action => "login", :return_to => "/abm_image/show/#{@image.id}" %>
+	からログインしてください。
+	</p>	
+<% end %>
+
+<% content_for(:sidemenu) do %>
+
+<% if logged_in? && current_base_user.me?(@image.abm_album.base_user_id) %>
+	<div  class="W5R4B9df box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+			<div class="box_inner clearfix">
+			<h6><span>menu</span></h6>
+			    <%= link_basic_to "編集する", :action => :edit, :id => @image.id %><br />
+		        <%= link_basic_to "削除する", :action => 'confirm_delete', :id => @image.id %><br/>
+				<%= link_basic_to "この画像をアルバムの表紙にする", :action => :cover_album_image, :id => @image.id %><br />
+				<%= link_basic_to "この#{t('view.noun.abm_image')}で#{t('view.noun.dia_entry')}を書く", :controller => 'dia_entry', :action => 'new', :images => [@image.id].to_s %>
+
+		        <% form_tag :action => :move_album, :id => @image.id do%>
+		        <%= t('view.noun.abm_album') %>間移動<br/>
+		            <%= select_tag("abm_album_id", options_for_select(@albums.collect {|p| [ p.title, p.id ] }, @image.abm_album_id)) %><br/>
+		            <%= submit_tag "移動" %>
+		        <% end %>	
+
+			</div><!--/box_inner-->
+		</div><!--/wrap3 -->
+		</div><!--/wrap2 -->
+		</div><!--/wrap1 -->
+	</div><!--/friend_box-->
+<% end %>
+
+<% end %>

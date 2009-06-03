@@ -1,0 +1,46 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.prf_profile') -%>
+<%- @pan3="#{t('view.noun.prf_profile')}#{t('view.noun.prf_question')}作成確認" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.prf_profile') %><%= t('view.noun.prf_question') %>作成確認
+<% end %>
+
+<h3><%= t('view.noun.prf_profile') %><%= t('view.noun.prf_question') %>作成確認</h3>
+
+<% form_tag :action => "create", :id => @question.id do %>
+	<%= hidden_field 'question', 'active_flag' %>
+	
+	<table class="lineColorL" style="width:609px;">
+	<tbody>
+	  <tr>
+	    <th style="width:100px;"><%= t('activerecord.attributes.prf_question.body') %></th>
+	    <td>
+	    	<%= @question.body %>
+			<%= hidden_field 'question', 'body' %>
+		</td>
+	  </tr>
+	  <tr>
+	    <th style="width:100px;"><%= t('activerecord.attributes.prf_question.question_type') %></th>
+	    <td>
+			<% if @question.type_select? %>
+				<%= t('activerecord.constant.type.select') %>
+			<% elsif @question.type_radio? %>
+				<%= t('activerecord.constant.type.radio') %>
+			<% elsif @question.type_checkbox? %>
+				<%= t('activerecord.constant.type.checkbox') %>
+			<% elsif @question.type_text? %>
+				<%= t('activerecord.constant.type.text') %>
+			<% elsif @question.type_textarea? %>
+				<%= t('activerecord.constant.type.textarea') %>
+			<% end %>
+			<%= hidden_field 'question', 'question_type' %>
+		</td>
+	  </tr>
+	</tbody>
+	</table>
+
+	<div class="bot_btn">
+		<%= mng_submit_tag '作成' %>
+		<%= mng_cancel_tag %>
+	</div>
+<% end %>

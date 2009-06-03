@@ -1,0 +1,2 @@
+page.replace_html 'tpc_topic_comment_message', error_message_on_with_label(@comment, :body)
+page.visual_effect :highlight, "tpc_topic_comment_message"

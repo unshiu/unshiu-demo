@@ -1,0 +1,49 @@
+<%- @pan1="SNS設定" -%>
+<%- @pan2=t('view.noun.prf_profile') -%>
+<%- @pan3="#{t('view.noun.prf_profile')}#{t('view.noun.prf_question')}削除" -%>
+
+<% content_for(:header_title) do %>
+<%= t('view.noun.prf_profile') %><%= t('view.noun.prf_question') %>削除
+<% end %>
+
+<h3><%= t('view.noun.prf_profile') %><%= t('view.noun.prf_question') %>削除</h3>
+
+<p class="dialog">
+	以下の<%= t('view.noun.prf_question') %>を削除します。よろしいですか？<br />
+	既に項目を入力しているユーザがいた場合、それらも閲覧、修正ができなくなります。
+</p>
+
+<% form_tag :action => "delete_question_complete", :id => @question.id do %>
+	<div class="bot_btn">
+		<%= mng_submit_tag '削除' %>
+		<%= mng_cancel_tag %>
+	</div>
+<% end %>
+<br/>
+
+<table border="0" cellpadding="3" cellspacing="1" class="lineColorLW" style="width:609px;">
+<tbody>
+  <tr>
+    <th style="width:120px;"><%= t('activerecord.attributes.prf_question.body') %></th>
+    <td>
+		<%= @question.body %>
+	</td>
+  </tr>
+  <tr>
+    <th style="width:120px;"><%= t('activerecord.attributes.prf_question.question_type') %></th>
+    <td>
+		<% if @question.type_select? %>
+			<%= t('activerecord.constant.type.select') %>
+		<% elsif @question.type_radio? %>
+			<%= t('activerecord.constant.type.radio') %>
+		<% elsif @question.type_checkbox? %>
+			<%= t('activerecord.constant.type.checkbox') %>
+		<% elsif @question.type_text? %>
+			<%= t('activerecord.constant.type.text') %>
+		<% elsif @question.type_textarea? %>
+			<%= t('activerecord.constant.type.textarea') %>
+		<% end %>
+	</td>
+  </tr>
+</tbody>
+</table>

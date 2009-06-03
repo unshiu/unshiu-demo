@@ -1,0 +1,95 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.msg_message') %>
+<% end %>
+
+<% content_for(:sidemenu) do %>
+
+<h2><span>作成</span></h2>
+
+<div id="side_contents_col" class="span-4">
+<div id="side_contents_box">
+	
+	<div id="write_message_box" class="box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="clearfix">
+			<h6 class="caps"></h6>
+			<div class="">
+			<ul class="sidemenu">
+				<li><%= link_to '<span class="small">メッセージを書く</span>', { :action => :new } , {:class => "button"}%></li>
+			</ul>
+
+			</div>
+		</div><!--/box_inner-->
+		</div><!--wrap3-->
+		</div><!--wrap2-->
+		</div><!--wrap1-->
+	</div><!--/diary_post_option_box-->
+
+	<div id="" class="W5R4B9df sidemenu_tray  append-bottom">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="box_inner clearfix">
+			<h6 class="caps"></h6>
+			<div class="">
+			<ul class="sidemenu">
+				<%= render :partial => 'msg/message_sidemenu' , :locals => {:current_menu => 'received'}%>
+			</ul>
+
+			</div>
+		</div><!--/box_inner-->
+		</div><!--wrap3-->
+		</div><!--wrap2-->
+		</div><!--wrap1-->
+	</div><!--/diary_post_option_box-->
+
+</div>
+</div>
+<% end %>
+	
+<div id="" class="W5R4B9df  append-bottom">
+	<div class="wrap1">
+	<div class="wrap2">
+	<div class="wrap3">
+	<div class="box_inner clearfix">
+
+	<div id="message_rows_header" class="clearfix">
+		<%= render :partial => 'msg/message_menu' %>
+		
+		<%= paginate(@msg_messages) %>
+	</div><!--/message_rows_header-->
+
+	<div id="callback_function_message"></div>
+	
+	<% if @msg_messages.size.zero? %>
+		<%= t('view.noun.msg_message') %>がありません。
+
+	<% else %>
+		<form id="msg_form">
+		<table border="0" id="messagebox" class="message_rows" width="100%">
+					<col span="1" class="checkbox">
+					<col span="1" class="name">
+					<col span="1" class="subject">
+					<col span="1" class="date">
+					<col span="1" class="delete">
+			<thead></thead>
+			<tbody id="message_list">
+				<%= render :partial => 'msg_receiver/message', :collection => @msg_messages, :as => :message, 
+				                                               :locals => { :msg_controller => 'msg_receiver', :msg_action => 'show' } %>
+			</tbody>
+		</table>
+	<% end %>
+	
+	</div>
+	
+	<div id="message_rows_footer">
+		<%= paginate(@msg_messages) %>
+	</div><!--/message_rows_footer-->
+
+	</div><!--/box_inner-->
+	</div><!--wrap3-->
+	</div><!--wrap2-->
+	</div><!--wrap1-->
+</div><!--box_outer-->

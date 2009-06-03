@@ -1,0 +1,22 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.tpc_comment') %>した<%= t('view.noun.tpc_topic') %>一覧
+<% end %>
+
+<% if @topics.size.zero? %>
+	<%= t('view.noun.tpc_comment') %>した<%= t('view.noun.tpc_topic') %>はありません。
+<% else %>
+
+	<%= paginate_header @topics %>
+
+	<% @topics.each do |topic| %>
+		<% list_cell_for do %>
+	    	<%= link_to_list_cell "#{topic.tpc_topic.title}(#{topic.tpc_topic.tpc_comments.count})", :controller => 'tpc_cmm', :action => 'show', :id => topic.id %>
+			<%= notice_new_if_new(topic.tpc_topic.created_at) %><br />
+			<%= link_to_user topic.tpc_topic.base_user %>
+			<%= date_or_time(topic.tpc_topic.created_at) %>
+		<% end %>
+	<% end %>
+
+	<%= paginate_links @topics %>
+
+<% end %>

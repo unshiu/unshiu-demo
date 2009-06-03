@@ -1,0 +1,143 @@
+<% content_for(:header_title) do %>
+	<%= @user.show_name %>の<%= t('view.noun.prf_profile') %>
+<% end %>
+
+<div style="<%= style_value('inner_title') %>">
+  <%= image_tag_for_default 'Spec_02.gif' %><br />
+  <span style="color:#024873;"></span><%= t('view.noun.prf_profile') %><br />
+  <%= image_tag_for_default 'Spec_02.gif' %>
+</div>
+<%= image_tag_for_default 'Spec_04.gif' %><br />
+
+<div style="text-align:left;">
+
+<table>
+<tr>
+<td style="vertical-align:top;">
+	
+	<%= safe_profile_view(@user.prf_profile.prf_image, :thumb, {"width" => 96, "height" => 96}) %>
+</td>
+<td>
+	<span style="font-size:small;">
+	<hr style="<%= style_value('hr1') %>" />
+			
+	<% if logged_in? && !current_base_user.me?(@user.id) %>
+		<% if MsgMessage.acceptable?(current_base_user, @user.id) %>
+			<%= link_to_list_cell "#{t('view.noun.msg_message')}を送る", :controller => 'msg_message', :action => 'new', :id => @user.id %><br />
+		<% end %>
+		<% unless BaseFriend.friend?(current_base_user.id, @user.id) %>
+			<%= link_to_list_cell "#{t('view.noun.base_friend')}申請をする", :controller => 'base_friend_apply', :action => 'new', :id => @user.id %><br />
+		<% end %>
+		<% unless BaseFavorite.favorite?(current_base_user.id, @user.id) %>
+			<%= link_to_list_cell "#{t('view.noun.base_favorite')}に追加する", :controller => 'base_favorite', :action => 'add_confirm', :id => @user.id %><br/>
+		<% end %>
+	<% end %>
+
+	<%= link_to_list_cell "所属#{t('view.noun.cmm_community')}(#{@user.cmm_communities.count})", :controller => 'cmm_user', :action => 'list', :id => @user.id %><br/>
+	<%= link_to_list_cell "#{t('view.noun.base_friend')}一覧(#{@user.friends.count})", :controller => 'base_friend', :action => 'list', :id => @user.id %><br/>
+	<%= link_to_list_cell "#{t('view.noun.dia_entry')}一覧(#{@entries.size})", :controller => 'dia_entry', :action => 'list', :id => @user.id %><br/>
+	<%= link_to_list_cell "#{t('view.noun.abm_album')}一覧(#{@albums.size})", :controller => 'abm_album', :action => 'list', :id => @user.id %><br/>
+
+	<% if logged_in? && @user.me?(current_base_user.id) %>
+		<hr style="<%= style_value('hr1') %>" />
+		<%= link_to_list_cell "#{t('view.noun.prf_profile')}を編集する", :controller => 'prf', :action => 'edit' %><br/>
+		<%= link_to_list_cell "#{t('view.noun.prf_profile')}画像を設定する", :controller => 'prf', :action => 'mail' %><br/>
+		<%= link_to_list_cell "公開設定を変更する", :controller => 'prf', :action => 'public_level_edit' %><br/>
+	<% end %>
+	</span>
+</td>
+</tr>
+</table>
+			
+<% @question_set.prf_question_set_partials.each do |qsp| %>
+	<% ans = qsp.prf_question.answer_by_prf_profile_id(@user.prf_profile.id) %>
+	<% if !ans.nil? && prf_accessible?(@user.prf_profile) %>
+		<% list_cell_for do %>
+			<h4><%= h qsp.prf_question.body %></h4>
+			<% if qsp.prf_question.type_select? || qsp.prf_question.type_radio? %>
+				<%= h ans.prf_choice.body %>
+				<% if qsp.prf_question.type_radio? && ans.body != nil && ans.body.size > 0 && ans.prf_choice.has_free_area? %>
+					(<%= h ans.body %>)
+				<% end %>
+			<% elsif qsp.prf_question.type_text? || qsp.prf_question.type_textarea? %>
+				<%= h ans.body %>
+			<% elsif qsp.prf_question.type_checkbox? %>
+				<% ans.each do |a| %>
+					<%= h a.prf_choice.body %>
+					<% if a.body != nil && a.body.size > 0 && a.prf_choice.has_free_area? %>
+						(<%= h a.body %>)
+					<% end %>
+				 	/ 
+				<% end %>
+			<% end %>
+		<% end %>
+	<% else %>
+		<% list_cell_for do %>
+			未公開
+		<% end %>
+	<% end %>
+<% end %>
+
+</div>
+<%= image_tag_for_default 'Spec_08.gif' %><br />
+
+<div style="<%= style_value('inner_title') %>">
+  <%= image_tag_for_default 'Spec_02.gif' %><br />
+  <span style="color:#024873;"></span>新着<%= t('view.noun.dia_entry') %><br />
+  <%= image_tag_for_default 'Spec_02.gif' %>
+</div>
+<%= image_tag_for_default 'Spec_04.gif' %><br />
+
+<div style="text-align:left;">
+	
+<% if @entries.size.zero? %>
+	まだ<%= t('view.noun.dia_entry') %>が書かれていません。
+
+<% else %>
+	<% @entries.each do |entry| %>
+		<% list_cell_for do %>
+	    	<%= date_or_time(entry.contributed_at) %>
+			<%= link_to_list_cell "#{entry.title}(#{entry.dia_entry_comments.count})", :controller => 'dia_entry', :action => 'show', :id => entry.id %>
+			<%= notice_new_if_new(entry.contributed_at) %><br />
+		<% end %>
+	<% end %>
+
+	<div style="text-align:right">
+	     <%= image_tag_for_default 'Spec_02.gif' %><br />
+	     >><%= link_basic_to "一覧(#{@entries.size})", :controller => 'dia_entry', :action => 'list', :id => @user.id %><br />
+	</div>
+	
+<% end %>
+</div>
+
+<%= image_tag_for_default 'Spec_08.gif' %><br />
+
+<div style="<%= style_value('inner_title') %>">
+  <%= image_tag_for_default 'Spec_02.gif' %><br />
+  <span style="color:#024873;"></span>新着<%= t('view.noun.abm_album') %><br />
+  <%= image_tag_for_default 'Spec_02.gif' %>
+</div>
+<%= image_tag_for_default 'Spec_04.gif' %><br />
+
+<div style="text-align:left;">
+<% if @albums.size.zero? %>
+	まだ<%= t('view.noun.abm_album') %>が作られていません。
+
+<% else %>
+
+	<% @albums.each do |album| %>
+		<% list_cell_for do %>
+	    	<%= date_or_time(album.updated_at) %>
+			<%= link_to_list_cell "#{album.title}(#{album.abm_images.count})", :controller => 'abm_album', :action => 'show', :id => album.id %>
+			<%= notice_new_if_new(album.updated_at) %><br />
+		<% end %>
+	<% end %>
+
+	<div style="text-align:right">
+	     <%= image_tag_for_default 'Spec_02.gif' %><br />
+	     >><%= link_basic_to "一覧(#{@albums.size})", :controller => 'abm_album', :action => 'list', :id => @user.id %><br />
+	</div>
+	
+<% end %>
+</div>
+<%= image_tag_for_default 'Spec_08.gif' %><br />

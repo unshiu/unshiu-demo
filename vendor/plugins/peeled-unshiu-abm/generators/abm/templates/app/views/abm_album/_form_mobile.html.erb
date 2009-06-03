@@ -1,0 +1,18 @@
+<div style="<%= style_value('form_style') %>">
+	<%= error_messages_for 'album', :object_name => 'abm_album' %>
+
+    <div>
+        <span style="color:#f75009;"></span><%= t('activerecord.attributes.abm_album.title') %><br />
+        <%=text_field 'album', 'title' %>
+    </div>
+    <div>
+        <span style="color:#f75009;"></span><%= t('activerecord.attributes.abm_album.body') %><br />
+        <%=text_area 'album', 'body', :size => '50x3' %>
+    </div>
+	<div>
+    	<span style="color:#f75009;"></span><%= t('activerecord.attributes.abm_album.public_level') %><br />
+    	<%= select 'album', 'public_level', select_type(AbmAlbum::PUBLIC_LEVELS) %>
+	</div>
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+</div>
+<%= image_tag_for_default 'Spec_02.gif' %><br />

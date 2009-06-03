@@ -1,0 +1,14 @@
+<%- @pan1="#{t('view.noun.pnt_point')}" -%><%- @pan2="マスタ管理" -%><%- @pan3="#{t('view.noun.pnt_master')}作成" -%>
+<% content_for(:header_title) do %>
+	<%= t('view.noun.pnt_master') %>作成
+<% end %>
+
+<h3><%= t('view.noun.pnt_master') %>作成</h3>
+
+<% form_tag :action => 'create' do %>
+    <%= render :partial => 'confirm_form' %>
+	<div class="bot_btn">
+    	<%= mng_submit_tag "作成" %>
+		<%= mng_cancel_tag %>
+	</div>
+<% end %>

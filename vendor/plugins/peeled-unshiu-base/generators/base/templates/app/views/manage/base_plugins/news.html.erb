@@ -1,0 +1,23 @@
+<%- @pan1="システム設定" -%><%- @pan2="プラグイン管理" -%><%- @pan3="プラグイン新着情報一覧" -%>
+
+<h3>プラグイン新着情報一覧</h3>
+
+<% if @plugin_news.size.zero? %>
+	プラグイン新着情報はありません。
+<% else %>
+	<table class="lineColorT" style="width:609px;">
+	  <tr>
+	    <th style="width:150px;">タイトル</th>
+	    <th style="width:309px;">詳細</th>
+	    <th style="width:150px;">日付</th>
+	  </tr>
+  
+	<% for news in @plugin_news %>
+	  <tr>
+	    <td><%= news.title %></td>
+	    <td><%= news.description %></td>
+	    <td><%= datetime_to_s(news.date) %></td>
+	  </tr>
+	<% end %>
+	</table>
+<% end %>

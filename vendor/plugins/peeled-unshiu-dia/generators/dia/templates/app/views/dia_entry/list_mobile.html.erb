@@ -1,0 +1,21 @@
+<% content_for(:header_title) do %>
+	<%= @diary.base_user.show_name %>の<%= t('view.noun.dia_entry') %>一覧
+<% end %>
+
+<% if @entries.size.zero? %>
+	<%= t('view.noun.dia_entry') %>がありません。
+
+<% else %>
+	<%= paginate_header(@entries) %>
+
+	<% @entries.each do |entry| %>
+	    <% list_cell_for do %>
+	    	<%= date_or_time(entry.contributed_at) %>
+			<%= link_to_list_cell "#{entry.title}(#{entry.dia_entry_comments.count})", :action => :show, :id => entry.id %>
+			<%= notice_new_if_new(entry.contributed_at) %>
+	    <% end %>
+	<% end %>
+
+	<%= paginate_links(@entries) %>
+
+<% end %>

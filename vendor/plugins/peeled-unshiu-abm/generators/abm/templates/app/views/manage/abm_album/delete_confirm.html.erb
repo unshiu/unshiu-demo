@@ -1,0 +1,19 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.abm_album') -%><%- @pan3="#{t('view.noun.abm_album')}の削除確認" -%>
+<% content_for(:header_title) do %>
+<%= t('view.noun.abm_album') %>の削除確認
+<% end %>
+
+<h3><%= t('view.noun.abm_album') %>の削除確認</h3>
+
+<p class="dialog">
+	以下の<%= t('view.noun.abm_album') %>を削除します。よろしいですか？
+</p>
+
+<% form_tag :action => 'delete', :id => @album.id do %>
+  <div class="bot_btn">
+    <%= mng_submit_tag '削除する' %>
+    <%= mng_cancel_tag %>
+  </div>
+<% end %>
+
+<%= render :partial => 'show' %>

@@ -1,0 +1,15 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.base_user') -%><%- @pan3="#{t('view.noun.base_user')}ログイン停止解除" -%>
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_user') %>ログイン停止解除確認
+<% end %>
+<h3><%= t('view.noun.base_user') %>ログイン停止解除確認</h3>
+
+<p class="dialog">次の<%= t('view.noun.base_user') %>をログイン停止解除にします。よろしいですか？</p>
+	
+<% form_tag :action => 'activate', :id => @base_user.id do %>
+  <div class="bot_btn">
+    <%= mng_submit_tag 'ログイン停止解除' %>
+    <%= mng_cancel_tag %>
+  </div>
+<% end %>
+<%= render :partial => 'show' %>

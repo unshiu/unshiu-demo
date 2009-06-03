@@ -1,0 +1,43 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.tpc_topic') %>作成
+<% end %>
+
+<% form_tag :action => 'create_complete' do %>
+
+<div style="<%= style_value('form_style') %>">
+
+<div>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.tpc_topic.title') %><br />
+	<%= @topic.title %>
+</div>
+
+<div>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.tpc_topic.body') %><br />
+	<%= hbr @topic.body%>
+</div>
+
+<div>
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.tpc_topic_cmm_community.public_level') %><br />
+	<%= TpcTopicCmmCommunity.public_level_name(@topic_info.public_level) %>
+</div>
+
+	<%= hidden_field 'topic', 'body' %>
+	<%= hidden_field 'topic', 'title' %>
+	<% if @topic_info.kind_of? TpcTopicCmmCommunity %>
+		<%= hidden_field 'topic_info', 'public_level' %>
+		<%= hidden_field 'topic_info', 'cmm_community_id' %>
+	<% end %>
+
+	<input type="hidden" name="topic_type" value="<%= @topic_info.class %>" />
+	
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+</div>
+
+<%= image_tag_for_default 'Spec_02.gif' %><br />
+
+	<div style="text-align:center">
+		<%= submit_tag '作成' %>
+		<%= cancel_tag %>
+	</div>
+<% end %>
+

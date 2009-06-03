@@ -1,0 +1,50 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_user') %>登録
+<% end %>
+
+<div class="signup">
+	<div id="signup_box" class="W5R4B9df box_outer clearfix">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="box_inner clearfix">
+			<h6 class="W5R4B9df caps"><span><%= t('view.noun.base_user') %>登録</span></h6>
+			<% form_tag :action => 'signup' do %>
+				<%= hidden_field_tag 'id', @activation_code %>
+		 		<%= hidden_field_tag 'invite', @invite %>
+				<%= hidden_field 'user', 'email' %>
+			
+				<fieldset>
+					<legend>登録</legend>
+				
+					<label for="user_email" accesskey="n" ><%= t('activerecord.attributes.base_user.email') %>：</label><br>
+					<span id="presignup_mailaddress"><%= @user.email %></span><br>
+					
+					<label for="user_login" accesskey="n" ><%= t('activerecord.attributes.base_user.login') %>：</label><br>
+					<%= text_field 'user', 'login', {:class => "span-15"} %><br>
+					<%= error_message_on_with_label @user, 'login' %><br>
+					
+					<label for="user_password" accesskey="n" ><%= t('activerecord.attributes.base_user.password') %>：</label><br>
+					<%= password_field 'user', 'password', :class => "span-15" %><br>
+					<%= error_message_on_with_label @user, 'password' %><br>
+					
+					<%= check_box 'user', 'receive_mail_magazine_flag' %>
+					<label class="small">弊社発行の<%= t('view.noun.mail_magazine') %>を受信</label><br><br>
+				
+					<label for="agreement" accesskey="" class="">利用規約：</label><br>
+					<div class="prepend-0">	
+						<textarea cols="" rows="" name="agreement" readonly  class="span-12">
+							<%= render :partial => 'base_terms_text' %>
+						</textarea>
+					</div>
+				
+					<div class="clearfix prepend-0">
+						<%= submit_button_tag("利用規約に同意して登録する") %>
+					</div>
+			<% end %>
+		</div>
+		</div><!--/wrap3-->
+		</div><!--/wrap2-->
+		</div><!--/wrap1-->
+	</div>
+</div>

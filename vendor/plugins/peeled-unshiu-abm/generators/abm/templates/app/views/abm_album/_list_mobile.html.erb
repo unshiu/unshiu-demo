@@ -1,0 +1,19 @@
+<% if @albums.size.zero? %>
+	<div style="text-align:left">
+	<%= t('view.noun.abm_album') %>がありません。
+	</div>
+<% else %>
+<%= paginate_header(@albums) %>
+
+<div style="text-align:left">
+<% @albums.each_with_index do |album, index| %>
+    <% list_cell_for do %>
+		<%= date_or_time(album.updated_at) %>
+    	<%= link_to_list_cell "#{album.title}(#{album.abm_images.count})", :action => :show, :id => album.id %>
+		<%= notice_new_if_new(album.updated_at) %>
+	<% end %>
+<% end %>
+</div>
+
+<%= paginate_links(@albums) %>
+<% end %>

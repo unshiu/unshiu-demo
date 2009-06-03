@@ -1,0 +1,54 @@
+<%- @pan1="システム設定" -%><%- @pan2='携帯機種管理' -%><%- @pan3="#{@jpmobile_carrier.name}" -%>
+
+<% content_for(:header_title) do %>
+	機種一覧
+<% end %>
+
+<h3>「<%= @jpmobile_carrier.name %>」機種一覧</h3>
+
+<% if @jpmobile_carrier.available_flag %>
+	<p class="dialog">現在「<%= @jpmobile_carrier.name %>」機種でサイトを閲覧することができます。</p>
+	<ul class="list">
+		<li><%= link_to "#{@jpmobile_carrier.name}での閲覧を禁止する", unavailable_confirm_manage_base_carrier_path(@jpmobile_carrier) %></li>
+	</ul>
+<% else %>
+	<p class="dialog">現在「<%= @jpmobile_carrier.name %>」機種でサイトを閲覧することはできません。</p>
+	<ul class="list">
+		<li><%= link_to "#{@jpmobile_carrier.name}での閲覧を許可する" , available_confirm_manage_base_carrier_path(@jpmobile_carrier) %></li>
+	</ul>
+<% end %>
+
+<% if @jpmobile_devices.size.zero? %>
+	対応機種がありません。
+<% else %>
+	<%= paginate_header(@jpmobile_devices) %>
+	<table class="lineColorT" style="width:609px;">
+	  <tr>
+		<th style="width:50px;">閲覧</th>
+		<th style="width:130px;">機種名</th>
+		<th style="width:309px;">デバイス名</th>
+	    <th style="width:120px;">更新日</th>
+	  </tr>
+  
+	<% for jpmobile_device in @jpmobile_devices %>
+	  <tr>
+		<td class="textalignC">
+			<% if @jpmobile_carrier.available_flag %>
+				<% if jpmobile_device.available_flag %>
+					許可
+				<% else %>
+					<span class="attention">拒否</span>
+				<% end %>
+			<% else %>
+				<span class="attention">拒否</span>
+			<% end %>
+		</td>
+		<td><%= link_to jpmobile_device.device, manage_base_device_path(jpmobile_device) %></td>
+		<td><%= jpmobile_device.name %></td>
+	    <td><%= datetime_to_s(jpmobile_device.updated_at) %></td>
+	  </tr>
+	<% end %>
+	</table>
+	<%= paginate_links(@jpmobile_devices) %>
+<% end %>
+

@@ -1,0 +1,2 @@
+page.replace_html 'callback_function_message', @error_message
+page.visual_effect :highlight, "callback_function_message"

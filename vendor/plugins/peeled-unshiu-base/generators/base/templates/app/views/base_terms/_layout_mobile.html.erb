@@ -1,0 +1,18 @@
+<% content_for(:header_title) do %>
+○○○会員規約
+<% end %>
+
+<%= yield %>
+
+<% if params[:id] %>
+<hr style="<%= style_value('hr1') %>">
+
+<%= link_basic_to '会員登録に戻る', :controller => 'base_signup', :action=> 'ask_agreement', :id => params[:activate], :invite => params[:invite] %><br/>
+
+<% else %>
+<br/>
+<ul>
+<li><%= link_terms_to "会員規約目次へ戻る", :action=>:index %></li>
+</ul>
+<br/>
+<% end %>

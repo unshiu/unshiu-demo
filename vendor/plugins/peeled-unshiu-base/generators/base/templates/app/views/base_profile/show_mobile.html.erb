@@ -1,0 +1,159 @@
+<% content_for(:header_title) do %>
+	<%= @user.show_name %>の<%= t('view.noun.base_profile') %>
+<% end %>
+
+<!--プロフィール-->
+<div style="<%= style_value('inner_title') %>">
+  <span style="color:#024873;"></span><%= t('view.noun.base_profile') %><br />
+</div>
+<br />
+
+<div style="text-align:left;">
+
+<table>
+<tr>
+<td style="vertical-align:top;">
+	<%= safe_profile_view(@profile, :thumb, {"width" => 96, "height" => 96}) %>
+</td>
+<td>
+
+	<span style="font-size:small;">
+	<hr style="<%= style_value('hr1') %>" />
+			
+	<% if logged_in? && !current_base_user.me?(@user.id) %>
+		最終ログイン:<%= login_status(@user.latest_login) %><br/>
+		
+		<% if MsgMessage.acceptable?(current_base_user, @user.id) %>
+			<%= link_to_list_cell "#{t('view.noun.msg_message')}を送る", :controller => 'msg_message', :action => 'new', :id => @user.id, :receivers => @user.id %><br />
+		<% end %>
+		<% unless BaseFriend.friend?(current_base_user.id, @user.id) %>
+			<%= link_to_list_cell "#{t('view.noun.base_friend')}申請をする", :controller => 'base_friend_apply', :action => 'new', :id => @user.id %><br />
+		<% end %>
+		<% unless BaseFavorite.favorite?(current_base_user.id, @user.id) %>
+			<%= link_to_list_cell "#{t('view.noun.base_favorite')}に追加する", :controller => 'base_favorite', :action => 'add_confirm', :id => @user.id %><br/>
+		<% end %>
+	<% end %>
+
+	<%= link_to_list_cell "所属#{t('view.noun.cmm_community')}(#{@user.cmm_communities.count})", :controller => 'cmm_user', :action => 'list', :id => @user.id %><br/>
+	<%= link_to_list_cell "#{t('view.noun.base_friend')}一覧(#{@user.friends.count})", :controller => 'base_friend', :action => 'list', :id => @user.id %><br/>
+	<%= link_to_list_cell "#{t('view.noun.dia_entry')}一覧(#{@entries.size})", :controller => 'dia_entry', :action => 'list', :id => @user.id %><br/>
+	<%= link_to_list_cell "#{t('view.noun.abm_album')}一覧(#{@albums.size})", :controller => 'abm_album', :action => 'list', :id => @user.id %><br/>
+
+	<% if logged_in? && @user.me?(current_base_user.id) %>
+		<hr style="<%= style_value('hr1') %>" />
+		<% if  @profile %>
+			<%= link_to_list_cell "#{t('view.noun.base_profile')}を編集する", :action => 'edit' %><br/>
+			<%= link_to_list_cell "#{t('view.noun.base_profile')}画像を設定する", :action => 'mail' %><br/>
+		<% else %>
+			<%= link_to_list_cell "#{t('view.noun.base_profile')}を設定する", :action => 'new' %><br/>
+			<%= link_to_list_cell "#{t('view.noun.base_profile')}画像を設定する", :action => 'mail' %><br/>
+		<% end %>
+	<% end %>
+	</span>
+</td>
+</tr>
+</table>
+
+<% if !@profile %>
+	<%= t('view.noun.base_profile') %>が設定されていません。
+
+<% else %>
+
+	<% list_cell_for do %>
+		<% if !@profile.introduction.blank? && UserRelationSystem.accessible?(current_base_user, params[:id], @profile.introduction_public_level) %>
+			<%= hbr @profile.introduction %><br />
+		<% else %>
+			非公開
+		<% end %>
+	<% end %>
+	
+	<% list_cell_for do %>
+		<% if @profile.sex && UserRelationSystem.accessible?(current_base_user, params[:id], @profile.sex_public_level) %>
+			<%= t('activerecord.attributes.base_profile.sex') %>：<%= BaseProfile.sex_kind_name(@profile.sex) %><br />
+		<% else %>
+			非公開
+		<% end %>
+	<% end %>
+	
+	<% list_cell_for do %>
+		<% if @profile.area && UserRelationSystem.accessible?(current_base_user, params[:id], @profile.area_public_level) %>
+			<%= t('activerecord.attributes.base_profile.area') %>：<%= BaseProfile.area_kind_name(@profile.area) %><br />
+		<% else %>
+			非公開
+		<% end %>
+	<% end %>
+	
+	<% list_cell_for do %>
+		<% if @profile.civil_status && UserRelationSystem.accessible?(current_base_user, params[:id], @profile.civil_status_public_level) %>
+			<%= t('activerecord.attributes.base_profile.civil_status') %>：<%= BaseProfile.civil_status_kind_name(@profile.civil_status) %><br />
+		<% else %>
+			非公開
+		<% end %>
+	<% end %>
+	
+	<% list_cell_for do %>
+		<% if @profile.birthday && UserRelationSystem.accessible?(current_base_user, params[:id], @profile.birthday_public_level) %>
+			<%= t('activerecord.attributes.base_profile.birthday') %>：<%= h @profile.birthday.strftime('%Y/%m/%d') %><br />
+		<% else %>
+			非公開
+		<% end %>
+	<% end %>
+<% end %>
+
+</div>
+<br />
+
+<div style="<%= style_value('inner_title') %>">
+  <span style="color:#024873;"></span>新着<%= t('view.noun.dia_entry') %><br />
+</div>
+
+<div style="text-align:left;">
+	
+<% if @entries.size.zero? %>
+	まだ<%= t('view.noun.dia_entry') %>が書かれていません。
+
+<% else %>
+	<% @entries.each do |entry| %>
+		<% list_cell_for do %>
+	    	<%= date_or_time(entry.contributed_at) %>
+			<%= link_to_list_cell "#{entry.title}(#{entry.dia_entry_comments.count})", :controller => 'dia_entry', :action => 'show', :id => entry.id %>
+			<%= notice_new_if_new(entry.contributed_at) %><br />
+		<% end %>
+	<% end %>
+
+	<div style="text-align:right">
+	     >><%= link_basic_to "一覧(#{@entries.size})", :controller => 'dia_entry', :action => 'list', :id => @user.id %><br />
+	</div>
+	
+<% end %>
+</div>
+<br />
+
+<div style="<%= style_value('inner_title') %>">
+  <span style="color:#024873;"></span>新着<%= t('view.noun.abm_album') %><br />
+</div>
+
+<div style="text-align:left;">
+<% if @albums.size.zero? %>
+	まだ<%= t('view.noun.abm_album') %>が作られていません。
+
+<% else %>
+
+	<% @albums.each do |album| %>
+		<% list_cell_for do %>
+	    	<%= date_or_time(album.updated_at) %>
+			<%= link_to_list_cell "#{album.title}(#{album.abm_images.count})", :controller => 'abm_album', :action => 'show', :id => album.id %>
+			<%= notice_new_if_new(album.updated_at) %><br />
+		<% end %>
+	<% end %>
+
+	<div style="text-align:right">
+	     >><%= link_basic_to "一覧(#{@albums.size})", :controller => 'abm_album', :action => 'list', :id => @user.id %><br />
+	</div>
+	
+<% end %>
+</div>
+<br/>
+<% if logged_in? && Unshiu::Plugins.active_ace? %>
+	<%= footmark(@footmark.uuid) %>
+<% end %>

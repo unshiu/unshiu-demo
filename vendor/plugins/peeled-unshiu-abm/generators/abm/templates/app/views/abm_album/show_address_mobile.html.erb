@@ -1,0 +1,14 @@
+<%content_for(:header_title) do %><%= t('view.noun.abm_image') %>メール投稿<%end %>
+
+<div style="text-align:left;">
+以下のリンクよりメール送信画面を開いて指定のアドレスに画像を添付したメールを送信してください。<br/>
+<br/>
+メールのタイトル/本文が、画像のタイトル/説明文になります。
+複数の画像が添付されていた場合はすべて同じタイトル/説明文となりますのでご注意ください。
+また、メールのタイトルが空の場合にはファイル名が画像のタイトルとなります。
+</div>
+<%= image_tag_for_default 'Spec_08.gif' %><br />
+<div style="text-align:center;">
+<span style="color:#024873;"></span><%= mail_to @address, "メールから#{t('view.noun.abm_image')}を投稿" %>
+</div>
+<%= image_tag_for_default 'Spec_08.gif' %><br />

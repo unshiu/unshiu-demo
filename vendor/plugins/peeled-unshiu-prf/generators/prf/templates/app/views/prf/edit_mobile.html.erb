@@ -1,0 +1,37 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.prf_profile') %>
+<% end %>
+<% content_for(:sub_title) do %>
+	編集
+<% end %>
+
+<% form_tag :action => 'confirm' do %>
+
+<%= error_messages_for 'profile', :object_name => 'prf_profile' %>
+
+<% @question_set.prf_question_set_partials.each do |qsp| %>
+<div>
+	<h3><%= qsp.prf_question.body %></h3>
+	<% if qsp.prf_question.type_select? %>
+		<select name="q[<%= qsp.prf_question.id %>]">
+			<%= prf_options(qsp.prf_question, @new_answers) %>
+		</select>
+	<% elsif qsp.prf_question.type_radio? %>
+		<% qsp.prf_question.prf_choices.each do |choice| %>
+		<div><%= prf_radio(choice, @new_answers) %></div>
+		<% end %>
+	<% elsif qsp.prf_question.type_checkbox? %>
+		<% qsp.prf_question.prf_choices.each do |choice| %>
+		<div><%= prf_checkbox(choice, @new_answers) %></div>
+		<% end %>
+	<% elsif qsp.prf_question.type_text? %>
+		<div><%= prf_text(qsp.prf_question, @new_answers) %></div>
+	<% elsif qsp.prf_question.type_textarea? %>
+		<div><%= prf_textarea(qsp.prf_question, @new_answers) %></div>
+	<% end %>
+</div>
+	<% end %>
+	<div>
+		<%= submit_tag '確認' %>
+	</div>
+<% end %>

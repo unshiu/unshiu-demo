@@ -1,0 +1,57 @@
+--- 
+ja-JP: 
+  activerecord: 
+    models: 
+      abm_image_comment: 
+      abm_album: 
+      abm_image: 
+    attributes: 
+      abm_image_comment: 
+        created_at: "作成日"
+        body: "コメント本文"
+        deleted_at: "削除日"
+        updated_at: "更新日"
+        base_user: "ユーザ"
+        deleter: "削除者"
+        abm_image: "写真"
+      abm_album: 
+        created_at: "作成日"
+        body: "説明"
+        title: "タイトル"
+        deleted_at: "削除日"
+        updated_at: "更新日"
+        public_level: "公開レベル"
+        base_user: "ユーザ"
+      abm_image: 
+        created_at: "作成日"
+        body: "説明"
+        title: "タイトル"
+        deleted_at: "削除日"
+        updated_at: "更新日"
+        abm_album: "アルバム"
+        image: "写真"
+    constant: 
+      abm_album: 
+        public_level_me: "自分だけに公開"
+        public_level_foaf: "友達の友達まで公開"
+        public_level_friend: "友達のみ公開"
+        public_level_user: "ユーザにのみ公開"
+        public_level_all: "全員に公開"
+  view: 
+    noun: 
+      abm_image_comment: "写真コメント"
+      base_friend: "友達"
+      abm_album: "アルバム"
+      abm_image: "写真"
+    flash:
+      notice:
+        abm_album_create: "アルバムを作成しました。"
+        abm_album_update: "アルバムを更新しました。"
+        abm_album_delete: "アルバムを削除しました。"
+        abm_image_update: "写真を編集しました。"
+        abm_image_upload: "アルバムに写真を追加しました。"
+        abm_image_delete: "アルバム写真を削除しました。"
+        abm_image_move_album: "アルバムを移動しました。"
+        abm_image_cover_album_image: "アルバムの表紙写真に設定しました。"
+      error:
+        abm_image_upload_no_image: "アップロードする写真を選択してください"

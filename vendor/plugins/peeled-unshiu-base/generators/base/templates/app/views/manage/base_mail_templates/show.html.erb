@@ -1,0 +1,106 @@
+<%- @pan1="管理者設定" -%><%- @pan2=t('view.noun.base_mail_template') -%><%- @pan3="詳細" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_mail_template') %>詳細
+<% end %>
+
+<h3><%= t('view.noun.base_mail_template') %>詳細</h3>
+
+<% if @base_mail_template.active? %>
+	<p class="dialog">この<%= t('view.noun.base_mail_template') %>をサービスでは現在利用中です。利用中の<%= t('view.noun.base_mail_template') %>は削除できません。</p>
+<% end %>
+
+<ul class="list">
+	<li><%= link_to '編集する', :action => 'edit', :id => @base_mail_template.id %></li>
+	<% unless @base_mail_template.active? %>
+		<li><%= link_to "この#{t('view.noun.base_mail_template')}を利用する",
+		                active_confirm_manage_base_mail_template_path(@base_mail_template.id) %></li>
+		<li><%= link_to '削除する', destroy_confirm_manage_base_mail_template_path(@base_mail_template.id) %></li>
+	<% end %>
+</ul>
+
+<table border="0" cellpadding="3" cellspacing="1" class="lineColorLW" style="width:609px;">
+<tbody>
+  <tr>
+    <th style="width:140px;">
+		<label for="base_mail_temlate_base_mail_template_kind_id">
+			<%= t('activerecord.attributes.base_mail_template.base_mail_template_kind') %>
+		</label>
+	</th>
+    <td><%= link_to @base_mail_template.base_mail_template_kind.name, manage_base_mail_template_kind_path(@base_mail_template.base_mail_template_kind) %></td>
+  </tr> 
+ <tr>
+   	<th style="width:140px;">
+		<label for="base_mail_temlate_content_type"><%= t('activerecord.attributes.base_mail_template.content_type') %></label>
+	</th>
+    <td><%= h @base_mail_template.view_content_type %></td>
+  </tr>
+  <tr>
+   	<th style="width:140px;">
+		<label for="base_mail_temlate_device_type"><%= t('activerecord.attributes.base_mail_template.device_type') %></label>
+	</th>
+    <td><%= h @base_mail_template.view_device_type %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;">
+		<label for="base_mail_temlate_subject"><%= t('activerecord.attributes.base_mail_template.subject') %></label>
+	</th>
+    <td><%= h @base_mail_template.subject %></td>
+  </tr>
+  <tr>
+   	<th style="width:140px;">
+		<label for="base_mail_temlate_body"><%= t('activerecord.attributes.base_mail_template.body') %></label>
+	</th>
+    <td><%= br h @base_mail_template.body %></td>
+  </tr>
+  <tr>
+   	<th style="width:140px;">
+		<label for="base_mail_temlate_footer_flag"><%= t('activerecord.attributes.base_mail_template.footer_flag') %></label>
+	</th>
+	<td><% if @base_mail_template.footer_flag? %>つける<% else %>つけない<% end %></td>
+  </tr>
+　　<tr>
+    <th style="width:140px;">
+		<label for="base_mail_temlate_updated_at"><%= t('activerecord.attributes.base_mail_template.updated_at') %></label>
+	</th>
+    <td><%= datetime_to_s(@base_mail_template.updated_at) %></td>
+  </tr>
+  <tr>
+   	<th style="width:140px;">
+		<label for="base_mail_temlate_created_at"><%= t('activerecord.attributes.base_mail_template.created_at') %></label>
+	</th>
+    <td><%= datetime_to_s(@base_mail_template.created_at) %></td>
+  </tr>
+</tbody>
+</table>
+
+<h4>テスト送信</h4>
+
+<p class="dialog">
+	指定アドレスにテスト送信します。適用前の最終確認等にご利用ください。
+	なお携帯宛に送信する際は迷惑メールの設定にて本サービスのドメインが拒否されていないかをご確認ください。
+</p>
+
+<% form_for 'forms_base_mail_template_send_test_form', :url => send_test_confirm_manage_base_mail_template_path do |f| %>
+	<%= f.error_messages %>
+	
+	<table border="0" cellpadding="3" cellspacing="1" class="lineColorLW" style="width:609px;">
+	<tbody>
+		<tr>
+			<th style="width:140px;">
+				<label for="base_mail_temlate_send_test_form_mail_address">
+					<%= t('activerecord.attributes.forms/base_mail_template_send_test_form.mail_address') %>
+				</label>
+			</th>
+			<td><%= f.text_field 'mail_address' %></td>
+		</tr>
+		
+	</tbody>
+	</table>
+
+	<div class="bot_btn">
+		<%= mng_submit_tag "送信確認" %>
+	</div>
+<% end %>
+
+

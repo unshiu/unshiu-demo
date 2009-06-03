@@ -1,0 +1,10 @@
+<% content_for(:header_title) do %>
+送信<%= t('view.noun.msg_message') %>
+<% end %>
+<% content_for(:sub_title) do %>
+<%= h @message.title %>
+<% end %>
+
+<%= render :partial => 'show' %>
+<hr style="<%= style_value('hr1') %>">
+<%= link_basic_to 'ゴミ箱に入れる', :action => 'delete_confirm', :id => @message.id %>

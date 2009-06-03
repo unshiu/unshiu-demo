@@ -1,0 +1,40 @@
+<%= yield %>
+
+<% if logged_in? && @diary && @diary.mine?(current_base_user) %>
+
+<div style="text-align:left;">
+
+<hr style="<%= style_value('hr1') %>"/>
+<%= link_to_list_cell "#{t('view.noun.dia_diary')}を書く", :controller => 'dia_entry', :action => 'new' %><br />
+<%= link_to_list_cell "#{t('view.noun.dia_diary')}一覧を見る", {:controller => 'dia_entry', :action => 'list'} %><br />
+<%= link_to_list_cell "下書き#{t('view.noun.dia_diary')}一覧を見る", :controller => 'dia_entry', :action => 'draft_list' %><br />
+
+<% if @entry %>
+<span style="color:#f75100;"></span><%= link_to_list_cell "この#{t('view.noun.dia_diary')}を表示する", {:controller => :dia_entry, :action => :show, :id => @entry}, {:accesskey => "5"} %>
+<% end %>
+
+</div>
+<%= image_tag_for_default 'Spec_08.gif' %><br />
+
+<% elsif @diary %>
+<div style="text-align:left;">
+
+<hr style="<%= style_value('hr1') %>"/>
+<%= link_to_list_cell "#{@diary.base_user.show_name}の日記一覧を見る", {:controller => 'dia_entry', :action => 'list', :id => @diary.base_user.id} %><br />
+<span style="color:#f75100;"></span><%= link_to_list_cell "#{@diary.base_user.show_name}の#{t('view.noun.base_profile')}", :controller => 'base_profile', :action => 'show', :id => @diary.base_user.id %><br />
+
+<% if @entry %>
+<span style="color:#f75100;"></span><%= link_to_list_cell "この#{t('view.noun.dia_diary')}を表示する", {:controller => :dia_entry, :action => :show, :id => @entry}, {:accesskey => "5"} %>
+<% end %>
+
+</div>
+<%= image_tag_for_default 'Spec_08.gif' %><br />
+<% elsif @entry %>
+
+<div style="text-align:left;">
+
+<span style="color:#f75100;"></span><%= link_to_list_cell "この#{t('view.noun.dia_diary')}を表示する", {:controller => :dia_entry, :action => :show, :id => @entry}, {:accesskey => "5"} %>
+
+</div>
+
+<% end %>

@@ -1,0 +1,14 @@
+<% content_for(:header_title) do %>
+退会
+<% end %>
+
+<div id="notice">
+	ご登録いただいたユーザー情報や投稿された日記などのデータはプライバシーポリシーに基づき処理いたします。
+	退会の取り消しはできません。よろしければ「退会をする」ボタンを押してください。
+</div>
+
+<% form_tag :action => 'quit' do %>
+
+	<%= submit_button_tag '退会する' %>
+
+<% end %>

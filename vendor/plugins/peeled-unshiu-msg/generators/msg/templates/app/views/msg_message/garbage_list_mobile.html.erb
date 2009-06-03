@@ -1,0 +1,35 @@
+<% content_for(:header_title) do %>
+	ゴミ箱<%= t('view.noun.msg_message') %>一覧
+<% end %>
+
+<% if @messages.size.zero? %>
+	<%= t('view.noun.msg_message') %>がありません。
+<% else %>
+	
+	<%= paginate_header(@messages) %>
+	
+	<% form_tag :action => 'clean_trash_box_confirm' do %>
+		<table style="border:0px;">
+		<% @messages.each do |message| %>
+		  <tr><td><span style="font-size:small;">
+			<% list_cell_for do %>
+		    	<%= link_to_list_cell message.title, :action => 'garbage_show', :id => message.id %><br/>
+				<% if message.sender?(current_base_user) %>
+					<span style="color:#f75009;"></span><%= link_to_user_without_emoticon message.msg_receivers[0].base_user %>
+				<% else %>
+					<%= link_to_user message.msg_sender.base_user %>
+				<% end %>
+				<%= date_or_time(message.updated_at) %><br />
+			<% end %>
+		  </span></td></tr>
+		<% end %>
+		</table>
+
+		<%= paginate_links(@messages) %>
+		<br />
+		<div style="text-align:center">
+		<%= submit_tag 'ゴミ箱を空にする' %>
+		</div>
+	<% end %>
+	
+<% end %>

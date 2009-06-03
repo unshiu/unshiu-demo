@@ -1,0 +1,11 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_friend') %>申請承認/拒否
+<% end %>
+<%= link_to_user_without_emoticon(@apply.base_user) %>の<%= t('view.noun.base_friend') %>を承認しますか？<br />
+<br />
+<div style="text-align:center">
+	<% form_tag :action => 'permit_confirm', :id => @apply.id do %>
+		<%= submit_tag '承認', :name => 'permit' %>
+		<%= submit_tag '拒否', :name => 'deny' %>
+	<% end %>
+</div>

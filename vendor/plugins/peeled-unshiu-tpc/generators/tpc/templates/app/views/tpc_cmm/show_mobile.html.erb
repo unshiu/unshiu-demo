@@ -1,0 +1,36 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.tpc_topic') %>
+<% end %>
+<% content_for(:sub_title) do %>
+	<%= @topic.tpc_topic.title %>
+<% end %>
+
+<div style="<%= style_value('small_info_right') %>">
+	<%= link_to_user @topic.tpc_topic.base_user %><br/>
+	<%= TpcTopicCmmCommunity.public_level_name(@topic.public_level) %><br />
+	<%= datetime_to_s @topic.tpc_topic.created_at %><br/>
+</div>
+
+<%= hbr @topic.tpc_topic.body %><br />
+<br />
+
+<!--コメント-->
+<div style="<%= style_value('inner_title') %>">
+  　<span style="color:#024873;"></span><%= t('view.noun.tpc_comment') %><br />
+</div>
+
+<span style="color:#024873;"></span><%= link_to_list_cell "#{t('view.noun.tpc_comment')}する", :action => 'new_comment', :id => @topic.id %><br />
+
+<% @comments.each do |@comment| %>
+	<% list_cell_for do %>
+		<%= render :partial => 'show_comment' %>
+	<% end %>
+<% end %>
+
+<div style="text-align:right;">
+	>><%= link_basic_to "一覧(#{@topic.tpc_topic.tpc_comments.size})", :action => 'comments', :id => @topic.id %><br />
+</div>
+
+<% if deletable? @topic %>
+	<%= link_basic_to "#{t('view.noun.tpc_topic')}を削除する", :action => 'delete_confirm', :id => @topic.id %><br />
+<% end %>

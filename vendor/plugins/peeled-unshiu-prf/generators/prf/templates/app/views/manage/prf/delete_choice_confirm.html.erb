@@ -1,0 +1,42 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.prf_profile') -%><%- @pan3= @choice.prf_question.body -%>
+
+<% content_for(:header_title) do %>
+<%= t('view.noun.prf_choice') %>削除
+<% end %>
+
+<h3><%= t('view.noun.prf_choice') %>削除</h3>
+
+<p class="dialog">
+	以下の<%= t('view.noun.prf_choice') %>を削除します。よろしいですか？<br />
+	既に設定ユーザがいた場合、それらも閲覧、修正ができなくなります。
+</p>
+
+<% form_tag :action => "delete_choice_complete", :id => @choice.id do %>
+	<div class="bot_btn">
+		<%= mng_submit_tag '削除' %>
+		<%= mng_cancel_tag %>
+	</div>
+<% end %>
+
+<table border="0" cellpadding="3" cellspacing="1" class="lineColorLW" style="width:609px;">
+<tbody>
+  <tr>
+    <th style="width:120px;"><%= t('activerecord.attributes.prf_choice.body') %></th>
+    <td>
+		<%= @choice.body %>
+	</td>
+  </tr>
+　　<% if @choice.has_free_area? %>
+  <tr>
+    <th style="width:120px;"><%= t('activerecord.attributes.prf_choice.free_area_type') %></th>
+    <td>
+		<% if @choice.free_area_type_text? %>
+			自由記述欄あり(<%= t('activerecord.constant.type.text') %>)
+		<% elsif @choice.free_area_type_textarea? %>
+			自由記述欄あり(<%= t('activerecord.constant.type.textarea') %>)
+		<% end %>
+	</td>
+  </tr>
+　　<% end %>
+</tbody>
+</table>

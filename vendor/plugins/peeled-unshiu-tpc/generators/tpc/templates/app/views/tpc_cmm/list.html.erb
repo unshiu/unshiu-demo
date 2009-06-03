@@ -1,0 +1,132 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.tpc_topic') %>一覧
+<% end %>
+<% content_for(:sub_title) do %>
+	<%=h @community.name %>
+<% end %>
+
+<div class="clearfix">
+		<div id="contents_title" class="span-12">
+			<h2><span><%= t('view.noun.tpc_topic') %>一覧</span></h2>
+		</div>
+		<ul class="menu_list">
+			<li><%= link_add_menu_to "トピックを作る", { :controller => 'tpc', :action => 'new_cmm_topic', :id => @community.id } %></li>
+		</ul>
+</div>
+
+<div id="tpc_rows_header" class="clearfix">
+	<div class="cmm_alart">
+		<ul class="menu_list">
+			<% unless @community.joined?(current_base_user.id) %>
+				<li><%= link_to '<span>コミュニティに参加する</span>', { :action => 'join', :id => @community.id }, :class => "button" %></li>
+			<% end %>
+		</ul>
+		<% if logged_in? %>
+			<span class="username"><%=h current_base_user.show_name %></span>さんは
+			<% if @community.joined?(current_base_user.id) %>
+				<span class="span-3">参加中</span>です。
+			<% elsif @community.applying?(current_base_user.id) %>
+				<span class="span-3">参加申請中</span>です。
+			<% else %>
+				<span class="span-3">未参加</span>です。このコミュニティに参加するには参加ボタンをクリックしてください。
+			<% end %>
+		<% end %>
+	</div>
+	<div class="cmm_alart">
+		<% if logged_in? %>
+			<span class="username"><%=h current_base_user.show_name %></span>さんは
+			<span class="span-3"><%=h @community.user_status_name(current_base_user.id) %></span>です。
+		<% end %>
+	</div>
+
+	<ul id="searchresultmenu" class="button_bar clearfix small">
+		<li class="first_child"><%= link_to "<span>新着順に並び替え</span>", :order => 'desc' %></li>
+		<li class="last_child"><%= link_to "<span>古い順に並び替え</span>", :order => 'asc' %></li>
+	</ul>
+	<ul id="searchresultmenu" class="button_bar clearfix small">
+		<li class="first_child"><%= link_to "<span>コメントが多い順に並び替え</span>", :order => 'comment' %></li>
+	</ul>
+
+	<div class="pager_box pager_box_top clear clearfix">
+		<%= paginate @topics %>
+	</div><!--pager_box-->
+</div><!--/message_rows_header-->
+
+
+<div class="top_topic_box box_outer">
+<div class="wrap1">
+<div class="wrap2">
+<div class="wrap3">
+<div class="box_inner">
+	
+	<% if @topics.size.zero? %>
+		<%= t('view.noun.tpc_topic') %>はありません。
+	<% else %>
+	
+		<% @topics.each do |topic| %>
+			<div class="diary_story_box box_outer clearfix community_topic_list">
+				<div class="community_topic_author">
+					<%= safe_profile_view(topic.tpc_topic.base_user.try(:base_profile), :thumb, {:size => "70x70", :class => "left", :alt => topic.tpc_topic.base_user.try(:show_name)}) %>
+				<div class="username"><%= link_to_user topic.tpc_topic.base_user %></div>
+				</div>
+				<div class="community_topic_text">
+					<h6>
+						<span>
+						<%= link_to body_summary(topic.tpc_topic.title, :length => 40), :controller => 'tpc_cmm', :action => 'show', :id => topic.id %>
+						</span>
+					</h6>
+					<div class="diary_text box_outer small">
+						<p>
+						<%= body_summary(topic.tpc_topic.body, :length => 100) %>
+						</p>
+					</div>
+					<div class="span-10 small">
+						<span class="permanent_link">
+							<%= link_to "続きを読む", :controller => 'tpc_cmm', :action => 'show', :id => topic.id %>｜
+						</span><!--/permanent_link-->
+						<span class="comment_link">
+							<%= link_to "コメント#{topic.tpc_topic.tpc_comments.count}", :controller => 'tpc_cmm', :action => 'show', :id => topic.id %>｜
+						</span><!--/comment_link-->
+						<span class="contents_date">
+							<%= l(topic.tpc_topic.updated_at, :format => :short) %>
+						</span><!--/contents_date-->
+					</div>
+				</div>
+			</div>
+		<% end %>
+	<% end %>
+	</div>
+
+</div>
+</div><!--/wrap3-->
+</div><!--/wrap2-->
+</div><!--/wrap1-->
+
+<div class="pager_box  pager_box_bottom prepend-top clearfix">
+	<%= paginate @topics %>
+</div><!--pager_box-->
+
+<% content_for(:sidemenu) do %>
+	<div id="friend_box" class="box_outer clearfix">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="box_inner">
+			<div class="title"><h6>メンバー</h6></div>
+			<div class="profile_img_panel">
+				<% @members.each do |member| %>
+					<% link_to :controller => :base_profile, :action => :show, :id => member.base_user_id do %>
+						<%= safe_profile_view(member.base_user.base_profile, :thumb, {:size => "40x40", :alt => member.base_user.show_name}) %>
+						<span><%=h member.base_user.show_name %></span>
+					<% end %>
+				<% end %>
+			</div><!--/profile_img_panel-->
+			<div class="more ">
+				<%= link_to "すべて表示", :controller => :tpc_cmm, :action => :list, :id  => @community.id%>
+			</div>
+		</div><!--/box_inner-->
+		</div><!-- /wrap3 -->
+		</div><!-- /wrap2 -->
+		</div><!-- /wrap1 -->
+	</div><!--/friend_box-->
+<% end %>

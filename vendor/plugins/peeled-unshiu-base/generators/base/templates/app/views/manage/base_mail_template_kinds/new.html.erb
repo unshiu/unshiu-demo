@@ -1,0 +1,45 @@
+<%- @pan1="管理者設定" -%><%- @pan2='メールテンプレート' -%><%- @pan3="" -%>
+
+<% content_for(:header_title) do %>
+	メールテンプレート作成
+<% end %>
+
+<h3>メールテンプレート作成</h3>
+
+<% form_for @base_mail_templates, :url => { :controller => 'manage/base_mail_templates', :action => 'create' } do |f| %>
+	<%= f.error_messages %>
+	
+	<table border="0" cellpadding="3" cellspacing="1" class="lineColorLW" style="width:609px;">
+	<tbody>
+		<tr>
+			<th style="width:140px;"><label for="base_notice_start_datetime">種別</label></th>
+			<td><%= f.select 'base_mail_template_kind_id', @base_mail_template_kinds.collect { |m| [m.name, m.id] } %></td>
+		</tr>
+		<tr>
+			<th style="width:140px;"><label for="base_notice_start_datetime">HTMLメール</label></th>
+			<td><%= f.select 'content_type', { 'text/plain', 'text/html' } %></td>
+		</tr>
+		<tr>
+			<th style="width:140px;"><label for="base_notice_start_datetime">subject</label></th>
+			<td><%= f.text_field 'subject' %></td>
+		</tr>
+		<tr>
+		    <th style="width:140px;"><%= t('activerecord.attributes.base_notice.body') %></th>
+		  	<td><%= f.text_area 'body' , :rows=>8 , :cols=>45 %></td>
+		</tr>
+		<tr>
+		    <th style="width:140px;"><%= t('activerecord.attributes.base_ng_word.active_flag') %></th>
+		    <td><%= f.check_box 'active_flag' %></td>
+	    </tr>
+		<tr>
+		    <th style="width:140px;">footer</th>
+		    <td><%= f.check_box 'footer_flag' %></td>
+	    </tr>
+		
+	</tbody>
+	</table>
+
+	<div class="bot_btn">
+		<%= mng_submit_tag "確認" %>
+	</div>
+<% end %>

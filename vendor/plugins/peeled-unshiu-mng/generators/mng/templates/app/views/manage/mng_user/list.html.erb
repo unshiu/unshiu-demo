@@ -1,0 +1,38 @@
+<%- @pan1="#{t('view.noun.mng_user')}設定" -%><%- @pan2="#{t('view.noun.mng_user')}設定" -%><%- @pan3="#{t('view.noun.mng_user')}一覧" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.mng_user') %>一覧
+<% end %>
+
+<h3><%= t('view.noun.mng_user') %>一覧</h3>
+
+<% if @users.size.zero? %>
+	<%= t('view.noun.mng_user') %>はいません。
+	
+<% else %>
+	<table class="lineColorT" style="width:609px;">
+	<tr>
+		<th style="width:219px;"><%= t('activerecord.attributes.base_user.login') %></th>
+		<th style="width:100px;"><%= t('activerecord.attributes.base_user.name') %></th>
+		<th style="width:100px;"><%= t('view.noun.base_footmark') %></th>
+		<th style="width:100px;"></th>
+	</tr>
+	<% for user in @users %>
+	<tr>
+		<td><%= link_to user.login, :controller => 'manage/base_user', :action => 'show', :id => user.id %></td>
+		<td><%= user.name %></td>
+		<td><% if user.footmark? %>
+				つける
+			<% else %>
+				つけない
+			<% end %>
+		</td>
+		<td>
+			<% if @users.size > 1 && user.id != current_base_user.id %>
+				<%= link_to '管理権限解除', :action => 'delete_confirm', :id => user.id %>
+			<% end %>
+		</td>
+	</tr>
+	<% end %>
+	</table>
+<% end %>

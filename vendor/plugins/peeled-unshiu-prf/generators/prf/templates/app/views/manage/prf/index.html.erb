@@ -1,0 +1,48 @@
+<%- @pan1="SNS設定" -%><%- @pan2="#{t('view.noun.prf_profile')}" -%><%- @pan3="#{t('view.noun.prf_profile')}項目一覧" -%>
+
+<% content_for(:header_title) do %>
+<%= t('view.noun.prf_profile') %>項目一覧
+<% end %>
+
+<h3><%= t('view.noun.prf_profile') %>項目一覧</h3>
+
+<% if @questions.size.zero? %>
+	<%= t('view.noun.prf_profile') %>項目がありません。
+	
+<% else %>
+	<%= paginate_header @questions %>
+
+	<table class="lineColorT" style="width:609px;">
+		<tr>
+			<th><%= t('activerecord.attributes.prf_question.body') %></th>
+			<th><%= t('activerecord.attributes.prf_question.question_type') %></th>
+			<th>操作</th>
+		</tr>
+		<% @questions.each_with_index do |question, index| %>
+			<tr>
+				<td><%= link_to question.prf_question.body, :action => "choices", :id => question.prf_question.id %></td>
+				<td>
+					<% if question.prf_question.type_select? %>
+						<%= t('activerecord.constant.type.select') %>
+					<% elsif question.prf_question.type_radio? %>
+						<%= t('activerecord.constant.type.radio') %>
+					<% elsif question.prf_question.type_checkbox? %>
+						<%= t('activerecord.constant.type.checkbox') %>
+					<% elsif question.prf_question.type_text? %>
+						<%= t('activerecord.constant.type.text') %>
+					<% elsif question.prf_question.type_textarea? %>
+						<%= t('activerecord.constant.type.textarea') %>
+					<% end %>
+				</td>
+				<td>
+					<%= link_to '削除', :action => 'delete_question_confirm', :id => question.prf_question.id %>
+					<%= link_to '編集', :action => 'edit', :id => question.prf_question.id %>
+					<%= link_to '上へ', :action => 'move_question', :num => index, :type => -1 unless index == 0%>
+					<%= link_to '下へ', :action => 'move_question', :num => index, :type => 1  unless index == @questions.size - 1 %>
+				</td>
+			</tr>
+		<% end %>
+	</table>
+	
+	<%= paginate_links @questions %>
+<% end %>

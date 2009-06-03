@@ -1,0 +1,16 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.cmm_community') %>作成
+<% end %>
+
+<%= render :partial => 'confirm' %>
+
+<% form_tag :action => "create_complete" do %>
+	<%= hidden_field 'community', 'name'%>
+	<%= hidden_field 'community', 'profile'%>
+	<%= hidden_field 'community', 'join_type'%>
+	<%= hidden_field 'community', 'topic_create_level'%>
+	<div style="text-align:center">
+		<%= submit_tag '作成' %>
+		<%= cancel_tag %>
+	</div>
+<% end %>

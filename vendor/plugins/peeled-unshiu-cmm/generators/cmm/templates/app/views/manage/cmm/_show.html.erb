@@ -1,0 +1,26 @@
+<table class="lineColorL" style="width:609px;">
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.cmm_community.name') %></th>
+		<td><%= h @community.name %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.cmm_community.created_at') %></th>
+		<td><%= datetime_to_s @community.created_at %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.cmm_community.profile') %></th>
+		<td>
+			<%= hbr @community.profile %>
+		</td>
+	</tr>
+	<tr>
+		<th>管理者</th>
+		<td>
+			<ul>
+				<% @community.admin_users.each do |user| %>
+					<li><%= link_to_user user.base_user %></li>
+				<% end %>
+			</ul>
+		</td>
+	</tr>
+</table>

@@ -1,0 +1,18 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.tpc_topic') %>削除
+<% end %>
+<% content_for(:sub_title) do %>
+	<%= h @topic.tpc_topic.title %>
+<% end %>
+
+<div id="warning">
+	この<%= t('view.noun.tpc_topic') %>を削除していいですか？<br/>
+</div>
+
+<%= t('activerecord.attributes.tpc_topic.body') %><br/>
+<%= hbr @topic.tpc_topic.body %>
+
+<% form_tag :action => 'delete_complete', :id => @topic.id do %>
+	<%= submit_button_tag("削除") %>
+	<%= cancel_button_tag %>
+<% end %>

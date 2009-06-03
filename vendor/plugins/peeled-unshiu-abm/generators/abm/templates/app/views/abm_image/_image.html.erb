@@ -1,0 +1,18 @@
+<%= "<tr>" if image_counter % 3 == 0 %>
+<td>
+	<div>
+		<table>
+			<tbody>
+			<tr><td>
+			<%= link_to image_tag(url_for_image_column(image, 'image', :large)), 
+			            :controller => :abm_image, :action => :show, :id => image.id %>
+			</td></tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<div>
+		<%= l(image.created_at) %>
+	</div>
+</td>
+<%= "</tr>" if image_counter % 3 == 2 %>

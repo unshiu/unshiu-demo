@@ -1,0 +1,28 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.tpc_topic') %>作成
+<% end %>
+
+<% form_tag :action => 'create_confirm' do %>
+  <div style="<%= style_value('form_style') %>">
+	<%= error_messages_for 'topic', :object_name => 'tpc_topic' %>
+	<div>
+		<span style="color:#f75009;"></span><%= t('activerecord.attributes.tpc_topic.title') %><br />
+		<%= text_field 'topic', 'title' %>
+	</div>
+	
+	<div>
+		<span style="color:#f75009;"></span><%= t('activerecord.attributes.tpc_topic.body') %><br />
+		<%= text_area 'topic', 'body', :size => '50x3' %>
+	</div>
+	
+	<span style="color:#f75009;"></span><%= t('activerecord.attributes.tpc_topic_cmm_community.public_level') %><br />
+	<%= select 'topic_info', 'public_level', select_type(TpcTopicCmmCommunity::PUBLIC_LEVELS) %>
+	<%= hidden_field 'topic_info', 'cmm_community_id' %>
+	<input type="hidden" name="topic_type" value="<%= @topic_info.type %>" />
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+  </div>
+  <%= image_tag_for_default 'Spec_02.gif' %><br />
+	<div style="text-align:center">
+		<%= submit_tag '確認' %>
+	</div>
+<% end %>

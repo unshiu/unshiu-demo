@@ -1,0 +1,20 @@
+<% if @albums.size.zero? %>
+	<%= t('view.noun.abm_album') %>がありません。
+<% else %>
+
+	<%= paginate_header(@albums) %>
+
+	<% @albums.each do |album| %>
+		<% list_cell_for do %>
+			<%= link_to_list_cell "#{album.title}(#{album.abm_images.count})", 
+			                      :controller => 'abm_album', :action => 'show', :id => album.id %>
+			<%= notice_new_if_new(album.updated_at) %><br />
+			<%= link_to_user album.base_user %>
+			<%= date_or_time(album.updated_at) %>
+		<% end %>
+	<% end %>
+
+	<%= paginate_links(@albums) %>
+
+<% end %>
+<%= image_tag_for_default 'Spec_08.gif' %><br />

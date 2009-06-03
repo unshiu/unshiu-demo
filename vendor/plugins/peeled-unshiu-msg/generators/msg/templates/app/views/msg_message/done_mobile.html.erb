@@ -1,0 +1,11 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.msg_message') %>送信
+<% end %>
+
+<span style="color:#f75009;"></span>以下の<%= t('view.noun.base_user') %>に<%= t('view.noun.msg_message') %>を送信しました。
+
+<ul>
+<% @msg_message.msg_receivers.each do |receiver| %>
+	<li><%= link_to_user_without_emoticon receiver.base_user %></li>
+<% end %>
+</ul>

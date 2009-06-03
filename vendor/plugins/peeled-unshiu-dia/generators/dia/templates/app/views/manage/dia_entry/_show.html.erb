@@ -1,0 +1,30 @@
+<table class="lineColorL" style="width:609px;">
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.dia_diary.base_user') %></th>
+		<td><%= link_to_user @entry.dia_diary.base_user %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.dia_entry.contributed_at') %></th>
+		<td><%= datetime_to_s(@entry.contributed_at) %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.dia_entry.public_level') %></th>
+		<td><%= DiaEntry.public_level_name(@entry.public_level) %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.dia_entry.title') %></th>
+		<td><%= h @entry.title %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.dia_entry.body') %></th>
+		<td><%= hbr @entry.body %></td>
+	</tr>
+	<tr>
+		<th><%= t('view.noun.abm_image') %></th>
+		<td>
+			<% for image in @entry.abm_images %>
+				<%= image_tag url_for_image_column(image, :image, :large) %>
+			<% end %>
+		</td>
+	</tr>
+</table>

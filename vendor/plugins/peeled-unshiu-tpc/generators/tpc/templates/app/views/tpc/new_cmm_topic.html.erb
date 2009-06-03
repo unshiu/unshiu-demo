@@ -1,0 +1,30 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.tpc_topic') %>作成
+<% end %>
+
+<% form_tag :action => 'create_complete' do %>
+
+	<label for="title" accesskey="n"><%= t('activerecord.attributes.tpc_topic.title') %>：</label><br/>
+	<p><%= text_field 'topic', 'title', :size => 50 %></p>
+	<div class="notice">
+		<%= error_message_on_with_label @topic, 'title' %>
+		<%=t 'activerecord.errors.stand_messages.too_long', :count => AppResources[:base][:title_max_length] %>
+	</div>
+	
+	<label for="body" accesskey="n"><%= t('activerecord.attributes.tpc_topic.body') %></label><br/>
+	<p><%= text_area 'topic', 'body', :size => '50x3' %></p>
+   	<div class="notice">
+		<%= error_message_on_with_label @topic, 'body' %>
+		<%=t 'activerecord.errors.stand_messages.too_long', :count => AppResources[:base][:body_max_length] %>
+	</div>
+	
+	<label for="public_level" accesskey="n"><%= t('activerecord.attributes.tpc_topic_cmm_community.public_level') %></label><br/>
+	<p><%= select 'topic_info', 'public_level', select_type(TpcTopicCmmCommunity::PUBLIC_LEVELS) %></p>
+   	<%= error_message_on_with_label @topic, 'public_level' %>
+	
+	<%= hidden_field 'topic_info', 'cmm_community_id' %>
+	<%= hidden_field_tag 'topic_type', @topic_info.type %>
+
+	<%= submit_button_tag("作成") %>
+	
+<% end %>

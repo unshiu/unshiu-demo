@@ -1,0 +1,29 @@
+<%- @pan1="管理者設定" -%><%- @pan2="#{t('view.noun.base_ng_word')}" -%><%- @pan3="詳細" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_ng_word') %>詳細
+<% end %>
+
+<h3><%= t('view.noun.base_ng_word') %>詳細</h3>
+
+<ul class="list">
+	<li><%= link_to "編集する", :action => 'edit', :id => @ng_word.id %></li>
+	<li><%= link_to "削除する", :action => 'delete_confirm', :id => @ng_word.id %></li>
+</ul>
+
+<table class="lineColorL" style="width:609px;">
+<tbody>
+  <tr>
+    <th style="width:140px;"><%= t('activerecord.attributes.base_ng_word.word') %></th>
+    <td>
+    	<%=h @ng_word.word %>
+	</td>
+  </tr>
+  <tr>
+    <th style="width:140px;"><%= t('activerecord.attributes.base_ng_word.active_flag') %></th>
+    <td>
+    	<%=h @ng_word.active_str %>
+	</td>
+  </tr>
+</tbody>
+</table>

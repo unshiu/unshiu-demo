@@ -1,0 +1,22 @@
+<table class="lineColorL" style="width:609px;">
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.tpc_topic.base_user') %></th>
+		<td><%= link_to_user @topic.tpc_topic.base_user %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.tpc_topic.created_at') %></th>
+		<td><%= datetime_to_s(@topic.tpc_topic.created_at) %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.tpc_topic_cmm_community.public_level') %></th>
+		<td><%= TpcTopicCmmCommunity.public_level_name(@topic.public_level) %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.tpc_topic.title') %></th>
+		<td><%= @topic.tpc_topic.title %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.tpc_topic.body') %></th>
+		<td><%= hbr @topic.tpc_topic.body %></td>
+	</tr>
+</table>

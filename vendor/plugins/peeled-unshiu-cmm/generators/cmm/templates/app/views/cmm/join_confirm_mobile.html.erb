@@ -1,0 +1,21 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.cmm_community') %>参加
+<% end %>
+
+<% if @community.join_type_free? %>
+<%= h @community.name %>に参加します。よろしいですか？
+<% else %>
+<%= h @community.name %>に参加申請します。よろしいですか？
+<% end %>
+
+<%= image_tag_for_default 'Spec_04.gif' %><br />
+<% form_tag :action => 'join_complete', :id => @community.id do %>
+	<div style="text-align:center">
+		<% if @community.join_type_free? %>
+		<%= submit_tag '参加' %>
+		<% else %>
+		<%= submit_tag '申請' %>
+		<% end %>
+		<%= cancel_tag %>
+	</div>
+<% end %>

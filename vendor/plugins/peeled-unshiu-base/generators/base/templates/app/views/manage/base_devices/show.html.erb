@@ -1,0 +1,114 @@
+<%- @pan1="システム設定" -%><%- @pan2='携帯機種管理' -%><%- @pan3="#{@jpmobile_device.device}" -%>
+
+<% content_for(:header_title) do %>
+	携帯機種詳細情報:<%= @jpmobile_device.device %>
+<% end %>
+
+<h3>携帯機種詳細情報:<%= @jpmobile_device.device %></h3>
+
+<% if @jpmobile_device.jpmobile_carrier.available_flag %>
+	<% if @jpmobile_device.available_flag %>
+		<p class="dialog">現在「<%= @jpmobile_device.device %>」機種でサイトを閲覧することができます。</p>
+		<ul class="list">
+			<li><%= link_to "#{@jpmobile_device.device}での閲覧を禁止する", unavailable_confirm_manage_base_device_path(@jpmobile_device) %></li>
+		</ul>
+	<% else %>
+		<p class="dialog">現在「<%= @jpmobile_device.device %>」機種でサイトを閲覧することはできません。</p>
+		<ul class="list">
+			<li><%= link_to "#{@jpmobile_device.device}での閲覧を許可する" , available_confirm_manage_base_device_path(@jpmobile_device) %></li>
+		</ul>
+	<% end %>
+<% else %>
+	<p class="dialog">
+		現在「<%= @jpmobile_device.jpmobile_carrier.name %>」でサイトを閲覧することはできません。
+		個別に閲覧対象を変更したい場合はキャリアによる制限を解除してください。
+	</p>
+<% end %>
+
+<table border="0" cellpadding="3" cellspacing="1" class="lineColorLW" style="width:609px;">
+<tbody>
+  <tr>
+	<th style="width:140px;">閲覧</th>
+	<td>
+		<% if @jpmobile_device.jpmobile_carrier.available_flag %>
+			<% if @jpmobile_device.available_flag %>
+				許可
+			<% else %>
+				<span class="attention">拒否</span>
+			<% end %>
+		<% else %>
+			<span class="attention">拒否</span>
+		<% end %>
+	</td>
+  </tr>
+  <tr>
+    <th style="width:140px;">キャリア名</th>
+    <td><%= h @jpmobile_device.jpmobile_carrier.name %></td>
+  </tr> 
+ <tr>
+   	<th style="width:140px;">機種名</th>
+    <td><%= h @jpmobile_device.name %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;">デバイス名</th>
+    <td><%= h @jpmobile_device.device %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;">GPS</th>
+    <td><%= use_function(@jpmobile_device.gps) %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;">JPG</th>
+    <td><%= use_function(@jpmobile_device.jpg) %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;">PNG</th>
+    <td><%= use_function(@jpmobile_device.png) %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;">Flash</th>
+    <td><%= use_function(@jpmobile_device.flash) %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;">Flash version</th>
+    <td><%= h @jpmobile_device.flash_version %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;">SSL</th>
+    <td><%= use_function(@jpmobile_device.ssl) %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;">カラー</th>
+    <td><% if @jpmobile_device.color %>カラー<% else %>モノクロ<% end %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;">色数</th>
+    <td><%= @jpmobile_device.colors %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;">着メロ</th>
+    <td><%= use_function(@jpmobile_device.ringer_melody_song) %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;">着うたフル</th>
+    <td><%= use_function(@jpmobile_device.ringer_melody_song_full) %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;">着ムービー</th>
+    <td><%= use_function(@jpmobile_device.ringer_melody_movie) %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;">QRコード</th>
+    <td><%= use_function(@jpmobile_device.qr) %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;">Bluetooth</th>
+    <td><%= use_function(@jpmobile_device.bluetooth) %></td>
+  </tr>
+  <tr>
+    <th style="width:140px;">更新日</th>
+    <td><%= datetime_to_s(@jpmobile_device.updated_at) %></td>
+  </tr>
+</tbody>
+</table>
+

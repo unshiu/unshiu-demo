@@ -1,0 +1,66 @@
+<% content_for(:header_title) do %>
+	下書き<%= t('view.noun.dia_diary') %>一覧
+<% end %>
+
+<div class="clearfix">
+	<div id="contents_title" class="span-12"><h2><span>下書き<%= t('view.noun.dia_diary') %>一覧</span></h2></div>
+	<ul class="menu_list">
+		<li><%= link_add_menu_to "#{t('view.noun.dia_diary')}を書く", :action => :new %></li>
+	</ul>
+</div>
+
+<div class="pager_box pager_box_top append-bottom clearfix">
+	<%= paginate(@entries) %>
+</div><!--pager_col-->
+
+<% if @entries.size.zero? %>
+	下書き<%= t('view.noun.dia_entry') %>がありません。
+
+<% else %>
+
+	<div class="diary_storys_box box_outer">
+		<% @entries.each do |entry| %>
+			<div class="diary_story_box box_outer clearfix">
+				<h5><span><%= link_to body_summary(entry.title, :length => 40), :action => :edit, :id => entry.id %></span></h5>
+				<div class="diary_text box_outer small">
+					<p>
+					<%= body_summary(entry.body, :length => 120) %>
+					</p>
+				</div>
+				<div class="span-10 small">
+					<span class="permanent_link">
+						<%= link_to "編集する", :action => :edit, :id => entry.id %>｜
+					</span>
+					<span class="comment_link"><%=h "コメント#{entry.dia_entry_comments.count}" %>｜</span><!--/comment_link-->
+					<span class="contents_date"><%= l(entry.updated_at, :format => :short) %></span><!--/contents_date-->
+					<span class="contents_time"></span><!--/contents_time-->
+				</div>
+				<span class="editdelete span-4 small">
+					<%= link_to "削除する", :action => :delete_confirm, :id => entry.id, :cancel_to => "/dia_entry/draft_list" %>
+				</span><!--/contents_time-->
+			</div>
+		<% end %>
+	</div><!--/diary_storys_box-->
+
+<% end %>
+
+<div class="pager_box pager_box_top append-bottom clearfix">
+	<%= paginate(@entries) %>
+</div><!--pager_col-->
+
+<% content_for(:sidemenu) do %>
+	<div  class="W5R4B9df box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+			<div class="box_inner clearfix">
+			<h6><span>menu</span></h6>
+			<ul>
+				<li><%= link_to "#{t('view.noun.dia_diary')}一覧を見る", :controller => 'dia_entry', :action => 'list' %></li>
+			</ul>
+			</div><!--/box_inner-->
+		</div><!--/wrap3 -->
+		</div><!--/wrap2 -->
+		</div><!--/wrap1 -->
+	</div>
+<% end %>

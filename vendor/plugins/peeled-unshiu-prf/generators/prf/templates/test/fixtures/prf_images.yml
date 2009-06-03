@@ -1,0 +1,19 @@
+# == Schema Information
+#
+# Table name: prf_images
+#
+#  id             :integer(4)      not null, primary key
+#  prf_profile_id :integer(4)      not null
+#  image          :string(255)
+#  created_at     :datetime
+#  updated_at     :datetime
+#  deleted_at     :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  prf_profile_id: 2
+two:
+  id: 2
+  prf_profile_id: 3

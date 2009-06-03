@@ -1,0 +1,31 @@
+<%- @pan1="管理者設定" -%><%- @pan2='メールテンプレート' -%><%- @pan3="" -%>
+
+<% content_for(:header_title) do %>
+	メールテンプレート作成
+<% end %>
+
+<% if @base_mail_templates.size.zero? %>
+	<%= t('view.noun.base_notice') %>がありません。
+<% else %>
+	<%= paginate_header(@base_mail_templates) %>
+	<table class="lineColorT" style="width:609px;">
+	  <tr>
+		<th style="width:309px;"><%= t('activerecord.attributes.base_notice.title') %></th>
+	    <th style="width:309px;"><%= t('activerecord.attributes.base_notice.title') %></th>
+	    <th style="width:150px;"><%= t('activerecord.attributes.base_notice.start_datetime') %></th>
+	  </tr>
+  
+	<% for base_mail_templates in @base_mail_templates %>
+	  <tr>
+	    <td>
+			<%= link_to base_mail_templates.base_mail_template_kind.name,
+			            manage_base_mail_template_kind_path(base_mail_templates.base_mail_template_kind) %>
+		</td>
+		<td><%= link_to base_mail_templates.subject, manage_base_mail_template_path(base_mail_templates) %></td>
+	    <td><%= datetime_to_s(base_mail_templates.updated_at) %></td>
+	  </tr>
+	<% end %>
+	</table>
+	<%= paginate_links(@base_mail_templates) %>
+<% end %>
+

@@ -1,0 +1,24 @@
+<% content_for(:header_title) do %>
+設定変更
+<% end %>
+
+<% form_tag :action => 'update_confirm' do %>
+
+<div style="<%= style_value('form_style') %>">
+	<span style="color:#f75009;"></span>サービスからの通知メールを受け取る
+	<%= check_box 'base_user', 'receive_system_mail_flag' %><br />
+	<span style="color:#f75009;"></span>メールマガジンを受け取る
+	<%= check_box 'base_user', 'receive_mail_magazine_flag' %><br />
+	<span style="color:#f75009;"></span>メッセージを誰から受け取る？<br />
+	<%= select 'base_user', 'message_accept_level', hash2sorted_array(MsgMessage::MESSAGE_ACCEPT_LEVELS) %><br />
+	<span style="color:#f75009;"></span>日記公開レベル初期値<br />
+	<%= select 'dia_diary', 'default_public_level', select_type(DiaEntry::PUBLIC_LEVELS) %><br />
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+</div>
+
+<%= image_tag_for_default 'Spec_02.gif' %><br />
+
+<div style="text-align:center">
+	<%= submit_tag '確認' %>
+</div>
+<% end %>

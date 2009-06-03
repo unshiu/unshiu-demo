@@ -1,0 +1,25 @@
+<div style="text-align:left">
+
+<% if @entries.size.zero? %>
+	<%= t('view.noun.dia_diary') %>がありません。
+
+<% else %>
+
+	<%= paginate_header(@entries) %>
+
+	<% @entries.each do |entry| %>
+		<% list_cell_for do %>
+			<% link_to :controller => 'dia_entry', :action => 'show', :id => entry.id do %>
+	    		<%= "#{truncate(entry.title, :length => 15)}(#{entry.dia_entry_comments.count})" %>
+			<% end %>
+			<%= notice_new_if_new(entry.contributed_at) %><br />
+			<%= link_to_user entry.dia_diary.base_user %>
+			<%= date_or_time(entry.contributed_at) %>
+		<% end %>
+	<% end %>
+
+	<%= paginate_links(@entries) %>
+
+<% end %>
+
+</div>

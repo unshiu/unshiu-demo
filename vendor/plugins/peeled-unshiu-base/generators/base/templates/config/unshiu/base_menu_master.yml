@@ -1,0 +1,42 @@
+profile:
+  id: 1
+  name: プロフィール
+  icon: profile
+  url: /base_profile/
+  num: 1
+  default_show: true
+diary:
+  id: 2
+  name: 日記
+  icon: diary
+  url: /dia_entry/list
+  num: 2
+  default_show: true
+photo:
+  id: 3
+  name: 写真
+  icon: photo
+  url: /abm_album/index
+  num: 3
+  default_show: true
+favorite:
+  id: 4
+  name: お気に入り
+  icon: favorite
+  url: /base_favorite/list
+  num: 4
+  default_show: true
+point:
+  id: 5
+  name: ポイント
+  icon: favorite
+  url: /pnt/index
+  num: 5
+  default_show: true
+prof:
+  id: 6
+  name: マイプロフ
+  icon: favorite
+  url: /prf/index
+  num: 6
+  default_show: false

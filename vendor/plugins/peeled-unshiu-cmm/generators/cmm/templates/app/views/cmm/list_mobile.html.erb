@@ -1,0 +1,21 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.cmm_community') %>一覧
+<% end %>
+
+<% if logged_in? %><% end %><%# FIXME session_id が付加されない対策%>
+
+<% if @communities.size.zero? %>
+	<%= t('view.noun.cmm_community') %>はありません。
+
+<% else %>
+	<%= paginate_header @communities %>
+
+	<% @communities.each do |community| %>
+		<% list_cell_for do %>
+			<%= link_to_list_cell "#{community.name}(#{community.joined_users.size})", :controller => :cmm, :action => 'show', :id => community.id %>
+		<% end %>
+	<% end %>
+
+	<%= paginate_links @communities %>
+	
+<% end %>

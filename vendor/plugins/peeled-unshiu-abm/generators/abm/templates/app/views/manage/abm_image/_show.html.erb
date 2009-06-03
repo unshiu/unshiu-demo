@@ -1,0 +1,30 @@
+<table class="lineColorL" style="width:609px;">
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.abm_album.base_user') %></th>
+		<td>
+			<% if @image.abm_album %>
+				<%= link_to_user @image.abm_album.base_user %>
+			<% else %>
+				<%= t('view.noun.abm_album') %>なし
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.abm_image.updated_at') %></th>
+		<td><%= datetime_to_s(@image.updated_at) %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.abm_image.title') %></th>
+		<td><%= h @image.title %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.abm_image.body') %></th>
+		<td><%= hbr @image.body %></td>
+	</tr>
+	<tr>
+		<th><%= t('view.noun.abm_image') %></th>
+		<td>
+			<%= safety_image_tag url_for_image_column(@image, :image, :large) %>
+		</td>
+	</tr>
+</table>

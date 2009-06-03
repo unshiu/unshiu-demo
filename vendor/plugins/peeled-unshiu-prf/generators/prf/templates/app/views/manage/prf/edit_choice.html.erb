@@ -1,0 +1,51 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.prf_profile') -%><%- @pan3=@prf_question.body -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.prf_choice') %>編集
+<% end %>
+
+<h3><%= t('view.noun.prf_choice') %>編集</h3>
+
+<ul class="list">
+	<li><%= link_to "#{t('view.noun.prf_choice')}一覧へ戻る", :action => 'choices', :id => @prf_question.id %></li>
+</ul>
+
+<%= error_messages_for 'prf_choice', :object_name => 'prf_choice' %>
+
+<% form_tag :action => "edit_choice_confirm" do %>
+	<%= hidden_field 'prf_choice', 'id' %>
+	<%= hidden_field 'prf_choice', 'prf_profile_id' %>
+	
+	<table border="0" cellpadding="3" cellspacing="1" class="lineColorLW" style="width:609px;">
+	<tbody>
+	  <tr>
+	    <th style="width:120px;"><%= t('activerecord.attributes.prf_choice.body') %></th>
+	    <td>
+			<%= text_field 'prf_choice', 'body' %>
+		</td>
+	  </tr>
+	　　<% if @prf_choice.free_area_type_text? || @prf_choice.free_area_type_textarea? %>
+	  <tr>
+	    <th style="width:120px;"><%= t('activerecord.attributes.prf_choice.free_area_type') %></th>
+	    <td>
+			
+				<%= select "prf_choice", "free_area_type",
+					[[ "#{t('activerecord.constant.type.none')}", PrfChoice::CHOICE_FREE_AREA_TYPE_NONE],
+					 ["#{t('activerecord.constant.type.text')}", PrfChoice::CHOICE_FREE_AREA_TYPE_TEXT],
+					 ["#{t('activerecord.constant.type.textarea')}", PrfChoice::CHOICE_FREE_AREA_TYPE_TEXTAREA]]  %>
+			
+				
+		</td>
+	  </tr>
+	　　<% else %>
+		<%= hidden_field 'prf_choice', 'free_area_type' %>
+　　　　　　<% end %>
+	</tbody>
+	</table>
+	
+	<div class="bot_btn">
+		<%= mng_submit_tag '確認' %>
+	</div>
+<% end %>
+
+

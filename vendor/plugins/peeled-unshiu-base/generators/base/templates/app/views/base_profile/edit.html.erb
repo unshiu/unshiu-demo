@@ -1,0 +1,76 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_profile') %>編集
+<% end %>
+
+<% form_tag :action => 'update' do %>
+	<label for="profile_name" accesskey="n"><%= t('activerecord.attributes.base_profile.name') %>：</label>
+	<br>
+	<%= text_field 'profile', 'name', { :class => "span-17", :style => "padding:8px;margin:2px 0px;" }%>
+	<%= hidden_field 'profile', 'name_public_level' %>
+	<div class="notice">
+		<%= error_message_on_with_label @profile, 'name' %>
+		<%=t 'activerecord.errors.stand_messages.too_long', :count => AppResources[:base][:name_max_length] %>
+	</div>
+	
+	<label for="profile_sex" accesskey="n"><%= t('activerecord.attributes.base_profile.sex') %>：</label>
+	<br>
+	<%= select 'profile', 'sex', select_type(BaseProfile::SEX) %><br />
+	<%= select 'profile', 'sex_public_level', select_type(BaseProfile::PUBLIC_LEVELS) %>
+	<br>
+	
+	<label for="profile_sex" accesskey="n"><%= t('activerecord.attributes.base_profile.area') %>：</label>
+	<br>
+	<%= select 'profile', 'area', select_type(BaseProfile::PREFECTURES), :selected => @profile.area.to_i %><br />
+	<%= select 'profile', 'area_public_level', select_type(BaseProfile::PUBLIC_LEVELS) %>
+	<br>
+	
+	<label for="profile_civil_status" accesskey="n"><%= t('activerecord.attributes.base_profile.civil_status') %>：</label>
+	<br>
+	<%= select 'profile', 'civil_status', select_type(BaseProfile::CIVIL) %><br />
+	<%= select 'profile', 'civil_status_public_level', select_type(BaseProfile::PUBLIC_LEVELS) %>
+	<br>
+	
+	<label for="profile_birthday" accesskey="n"><%= t('activerecord.attributes.base_profile.birthday') %>：</label>
+	<br>
+	<% if @profile.birthday %>
+		<%= text_field_tag 'profile[birthday]', @profile.birthday.strftime('%Y%m%d'), numeric_text_field_options %>
+	<% else %>
+		<%= text_field_tag 'profile[birthday]', nil, numeric_text_field_options %>
+	<% end %><br />
+	<%= select 'profile', 'birthday_public_level', select_type(BaseProfile::PUBLIC_LEVELS) %>
+	<div class="notice">
+		<%= error_message_on_with_label @profile, 'birthday' %>
+		20080401か2008/04/01の形式で入力してください
+	</div>
+	<br>
+	<label for="profile_introduction" accesskey="n"><%= t('activerecord.attributes.base_profile.introduction') %>：</label>
+	<br>
+	<%= text_area 'profile', 'introduction', :size => "50x3" %>
+	<div class="notice">
+		<%= error_message_on_with_label @profile, 'introduction' %>
+		<%=t 'activerecord.errors.stand_messages.too_long', :count => AppResources[:base][:body_max_length] %>
+	</div>
+	<%= select 'profile', 'introduction_public_level', select_type(BaseProfile::PUBLIC_LEVELS) %>
+	<br>
+	
+	<%= submit_button_tag("更新") %>
+		
+<% end %>
+
+<% content_for(:sidemenu) do %>
+	<div  class="W5R4B9df box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+			<div class="box_inner clearfix">
+			<h6><span>menu</span></h6>
+			<%= link_to '設定変更', :controller => 'base_user_config', :action => 'index' %><br/>
+			<%= link_to '登録メールアドレス変更', :controller => 'base_user_config', :action => 'mail_reset_input' %><br/>
+			<%= link_to 'パスワード変更', :controller => 'base_signup', :action => 'password_set_ask' %><br/>
+
+			</div><!--/box_inner-->
+		</div><!--/wrap3 -->
+		</div><!--/wrap2 -->
+		</div><!--/wrap1 -->
+	</div><!--/friend_box-->
+<% end %>

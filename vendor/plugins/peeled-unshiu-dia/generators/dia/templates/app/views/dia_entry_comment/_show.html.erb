@@ -1,0 +1,16 @@
+<% if @comment.not_invisibled_by_anyone? %>
+<%= link_to_user_without_emoticon @comment.base_user, '#F75200' %>
+<% if logged_in? && @comment.deletable?(current_base_user) %>
+<%= link_to_list_cell '[削除]', :controller => 'dia_entry_comment', :action => 'delete_confirm', :id => @comment.id %>
+<% end %><br />
+<%= hbr @comment.body %><br />
+<div style="text-align:right;"><%= date_or_time(@comment.created_at) %></div>
+<% else %>
+  <% if @comment.invisibled_by_writer? %>
+  	<%= t('activerecord.attributes.dia_entry_comment.deleter_writer') %>によって削除されました。
+  <% elsif @comment.invisibled_by_owner? %>
+  	<%= t('activerecord.attributes.dia_entry_comment.deleter_owner') %>によって削除されました。
+  <% elsif @comment.invisibled_by_manager? %>
+  	<%= t('activerecord.attributes.dia_entry_comment.deleter_manager') %>によって削除されました。
+  <% end %>
+<% end %>

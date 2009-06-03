@@ -1,0 +1,33 @@
+<div class="massage_title">
+	<h4><%= h @message.title %></h4>
+</div>
+
+<% unless @message.msg_sender.base_user.nil? %><%# nil の場合退会済み %>
+<ul class="menu_list">
+	<li>
+		<%= link_to '<span>返信する</span>', { :controller => 'msg_message', :action => 'reply', :id => @message.id }, :class => "button" %>
+	</li>
+</ul>
+<% end %>
+
+<div class="message_photo">
+	<% link_to :controller => 'base_profile', :action => 'show', :id => @message.msg_sender.base_user_id do %>
+		<%= safe_profile_view(@message.msg_sender.base_user.try(:base_profile), :thumb, {"width" => 40, "height" => 40 })%>
+	<% end %>
+</div>
+
+<div class="clearfix">
+	<div class="message_from">
+		From：<span class="username"><%= link_to_user(@message.msg_sender.base_user) %></span>
+	</div>
+	
+	<div class="massage_date">
+		Date：<span class="date"><%= l(@message.created_at)%></span>
+	</div>
+</div>
+
+<div class="message_text">
+	<p>
+	<%= hbr @message.body %>
+	</p>
+</div>

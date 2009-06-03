@@ -1,0 +1,54 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.dia_diary') %>
+<% end %>
+<% content_for(:sub_title) do %>
+	<%= t('view.noun.dia_entry_comment') %>一覧
+<% end %>
+
+
+<div class="clearfix">
+	<div id="contents_title" class="span-12">
+		<h2><span><%= t('view.noun.dia_entry_comment') %>一覧</span></h2>
+	</div>
+</div>
+
+<div class="diary_comments_box box_outer">
+<div class="wrap1">
+<div class="wrap2">
+<div class="wrap3">
+<div class="box_inner">
+	
+	<div class="pager_box pager_box_top clear clearfix">
+		<%= paginate @comments %>
+	</div><!--pager_box-->
+	
+	<!-- comment  -->
+	<div id="dia_entry_comments">
+		<%= render :partial => 'dia_entry_comment/comment', :collection => @comments %>
+	</div>
+	
+	<div class="pager_box pager_box_top clear clearfix">
+		<%= paginate @comments %>
+	</div><!--pager_box-->
+</div>
+</div>
+</div><!--/wrap3-->
+</div><!--/wrap2-->
+</div><!--/wrap1-->
+
+<% content_for(:sidemenu) do %>
+	<div  class="W5R4B9df box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+			<div class="box_inner clearfix">
+			<h6><span>menu</span></h6>
+			<ul>
+				<li><%= link_to "#{t('view.noun.dia_entry')}に戻る", :controller => :dia_entry, :action => 'show', :id => @entry.id %></li>
+			</ul>
+			</div><!--/box_inner-->
+		</div><!--/wrap3 -->
+		</div><!--/wrap2 -->
+		</div><!--/wrap1 -->
+	</div><!--/friend_box-->
+<% end %>

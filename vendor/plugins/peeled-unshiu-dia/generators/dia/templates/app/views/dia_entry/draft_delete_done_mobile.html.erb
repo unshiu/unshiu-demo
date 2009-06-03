@@ -1,0 +1,7 @@
+<% content_for(:header_title) do %>
+下書き<%= t('view.noun.dia_diary') %>削除
+<% end %>
+下書き<%= t('view.noun.dia_diary') %>を削除しました。<br />
+<br />
+<%= link_basic_to "下書き#{t('view.noun.dia_diary')}一覧に戻る", :action => 'draft_list' %><br />
+<span style="color:#f75100;"></span><%= link_basic_to "#{t('view.noun.dia_diary')}一覧を見る", {:controller => 'dia_entry', :action => 'list'}, {:accesskey => '5'} %><br />

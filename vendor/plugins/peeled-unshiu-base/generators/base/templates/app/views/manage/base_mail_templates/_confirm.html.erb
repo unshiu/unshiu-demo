@@ -1,0 +1,55 @@
+<table border="0" cellpadding="3" cellspacing="1" class="lineColorLW" style="width:609px;">
+<tbody>
+	<tr>
+		<th style="width:140px;">
+			<label for="base_mail_temlate_base_mail_template_kind_id">
+				<%= t('activerecord.attributes.base_mail_template.base_mail_template_kind') %>
+			</label>
+		</th>
+		<td>
+			<%= h @base_mail_template_kind.name %>
+		</td>
+	</tr>
+	<tr>
+		<th style="width:140px;">
+			<label for="base_mail_temlate_content_type"><%= t('activerecord.attributes.base_mail_template.content_type') %></label>
+		</th>
+		<td>
+			<%= h @base_mail_template.view_content_type %>
+		</td>
+	</tr>
+	<tr>
+		<th style="width:140px;">
+			<label for="base_mail_temlate_device_type"><%= t('activerecord.attributes.base_mail_template.device_type') %></label>
+		</th>
+		<td>
+			<%= h @base_mail_template.view_device_type %>
+		</td>
+	</tr>
+	<tr>
+		<th style="width:140px;">
+			<label for="base_mail_temlate_subject"><%= t('activerecord.attributes.base_mail_template.subject') %></label>
+		</th>
+		<td>
+			<%= h @base_mail_template.subject %>
+		</td>
+	</tr>
+	<tr>
+	    <th style="width:140px;">
+			<label for="base_mail_temlate_body"><%= t('activerecord.attributes.base_mail_template.body') %></label>
+		</th>
+	  	<td>
+			<%= br h @base_mail_template.body %>
+		</td>
+	</tr>
+	<tr>
+	    <th style="width:140px;">
+			<label for="base_mail_temlate_footer_flag"><%= t('activerecord.attributes.base_mail_template.footer_flag') %>
+		</th>
+	    <td>
+			<% if @base_mail_template.footer_flag %>つける<% else %>つけない<% end %>
+		</td>
+    </tr>
+	
+</tbody>
+</table>

@@ -1,0 +1,17 @@
+<%- @pan1="メール" -%>
+<%- @pan2="#{t('view.noun.mlg_magazine')}管理" -%>
+<%- @pan3="#{t('view.noun.mlg_magazine')}削除の確認" -%>
+
+<% content_for(:header_title) do %>
+  <%= t('view.noun.mlg_magazine') %>削除の確認
+<% end %>
+<h3><%= t('view.noun.mlg_magazine') %>削除の確認</h3>
+
+<% form_tag :action => 'delete' do %>
+  <%= render :partial => 'confirm_form' %>
+
+  <div class="bot_btn"><div class="bot_btn_sp">
+     <%= submit_tag "削除する", :class=>"button" %>
+     <%= cancel_tag nil, :class=>"button" %>
+  </div></div>
+<% end %>

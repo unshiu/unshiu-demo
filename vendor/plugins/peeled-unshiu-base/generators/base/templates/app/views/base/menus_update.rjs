@@ -1,0 +1,4 @@
+page.replace_html 'sub_menu_col', render(:partial => "base_menu", :local => {:base_menus => @base_menus, :base_sub_menus => @base_sub_menus})
+page.visual_effect :highlight, "sub_menu_col"
+page.hide "sub_sub_menu_list"
+page.call "setup_sub_menu_drag_and_drop"

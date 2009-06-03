@@ -1,0 +1,14 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.cmm_community') %>削除
+<% end %>
+
+<div class="warning">
+	<%= t('view.noun.cmm_community') %>「<%= h @community.name %>」を削除します。よろしいですか？
+</div>
+
+<% form_tag :action => 'destroy_complete', :id => @community.id do %>
+	
+	<%= submit_button_tag("削除") %>
+	<%= cancel_button_tag %>
+	
+<% end %>

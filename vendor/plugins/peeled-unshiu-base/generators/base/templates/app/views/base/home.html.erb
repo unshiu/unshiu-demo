@@ -1,0 +1,41 @@
+<% if @unread_messages_count && @unread_messages_count != 0 %>
+	<%= link_basic_to "未読#{t('view.noun.msg_message')}が#{@unread_messages_count}件あります。", :controller => 'msg_receiver', :action => 'list' %><br />
+<% end %>
+<% if @friend_applies_count && @friend_applies_count != 0 %>
+	<%= link_basic_to "#{t('view.noun.base_friend')}申請が#{@friend_applies_count}件あります。", :controller => 'base_friend_apply', :action => 'list' %><br />
+<% end %>
+<% if @unread_entry_comments_count && @unread_entry_comments_count != 0 %>
+	<%= link_basic_to "未読#{t('view.noun.dia_entry')}#{t('view.noun.dia_entry_comment')}が#{@unread_entry_comments_count}件あります。", :controller => 'dia_entry', :action => 'show', :id => @oldest_unread_comment.dia_entry_id %><br />
+<% end %>
+
+<div class="tabs_col append-bottom  ">
+	<ul class="clearfix" >
+		<li><a href="" class="first on">最近の更新</a></li>
+		<li><a href="">メッセージ</a></li>
+		<li><a href="">日記</a></li>
+		<li><a href="">写真</a></li>
+		<li><a href="">お気に入り</a></li>
+	</ul>
+</div><!--tab_col-->
+
+<div class="tabs_optional_col append-bottom clearfix">
+	<ul class="clearfix">
+		<li><a href="">すべての更新情報</a></li>
+		<li><a href="">友達の更新情報</a></li>
+		<li><a href="">あなたの更新情報</a></li>
+	</ul>
+</div><!--tabs_optional__col-->
+
+<% content_for(:sidemenu) do %>
+
+<div id="friend_search_col">
+	<div id="friend_search_col_inner" class="side_optional_col_inner append-bottom">
+		<div class="side_col_tilte"><h6 class="caps">友達を検索</h6></div>
+		<div class="profile_img_panel">
+			<a href="/mypage_top.htm"><img src="/images/default/icon/default_profile_image.gif" width="40" height="40" border="0"></a>
+		</div>
+		<div class="more "><a href="">すべて表示</a></div>
+	</div><!--/friend_search_col_inner-->
+</div><!--/friend_search_col-->
+
+<% end %>

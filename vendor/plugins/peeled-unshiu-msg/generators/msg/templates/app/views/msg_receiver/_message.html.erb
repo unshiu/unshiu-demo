@@ -1,0 +1,27 @@
+<tr id="message_<%= message.id %>" class="message <%= readcheck_class(message) %>">
+	<td class="checkbox"><%= check_box_tag "message_ids[#{message.id}]", message.id %></td>
+	<td class="name"><div class="name"><%= link_to_user message.msg_sender.base_user %></div></td>
+	<td class="status_icon">
+		<% if message.sender?(current_base_user) %>
+			<img src="" alt="" class="ui-icon ui-icon-mail-open" >
+		<% elsif message.msg_receiver(current_base_user.id).read_flag %>
+			<img src="" alt="" class="ui-icon ui-icon-mail-open" >
+		<% else  %>
+			<img src="" alt="" class="ui-icon ui-icon-mail-closed" >
+		<% end %>
+	</td>
+	<td class="subject">
+		<div class="subject">
+			<% link_to :controller => msg_controller, :action => msg_action, :id => message.id do %>
+				<span><%= body_summary(message.title, :length => 26)%></span>
+			<% end %>
+		</div>
+	</td>
+	<td class="date"><span="small"><%= datetime_to_date(message.created_at) %></span></td>
+	<td class="delete"></td>
+	<% if message.sender?(current_base_user) %>
+		<%= hidden_field_tag "del[#{message.id}][sender]" %>
+	<% else %>
+		<%= hidden_field_tag "del[#{message.id}][receiver]" %>
+	<% end %>
+</tr>

@@ -1,0 +1,12 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_friend') %>申請承認
+<% end %>
+<%= link_to_user_without_emoticon(@apply.base_user) %>の<%= t('view.noun.base_friend') %>申請を承認しますか？<br />
+申請を承認した場合、<%= t('view.noun.base_friend') %>まで公開の日記などがお互いに見えるようになりますので、ご注意ください。<br />
+<br />
+<div style="text-align:center">
+	<% form_tag :action => 'permit', :id => @apply.id do %>
+		<%= submit_tag '承認' %>
+		<%= cancel_tag '戻る' %>
+	<% end %>
+</div>

@@ -1,0 +1,51 @@
+<%- @pan1="システム設定" -%><%- @pan2='携帯機種管理' -%><%- @pan3="対応キャリア一覧" -%>
+
+<% content_for(:header_title) do %>
+	対応キャリア一覧
+<% end %>
+
+<h3>対応キャリア一覧</h3>
+
+<% if @jpmobile_carriers.size.zero? %>
+	対応キャリアがありません。
+<% else %>
+	
+	<table class="lineColorL" style="width:609px;">
+		<% for jpmobile_carrier in @jpmobile_carriers %>
+		<tr>
+			<th width="20%"><%=h jpmobile_carrier.name %></th>
+			<td><%= link_to jpmobile_carrier.jpmobile_devices.count, manage_base_carrier_path(jpmobile_carrier) %></td>
+			<td>
+				<% if jpmobile_carrier.available_flag %>
+					閲覧許可
+				<% else %>
+					<span class="attention">閲覧拒否</span>
+				<% end %>
+			</td>
+		</tr>
+		<% end %>
+	</table>
+	
+<% end %>
+
+<h4>機種情報更新新着情報</h4>
+
+<% if @mobiles_news.size.zero? %>
+	機種情報更新新着情報はありません。
+<% else %>
+	<table class="lineColorT" style="width:609px;">
+	  <tr>
+	    <th style="width:150px;">タイトル</th>
+	    <th style="width:309px;">詳細</th>
+	    <th style="width:150px;">日付</th>
+	  </tr>
+  
+	<% for news in @mobiles_news %>
+	  <tr>
+	    <td><%= news.title %></td>
+	    <td><%= news.description %></td>
+	    <td><%= datetime_to_s(news.date) %></td>
+	  </tr>
+	<% end %>
+	</table>
+<% end %>

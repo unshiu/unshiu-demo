@@ -1,0 +1,4 @@
+page.replace_html 'dia_entry_comments', render(:partial => "comment", :collection => @comments)
+page.replace_html 'dia_entry_comment_message', t('view.flash.notice.dia_entry_comment_create')
+page.visual_effect :highlight, "dia_entry_comment_message"
+page.call "(function() {$('#comment_body').val('');})"

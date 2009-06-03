@@ -1,0 +1,27 @@
+<%- @pan1="#{t('view.noun.mng_user')}設定" -%><%- @pan2="#{t('view.noun.mng_user')}設定" -%><%- @pan3="新規#{t('view.noun.mng_user')}" -%>
+
+<% content_for(:header_title) do %>
+	新規<%= t('view.noun.mng_user') %>
+<% end %>
+
+<h3>新規<%= t('view.noun.mng_user') %></h3>
+
+<p class="dialog">以下の<%= t('view.noun.base_user') %>を<%= t('view.noun.mng_user') %>に設定します。よろしいですか？</p>
+
+<% form_tag :action => 'create', :id => @base_user.id do %>
+    <%= hidden_field 'base_user', 'joined_at' %>
+    <%= hidden_field 'base_user', 'login' %>
+    <%= hidden_field 'base_user', 'password' %>
+	<%= hidden_field 'base_user', 'email' %>
+	<%= hidden_field 'base_user', 'name' %>
+	<%= hidden_field 'base_user', 'footmark_flag' %>
+	<%= hidden_field 'base_user', 'receive_mail_magazine_flag' %>
+	<%= hidden_field 'base_user', 'receive_system_mail_flag' %>
+	
+	<div class="bot_btn">
+		<%= submit_tag "設定", :class => 'button' %>
+  		<%= mng_cancel_tag %>
+    </div>
+<% end %>
+
+<%= render :partial => 'manage/base_user/show' %>

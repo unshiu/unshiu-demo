@@ -1,0 +1,70 @@
+<% content_for(:header_title) do %>
+	<%= @user.show_name %>の<%= t('view.noun.base_friend') %>一覧
+<% end %>
+
+<div class="clearfix">
+	<div id="contents_title" class="span-12">
+		<h2><span><%= t('view.noun.base_friend') %>一覧</span></h2>
+	</div>
+</div>
+
+<div id="tpc_rows_header" class="clearfix">
+
+	<div class="pager_box pager_box_top clear clearfix">
+		<%= paginate @friends %>
+	</div><!--pager_box-->
+</div><!--/message_rows_header-->
+
+
+<div class="top_topic_box box_outer">
+<div class="wrap1">
+<div class="wrap2">
+<div class="wrap3">
+<div class="box_inner">
+
+	<% if @friends.size.zero? %>
+		<%= t('view.noun.base_friend') %>がいません。
+
+	<% else %>
+		<% @friends.each do |friend| %>
+			<div class="diary_story_box box_outer clearfix community_topic_list">
+				<div class="community_topic_author">
+					<%= safe_profile_view(friend.base_profile, :large, { :width => "70", :height => "70", :class => "left", :alt => friend.show_name }) %>
+				</div>
+				<div class="community_topic_text">
+					<h6><span><%= link_to_user friend %></span></h6>
+					<div class="diary_text box_outer small">
+						<p>
+							<%= body_summary(friend.base_profile.try(:introduction), :length => 80) %>
+						</p>
+					</div>
+					<div class="span-8 small">
+						<span class="permanent_link">
+							<%= link_to "詳細を見る", :controller => 'base_profile', :action=> 'show', :id => friend.id %>｜
+						</span>
+						<span class="permanent_link">最終ログイン　<%= login_status(friend.latest_login) %></span>
+					</div>
+
+				<span class="editdelete span-6 small">
+					<span class="ui-icon ui-icon-pencil" style="float:left;"></span>
+					<%= link_to "メッセージを送る", :controller => :msg_message, :action => :new, :receivers => [friend.id]%>｜
+					<span class="ui-icon ui-icon-trash" style="float:left;"></span>
+					<%= link_to "#{t('view.noun.base_friend')}から外す", :action => 'delete_confirm', :id => friend.id %>
+				</span>
+				</div>
+			<!--/contents_time-->
+			</div>
+		<% end %>
+
+	<% end %>
+
+	</div>
+
+</div>
+</div><!--/wrap3-->
+</div><!--/wrap2-->
+</div><!--/wrap1-->
+
+<div class="pager_box  pager_box_bottom prepend-top clearfix">
+	<%= paginate @friends %>
+</div><!--pager_box-->

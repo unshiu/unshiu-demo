@@ -1,0 +1,18 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_friend') %>申請者一覧
+<% end %>
+
+<% if @applied_list.size.zero? %>
+	申請している<%= t('view.noun.base_friend') %>はいません。
+
+<% else %>
+	<%= paginate_header(@applied_list) %>
+
+	<% @applied_list.each do |applied| %>
+		<% list_cell_for do %>
+			<%= link_basic_to applied.base_user.show_name, :action => 'permit_or_deny', :id => applied.id %><br />
+		<% end %>
+	<% end %>
+
+	<%= paginate_links(@applied_list) %>
+<% end %>

@@ -1,0 +1,11 @@
+<%content_for(:header_title) do %><%= t('view.noun.abm_album') %>編集<%end %>
+<div>
+    <% form_tag :action => 'update', :id => params[:id] do %>
+	　　<%= render :partial => 'confirm' %>
+	  <div style="text-align:center">
+	  	<%= submit_tag "編集" %>
+	  	<%= cancel_tag %>
+	  </div>
+	<%end %>
+</div>
+<%= image_tag_for_default 'Spec_08.gif' %><br />

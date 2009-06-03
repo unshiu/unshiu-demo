@@ -1,0 +1,7 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.abm_album') %><%= t('view.noun.abm_image') %>編集
+<% end %>
+<%= t('view.noun.abm_image') %>「<%= @image.title %>」を変更しました。<br />
+<br />
+<%= link_basic_to "変更した#{t('view.noun.abm_image')}を表示する", :action => 'show', :id => @image.id %><br />
+<hr style="<%= style_value('hr1') %>">

@@ -1,0 +1,12 @@
+common: &common
+  message_list_size: 10
+  message_list_size_mobile: 5
+  
+development:
+  <<: *common
+  
+test:
+  <<: *common
+
+production:
+  <<: *common

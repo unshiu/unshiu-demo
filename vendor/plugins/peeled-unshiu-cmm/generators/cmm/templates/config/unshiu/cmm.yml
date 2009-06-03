@@ -1,0 +1,34 @@
+common: &common
+  # コミュニティ一覧に出す最大数
+  community_list_size: 5
+  portal_community_list_size: 3
+  portal_member_list_size: 8
+  
+  # コミュニティを作ったときにデフォルトで参加承認が必要かどうか
+  # 数値の意味は cmm_community.rb を参照のこと
+  default_join_type: 0
+
+  # コミュニティ作成時の、デフォルトの topic_create_level
+  default_topic_create_level: 10
+
+  # メンバー一覧ページの最大数
+  member_list_size: 5
+  
+  # ポータルに表示する場合などのアルバムのキャッシュ時間(sec)
+  cmm_community_cache_time: 600
+  
+  image_allow_format: ["gif", "png", "jpg"]
+  
+development:
+  # 1ファイルあたりの最大容量
+  file_size_max_image_size: 5M
+  <<: *common
+  
+test:
+  file_size_max_image_size: 10K
+  <<: *common
+
+production:
+  file_size_max_image_size: 5M
+  <<: *common
+

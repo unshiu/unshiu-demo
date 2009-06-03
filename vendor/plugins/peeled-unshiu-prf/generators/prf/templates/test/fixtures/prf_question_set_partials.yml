@@ -1,0 +1,70 @@
+# == Schema Information
+#
+# Table name: prf_question_set_partials
+#
+#  id                  :integer(4)      not null, primary key
+#  prf_question_set_id :integer(4)      not null
+#  prf_question_id     :integer(4)      not null
+#  order_num           :integer(4)
+#  required_flag       :boolean(1)
+#  created_at          :datetime
+#  updated_at          :datetime
+#  deleted_at          :datetime
+#
+
+a:
+  id: 1
+  prf_question_set_id: 1
+  prf_question_id: 1
+  order_num: 1
+  required_flag: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+b:
+  id: 2
+  prf_question_set_id: 1
+  prf_question_id: 2
+  order_num: 2
+  required_flag: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+c:
+  id: 3
+  prf_question_set_id: 1
+  prf_question_id: 3
+  order_num: 3
+  required_flag: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+d:
+  id: 4
+  prf_question_set_id: 1
+  prf_question_id: 4
+  order_num: 4
+  required_flag: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>  
+e:
+  id: 5
+  prf_question_set_id: 1
+  prf_question_id: 5
+  order_num: 5
+  required_flag: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>  
+f:
+  id: 6
+  prf_question_set_id: 1
+  prf_question_id: 6
+  order_num: 6
+  required_flag: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>  
+g:
+  id: 7
+  prf_question_set_id: 1
+  prf_question_id: 12
+  order_num: 7
+  required_flag: 0
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>

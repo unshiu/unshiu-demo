@@ -1,0 +1,38 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.abm_album') -%><%- @pan3="#{t('view.noun.abm_image')}一覧" -%>
+<% content_for(:header_title) do %>
+<%= t('view.noun.abm_image') %>一覧
+<% end %>
+
+<h3><%= t('view.noun.abm_image') %>一覧</h3>
+
+<% if @images.size != 0 %>
+<%= paginate_header(@images) %>
+<table class="lineColorT" style="width:609px;">
+  <tr>
+    <th style="width:150px;"><%= t('activerecord.attributes.abm_image.updated_at') %></th>
+    <th style="width:150px;"><%= t('activerecord.attributes.abm_album.base_user') %></th>
+    <th style="width:309px;"><%= t('activerecord.attributes.abm_image.image') %></th>
+  </tr>
+<% for image in @images %>
+<tr>
+	<td>
+		<%= datetime_to_s(image.updated_at) %>
+	</td>
+	<td>
+		<% if image.abm_album %>
+			<%= link_to_user image.abm_album.base_user %>
+		<% else %>
+			<%= t('view.noun.abm_album') %>なし
+		<% end %>
+	</td>
+	<td>
+		<%= link_to "#{image.title}(#{image.abm_image_comments.count})", :action => 'show', :id => image.id %><br />
+		<%= link_to safety_image_tag(url_for_image_column(image, :image, :thumb)), :controller => 'manage/abm_image', :action => 'show', :id => image.id %>
+	</td>
+</tr>
+<% end %>
+</table>
+<%= paginate_links(@images) %>
+<% else %>
+<%= t('view.noun.abm_image') %>がありません。
+<% end %>

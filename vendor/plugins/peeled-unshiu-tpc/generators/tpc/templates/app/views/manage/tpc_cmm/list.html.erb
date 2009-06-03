@@ -1,0 +1,31 @@
+<%- @pan1="SNS設定" -%><%- @pan2="#{t('view.noun.cmm_community')}" -%><%- @pan3=@community.name -%>
+
+<% content_for(:header_title) do %>
+<%= @community.name %>の<%= t('view.noun.tpc_topic') %>一覧
+<% end %>
+
+<h3><%= @community.name %>の<%= t('view.noun.tpc_topic') %>一覧</h3>
+
+<% if @topics.size > 0 %>
+	<%= paginate_header @topics %>
+	<table class="lineColorT" style="width:609px;">
+		<tr>
+			<th><%= t('activerecord.attributes.tpc_topic.created_at') %></th>
+			<th><%= t('activerecord.attributes.tpc_topic.last_commented_at') %></th>
+			<th><%= t('activerecord.attributes.tpc_topic.title') %></th>
+			<th><%= t('view.noun.tpc_comment') %>数</th>
+		</tr>
+		<% @topics.each do |topic| %>
+			<tr>
+				<td><%= datetime_to_s(topic.created_at) %></td>
+				<td><%= datetime_to_s(topic.tpc_topic.last_commented_at) if topic.tpc_topic.tpc_comments.size > 0%></td>
+				<td><%= link_to topic.tpc_topic.title, :action => 'show', :id => topic.id %></td>
+				<td><%= topic.tpc_topic.tpc_comments.size %></td>
+			</tr>
+		<% end %>
+	</table>
+	
+	<%= paginate_links @topics %>
+<% else %>
+	<%= t('view.noun.cmm_community') %>に<%= t('view.noun.tpc_topic') %>がありませんでした。
+<% end %>

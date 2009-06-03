@@ -1,0 +1,39 @@
+<%- @pan1="#{t('view.noun.base_user')}" -%><%- @pan2="アクティブ利用#{t('view.noun.base_user')}数遷移" -%>
+
+<% content_for(:header_title) do %>
+	<%= @pan2 %>
+<% end %>
+
+<h3>アクティブ利用ユーザ履歴</h3>
+
+<p>
+	<% BaseActiveHistory::BEFORE_DAYS_LIST.each do |days| %>
+		<%= link_to "#{days}日前", :action => :index, :id => days %>
+		<% if BaseActiveHistory::BEFORE_DAYS_LIST.last != days %>&nbsp;|&nbsp;<% end %>
+	<% end %>
+</p>
+
+
+<% if @base_active_histories.size.zero? %>
+	履歴がありません。
+<% else %>
+	
+	<div><%= @active_history_graph %></div>
+	
+	<%= paginate_header(@base_active_histories) %>
+	
+	<table class="lineColorT" style="width:609px;">
+		<tr>
+			<th>日付</th>
+			<th>アクティブユーザ数</th>
+		</tr>
+	  <% @base_active_histories.each do |base_active_history| %>
+		<tr>
+			<td><%=h base_active_history.history_day %></td>
+		    <td><%=h base_active_history.user_count %></td>
+		</tr>
+	  <% end %>
+	</table>
+	
+	<%= paginate_links(@base_active_histories) %>
+<% end %>

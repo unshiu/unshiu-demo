@@ -1,0 +1,17 @@
+<%- @pan1="#{t('view.noun.mng_user')}設定" -%><%- @pan2="#{t('view.noun.mng_user')}設定" -%><%- @pan3="#{t('view.noun.mng_user')}解除" -%>
+<% content_for(:header_title) do %>
+	<%= t('view.noun.mng_user') %>解除
+<% end %>
+
+<h3><%= t('view.noun.mng_user') %>解除</h3>
+
+<p class="dialog">以下の<%= t('view.noun.base_user') %>の管理者権限を解除します。よろしいですか？</p>
+
+<% form_tag :action => 'delete', :id => @base_user.id do %>
+	<div class="bot_btn">
+		<%= submit_tag "解除", :class => 'button' %>
+		<%= mng_cancel_tag %>
+	</div>
+<% end %>
+
+<%= render :partial => 'manage/base_user/show' %>

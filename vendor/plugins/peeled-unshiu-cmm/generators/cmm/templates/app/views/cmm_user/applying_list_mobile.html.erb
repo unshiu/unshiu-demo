@@ -1,0 +1,21 @@
+<% content_for(:header_title) do %>
+	申請中<%= t('view.noun.cmm_community') %>一覧
+<% end %>
+
+<% if @communities.size.zero? %>
+	申請中<%= t('view.noun.cmm_community') %>はありません。
+
+<% else %>
+	<%= paginate_header @communities %>
+
+	<% @communities.each do |c| %>
+		<% next unless c.cmm_community %>
+		<% list_cell_for do %>
+			<%= link_to_list_cell "#{c.cmm_community.name}(#{c.cmm_community.joined_users.size})", 
+			                      :controller => :cmm, :action => 'show', :id => c.cmm_community.id %>
+		<% end %>
+	<% end %>
+
+	<%= paginate_links @communities %>
+	
+<% end %>

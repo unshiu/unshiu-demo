@@ -1,0 +1,30 @@
+<table class="lineColorL" style="width:609px;">
+	<tr>
+		<th width="20%"><%= t('activerecord.attributes.abm_album.base_user') %></th>
+		<td><%= link_to_user @album.base_user %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.abm_album.updated_at') %></th>
+		<td><%= datetime_to_s(@album.updated_at) %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.abm_album.public_level') %></th>
+		<td><%= AbmAlbum.public_level_name(@album.public_level) %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.abm_album.title') %></th>
+		<td><%= h @album.title %></td>
+	</tr>
+	<tr>
+		<th><%= t('activerecord.attributes.abm_album.body') %></th>
+		<td><%= hbr @album.body %></td>
+	</tr>
+	<tr>
+		<th><%= t('view.noun.abm_image') %></th>
+		<td>
+			<% for image in @album.abm_images %>
+				<%= link_to safety_image_tag(url_for_image_column(image, :image, :thumb)), :controller => 'manage/abm_image', :action => 'show', :id => image.id %>
+			<% end %>
+		</td>
+	</tr>
+</table>

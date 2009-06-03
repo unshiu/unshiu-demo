@@ -1,0 +1,13 @@
+<%- @pan1=t('view.noun.pnt_point') -%><%- @pan2=t('view.noun.pnt_import') -%>
+<% content_for(:header_title) do %>
+	<%= t('view.noun.pnt_import') %>
+<% end %>
+
+<h3><%= t('view.noun.pnt_import') %></h3>
+
+<% form_tag({:action => 'upload'}, {:multipart => true}) do %>
+  <%= error_messages_for 'pnt_import_form' %>
+
+  <%= file_field_tag 'file' %>
+  <%= submit_tag '一括登録' %>
+<% end %>

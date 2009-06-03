@@ -1,0 +1,15 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.dia_entry') %>メール投稿
+<% end %>
+
+<div style="text-align:left;">
+以下のリンクよりメール送信画面を開いて指定のアドレスにメールを送信してください。
+メールのタイトルが<%= t('view.noun.dia_entry') %>の<%= t('activerecord.attributes.dia_entry.title') %>に、メールの本文が、<%= t('view.noun.dia_entry') %>の<%= t('activerecord.attributes.dia_entry.body') %>になります。
+メールに画像が添付されていた場合には<%= t('view.noun.abm_image') %>付きの<%= t('view.noun.dia_entry') %>が作成され、
+<%= t('view.noun.abm_image') %>は専用の<%= t('view.noun.abm_album') %>に保存されます。
+</div>
+
+<div style="text-align:center;">
+<span style="color:#024873;"></span><%= mail_to @mail_address, "メールから#{t('view.noun.dia_entry')}を投稿" %>
+</div>
+<%= image_tag_for_default 'Spec_08.gif' %><br />

@@ -1,0 +1,73 @@
+a:
+  id: 1
+  jpmobile_carrier_id: 1
+  model: SH903i
+  device: SH903i
+  name: SH903i
+  gps: true
+  jpg: true
+  gif: true
+  png: true
+  flash: true
+  flash_version: "Flash Lite 1.0"
+  ssl: true
+  color: true
+  colors: 5000
+  chord: 32
+  ringer_melody_song: true
+  ringer_melody_song_full: true
+  ringer_melody_movie: true
+  qr: true
+  bluetooth: true
+  available_flag: true
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+b:
+  id: 2
+  jpmobile_carrier_id: 2
+  model: W21SA
+  device: SA31
+  name: W21SA
+  gps: true
+  jpg: true
+  gif: true
+  png: true
+  flash: true
+  flash_version: "Flash Lite 1.0"
+  ssl: true
+  color: true
+  colors: 5000
+  chord: 32
+  ringer_melody_song: true
+  ringer_melody_song_full: true
+  ringer_melody_movie: true
+  qr: true
+  bluetooth: true
+  available_flag: true
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+c:
+  id: 3
+  jpmobile_carrier_id: 3
+  model: 910T
+  device: 910T
+  name: 910T
+  gps: true
+  jpg: true
+  gif: true
+  png: true
+  flash: true
+  flash_version: "Flash Lite 1.0"
+  ssl: true
+  color: true
+  colors: 5000
+  chord: 32
+  ringer_melody_song: true
+  ringer_melody_song_full: true
+  ringer_melody_movie: true
+  qr: true
+  bluetooth: true
+  available_flag: true
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  

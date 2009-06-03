@@ -1,0 +1,25 @@
+<div class="clearfix">
+	<div id="contents_title" class="span-12">
+		<h2><span><%= AppResources[:init][:service_name]%>について</span></h2>
+	</div>
+</div>
+
+<ul>
+	<li><%= link_to "#{AppResources[:init][:service_name]}とは？", :controller=>:base_guides, :action=>:base_01 %></li>
+	<li><%= link_to "会員登録方法", :controller=>:base_guides, :action=>:base_02 %></li>
+	<li><%= link_to "#{t('view.noun.mail_magazine')}について", :controller=>:base_guides, :action=>:base_03 %></li>
+	<li><%= link_to "退会について", :controller=>:base_guides, :action=>:base_04 %></li>
+</ul>
+<%= t('view.noun.my_portal') %><br />
+<ul>
+	<li><%= link_to t('view.noun.msg_message'),   :controller=>:base_guides, :action=>:myportal_01 %></li>
+	<li><%= link_to t('view.noun.dia_entry'),     :controller=>:base_guides, :action=>:myportal_02 %></li>
+	<li><%= link_to t('view.noun.base_footmark'), :controller=>:base_guides, :action=>:myportal_03 %></li>
+	<li><%= link_to t('view.noun.abm_album'),     :controller=>:base_guides, :action=>:myportal_04 %></li>
+	<li><%= link_to t('view.noun.base_profile'),  :controller=>:base_guides, :action=>:myportal_05 %></li>
+	<li><%= link_to t('view.noun.prf_profile'),   :controller=>:base_guides, :action=>:myportal_06 %></li>
+	<li><%= link_to t('view.noun.cmm_community'), :controller=>:base_guides, :action=>:myportal_07 %></li>
+	<li><%= link_to t('view.noun.base_friend'),   :controller=>:base_guides, :action=>:myportal_08 %></li>
+	<li><%= link_to t('view.noun.base_favorite'), :controller=>:base_guides, :action=>:myportal_09 %></li>
+	<li><%= link_to t('view.noun.pnt_point'),     :controller=>:base_guides, :action=>:myportal_10 %></li>
+</ul>

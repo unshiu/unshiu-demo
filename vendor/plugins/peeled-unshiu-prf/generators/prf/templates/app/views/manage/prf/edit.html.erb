@@ -1,0 +1,47 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.prf_profile') -%>
+<%- @pan3="#{t('view.noun.prf_profile')}#{t('view.noun.prf_question')}編集" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.prf_profile') %><%= t('view.noun.prf_question') %>編集
+<% end %>
+
+<h3><%= t('view.noun.prf_profile') %><%= t('view.noun.prf_question') %>編集</h3>
+
+<%= error_messages_for 'question', :object_name => 'prf_question' %>
+
+<% form_tag :action => "edit_confirm", :id => @question.id do %>
+	<%= hidden_field 'question', 'active_flag' %>
+	<%= hidden_field 'question', 'prf_profile_id' %>
+	
+	<table border="0" cellpadding="3" cellspacing="1" class="lineColorLW" style="width:609px;">
+	<tbody>
+	  <tr>
+	    <th style="width:120px;"><%= t('activerecord.attributes.prf_question.body') %></th>
+	    <td>
+			<%= text_field 'question', 'body' %>
+		</td>
+	  </tr>
+	  <tr>
+	    <th style="width:120px;"><%= t('activerecord.attributes.prf_question.question_type') %></th>
+	    <td>
+			<ul>
+				<li><%= radio_button 'question', 'question_type', PrfQuestion::QUESTION_TYPE_RADIO %>
+					<%= t('activerecord.constant.type.radio') %></li>
+				<li><%= radio_button 'question', 'question_type', PrfQuestion::QUESTION_TYPE_SELECT %>
+					<%= t('activerecord.constant.type.select') %></li>
+				<li><%= radio_button 'question', 'question_type', PrfQuestion::QUESTION_TYPE_CHECKBOX %>
+					<%= t('activerecord.constant.type.checkbox') %></li>
+				<li><%= radio_button 'question', 'question_type', PrfQuestion::QUESTION_TYPE_TEXT %>
+					<%= t('activerecord.constant.type.text') %></li>
+				<li><%= radio_button 'question', 'question_type', PrfQuestion::QUESTION_TYPE_TEXTAREA %>
+					<%= t('activerecord.constant.type.textarea') %></li>
+			</ul>
+		</td>
+	  </tr>
+	</tbody>
+	</table>
+
+	<div class="bot_btn">
+		<%= mng_submit_tag '確認' %>
+	</div>
+<% end %>

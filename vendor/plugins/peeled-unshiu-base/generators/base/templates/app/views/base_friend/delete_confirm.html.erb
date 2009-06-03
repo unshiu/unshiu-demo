@@ -1,0 +1,12 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_friend') %>削除
+<% end %>
+
+<div id="warning">
+	<%= @friend.friend.show_name %>を<%= t('view.noun.base_friend') %>から外しますか？
+</div>
+
+<% form_tag :action => 'delete', :id => @friend.id do %>
+	<%= submit_button_tag '外す' %>
+	<%= cancel_button_tag %>
+<% end %>

@@ -1,0 +1,8 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.cmm_community') %>
+<% end %>
+<% content_for(:sub_title) do %>
+削除完了
+<% end %>
+
+<span style="color:#f75100;"></span><%= link_basic_to "所属#{t('view.noun.cmm_community')}一覧に戻る", {:controller => 'cmm_user', :action => 'list'}, {:accesskey => '5'}%>

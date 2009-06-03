@@ -1,0 +1,30 @@
+<%- @pan1="システム設定" -%><%- @pan2='携帯機種管理' -%><%- @pan3="検索結果" -%>
+
+<% content_for(:header_title) do %>
+	検索結果
+<% end %>
+
+<h3>「<%= params[:keyword] %>」の検索結果</h3>
+
+<% if @jpmobile_devices.size.zero? %>
+	対象機種はありません。
+<% else %>
+	<%= paginate_header(@jpmobile_devices) %>
+	<table class="lineColorT" style="width:609px;">
+	  <tr>
+		<th style="width:100px;">キャリア</th>
+		<th style="width:100px;">機種名</th>
+	    <th style="width:150px;">更新日</th>
+	  </tr>
+  
+	<% for jpmobile_device in @jpmobile_devices %>
+	  <tr>
+	    <td><%= jpmobile_device.jpmobile_carrier.name %></td>
+		<td><%= link_to jpmobile_device.name, manage_base_device_path(jpmobile_device) %></td>
+	    <td><%= datetime_to_s(jpmobile_device.updated_at) %></td>
+	  </tr>
+	<% end %>
+	</table>
+	<%= paginate_links(@jpmobile_devices) %>
+<% end %>
+

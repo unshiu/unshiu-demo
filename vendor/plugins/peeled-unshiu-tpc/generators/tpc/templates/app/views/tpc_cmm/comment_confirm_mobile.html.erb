@@ -1,0 +1,21 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.cmm_community') %>
+<% end %>
+<% content_for(:sub_title) do %>
+<%= t('view.noun.tpc_comment') %>投稿
+<% end %>
+
+<% form_tag :action => 'comment_complete', :id => @topic.id do %>
+<div style="<%= style_value('form_style') %>">
+	<%= hidden_field 'comment', 'tpc_topic_id' %>
+	<%= hidden_field 'comment', 'body' %>
+	<div>
+		<span style="color:#f75009;"></span><%= t('activerecord.attributes.tpc_comment.body') %><br />
+		<%= hbr @comment.body %>
+	</div>
+</div>
+	<div style="text-align:center">
+		<%= submit_tag '投稿' %>
+		<%= cancel_tag %>
+	</div>
+<% end %>

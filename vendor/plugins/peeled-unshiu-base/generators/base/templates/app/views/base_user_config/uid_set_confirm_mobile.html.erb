@@ -1,0 +1,12 @@
+<% content_for(:header_title) do %>
+かんたんログイン設定
+<% end %>
+
+携帯電話固有の情報を利用しかんたんログイン設定を行う、
+次回から「かんたんログイン」ボタンを押すだけでログインが可能になります。<br/>
+<br/>
+<div style="text-align:center">
+<% form_tag({:action => 'uid_set'}, {:utn => 'utn'}) do %>
+<%= submit_tag '設定する' %>
+<% end %>
+</div>

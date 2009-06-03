@@ -1,0 +1,27 @@
+<%- @pan1="システム設定" -%><%- @pan2="設定情報" -%><%- @pan3="データベース設定" -%>
+
+<% content_for(:header_title) do %>
+	データベース設定
+<% end %>
+
+<h3>データベース設定</h3>
+
+<table class="lineColorL" style="width:609px;">
+	<tr>
+		<th width="30%">DB</th>
+		<td><%=h @db_adapter %></td>
+	</tr>
+	<tr>
+		<th width="30%">クエリログファイル</th>
+		<td><%=h @system.mysql_slow_query_log_file %></td>
+	</tr>
+	<tr>
+		<th width="30%">最低ログ出力時間（指定の値より長くかかったSQLをログ出力対象とします。）</th>
+		<td><%=h @system.mysql_slow_query_long_query_time %></td>
+	</tr>
+	<tr>
+		<th width="30%">インデックスを用いなかったログを出力対象に加えるか？</th>
+		<td><%=h @system.mysql_slow_query_not_using_indexes? %></td>
+	</tr>
+</table>
+

@@ -1,0 +1,20 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_favorite') %>一覧
+<% end %>
+
+<% if @favorites.size.zero? %>
+	<%= t('view.noun.base_favorite') %><%= t('view.noun.base_user') %>はいません。
+
+<% else %>
+	<%= paginate_header(@favorites) %>
+
+	<% @favorites.each do |favorite| %>
+		<% list_cell_for do %>
+			<%= link_to_user_without_emoticon favorite %>
+			<%= link_basic_to '[削除]', :action => 'delete_confirm', :id => favorite.id %>
+		<% end %>
+	<% end %>
+
+	<%= paginate_links(@favorites) %>
+
+<% end %>

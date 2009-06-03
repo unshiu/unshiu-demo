@@ -1,0 +1,12 @@
+<%content_for(:header_title) do %><%= t('view.noun.abm_album') %><%= t('view.noun.abm_image') %>削除<%end %>
+<div>
+    以下の<%= t('view.noun.abm_image') %>を 削除します。よろしいですか？<br/>
+    <%= render :partial => 'show_image' %>
+    
+    <% form_tag :action => :delete, :id => @image.id do %>
+	<div style="text-align:center">
+        <%= submit_tag "削除" %>
+        <%= cancel_tag %>
+	</div>
+    <% end %>
+</div>

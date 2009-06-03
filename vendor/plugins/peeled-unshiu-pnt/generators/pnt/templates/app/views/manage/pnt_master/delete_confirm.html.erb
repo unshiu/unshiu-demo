@@ -1,0 +1,20 @@
+<%- @pan1="#{t('view.noun.pnt_point')}" -%><%- @pan2="マスタ管理" -%><%- @pan3="#{t('view.noun.pnt_master')}削除" -%>
+<% content_for(:header_title) do %>
+<%= t('view.noun.pnt_master') %>削除
+<% end %>
+<h3><%= t('view.noun.pnt_master') %>削除</h3>
+
+<p class="dialog">
+	<%= t('view.noun.pnt_master') %>を削除した場合、配布した<%= t('view.noun.pnt_point') %>はすべて無効になり、履歴の閲覧もできなくなります。
+</p>
+
+<% form_tag :action => 'delete' do %>
+	<%= hidden_field 'pnt_master', 'id' %>
+	<div class="bot_btn">
+    	<%= mng_submit_tag "削除" %>
+    	<%= mng_cancel_tag %>
+	</div>
+<% end %>
+
+<%= render :partial => 'show' %>
+

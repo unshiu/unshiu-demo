@@ -1,0 +1,33 @@
+<%content_for(:header_title) do %><%= t('view.noun.abm_album') %><%= t('view.noun.abm_image') %>編集<%end %>
+<div>
+    <% form_tag :action => :update, :id => @image.id do %>
+<div style="<%= style_value('form_style') %>">
+	<%= error_messages_for 'image', :object_name => 'abm_image' %>
+
+    <div>
+		<span style="color:#f75009;"></span><%= t('activerecord.attributes.abm_image.title') %><br />
+		<%= h @image.title %>
+		<%= hidden_field "image", "title" %>
+    </div>
+    <div>
+    	<span style="color:#f75009;"></span><%= t('activerecord.attributes.abm_image.body') %><br />
+		<%= hbr @image.body %>
+        <%= hidden_field "image", "body" %>
+    </div>
+	
+	<div style="text-align:center">
+		<%= image_tag_for_default 'Spec_04.gif' %><br />
+		<%= image_tag url_for_image_column(@image, 'image', :large) %><br />
+		<%= image_tag_for_default 'Spec_02.gif' %><br />
+	</div>
+	<%= image_tag_for_default 'Spec_02.gif' %><br />
+</div>
+<%= image_tag_for_default 'Spec_02.gif' %><br />
+
+	<div style="text-align:center">
+        <%= submit_tag "編集" %>
+        <%= cancel_tag %>
+	</div>
+    <% end %>
+</div>
+<%= image_tag_for_default 'Spec_08.gif' %><br />

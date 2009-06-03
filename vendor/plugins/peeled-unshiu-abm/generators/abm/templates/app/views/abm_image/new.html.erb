@@ -1,0 +1,36 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.abm_album') %>
+<% end %>
+<% content_for(:sub_title) do %>
+	アップロード
+<% end %>
+
+
+<% form_for :upload_file, :url => {:action => :upload }, :method => :post, :html => { :multipart => true } do |f| %>
+	<%= hidden_field_tag 'abm_album_id', @abm_album_id %>
+	<fieldset>
+		
+		<label for="photo_file"><%= t('view.noun.abm_image') %></label>
+		<%= f.file_field :image %>
+		<%= error_message_on_with_label @image, 'image' %>
+		
+	</fieldset>
+	<div class="buttons">
+		<%= f.submit 'アップロード', :class => 'button upload' %>
+	</div>
+<% end %>
+
+<% content_for(:sidemenu) do %>
+	<div  class="W5R4B9df box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+			<div class="box_inner clearfix">
+			<h6><span>menu</span></h6>
+				<%= link_to "#{t('view.noun.abm_album')}へ戻る", :controller => :abm_album, :action => :show, :id => @abm_album_id %>
+			</div><!--/box_inner-->
+		</div><!--/wrap3 -->
+		</div><!--/wrap2 -->
+		</div><!--/wrap1 -->
+	</div><!--/friend_box-->
+<% end %>

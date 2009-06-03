@@ -1,0 +1,6 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.base_friend') %>申請拒否
+<% end %>
+<%= @user.show_name %>の<%= t('view.noun.base_friend') %>申請を拒否しました。<br />
+<br />
+<%= link_basic_to @user.show_name + "の#{t('view.noun.base_profile')}に戻る", :controller => 'base_profile', :action => 'show', :id => @user.id %>

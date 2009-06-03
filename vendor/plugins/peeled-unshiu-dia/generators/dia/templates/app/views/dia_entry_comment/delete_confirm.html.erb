@@ -1,0 +1,20 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.dia_entry_comment') %>削除
+<% end %>
+<% content_for(:sub_title) do %>
+	<%=h @entry.dia_diary.base_user.show_name %>の<%= t('view.noun.dia_diary') %>
+<% end %>
+
+<div class="warning">
+	以下の<%= t('view.noun.dia_entry_comment') %>を削除していいですか？
+</div>
+
+<%= h @comment.base_user.show_name %><br/>
+<%= hbr @comment.body %>
+
+<% form_tag :action => 'delete', :id => @comment.id do %>
+	
+	<%= submit_button_tag("削除") %>
+	<%= cancel_button_tag %>
+	
+<% end %>

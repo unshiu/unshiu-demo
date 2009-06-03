@@ -1,0 +1,41 @@
+<%- @pan1="メール" -%>
+<%- @pan2="#{t('view.noun.mlg_magazine')}配信履歴" -%>
+
+<% content_for(:header_title) do %>
+<%= t('view.noun.mlg_magazine') %>配信履歴
+<% end %>
+
+<h3><%= t('view.noun.mlg_magazine') %>配信履歴</h3>
+
+<%= paginate_header(@mlg_magazines) %>
+
+<table class="lineColorT" style="width:609px;">
+<tr>
+	<th width="200px"><%= t('activerecord.attributes.mlg_magazine.title') %></th>
+	<th width="120px"><%= t('activerecord.attributes.mlg_magazine.send_at') %></th>
+	<th width="120px"><%= t('activerecord.attributes.mlg_magazine.sended_at') %></th>
+	<th width="119px">配信数</th>
+</tr>
+<% for mlg_magazine in @mlg_magazines %>
+<tr>
+	<td><%= link_to truncate(mlg_magazine.title,10), :action => :show, :id => mlg_magazine.id %></td>
+	<td>
+		<% if mlg_magazine.send_setup? %>
+			<%= datetime_to_s(mlg_magazine.send_at) %>
+		<% else %>
+			<%= link_to '配信設定をする', :controller => :mlg_delivery, :action => :setup, :id => mlg_magazine.id %>
+		<% end %>	
+	</td>
+	<td><%= datetime_to_s(mlg_magazine.sended_at) %></td>
+	<td style="text-align:center;">
+		<% if mlg_magazine.send_setup? %>
+			<%= mlg_magazine.send_count %>
+		<% else %>
+			-
+		<% end %>
+	</td>
+</tr>
+<% end %>
+</table>
+
+<%= paginate_links(@mlg_magazines) %>

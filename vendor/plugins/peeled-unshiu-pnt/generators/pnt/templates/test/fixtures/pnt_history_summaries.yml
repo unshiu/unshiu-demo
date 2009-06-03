@@ -1,0 +1,52 @@
+# == Schema Information
+#
+# Table name: pnt_history_summaries
+#
+#  id              :integer(4)      not null, primary key
+#  start_at        :datetime        not null
+#  end_at          :datetime        not null
+#  sum_issue_point :integer(4)      not null
+#  sum_use_point   :integer(4)      not null
+#  record_count    :integer(4)      not null
+#  file_name       :string(256)     default(""), not null
+#  created_at      :datetime
+#  updated_at      :datetime
+#  deleted_at      :datetime
+#  kind_type       :integer(4)      not null
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+a:
+  id: 1
+  kind_type: 3
+  start_at:   <%= 3.month.ago.beginning_of_month.to_s :db %>
+  end_at:     <%= (3.month.ago.next_month.beginning_of_month - 1).to_s :db %>
+  sum_issue_point: 987000
+  sum_use_point:   22110
+  record_count:    1210
+  file_name: 'test_a'
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+b:
+  id: 2
+  kind_type: 3
+  start_at:   <%= Time.now.last_month.to_s :db %>
+  end_at:     <%= (Time.now.beginning_of_month - 1).to_s :db %>
+  sum_issue_point: 876120
+  sum_use_point:   60212
+  record_count:    3875
+  file_name: 'test_b'
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+c:
+  id: 3
+  kind_type: 4
+  start_at:   <%= Time.now.beginning_of_month.to_s :db %>
+  end_at:     <%= (Time.now.next_month.next_month.next_month.next_month.next_month.beginning_of_month - 1).to_s :db %>
+  sum_issue_point: 98765120
+  sum_use_point:   122870
+  record_count:    20987
+  file_name: 'test_c'
+  created_at: <%= Time.now.to_s :db %>
+  updated_at: <%= Time.now.to_s :db %>
+  

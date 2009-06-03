@@ -1,0 +1,3 @@
+module BaseUserConfigHelper
+  include BaseUserConfigHelperModule
+end

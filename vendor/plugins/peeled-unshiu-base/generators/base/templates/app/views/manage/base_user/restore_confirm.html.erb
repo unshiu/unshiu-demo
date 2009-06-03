@@ -1,0 +1,15 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.base_user') -%><%- @pan3="#{t('view.noun.base_user')}アカウント復活" -%>
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_user') %>アカウント復活確認
+<% end %>
+<h3><%= t('view.noun.base_user') %>アカウント復活確認</h3>
+
+<p class="dialog">次の<%= t('view.noun.base_user') %>のアカウントを復活させます。よろしいですか？</p>
+
+<% form_tag :action => 'restore', :id => @base_user.id do %>
+  <div class="bot_btn">
+    <%= mng_submit_tag '復活' %>
+    <%= mng_cancel_tag %>
+  </div>
+<% end %>
+<%= render :partial => 'show' %>

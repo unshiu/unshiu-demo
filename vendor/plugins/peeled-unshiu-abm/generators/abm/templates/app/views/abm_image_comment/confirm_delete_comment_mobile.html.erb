@@ -1,0 +1,14 @@
+<%content_for(:header_title) do %><%= t('view.noun.abm_album') %><%= t('view.noun.abm_image') %><%= t('view.noun.abm_image_comment') %>削除<%end %>
+<div>
+    以下の<%= t('view.noun.abm_image_comment') %>を削除します。よろしいですか？<br/>
+	<br/>
+    <% form_tag :action => :delete_comment, :id => @comment.id do %>
+		<%= hidden_field_tag 'cancel_to', params[:cancel_to] %>
+        <%= hbr @comment.body %><br/>
+        <br/>
+	<div style="text-align:center">
+        <%= submit_tag "削除" %>
+        <%= cancel_tag %>
+	</div>
+    <% end %>
+</div>

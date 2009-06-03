@@ -1,0 +1,27 @@
+<%- @pan1="SNS設定" -%><%- @pan2=t('view.noun.base_user') -%><%- @pan3="#{t('view.noun.base_user')}詳細" -%>
+
+<% content_for(:header_title) do %>
+<%= @pan3 %>
+<% end %>
+
+<h3><%= @pan3 %></h3>
+
+<ul class="list">
+<% if @base_user.active? %>
+	<li><%= link_to 'ログイン停止にする', :action => 'forbid_confirm', :id => @base_user.id %></li>
+<% elsif @base_user.forbidden? %>
+	<li><%= link_to 'ログイン停止を解除する', :action => 'activate_confirm', :id => @base_user.id %></li>
+<% end %>
+
+<% if @base_user.withdrawal? %>
+	<li><%= link_to 'アカウントを復活する', :action => 'restore_confirm', :id => @base_user.id %></li>
+<% else %>
+	<li><%= link_to "#{t('view.noun.msg_message')}を送る", :controller => 'manage/msg', :action => 'new', :id => @base_user.id %></li>
+	<li><%= link_to '編集する', :action => 'edit', :id => @base_user.id %></li>
+	<li><%= link_to '強制退会させる', :action => 'withdrawal_confirm', :id => @base_user.id %></li>
+<% end %>
+	<li><%= link_to "#{t('view.noun.pnt_point')}履歴を見る", :controller => 'manage/pnt', :action => 'user_history', :id => @base_user.id %></li>
+
+</ul>
+
+<%= render :partial => 'show'%>

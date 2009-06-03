@@ -1,0 +1,6 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.abm_album') %><%= t('view.noun.abm_image') %>削除
+<% end %>
+<%= t('view.noun.abm_album') %>の<%= t('view.noun.abm_image') %>を削除しました。<br />
+<br />
+<%= link_basic_to "#{t('view.noun.abm_album')}に戻る", :controller => 'abm_album', :action => 'show', :id => @album.id %>

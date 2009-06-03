@@ -1,0 +1,3 @@
+page.replace_html 'message_list', render(:partial => "msg_receiver/message", :collection => @messages, :locals => { :msg_controller => 'msg_sender', :msg_action => 'show' })
+page.replace_html 'callback_function_message', "指定されたメッセージをゴミ箱へ移動しました"
+page.visual_effect :highlight, "callback_function_message"

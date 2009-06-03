@@ -1,0 +1,31 @@
+<div class="massage_title">
+	<h4><%= h @message.title %></h4>
+</div>
+
+<div class="message_photo">
+	<% @message.msg_receivers.each do |receiver| %>
+		<% link_to :controller => 'base_profile', :action => 'show', :id => @message.msg_sender.base_user_id do %>
+			<%= safe_profile_view(receiver.base_user.base_profile, :thumb, {"width" => 40, "height" => 40 })%>
+		<% end %>
+	<% end %>
+</div>
+
+<div class="clearfix">
+	<div class="message_from">
+		To：
+		<% @message.msg_receivers.each do |receiver| %>
+			<span class="username"><%= link_to_user(receiver.base_user) %></span>
+			<%= ',' unless @message.msg_receivers.last == receiver %>
+		<% end %>
+	</div>
+	
+	<div class="massage_date">
+		Date：<span class="date"><%= datetime_to_s(@message.created_at)%></span>
+	</div>
+</div>
+
+<div class="message_text">
+	<p>
+	<%= hbr @message.body %>
+	</p>
+</div>

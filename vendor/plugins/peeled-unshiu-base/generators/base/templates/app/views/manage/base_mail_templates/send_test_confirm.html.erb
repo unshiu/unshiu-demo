@@ -1,0 +1,36 @@
+<%- @pan1="管理者設定" -%><%- @pan2=t('view.noun.base_mail_template') -%><%- @pan3="送信テスト" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.base_mail_template') %>送信テスト
+<% end %>
+
+<h3><%= t('view.noun.base_mail_template') %>送信テスト</h3>
+
+<p class="dialog">
+	以下のアドレスにテスト送信します。
+</p>
+
+<% form_for @forms_base_mail_template_send_test_form, :url => send_test_manage_base_mail_template_path do |f| %>
+	<%= f.hidden_field 'mail_address' %>
+	
+	<table border="0" cellpadding="3" cellspacing="1" class="lineColorLW" style="width:609px;">
+	<tbody>
+		<tr>
+			<th style="width:140px;">
+				<label for="base_mail_temlate_send_test_form_mail_address">
+					<%= t('activerecord.attributes.base_mail_template_send_test_form.mail_address') %>
+				</label>
+			</th>
+			<td><%= h @forms_base_mail_template_send_test_form.mail_address %></td>
+		</tr>
+		
+	</tbody>
+	</table>
+	
+	<div class="bot_btn">
+		<%= mng_submit_tag "送信" %>
+		<%= mng_cancel_tag %>
+	</div>
+<% end %>
+<br/>
+<%= render :partial => 'confirm' %>

@@ -1,0 +1,99 @@
+<% content_for(:header_title) do %>
+送信<%= t('view.noun.msg_message') %>
+<% end %>
+
+<% content_for(:sidemenu) do %>
+
+<h2><span>送信箱</span></h2>
+
+<div id="side_contents_col" class="span-4">
+<div id="side_contents_box">
+	<div id="write_message_box" class="box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="clearfix">
+			<h6 class="caps"></h6>
+			<div class="">
+			<ul class="sidemenu">
+				<li><%= link_to '<span class="small">メッセージを書く</span>', { :controller => :msg_message, :action => :new } , {:class => "button"}%></li>
+			</ul>
+
+			</div>
+		</div><!--/box_inner-->
+		</div><!--wrap3-->
+		</div><!--wrap2-->
+		</div><!--wrap1-->
+	</div>
+
+	<div id="" class="W5R4B9df sidemenu_tray  append-bottom">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="box_inner clearfix">
+			<h6 class="caps"></h6>
+			<div class="">
+				<ul class="sidemenu">
+					<%= render :partial => 'msg/message_sidemenu' , :locals => {:current_menu => 'sent'}%>
+				</ul>
+
+			</div>
+		</div><!--/box_inner-->
+		</div><!--wrap3-->
+		</div><!--wrap2-->
+		</div><!--wrap1-->
+	</div>
+</div>
+</div>
+
+<% end %>
+
+<% content_for(:message_menu) do %>
+	<div class="mailbox_back"><%= link_to '一覧に戻る', :controller => 'msg_message', :action => 'index' %></div>
+
+	<ul id="messageboxsubmenu_delete" class="button_bar clearfix small">
+		<li class="first_child">
+			<%= link_to '<span class="trash">ゴミ箱に入れる</span>', :action => 'delete', :id => @message.id %>
+		</li>
+	</ul>
+
+	<div class="pager_box pager_box_top clearfix">
+		<div class="turnover">
+			<% if @prev_message %>
+				<span class="next_page"><%= link_to '前のメッセージ', :action => :show, :id => @prev_message.id %></span>
+			<% else %>
+				<span class="preview_page link_off">前のメッセージ</span>
+			<% end %>
+			<span>|</span>
+			<% if @next_message %>
+				<span class="next_page"><%= link_to '次のメッセージ', :action => :show, :id => @next_message.id %></span>
+			<% else %>
+				<span class="preview_page link_off">次のメッセージ</span>
+			<% end %>
+		</div>
+	</div><!--pager_box-->
+<% end %>
+
+<div id="" class="W5R4B9df  append-bottom">
+	<div class="wrap1">
+	<div class="wrap2">
+	<div class="wrap3">
+	<div class="box_inner clearfix">
+
+	<div id="message_rows_header" class="clearfix">
+		<%= yield :message_menu %>
+	</div><!--/message_rows_header-->
+		
+	<div class="box_inner message_view">
+		<%= render :partial => 'sender_message' %>
+	</div><!--/box_inner-->
+
+	<div id="message_rows_footer">
+		<%= yield :message_menu %>
+	</div><!--/message_rows_footer-->
+
+	</div><!--/box_inner-->
+	</div><!--wrap3-->
+	</div><!--wrap2-->
+	</div><!--wrap1-->
+</div><!--box_outer-->

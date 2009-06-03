@@ -1,0 +1,99 @@
+# == Schema Information
+#
+# Table name: msg_receivers
+#
+#  id             :integer(4)      not null, primary key
+#  msg_message_id :integer(4)      not null
+#  base_user_id   :integer(4)      not null
+#  trash_status   :integer(2)
+#  replied_flag   :boolean(1)      not null
+#  read_flag      :boolean(1)      not null
+#  draft_flag     :boolean(1)
+#  created_at     :datetime
+#  updated_at     :datetime
+#  deleted_at     :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  base_user_id: 2
+  msg_message_id: 1
+  trash_status: 2
+  draft_flag: false
+  read_flag: false
+  replied_flag: false
+two:
+  id: 2
+  base_user_id: 2
+  msg_message_id: 2
+  trash_status: null
+  draft_flag: false
+  read_flag: true
+  replied_flag: true
+three:
+  id: 3
+  base_user_id: 2
+  msg_message_id: 3
+  trash_status: 1
+  draft_flag: false
+four:
+  id: 4
+  base_user_id: 2
+  msg_message_id: 4
+  trash_status: null
+  draft_flag: true
+five:
+  id: 5
+  base_user_id: 1
+  msg_message_id: 5
+  trash_status: 2
+  draft_flag: false
+six:
+  id: 6
+  base_user_id: 1
+  msg_message_id: 6
+  trash_status: null
+  draft_flag: false
+seven:
+  id: 7
+  base_user_id: 1
+  msg_message_id: 7
+  trash_status: 1
+  draft_flag: false
+eight:
+  id: 8
+  base_user_id: 1
+  msg_message_id: 8
+  trash_status: null
+  draft_flag: true
+nine:
+  id: 9
+  base_user_id: 2
+  msg_message_id: 9
+  trash_status: null
+  draft_flag: false
+ten:
+  id: 10
+  base_user_id: 2
+  msg_message_id: 10
+  trash_status: null
+  draft_flag: false
+eleven:
+  id: 11
+  base_user_id: 1
+  msg_message_id: 11
+  trash_status: null
+  draft_flag: false
+twelve:
+  id: 12
+  base_user_id: 14
+  msg_message_id: 12
+  trash_status: null
+  draft_flag: true
+thirteen:
+  id: 13
+  base_user_id: 2
+  msg_message_id: 13
+  trash_status: null
+  draft_flag: true 

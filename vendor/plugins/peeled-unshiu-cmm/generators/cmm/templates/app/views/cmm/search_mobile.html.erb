@@ -1,0 +1,30 @@
+<% content_for(:header_title) do %>
+	<%= t('view.noun.cmm_community') %>検索
+<% end %>
+
+キーワード検索
+<% form_tag :action => 'search' do %>
+	<%= text_field_tag 'keyword', @keyword %>
+	<%= image_tag_for_default 'Spec_04.gif' %><br />
+	<div style="text-align:center">
+		<%= submit_tag '検索' %>
+	</div>
+<% end %>
+
+<%= image_tag_for_default 'Spec_08.gif' %><br />
+
+<% if @communities.size.zero? %>
+	見つかりませんでした。
+
+<% else %>
+	<%= paginate_header @communities %>
+
+	<% @communities.each do |community| %>
+		<% list_cell_for do %>
+			<%= link_to_list_cell "#{community.name}(#{community.joined_users.size})", :controller => :cmm, :action => 'show', :id => community.id %>
+		<% end %>
+	<% end %>
+
+	<%= paginate_links @communities %>
+
+<% end %>

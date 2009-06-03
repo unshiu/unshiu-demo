@@ -1,0 +1,19 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.cmm_community') %>参加申請
+<% end %>
+
+<%= @ccbu.base_user.show_name %>が<%= @ccbu.cmm_community.name %>に参加申請をしています。<br/>
+<br/>
+<%= @ccbu.base_user.show_name %>を
+<%- if @state == CmmCommunitiesBaseUser::STATUS_MEMBER -%>承認
+<%- elsif @state == CmmCommunitiesBaseUser::STATUS_NONE -%>拒否
+<%- elsif @state == CmmCommunitiesBaseUser::STATUS_REJECTED -%>拒否した上で<%= t('view.noun.cmm_community_rejected') %>
+<%- end -%>します。よろしいですか？
+
+<%= image_tag_for_default 'Spec_04.gif' %><br />
+<% form_tag :action=> 'approve_complete', :id => @ccbu.id, :state => @state do %>
+	<div style="text-align:center">
+		<%= submit_tag '決定' %>
+		<%= cancel_tag %>
+	</div>
+<% end %>

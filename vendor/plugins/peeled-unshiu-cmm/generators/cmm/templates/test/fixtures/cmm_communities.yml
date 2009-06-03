@@ -1,0 +1,41 @@
+# == Schema Information
+#
+# Table name: cmm_communities
+#
+#  id                 :integer(4)      not null, primary key
+#  name               :string(255)     default(""), not null
+#  profile            :text
+#  image_file_name    :string(255)
+#  join_type          :integer(4)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  deleted_at         :datetime
+#  topic_create_level :integer(4)
+#  cmm_image_id       :integer(4)
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  name: one
+  profile: 'ぷろふぃーる'
+  join_type: 0
+  topic_create_level: <%= CmmCommunitiesBaseUser::STATUS_ADMIN %>
+two:
+  id: 2
+  name: two
+  profile: 'hello プロフィール'
+  join_type: 0
+  topic_create_level: <%= CmmCommunitiesBaseUser::STATUS_ADMIN %>
+three:
+  id: 3
+  name: three
+  profile: 'hello ぷろふぃーる two'
+  topic_create_level: 10
+  join_type: 1
+four:
+  id: 4
+  name: four
+  profile: 'ぷろふぃーる'
+  join_type: 1
+  topic_create_level: <%= CmmCommunitiesBaseUser::STATUS_ADMIN %>

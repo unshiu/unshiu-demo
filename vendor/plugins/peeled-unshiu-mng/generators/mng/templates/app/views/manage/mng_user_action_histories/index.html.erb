@@ -1,0 +1,30 @@
+<%- @pan1="管理者設定" -%><%- @pan2=t('view.noun.mng_user_action_history') -%><%- @pan3="一覧" -%>
+
+<% content_for(:header_title) do %>
+	<%= t('view.noun.mng_user_action_history') %>一覧
+<% end %>
+
+<h3><%= t('view.noun.mng_user_action_history') %>一覧</h3>
+
+<% if @mng_user_action_histories.size.zero? %>
+	<%= t('view.noun.mng_user_action_history') %>がありません。
+<% else %>
+	<%= paginate_header(@mng_user_action_histories) %>
+	<table class="lineColorT" style="width:609px;">
+	  <tr>
+		<th><%= t('activerecord.attributes.base_user.login') %></th>
+	    <th style="width:120px"><%= t('activerecord.attributes.mng_user_action_history.user_action')%></th>
+		<th style="width:60px" >詳細</th>
+	  </tr>
+  
+	<% for mng_user_action_history in @mng_user_action_histories %>
+	  <tr>
+	    <td><%=h mng_user_action_history.base_user.login %></td>
+	    <td><%=h datetime_to_s(mng_user_action_history.created_at) %></td>
+		<td class="textalignC"><%= link_to "詳細", manage_mng_user_action_history_path(mng_user_action_history) %></td>
+	  </tr>
+	<% end %>
+	</table>
+	<%= paginate_links(@mng_user_action_histories) %>
+<% end %>
+

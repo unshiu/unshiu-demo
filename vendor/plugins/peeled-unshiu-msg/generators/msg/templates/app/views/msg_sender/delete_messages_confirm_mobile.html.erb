@@ -1,0 +1,15 @@
+<% content_for(:header_title) do %>
+送信<%= t('view.noun.msg_message') %>
+<% end %>
+この送信<%= t('view.noun.msg_message') %>をゴミ箱に入れます。よろしいですか？<br />
+
+<% form_tag :action => 'delete_messages' do %>
+  <% for message in @messages %>
+「<%= message.title %>」<%= hidden_field_tag "del[#{message.id}]" %><br />
+  <% end %>
+
+  <div style="text-align:center">
+    <%= submit_tag 'ゴミ箱に入れる' %>
+    <%= cancel_tag %>
+　　</div>
+<% end %>

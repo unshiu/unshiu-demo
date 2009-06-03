@@ -1,0 +1,18 @@
+<table class="lineColorL" style="width:609px;">
+<tbody>
+  <tr>
+    <th style="width:140px;"><%= t('activerecord.attributes.base_ng_word.word') %></th>
+    <td>
+    	<%= @ng_word.word %>
+		<%= hidden_field 'ng_word', 'word' %>
+	</td>
+  </tr>
+  <tr>
+    <th style="width:140px;"><%= t('activerecord.attributes.base_ng_word.active_flag') %></th>
+    <td>
+    	<%= @ng_word.active_str %>
+		<%= hidden_field 'ng_word', 'active_flag' %>
+	</td>
+  </tr>
+</tbody>
+</table>

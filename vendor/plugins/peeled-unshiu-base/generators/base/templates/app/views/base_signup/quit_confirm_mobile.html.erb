@@ -1,0 +1,10 @@
+<% content_for(:header_title) do %>
+退会確認
+<% end %>
+
+<% form_tag :action => 'quit' do %>
+ご登録いただいたユーザー情報や投稿された日記などのデータが削除されてしまいますが、よろしいですか？<br />
+<div style="text-align:center">
+	<%= submit_tag '退会' %>
+</div>
+<% end %>

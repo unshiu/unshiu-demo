@@ -1,0 +1,16 @@
+<% if @comment.not_invisibled_by_anyone? %>
+	<%= link_to_user_without_emoticon @comment.base_user, '#F75200' %>
+	<% if logged_in? && deletable_comment?(@comment) %>
+		<%= link_basic_to '[削除]', :action => 'delete_comment_confirm', :id => @comment.id %>
+	<% end %><br/>
+	<%= hbr @comment.body %>
+<% else %>
+	<% if @comment.invisibled_by_writer? %>
+		<%= t('view.noun.tpc_comment') %>投稿者によって削除されました。
+	<% elsif @comment.invisibled_by_owner? %>
+		<%= t('view.noun.cmm_community') %>管理者によって削除されました。
+	<% elsif @comment.invisibled_by_manager? %>
+		システム管理者によって削除されました。
+	<% end %>
+<% end %>
+<div style="text-align:right;"><%= date_or_time(@comment.created_at) %></div>

@@ -1,0 +1,49 @@
+<%- @pan1="#{t('view.noun.pnt_point')}" -%><%- @pan2="マスタ管理" -%><%- @pan3="#{t('view.noun.pnt_master')}詳細" -%>
+<% content_for(:header_title) do %>
+	<%= t('view.noun.pnt_master') %>詳細
+<% end %>
+
+<h3><%= t('view.noun.pnt_master') %>詳細</h3>
+
+<ul class="list">
+	<li><%= link_to "#{t('activerecord.attributes.pnt_master.title')}を変更する", :action => :edit, :id => @pnt_master.id %></li>
+	<% if @pnt_master.pnt_points.empty? %>
+		<li><%= link_to '削除する', :action => :delete_confirm, :id => @pnt_master.id %></li>
+	<% else %>
+		<li><%= t('view.noun.pnt_point') %>配布履歴があるため削除できません。</li>
+	<% end %>
+</ul>
+
+<%= render :partial => 'show' %>
+
+<br />
+<h3><%= t('view.noun.pnt_point') %>増減箇所リスト</h3>
+
+<ul class="list">
+	<li><%= link_to "#{t('view.noun.pnt_point')}を増減する箇所を追加する", :controller => :pnt_filter, :action => :new, :pnt_master_id => @pnt_master.id %></li>
+</ul>
+
+<% if @pnt_filters.size.zero? %>
+	<%= t('view.noun.pnt_point') %>付与地点はありません。
+	
+<% else %>
+	<table class="lineColorT" width="609px">
+	<tr>
+		<th><%= t('activerecord.attributes.pnt_filter_master.title') %></th>
+		<th><%= t('activerecord.attributes.pnt_filter.summary') %></th>
+		<th><%= t('activerecord.attributes.pnt_filter.point') %></th>
+		<th><%= t('activerecord.attributes.pnt_filter.created_at') %></th>
+		<th><%= t('activerecord.attributes.pnt_filter.updated_at') %></th>
+		<th></th>
+	</tr>
+	<% @pnt_filters.each do |pnt_filter| %>
+		<tr>
+			<td><%= pnt_filter.pnt_filter_master.title %></td>
+			<td><%= link_to pnt_filter.summary, :controller => 'manage/pnt_filter', :action => 'show', :id => pnt_filter.id %></td>
+			<td><%= pnt_filter.point %></td>
+			<td><%= pnt_filter.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+			<td><%= pnt_filter.updated_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+		</tr>
+	<% end %>
+	</table>
+<% end %>

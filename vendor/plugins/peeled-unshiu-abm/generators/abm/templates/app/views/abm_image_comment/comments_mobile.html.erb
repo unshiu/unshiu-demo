@@ -1,0 +1,20 @@
+<% content_for(:header_title) do %>
+	<%= h @album.title %>の<%= t('view.noun.abm_image_comment') %>
+<% end %>
+
+<% if @comments.size.zero? %>
+	<%= t('view.noun.abm_image_comment') %>はありません。
+	
+<% else %>
+	<%= paginate_header(@comments) %>
+	
+	<% @comments.each do |@comment| %>
+		<% list_cell_for do %>
+			<%= render :partial => 'show_comment' %>
+		<% end %>
+	<% end %>
+	
+    <%= paginate_links(@comments) %>
+<% end %>
+    <br/>
+    <span style="color:#024873;"></span><%= link_basic_to "#{t('view.noun.abm_image_comment')}を書く", :action => :new_comment, :id => @image.id %>

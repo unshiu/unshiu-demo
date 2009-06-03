@@ -1,0 +1,6 @@
+<div style="text-align:center">
+<% form_tag({:controller => 'base_user', :action => 'simple_login'}, {:utn => 'utn'}) do %>
+	<%= hidden_field_tag 'return_to', params[:return_to] %>
+	<%= submit_tag 'かんたんログイン' %>
+<% end %>
+</div>

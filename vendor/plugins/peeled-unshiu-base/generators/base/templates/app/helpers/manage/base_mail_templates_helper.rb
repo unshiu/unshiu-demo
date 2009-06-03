@@ -1,0 +1,3 @@
+module Manage::BaseMailTemplatesHelper
+  include ManageBaseMailTemplatesHelperModule
+end

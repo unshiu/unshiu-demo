@@ -1,0 +1,9 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.msg_message') %>
+<% end %>
+<%= link_basic_to "#{t('view.noun.msg_message')}を作成", :action => 'new' %><br />
+<br />
+<%= link_basic_to '受信箱(' + @received_count + ')', :controller => 'msg_receiver', :action => 'list' %><br />
+<%= link_basic_to '送信箱(' + @sent_count + ')', :controller => 'msg_sender', :action => 'list' %><br />
+<%= link_basic_to '下書き(' + @draft_count + ')', :action => 'draft_list' %><br />
+<%= link_basic_to 'ゴミ箱(' + @garbage_count + ')', :action => 'garbage_list' %><br />

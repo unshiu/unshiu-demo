@@ -1,0 +1,103 @@
+<% content_for(:header_title) do %>
+<%= t('view.noun.msg_message') %><%= t('view.noun.msg_notify') %>
+<% end %>
+
+<% content_for(:sidemenu) do %>
+
+<h2><span>通報</span></h2>
+
+<div id="side_contents_col" class="span-4">
+<div id="side_contents_box">
+	
+	<div id="write_message_box" class="box_outer">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="clearfix">
+			<h6 class="caps"></h6>
+			<div class="">
+			<ul class="sidemenu">
+				<li><%= link_to '<span class="small">メッセージを書く</span>', { :controller => :msg_message, :action => :new } , {:class => "button"}%></li>
+			</ul>
+
+			</div>
+		</div><!--/box_inner-->
+		</div><!--wrap3-->
+		</div><!--wrap2-->
+		</div><!--wrap1-->
+	</div>
+
+	<div id="" class="W5R4B9df sidemenu_tray  append-bottom">
+		<div class="wrap1">
+		<div class="wrap2">
+		<div class="wrap3">
+		<div class="box_inner clearfix">
+			<h6 class="caps"></h6>
+			<div class="">
+				<ul class="sidemenu">
+					<%= render :partial => 'msg/message_sidemenu' , :locals => {:current_menu => 'received'}%>
+				</ul>
+
+			</div>
+		</div><!--/box_inner-->
+		</div><!--wrap3-->
+		</div><!--wrap2-->
+		</div><!--wrap1-->
+	</div>
+</div>
+</div>
+<% end %>
+
+<div id="" class="W5R4B9df  append-bottom">
+	<div class="wrap1">
+	<div class="wrap2">
+	<div class="wrap3">
+	<div class="box_inner clearfix">
+		
+	<div class="box_inner message_view">
+		<div class="massage_title">
+			<h4><%= h @message.title %></h4>
+		</div>
+
+		<div class="message_photo">
+			<% link_to :controller => 'base_profile', :action => 'show', :id => @message.msg_sender.base_user_id do %>
+				<%= safe_profile_view(@message.msg_sender.base_user.base_profile, :thumb, {"width" => 40, "height" => 40 })%>
+			<% end %>
+		</div>
+
+		<div class="clearfix">
+			<div class="message_from">
+				From：<span class="username"><%= link_to_user(@message.msg_sender.base_user) %></span>
+			</div>
+			<div class="massage_date">
+				Date：<span class="date"><%= datetime_to_s(@message.created_at)%></span>
+			</div>
+		</div>
+
+		<div class="message_text">
+			<p>
+			<%= hbr @message.body %>
+			</p>
+		</div>
+
+	</div><!--/box_inner-->
+
+	</div><!--/box_inner-->
+	</div><!--wrap3-->
+	</div><!--wrap2-->
+	</div><!--wrap1-->
+</div><!--box_outer-->
+
+<% form_tag :action => 'confirm', :id => @message.id do %>
+	
+	<label for="notify_comment" accesskey="n"><%= t('activerecord.attributes.msg_notify.comment') %>：</label>
+	<br>
+	<%= text_area 'notify', 'comment', :size => "50x3" %>
+	<div class="notice">
+		<%= error_message_on_with_label @notify, 'comment' %>
+		<%=t 'activerecord.errors.stand_messages.too_long', :count => AppResources[:base][:body_max_length] %>
+	</div>
+
+	<%= submit_button_tag("確認") %>
+
+<% end %>

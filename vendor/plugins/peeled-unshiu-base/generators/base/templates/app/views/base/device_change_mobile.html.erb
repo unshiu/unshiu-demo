@@ -1,0 +1,30 @@
+<% content_for(:header_title) do %>
+	機種変更時のご注意
+<% end %>
+
+<div style="text-align:left;">
+当サービスは機種変更後も以下の手続きを行えば引き続きご利用いただけます。<br />
+<br />
+1.ログイン<br />
+<%= link_basic_to "ログイン画面", :controller=>:base_user, :action=>:login %>より、
+<b>当時の<%= t('activerecord.attributes.base_login_form.login') %></b>、<%= t('activerecord.attributes.base_login_form.password') %>でログインします<br />
+<br />
+
+2.メールアドレスの変更<br />
+ログイン後、ページ下部にある<%= link_basic_to "登録情報変更", :controller=>:base_user_config, :action=>:index %>より、
+<%= link_basic_to "登録メールアドレス変更", :controller=>:base_user_config ,:action=>:mail_reset_input %>ページを開きます。<br />
+<br />
+
+3.新しいメールアドレスの入力</b><br />
+<%= link_basic_to "登録メールアドレス変更", :controller=>:base_user_config ,:action=>:mail_reset_input %>ページから新しいメールアドレスを登録します。登録が完了すると、入力したメールアドレスの確認メールが届きます。<br />
+<br />
+
+4.新しいメールアドレスの登録<br />
+届いたメールアドレスに記載されているURLをクリックすると新しいメールアドレスの登録が完了し、次回からこのメールアドレスでログインできます。<br />
+<br />
+
+5.かんたんログインの設定<br />
+よりかんたんにログインするために<%= link_basic_to "かんたんログインの設定ページ", :controller=>:base_user_config, :action=>:uid_set_confirm %>からかんたんログインを設定しましょう。
+</div>
+<%= image_tag_for_default 'Spec_08.gif' %><br />
+

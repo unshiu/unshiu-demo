@@ -1,0 +1,91 @@
+--- 
+ja-JP: 
+  activerecord: 
+    models: 
+      cmm_tag_relation: 
+      cmm_image: 
+      cmm_community_tag: 
+      cmm_communities_base_user: 
+      cmm_community: 
+      cmm_tag: 
+    attributes: 
+      cmm_tag_relation: 
+        created_at: "作成日"
+        parent_cmm_tag: "親コミュニティタグ"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        cmm_tag: "コミュニティタグ"
+      cmm_image: 
+        created_at: "作成日"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        cmm_community: "コミュニティ"
+        image: "画像"
+      cmm_community_tag: 
+        created_at: "作成日"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        cmm_community: "コミュニティ"
+      cmm_communities_base_user: 
+        created_at: "申請日"
+        updated_at: "参加日"
+        deleted_at: "削除日"
+        cmm_community: "コミュニティ"
+        base_user: "ユーザ"
+        status: "メンバーステータス"
+      cmm_community: 
+        name: "名前"
+        cmm_image: "コミュニティ画像"
+        image_file_name: "画像ファイル名"
+        created_at: "作成日"
+        profile: "プロフィール"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+        join_type: "参加タイプ"
+        topic_create_level: "トピック作成レベル"
+      cmm_tag: 
+        name: "タグ名"
+        created_at: "作成日"
+        updated_at: "更新日"
+        deleted_at: "削除日"
+    constant: 
+      status: 
+        status_applying: "承認待ちユーザ"
+        status_rejected: "アクセス禁止ユーザ"
+        status_guest: "ゲスト"
+        status_admin: "管理者"
+        status_member: "メンバー"
+        status_subadmin: "副管理者"
+  view: 
+    noun: 
+      cmm_tag_relation: "コミュニティタグ関連"
+      cmm_image: "コミュニティ画像"
+      tpc_topic: "トピック"
+      cmm_community_tag: "コミュニティタグ"
+      cmm_communities_base_user: "メンバー"
+      cmm_community: "コミュニティ"
+      cmm_community_rejected: "アクセス禁止"
+      base_user: "ユーザ"
+      cmm_tag: "コミュニティタグ"
+      join_type_free: "自由参加"
+      join_type_need_approval: "管理人の承認が必要"
+      topic_create_level_admin: "管理者のみ"
+      topic_create_level_member: "参加者なら誰でも"
+      status_none: ""
+      status_admin: "管理者"
+      status_subadmin: "サブ管理者"
+      status_member: "メンバー"
+      status_guest: "ゲスト"
+      status_applying: "参加申請中"
+      status_rejected: "参加拒否"
+    flash:
+      notice:
+        cmm_community_create: "コミュニティを作成しました。"
+        cmm_community_delete: "コミュニティを削除しました。"
+        cmm_community_image_update: "コミュニティ画像をアップロードしました。"
+        cmm_community_join: "コミュニティに参加しました。"
+        cmm_community_join_apply: "コミュニティに参加申請しました。"
+        cmm_community_resign: "コミュニティから脱退しました。"
+      error:
+        cmm_community_image_update: "コミュニティ画像をアップロードに失敗しました。"
+        cmm_community_image_update_no_image: "アップロードするファイルを選択してください。"

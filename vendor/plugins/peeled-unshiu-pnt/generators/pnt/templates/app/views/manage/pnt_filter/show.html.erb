@@ -1,0 +1,16 @@
+<%- @pan1="#{t('view.noun.pnt_point')}" -%><%- @pan2="マスタ管理" -%><%- @pan3="#{t('view.noun.pnt_filter')}詳細" -%>
+<% content_for(:header_title) do %>
+	<%= t('view.noun.pnt_filter') %>詳細
+<% end %>
+
+<h3><%= t('view.noun.pnt_filter') %>詳細</h3>
+
+<ul class="list">
+	<li><%= link_to '編集する', :action => :edit, :id => @pnt_filter.id %></li>
+	<li><%= link_to '削除する', :action => :delete_confirm, :id => @pnt_filter.id %></li>
+</ul>
+
+<%= render :partial => 'show' %>
+
+
+
