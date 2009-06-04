@@ -388,6 +388,7 @@ table.lineColorLW td {
 }
 
 /* ロゴ */
+
 h1 {
 	margin: 0;
 	padding: 0 0 0 22px;
@@ -397,12 +398,12 @@ h1 {
 }
 
 h1 a {
-	width: 83px;
+	width: 150px;
 	height: 41px;
 	border: 0;
 	text-decoration: none;
 	display: block;
-	background: url(../images/mng/mobilesns.gif) no-repeat 0 0;
+	background: url(../images/default/logo/mobile_unshiu_peeled_logo.png) no-repeat 0 0;
 }
 
 /* キャッチコピー */
