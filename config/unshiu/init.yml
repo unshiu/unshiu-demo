@@ -35,5 +35,7 @@ test:
   <<: *common
 
 production:
+  tokyotyrant_on : true
+  
   application_domain: demo.unshiu.jp
   <<: *common
