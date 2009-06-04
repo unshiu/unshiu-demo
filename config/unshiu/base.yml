@@ -76,7 +76,7 @@ production:
   file_size_max_image_size: 5M
   
   # 自動送信 FROM メールアドレス
-  system_mail_address: sendonly@unshiu.drecom.jp
+  system_mail_address: sendonly@demo.unshiu.jp
   # 登録用空メール送信先
-  registration_mail_address: registration@unshiu.drecom.jp
+  registration_mail_address: registration@demo.unshiu.jp
   <<: *common
