@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/usr/local/bin/ruby
 #
 # メール受信処理
 #　postfixなどから呼ばれることを想定
