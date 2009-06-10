@@ -22,6 +22,7 @@ module Jpmobile
           @emoticon_dir = options[:path] || 'emoticons'
           @only = [].push(options[:only]).flatten.compact
           @except  = [].push(options[:except]).flatten.compact
+          @editable_tag = options[:editable_tag] || true
         end
 
         def apply_outgoing?(controller)
@@ -44,18 +45,20 @@ module Jpmobile
  
           return str unless Jpmobile::Emoticon::UTF8_REGEXP =~ utf8_str
  
-          # input内の絵文字をPC編集用タグに置換する。
-          utf8_str.gsub!(INSIDE_INPUT_TAG) do
-            prefix, value, suffix = $1, $2, $3
-            prefix << value.gsub(Jpmobile::Emoticon::UTF8_REGEXP){ |m| "[emo:#{ m.unpack('U').first}]"} << suffix
-          end
+          if @editable_tag
+            # input内の絵文字をPC編集用タグに置換する。
+            utf8_str.gsub!(INSIDE_INPUT_TAG) do
+              prefix, value, suffix = $1, $2, $3
+              prefix << value.gsub(Jpmobile::Emoticon::UTF8_REGEXP){ |m| "[emo:#{ m.unpack('U').first}]"} << suffix
+            end
  
-          # textarea内の絵文字をPC編集用タグに置換する。
-          utf8_str.gsub!(INSIDE_TEXTAREA_TAG) do
-            prefix, value, suffix = $1, $2, $3
-            prefix << value.gsub(Jpmobile::Emoticon::UTF8_REGEXP){|m| "[emo:#{m.unpack('U').first}]"} << suffix
+            # textarea内の絵文字をPC編集用タグに置換する。
+            utf8_str.gsub!(INSIDE_TEXTAREA_TAG) do
+              prefix, value, suffix = $1, $2, $3
+              prefix << value.gsub(Jpmobile::Emoticon::UTF8_REGEXP){|m| "[emo:#{m.unpack('U').first}]"} << suffix
+            end
           end
-
+          
           # 数値文字参照をUTF8で置き換え、（&#xE63E;などで記載されていればそれをUTF8に変換）
           # さらに絵文字に該当するコードをそれぞれDoCoMo公式のマッピングで置き換えた上で
           # IMGタグで置換する。
@@ -67,7 +70,8 @@ module Jpmobile
           utf8_str.gsub(Jpmobile::Emoticon::UTF8_REGEXP) do |match|
             docomo_code = Jpmobile::Emoticon::CONVERSION_TABLE_TO_DOCOMO[match.unpack('U').first]
             if Jpmobile::Emoticon::DOCOMO_UNICODE_TO_TYPEPAD[docomo_code]
-              img_builder.call(File.join(controller.request.relative_url_root,
+              relative_url_root = ActionController::Base.relative_url_root.blank? ? "/" : ActionController::Base.relative_url_root
+              img_builder.call(File.join(relative_url_root,
                                        "images",
                                        @emoticon_dir,
                                        Jpmobile::Emoticon::DOCOMO_UNICODE_TO_TYPEPAD[docomo_code] || "[&#x#{docomo_code}]"))
